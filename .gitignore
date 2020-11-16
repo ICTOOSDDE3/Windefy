@@ -338,3 +338,8 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+
+.vs/
+Controller/obj/
+View/obj/
+Model/obj
