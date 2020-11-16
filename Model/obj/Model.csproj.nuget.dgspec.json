@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\projects\\Windesheim\\Windefy\\Model\\Model.csproj": {}
+    "C:\\Users\\AdeRm\\Source\\Repos\\Windefy2\\Model\\Model.csproj": {}
   },
   "projects": {
-    "D:\\projects\\Windesheim\\Windefy\\Model\\Model.csproj": {
+    "C:\\Users\\AdeRm\\Source\\Repos\\Windefy2\\Model\\Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\projects\\Windesheim\\Windefy\\Model\\Model.csproj",
+        "projectUniqueName": "C:\\Users\\AdeRm\\Source\\Repos\\Windefy2\\Model\\Model.csproj",
         "projectName": "Model",
-        "projectPath": "D:\\projects\\Windesheim\\Windefy\\Model\\Model.csproj",
-        "packagesPath": "C:\\Users\\Thomas\\.nuget\\packages\\",
-        "outputPath": "D:\\projects\\Windesheim\\Windefy\\Model\\obj\\",
+        "projectPath": "C:\\Users\\AdeRm\\Source\\Repos\\Windefy2\\Model\\Model.csproj",
+        "packagesPath": "C:\\Users\\AdeRm\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\AdeRm\\Source\\Repos\\Windefy2\\Model\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Thomas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\AdeRm\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -55,7 +52,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

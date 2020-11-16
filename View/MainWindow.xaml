@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:View"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
-    </Grid>
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Button x:Name="AudioTestWindow" Content="Naar audio test window" HorizontalAlignment="Center" Click="btnAudioWindow_Click" />
+    </StackPanel>
 </Window>

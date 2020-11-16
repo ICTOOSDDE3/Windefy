@@ -27,23 +27,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Thomas\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\AdeRm\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\projects\\Windesheim\\Windefy\\View\\View.csproj",
+      "projectUniqueName": "C:\\Users\\AdeRm\\Source\\Repos\\Windefy2\\View\\View.csproj",
       "projectName": "View",
-      "projectPath": "D:\\projects\\Windesheim\\Windefy\\View\\View.csproj",
-      "packagesPath": "C:\\Users\\Thomas\\.nuget\\packages\\",
-      "outputPath": "D:\\projects\\Windesheim\\Windefy\\View\\obj\\",
+      "projectPath": "C:\\Users\\AdeRm\\Source\\Repos\\Windefy2\\View\\View.csproj",
+      "packagesPath": "C:\\Users\\AdeRm\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\AdeRm\\Source\\Repos\\Windefy2\\View\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Thomas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\AdeRm\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -56,8 +52,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "D:\\projects\\Windesheim\\Windefy\\Model\\Model.csproj": {
-              "projectPath": "D:\\projects\\Windesheim\\Windefy\\Model\\Model.csproj"
+            "C:\\Users\\AdeRm\\Source\\Repos\\Windefy2\\Model\\Model.csproj": {
+              "projectPath": "C:\\Users\\AdeRm\\Source\\Repos\\Windefy2\\Model\\Model.csproj"
             }
           }
         }
@@ -88,7 +84,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
       }
     }
   }

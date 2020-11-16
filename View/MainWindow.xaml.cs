@@ -23,6 +23,14 @@ namespace View
         public MainWindow()
         {
             InitializeComponent();
+
+
+        }
+
+        private void btnAudioWindow_Click(object sender, EventArgs e)
+        {
+            AudioVisueel window1 = new AudioVisueel();
+            window1.ShowDialog();
         }
     }
 }
