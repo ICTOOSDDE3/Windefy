@@ -11,6 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using Microsoft.Win32;
+using System.Windows.Controls.Primitives;
 
 namespace View
 {
@@ -20,6 +21,7 @@ namespace View
 	public partial class AudioVisueel : Window
 	{
 		private MediaPlayer mediaPlayer = new MediaPlayer();
+		private bool userIsDraggingSlider = false;
 
 		public AudioVisueel()
 		{
@@ -39,10 +41,16 @@ namespace View
 
 		void timer_Tick(object sender, EventArgs e)
 		{
-			if (mediaPlayer.Source != null)
+			if (mediaPlayer.Source != null && !userIsDraggingSlider && mediaPlayer.NaturalDuration.HasTimeSpan)
 			{
 				lblStatus.Content = String.Format("{0} / {1}", mediaPlayer.Position.ToString(@"hh\:mm\:ss"), mediaPlayer.NaturalDuration.TimeSpan.ToString(@"hh\:mm\:ss"));
-				pbStatus.Value = (mediaPlayer.Position.TotalSeconds / mediaPlayer.NaturalDuration.TimeSpan.TotalSeconds) * 100;
+				TimeStatus.Maximum = mediaPlayer.NaturalDuration.TimeSpan.TotalSeconds;
+				TimeStatus.Value = mediaPlayer.Position.TotalSeconds;
+				//TimeStatus.Foreground = Brushes.Red; 
+			}
+            else if (mediaPlayer.Source != null && mediaPlayer.NaturalDuration.HasTimeSpan)
+            {
+				lblStatus.Content = String.Format("{0} / {1}", mediaPlayer.Position.ToString(@"hh\:mm\:ss"), mediaPlayer.NaturalDuration.TimeSpan.ToString(@"hh\:mm\:ss"));
 			}
 			else
 				lblStatus.Content = "No file selected...";
@@ -73,7 +81,7 @@ namespace View
 			mediaPlayer.Position = TimeSpan.FromSeconds(mediaPlayer.Position.TotalSeconds - 5);
 		}
 
-		private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+		private void Volume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
 		{
 			mediaPlayer.Volume = Volume.Value / 100;
 		}
@@ -83,5 +91,15 @@ namespace View
 			//moet nog
 		}
 
+        private void TimeStatus_DragCompleted(object sender, DragCompletedEventArgs e)
+        {
+			userIsDraggingSlider = false;
+			mediaPlayer.Position = TimeSpan.FromSeconds(TimeStatus.Value);
+		}
+
+        private void TimeStatus_DragStarted(object sender, DragStartedEventArgs e)
+        {
+			userIsDraggingSlider = true;
+		}
 	}
 }

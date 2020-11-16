@@ -1,21 +1,19 @@
 ﻿<Window x:Class="View.AudioVisueel"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MediaPlayerAudioControlSample" Height="245.067" Width="300">
+        Title="MediaPlayerAudioControlSample" Height="316" Width="646">
     <StackPanel Margin="10">
-        <Label Name="Song" Content="No Song selected" HorizontalContentAlignment="Center" Margin="5" />
+        <Label Name="Song" Content="" HorizontalContentAlignment="Center" Margin="5" />
         <Label Name="lblStatus" Content="Not playing..." HorizontalContentAlignment="Center" Margin="5" />
-        <ProgressBar Minimum="0" Maximum="100" Value="0" Name="pbStatus" />
+        <Slider Minimum="0" Maximum="100" Value="0" Name="TimeStatus" Thumb.DragStarted="TimeStatus_DragStarted" Thumb.DragCompleted="TimeStatus_DragCompleted" Foreground="PowderBlue"/>
         <WrapPanel HorizontalAlignment="Center" Margin="62,0,61.6,0">
-            <Button x:Name="btnPlay" Click="btnPlay_Click" Content="Play"/>
-            <Button x:Name="btnPause" Margin="5,0" Click="btnPause_Click" Content="Pause"/>
-            <Button x:Name="btnStop" Click="btnStop_Click" Content="Stop"/>
+            <Button x:Name="btnPrev" Click="btnPrev_Click" Content="Prev" Margin="5,0"/>
+            <Button x:Name="btnPlay" Click="btnPlay_Click" Content="Play" Margin="5,0"/>
+            <Button x:Name="btnPause" Click="btnPause_Click" Content="Pause" Margin="5,0"/>
+            <Button x:Name="btnStop" Click="btnStop_Click" Content="Stop" Margin="5,0"/>
+            <Button x:Name="btnNext" Click="btnNext_Click" Content="Next" Margin="5,0"/>
+            <Button x:Name="btnRewind" Click="btnRewind_Click" Content="Rewind" Margin="5,0"/>
         </WrapPanel>
-        <Grid HorizontalAlignment="Left" Height="41" Margin="62,0,0,0" Width="150">
-            <Button x:Name="btnNext" Click="btnNext_Click" Content="Next" Margin="93,14,27,7"/>
-            <Button x:Name="btnPrev" Click="btnPrev_Click" Content="Prev" Margin="28,15,96,7"/>
-            <Slider Value="100" Maximum="100" TickPlacement="BottomRight" TickFrequency="5" Margin="-1,39,0,-39" ValueChanged="Slider_ValueChanged" Name="Volume"/>
-            <Button x:Name="btnRewind" Click="btnRewind_Click" Content="Rewind" Margin="56,73,49,-59"/>
-        </Grid>
+        <Slider Value="100" Maximum="100" TickPlacement="BottomRight" TickFrequency="5" ValueChanged="Volume_ValueChanged" Name="Volume"/>
     </StackPanel>
 </Window>
