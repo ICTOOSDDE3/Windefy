@@ -8,23 +8,23 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-    "C:\\Users\\Rick\\.nuget\\packages\\": {},
+    "C:\\Users\\Thomas\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Rick\\source\\repos\\Windify\\Model\\Model.csproj",
+      "projectUniqueName": "D:\\projects\\Windesheim\\Windefy\\Model\\Model.csproj",
       "projectName": "Model",
-      "projectPath": "C:\\Users\\Rick\\source\\repos\\Windify\\Model\\Model.csproj",
-      "packagesPath": "C:\\Users\\Rick\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Rick\\source\\repos\\Windify\\Model\\obj\\",
+      "projectPath": "D:\\projects\\Windesheim\\Windefy\\Model\\Model.csproj",
+      "packagesPath": "C:\\Users\\Thomas\\.nuget\\packages\\",
+      "outputPath": "D:\\projects\\Windesheim\\Windefy\\Model\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Rick\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Thomas\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
