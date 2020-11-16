@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\projects\\Windesheim\\Windefy\\View\\View.csproj": {}
+    "C:\\Users\\Dylan\\source\\repos\\Windefy\\View\\View.csproj": {}
   },
   "projects": {
-    "D:\\projects\\Windesheim\\Windefy\\Model\\Model.csproj": {
+    "C:\\Users\\Dylan\\source\\repos\\Windefy\\Model\\Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\projects\\Windesheim\\Windefy\\Model\\Model.csproj",
+        "projectUniqueName": "C:\\Users\\Dylan\\source\\repos\\Windefy\\Model\\Model.csproj",
         "projectName": "Model",
-        "projectPath": "D:\\projects\\Windesheim\\Windefy\\Model\\Model.csproj",
-        "packagesPath": "C:\\Users\\Thomas\\.nuget\\packages\\",
-        "outputPath": "D:\\projects\\Windesheim\\Windefy\\Model\\obj\\",
+        "projectPath": "C:\\Users\\Dylan\\source\\repos\\Windefy\\Model\\Model.csproj",
+        "packagesPath": "C:\\Users\\Dylan\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Dylan\\source\\repos\\Windefy\\Model\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Thomas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Dylan\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -59,20 +56,17 @@
         }
       }
     },
-    "D:\\projects\\Windesheim\\Windefy\\View\\View.csproj": {
+    "C:\\Users\\Dylan\\source\\repos\\Windefy\\View\\View.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\projects\\Windesheim\\Windefy\\View\\View.csproj",
+        "projectUniqueName": "C:\\Users\\Dylan\\source\\repos\\Windefy\\View\\View.csproj",
         "projectName": "View",
-        "projectPath": "D:\\projects\\Windesheim\\Windefy\\View\\View.csproj",
-        "packagesPath": "C:\\Users\\Thomas\\.nuget\\packages\\",
-        "outputPath": "D:\\projects\\Windesheim\\Windefy\\View\\obj\\",
+        "projectPath": "C:\\Users\\Dylan\\source\\repos\\Windefy\\View\\View.csproj",
+        "packagesPath": "C:\\Users\\Dylan\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Dylan\\source\\repos\\Windefy\\View\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Thomas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Dylan\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -85,8 +79,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "D:\\projects\\Windesheim\\Windefy\\Model\\Model.csproj": {
-                "projectPath": "D:\\projects\\Windesheim\\Windefy\\Model\\Model.csproj"
+              "C:\\Users\\Dylan\\source\\repos\\Windefy\\Model\\Model.csproj": {
+                "projectPath": "C:\\Users\\Dylan\\source\\repos\\Windefy\\Model\\Model.csproj"
               }
             }
           }
