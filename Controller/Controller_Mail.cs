@@ -22,7 +22,7 @@ namespace Controller
             email.From = new MailAddress("Windify80@gmail.com");
             //Set receiver
             email.To.Add(new MailAddress(mail.RecipientEmail));
-            //Set subjec
+            //Set subject
             email.Subject = mail.Subject;
             //Set email messagew
             email.Body = mail.Message;
@@ -51,8 +51,10 @@ namespace Controller
         {
             //Linq statement to create random string based on the given chars and amount
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            return new string(Enumerable.Repeat(chars, 10)
+            string code = new string(Enumerable.Repeat(chars, 10)
               .Select(s => s[random.Next(s.Length)]).ToArray());
+            Console.WriteLine(code);
+            return code;
         }
     }
 }

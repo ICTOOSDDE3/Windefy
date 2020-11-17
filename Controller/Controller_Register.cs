@@ -45,6 +45,12 @@ namespace Controller
             //TODO: Add code to check if email already excists in database when db connection is written
             return true;
         }
+
+        public string PasswordToHash(string password)
+        {
+            string hash = "";
+            return hash;
+        }
     }
 }
 
