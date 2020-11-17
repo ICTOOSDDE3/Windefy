@@ -27,19 +27,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Dylan\\.nuget\\packages\\": {}
+    "C:\\Users\\Rick\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Dylan\\source\\repos\\Windefy\\View\\View.csproj",
+      "projectUniqueName": "C:\\Users\\Rick\\Documents\\hbo-ict\\KBS\\Windify Git\\Windefy\\View\\View.csproj",
       "projectName": "View",
-      "projectPath": "C:\\Users\\Dylan\\source\\repos\\Windefy\\View\\View.csproj",
-      "packagesPath": "C:\\Users\\Dylan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Dylan\\source\\repos\\Windefy\\View\\obj\\",
+      "projectPath": "C:\\Users\\Rick\\Documents\\hbo-ict\\KBS\\Windify Git\\Windefy\\View\\View.csproj",
+      "packagesPath": "C:\\Users\\Rick\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Rick\\Documents\\hbo-ict\\KBS\\Windify Git\\Windefy\\View\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Dylan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Rick\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -52,8 +56,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\Dylan\\source\\repos\\Windefy\\Model\\Model.csproj": {
-              "projectPath": "C:\\Users\\Dylan\\source\\repos\\Windefy\\Model\\Model.csproj"
+            "C:\\Users\\Rick\\Documents\\hbo-ict\\KBS\\Windify Git\\Windefy\\Model\\Model.csproj": {
+              "projectPath": "C:\\Users\\Rick\\Documents\\hbo-ict\\KBS\\Windify Git\\Windefy\\Model\\Model.csproj"
             }
           }
         }

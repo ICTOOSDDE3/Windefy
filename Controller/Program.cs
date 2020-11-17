@@ -7,6 +7,8 @@ namespace Controller
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+            Controller_Mail m1 = new Controller_Mail();
+            m1.SendValidationMail("rickeh39@gmail.com");
         }
     }
 }

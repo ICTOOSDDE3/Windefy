@@ -14,25 +14,27 @@ namespace Controller
         private MailMessage email;
 
         //TODO: Refactor
-        public void SendMail(Model_Mail Mail)
+        public void SendMail(Model_Mail mail)
         {
             //Instanciate email
             email = new MailMessage();
             //Set sender
-            email.From = new MailAddress(Mail.SenderEmail);
+            email.From = new MailAddress("Windify80@gmail.com");
             //Set receiver
-            email.To.Add(new MailAddress(Mail.RecipientEmail));
+            email.To.Add(new MailAddress(mail.RecipientEmail));
             //Set subjec
-            email.Subject = Mail.Subject;
+            email.Subject = mail.Subject;
             //Set email messagew
-            email.Body = Mail.Message;
+            email.Body = mail.Message;
             //Set priority
             email.Priority = MailPriority.High;
 
-            SmtpClient emailSender = new SmtpClient("mail.software-essentials.nl");
+            SmtpClient emailSender = new SmtpClient("smtp.gmail.com", 587);
 
             // Set mail credentials
-            emailSender.Credentials = new NetworkCredential("username", "password");
+            emailSender.EnableSsl = true;
+            emailSender.UseDefaultCredentials = false;
+            emailSender.Credentials = new NetworkCredential("windify80@gmail.com", "Windesheim1");
             // Send the email
             emailSender.Send(email);
         }
@@ -41,7 +43,7 @@ namespace Controller
         {
             string code = CreateCode();
 
-            Model_Mail mail = new Model_Mail(adres, "dylanroubos@software-essentials.nl", "Mail verification", $"To verify your mail, insert code: {code}, \n\n kind regards, \n\n Windify ");
+            Model_Mail mail = new Model_Mail(adres, "Windify80@gmail.com", "Mail verification", $"To verify your mail, insert code: {code}, \n\n kind regards, \n\n Windify ");
             SendMail(mail);
         }
 
