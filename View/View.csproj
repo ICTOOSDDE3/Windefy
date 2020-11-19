@@ -7,7 +7,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\Images\banner.png" />
+    <None Remove="Assets\Images\banner.svg" />
+    <None Remove="Assets\Images\mockSongImage.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="Styles\Texts.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Model\Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Images\banner.png" />
+    <Resource Include="Assets\Images\mockSongImage.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Styles\Texts.xaml" />
   </ItemGroup>
 
 </Project>
