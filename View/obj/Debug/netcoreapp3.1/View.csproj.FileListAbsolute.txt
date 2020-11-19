@@ -1,6 +1,0 @@
-C:\Users\jortkuhlmann\Documents\Windefy\View\obj\Debug\netcoreapp3.1\View.csprojAssemblyReference.cache
-C:\Users\jortkuhlmann\Documents\Windefy\View\obj\Debug\netcoreapp3.1\Login.g.cs
-C:\Users\jortkuhlmann\Documents\Windefy\View\obj\Debug\netcoreapp3.1\MainWindow.g.cs
-C:\Users\jortkuhlmann\Documents\Windefy\View\obj\Debug\netcoreapp3.1\App.g.cs
-C:\Users\jortkuhlmann\Documents\Windefy\View\obj\Debug\netcoreapp3.1\View_MarkupCompile.cache
-C:\Users\jortkuhlmann\Documents\Windefy\View\obj\Debug\netcoreapp3.1\View_MarkupCompile.lref
