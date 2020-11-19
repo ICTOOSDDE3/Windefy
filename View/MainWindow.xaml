@@ -42,7 +42,7 @@
             </WrapPanel>
             </ScrollViewer>
         </WrapPanel>
-        <Image Source="Assets/Images/mockSongImage.jpg" Height="70" Width="70" Margin="10,25,100,25" Grid.Row="1" Grid.Column="0"/>
+        <Image Source="Assets/Images/mockSongImage.jpg" Height="70" Width="70" Margin="30,10,100,10" Grid.Row="1" Grid.Column="0"/>
 
         <WrapPanel Grid.Row="0" Grid.Column="1" Background="White">
             <TextBox Style="{StaticResource placeHolder}" Tag="Search for your next favorite thing" Width="490" Height="35" FontSize="18" Margin="30,30,0,0" />
