@@ -17,7 +17,7 @@
             <ColumnDefinition Width="200" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <WrapPanel Grid.Row="1" Grid.ColumnSpan="2" Background="#4F83CC"/>
+        <Grid Grid.Row="1" Grid.ColumnSpan="2" Background="#4F83CC"/>
         <WrapPanel Grid.Row="0" Grid.Column="0" Background="#FFFF72">
             <Label Content="Windefy" FontSize="35" Margin="10,30,0,0" />
 
@@ -44,13 +44,13 @@
         </WrapPanel>
         <Image Source="Assets/Images/mockSongImage.jpg" Height="70" Width="70" Margin="30,10,100,10" Grid.Row="1" Grid.Column="0"/>
 
-        <WrapPanel Grid.Row="0" Grid.Column="1" Background="White">
-            <TextBox Style="{StaticResource placeHolder}" Tag="Search for your next favorite thing" Width="490" Height="35" FontSize="18" Margin="30,30,0,0" />
-            <Button x:Name="Login_Button" Content="" Margin="1087,22,0,0" Width="44" Height="44" BorderBrush="#00707070" Click="Login_Button_Click">
+        <Grid Grid.Row="0" Grid.Column="1" Background="White">
+            <TextBox Style="{StaticResource placeHolder}" Tag="Search for your next favorite thing" Width="490" Height="35" FontSize="18" Margin="38,33,712,850" />
+            <Button x:Name="Login_Button" Content="" Margin="1168,29,28,845" Width="44" Height="44" BorderBrush="#00707070" Click="Login_Button_Click">
                 <Button.Background>
                     <ImageBrush ImageSource="/logint button.png"/>
                 </Button.Background>
             </Button>
-        </WrapPanel>
+        </Grid>
     </Grid>
 </Window>
