@@ -7,15 +7,15 @@
         <Label Name="lblStatus" Content="Not playing..." HorizontalContentAlignment="Center" Margin="5" />
         <ProgressBar Minimum="0" Maximum="100" Value="0" Name="pbStatus" />
         <WrapPanel HorizontalAlignment="Center" Margin="62,0,61.6,0">
-            <Button x:Name="btnPlay" Click="btnPlay_Click" Content="Play"/>
-            <Button x:Name="btnPause" Margin="5,0" Click="btnPause_Click" Content="Pause"/>
-            <Button x:Name="btnStop" Click="btnStop_Click" Content="Stop"/>
         </WrapPanel>
-        <Grid HorizontalAlignment="Left" Height="41" Margin="62,0,0,0" Width="150">
-            <Button x:Name="btnNext" Click="btnNext_Click" Content="Next" Margin="93,14,27,7"/>
-            <Button x:Name="btnPrev" Click="btnPrev_Click" Content="Prev" Margin="28,15,96,7"/>
-            <Slider Value="100" Maximum="100" TickPlacement="BottomRight" TickFrequency="5" Margin="-1,39,0,-39" ValueChanged="Slider_ValueChanged" Name="Volume"/>
-            <Button x:Name="btnRewind" Click="btnRewind_Click" Content="Rewind" Margin="56,73,49,-59"/>
+        <Grid Height="115" Width="180">
+            <Button x:Name="btnNext" Click="btnNext_Click" Content="Next" Margin="124,3,14,79"/>
+            <Button x:Name="btnPrev" Click="btnPrev_Click" Content="Prev" Margin="17,4,121,79"/>
+            <Slider Value="100" Maximum="100" TickPlacement="BottomRight" TickFrequency="5" Margin="-1,38,0,57" ValueChanged="Slider_ValueChanged" x:Name="Volume"/>
+            <Button x:Name="btnRewind" Click="btnRewind_Click" Content="Rewind" Margin="52,63,53,31"/>
+            <ToggleButton x:Name = "tbPlayPause" Content = "Toggle"  
+         Checked = "TogglePlay" Unchecked = "TogglePause" Margin="64,3,64,79"/>
+            <Slider Margin="0,95,0,0" Name="sliderStatus" Minimum="0" ValueChanged="sliderStatus_ValueChanged" DragLeave="sliderStatus_DragLeave" DragEnter="sliderStatus_DragEnter"   />
         </Grid>
     </StackPanel>
 </Window>
