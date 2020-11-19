@@ -11,37 +11,41 @@
     <Grid Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition />
-            <RowDefinition Height="120" />
+            <RowDefinition Height="90" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="350" />
+            <ColumnDefinition Width="200" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <WrapPanel Grid.Row="1" Grid.ColumnSpan="2" Background="#4F83CC"/>
         <WrapPanel Grid.Row="0" Grid.Column="0" Background="#FFFF72">
-            <Label Content="Windify" FontSize="35" Margin="30,30,0,0" />
-        </WrapPanel>
-        <Image Source="Assets/Images/mockSongImage.jpg" Height="70" Width="70" Margin="25,25,205,25" Grid.Row="1" Grid.Column="0"/>
+            <Label Content="Windify" FontSize="35" Margin="10,30,0,0" />
 
-        <WrapPanel Grid.Row="0" Grid.Column="1" Background="White" Margin="50,0,0,0">
-            <TextBox Style="{StaticResource placeHolder}" Tag="Search for your next favorite thing" Width="490" Height="35" FontSize="18" Margin="0,30,0,0" />
-        </WrapPanel>
-        <WrapPanel  Background="Transparent" Margin="30,145,5,25">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
 
-            <Label Content="Browse" FontSize="30" Height="54" Width="220"/>
-                <Label Content="Explore" FontSize="30" Height="54" Width="220" Margin="50,0,0,0"/>
-                <Label Content="Recommended" FontSize="30" Height="54" Width="220" Margin="50,0,0,0"/>
-            <Label Content="Favorites" FontSize="30" Height="54" Width="220"/>
-                <Label Content="Artists" FontSize="30" Height="54" Width="220" Margin="50,0,0,0"/>
-                <Label Content="Albums" FontSize="30" Height="54" Width="220" Margin="50,0,0,0"/>
-                <Label Content="Songs" FontSize="30" Height="54" Width="220" Margin="50,0,0,0"/>
-            <Label Content="Playlists" FontSize="30" Height="54" Width="320"/>
-            <Image Source="Assets/Images/mockSongImage.jpg" Height="30" Width="30" Margin="20,0,0,0"  />
-            <Label Content="Mood" FontSize="30" Height="54" Width="220" Margin="15,0,0,0"/>
-            <Image Source="Assets/Images/mockSongImage.jpg" Height="30" Width="30" Margin="20,0,0,0"  />
-            <Label Content="The best album" FontSize="30" Height="54" Width="220" Margin="15,0,0,0"/>
-            <Image Source="Assets/Images/mockSongImage.jpg" Height="30" Width="30" Margin="20,0,0,0"  />
-            <Label Content="Good songs for cool..." FontSize="30" Height="54" Width="220" Margin="15,0,0,0"/>
+                <WrapPanel  Background="Transparent" Margin="10,50,5,0" Height="749" >
+
+                <Label Content="Browse" FontSize="20" Height="54" Width="220"/>
+                    <Label Content="Explore" FontSize="20" Height="54" Width="220" Margin="50,0,0,0"/>
+                    <Label Content="Recommended" FontSize="20" Height="54" Width="220" Margin="50,0,0,0"/>
+                    <Label Content="Favorites" FontSize="20" Height="54" Width="220"/>
+                    <Label Content="Artists" FontSize="20" Height="54" Width="220" Margin="50,0,0,0"/>
+                    <Label Content="Albums" FontSize="20" Height="54" Width="220" Margin="50,0,0,0"/>
+                    <Label Content="Songs" FontSize="20" Height="54" Width="220" Margin="50,0,0,0"/>
+                    <Label Content="Playlists" FontSize="20" Height="54" Width="320"/>
+                <Image Source="Assets/Images/mockSongImage.jpg" Height="30" Width="30" Margin="20,0,0,0"  />
+                    <Label Content="Mood" FontSize="20" Height="54" Width="100" Margin="15,0,0,0"/>
+                <Image Source="Assets/Images/mockSongImage.jpg" Height="30" Width="30" Margin="20,0,0,0"  />
+                    <Label Content="The best album" FontSize="20" Height="54" Width="100" Margin="15,0,0,0"/>
+                <Image Source="Assets/Images/mockSongImage.jpg" Height="30" Width="30" Margin="20,0,0,0"  />
+                    <Label Content="Good songs for cool..." FontSize="20" Height="54" Width="100" Margin="15,0,0,0"/>
+            </WrapPanel>
+            </ScrollViewer>
+        </WrapPanel>
+        <Image Source="Assets/Images/mockSongImage.jpg" Height="70" Width="70" Margin="10,25,100,25" Grid.Row="1" Grid.Column="0"/>
+
+        <WrapPanel Grid.Row="0" Grid.Column="1" Background="White">
+            <TextBox Style="{StaticResource placeHolder}" Tag="Search for your next favorite thing" Width="490" Height="35" FontSize="18" Margin="30,30,0,0" />
         </WrapPanel>
     </Grid>
 </Window>

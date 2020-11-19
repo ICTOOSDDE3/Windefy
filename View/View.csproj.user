@@ -10,8 +10,8 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Styles\Texts.xaml">
+    <Resource Update="Styles\Texts.xaml">
       <SubType>Designer</SubType>
-    </Page>
+    </Resource>
   </ItemGroup>
 </Project>
