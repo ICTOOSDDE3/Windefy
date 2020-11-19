@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Cryptography;
+using System.Linq;
 
 namespace Controller
 {
     class Controller_Register
     {
+        private static Random random = new Random();
+        private Controller_Mail resendVerificationMail = new Controller_Mail();
+
         //Method to register an account (validate and save to db)
         public void RegisterAccount(string email, string name, string pw1, string pw2)
         {
@@ -20,7 +24,7 @@ namespace Controller
                         //TODO: Create the account in the database when the db connection is made
 
                         byte[] bytePassword = PasswordToByte(pw1);
-                        var salt = GenerateSalt(20); // maybe a random number between 20 - 30?
+                        byte[] salt = GenerateSalt(20); // maybe a random number between 20 - 30?
                         byte[] genratedPasswordHash = GenerateHash(bytePassword, salt, 10, 10); // maybe these numbers random generate aswell?
 
                         //INSERT INTO Users (User_Email, User_Name, User_Password(GenratedPasswordHash)) 
@@ -93,6 +97,51 @@ namespace Controller
                 return deriveBytes.GetBytes(length);
             }
         }
+
+        /// <summary>
+        /// creates a verification code
+        /// </summary>
+        /// <returns>returns a code string</returns>
+        public string CreateCode()
+        {
+            //Linq statement to create random string based on the given chars and amount
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            string code = new string(Enumerable.Repeat(chars, 10)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+            Console.WriteLine(code);
+            return code;
+        }
+
+        // method get verifcation code
+        public string GetUserVerificationCode(int userID)
+        {
+            string verificationCode = "";// search verificationcode in database filtered on userID
+            return verificationCode;
+        }
+
+        // method check verification code
+        public bool IsVerificationCodeCorrect(string verificationCode, int userID)
+        {
+            //get verification code of user, using userID (database)
+            //compare if verificationcode is same as input verificationcode return true
+            // else false
+            string dbCode = GetUserVerificationCode(userID);
+            if (dbCode.Equals(verificationCode))
+            {
+                return true;
+            }
+            return false;
+        }
+
+
+        // method resend verification code
+        public void ResendVerificationCode(int userID)
+        {
+            string userMail = "";
+            string newCode = CreateCode();
+            resendVerificationMail.SendValidationMail(userMail, newCode);
+        }
+
 
     }
 }

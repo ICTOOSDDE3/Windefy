@@ -8,7 +8,6 @@ namespace Controller
         {
             Console.WriteLine("Hello World!");
             Controller_Mail m1 = new Controller_Mail();
-            m1.SendValidationMail("rickeh39@gmail.com");
         }
     }
 }
