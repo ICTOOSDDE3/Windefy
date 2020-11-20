@@ -15,3 +15,20 @@ C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\Controller\obj\Debug\net
 C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\Controller\obj\Debug\netcoreapp3.1\Controller.dll
 C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\Controller\obj\Debug\netcoreapp3.1\Controller.pdb
 C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\Controller\obj\Debug\netcoreapp3.1\Controller.genruntimeconfig.cache
+C:\Users\Dylan\source\Windefy\Windefy\Controller\bin\Debug\netcoreapp3.1\Model.exe
+C:\Users\Dylan\source\Windefy\Windefy\Controller\bin\Debug\netcoreapp3.1\Controller.exe
+C:\Users\Dylan\source\Windefy\Windefy\Controller\bin\Debug\netcoreapp3.1\Controller.deps.json
+C:\Users\Dylan\source\Windefy\Windefy\Controller\bin\Debug\netcoreapp3.1\Controller.runtimeconfig.json
+C:\Users\Dylan\source\Windefy\Windefy\Controller\bin\Debug\netcoreapp3.1\Controller.runtimeconfig.dev.json
+C:\Users\Dylan\source\Windefy\Windefy\Controller\bin\Debug\netcoreapp3.1\Controller.dll
+C:\Users\Dylan\source\Windefy\Windefy\Controller\bin\Debug\netcoreapp3.1\Controller.pdb
+C:\Users\Dylan\source\Windefy\Windefy\Controller\bin\Debug\netcoreapp3.1\Model.dll
+C:\Users\Dylan\source\Windefy\Windefy\Controller\bin\Debug\netcoreapp3.1\Model.pdb
+C:\Users\Dylan\source\Windefy\Windefy\Controller\obj\Debug\netcoreapp3.1\Controller.csprojAssemblyReference.cache
+C:\Users\Dylan\source\Windefy\Windefy\Controller\obj\Debug\netcoreapp3.1\Controller.AssemblyInfoInputs.cache
+C:\Users\Dylan\source\Windefy\Windefy\Controller\obj\Debug\netcoreapp3.1\Controller.AssemblyInfo.cs
+C:\Users\Dylan\source\Windefy\Windefy\Controller\obj\Debug\netcoreapp3.1\Controller.csproj.CoreCompileInputs.cache
+C:\Users\Dylan\source\Windefy\Windefy\Controller\obj\Debug\netcoreapp3.1\Controller.csproj.CopyComplete
+C:\Users\Dylan\source\Windefy\Windefy\Controller\obj\Debug\netcoreapp3.1\Controller.dll
+C:\Users\Dylan\source\Windefy\Windefy\Controller\obj\Debug\netcoreapp3.1\Controller.pdb
+C:\Users\Dylan\source\Windefy\Windefy\Controller\obj\Debug\netcoreapp3.1\Controller.genruntimeconfig.cache

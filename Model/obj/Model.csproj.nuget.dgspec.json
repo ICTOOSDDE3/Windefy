@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Rick\\Documents\\hbo-ict\\KBS\\Windify Git\\Windefy\\Model\\Model.csproj": {}
+    "C:\\Users\\Dylan\\source\\Windefy\\Windefy\\Model\\Model.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Rick\\Documents\\hbo-ict\\KBS\\Windify Git\\Windefy\\Model\\Model.csproj": {
+    "C:\\Users\\Dylan\\source\\Windefy\\Windefy\\Model\\Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Rick\\Documents\\hbo-ict\\KBS\\Windify Git\\Windefy\\Model\\Model.csproj",
+        "projectUniqueName": "C:\\Users\\Dylan\\source\\Windefy\\Windefy\\Model\\Model.csproj",
         "projectName": "Model",
-        "projectPath": "C:\\Users\\Rick\\Documents\\hbo-ict\\KBS\\Windify Git\\Windefy\\Model\\Model.csproj",
-        "packagesPath": "C:\\Users\\Rick\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Rick\\Documents\\hbo-ict\\KBS\\Windify Git\\Windefy\\Model\\obj\\",
+        "projectPath": "C:\\Users\\Dylan\\source\\Windefy\\Windefy\\Model\\Model.csproj",
+        "packagesPath": "C:\\Users\\Dylan\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Dylan\\source\\Windefy\\Windefy\\Model\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Rick\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Dylan\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -29,6 +26,7 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -40,6 +38,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "imports": [
             "net461",
             "net462",
@@ -55,7 +54,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
