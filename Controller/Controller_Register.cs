@@ -26,8 +26,6 @@ namespace Controller
                         byte[] bytePassword = PasswordToByte(pw1);
                         byte[] salt = GenerateSalt(20); // maybe a random number between 20 - 30?
                         byte[] genratedPasswordHash = GenerateHash(bytePassword, salt, 10, 10); // maybe these numbers random generate aswell?
-                        Console.WriteLine(email, name, pw1);
-
                         //INSERT INTO Users (User_Email, User_Name, User_Password(GenratedPasswordHash)) 
                         //we also need to store the salt (generated above) and the iterations and workfactor (which are the two 10's in GenerateHash())
                         //VALUES (email, name, generatedPasswordHash)
@@ -142,8 +140,6 @@ namespace Controller
             string newCode = CreateCode();
             resendVerificationMail.SendValidationMail(userMail, newCode);
         }
-
-
     }
 }
 

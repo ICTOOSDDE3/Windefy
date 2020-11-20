@@ -27,9 +27,19 @@ namespace View
 
         private void Login_Button_Click(object sender, RoutedEventArgs e)
         {
-            var loginWindow = new Login();
-            loginWindow.Owner = this;
-            loginWindow.ShowDialog();
+            LoginBackground.Visibility = Visibility.Visible;
+        }
+
+        private void Register_Click(object sender, RoutedEventArgs e)
+        {
+            LoginGrid.Visibility = Visibility.Hidden;
+            RegisterGrid.Visibility = Visibility.Visible;
+        }
+
+        private void Login_Button_Register(object sender, RoutedEventArgs e)
+        {
+            RegisterGrid.Visibility = Visibility.Hidden;
+            LoginGrid.Visibility = Visibility.Visible;
         }
     }
 }
