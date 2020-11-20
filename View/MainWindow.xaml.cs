@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace View
 {
@@ -20,17 +21,118 @@ namespace View
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
-        {
+        private MediaPlayer mediaPlayer = new MediaPlayer();
+        private bool userIsDraggingSlider = false;
+        private bool mediaPlaying = false;
+        private bool rewind = false;
+        private Model.Track CurrentTrack;
+
+        public MainWindow() {
             InitializeComponent();
+            DataContext = new Model.Track("test", 1, 2, 3, DateTime.Now, 1, new List<int>(), new List<int>(), "https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3");
+            CurrentTrack = (Model.Track)this.DataContext;
+
+/*            Controller.Track track = new Controller.Track();
+            track.GetTrack(2);
+*/
 
 
+
+            mediaPlayer.MediaEnded += MediaPlayer_MediaEnded;
+            DispatcherTimer timer = new DispatcherTimer();
+
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += timer_Tick;
+            timer.Start();
         }
 
-        private void btnAudioWindow_Click(object sender, EventArgs e)
+        private void timer_Tick(object sender, EventArgs e)
         {
-            AudioVisueel window1 = new AudioVisueel();
-            window1.ShowDialog();
+            if (mediaPlayer.Source != null && !userIsDraggingSlider && mediaPlayer.NaturalDuration.HasTimeSpan)
+            {
+                lblStatus.Content = String.Format("{0} / {1}", mediaPlayer.Position.ToString(@"hh\:mm\:ss"), mediaPlayer.NaturalDuration.TimeSpan.ToString(@"hh\:mm\:ss"));
+                TimeStatus.Maximum = mediaPlayer.NaturalDuration.TimeSpan.TotalSeconds;
+                TimeStatus.Value = mediaPlayer.Position.TotalSeconds;
+                //TimeStatus.Foreground = Brushes.Red;
+            }
+            else if (mediaPlayer.Source != null && mediaPlayer.NaturalDuration.HasTimeSpan)
+            {
+                lblStatus.Content = String.Format("{0} / {1}", mediaPlayer.Position.ToString(@"hh\:mm\:ss"), mediaPlayer.NaturalDuration.TimeSpan.ToString(@"hh\:mm\:ss"));
+            }
+        }
+
+        private void btnNext_Click(object sender, RoutedEventArgs e)
+        {
+            //naar volgend liedje
+        }
+        private void btnPrev_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            //naar vorig liedje
+        }
+
+        private void btnPrev_Click(object sender, RoutedEventArgs e)
+        {
+            mediaPlayer.Stop();
+
+            if (mediaPlaying)
+            {
+                mediaPlayer.Play();
+            }
+        }
+
+        private void Volume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            mediaPlayer.Volume = Volume.Value / 100;
+        }
+
+        private void MediaPlayer_MediaEnded(object sender, EventArgs e)
+        {
+            if (rewind)
+            {
+                mediaPlayer.Stop();
+                mediaPlayer.Play();
+            }
+            else
+            {
+                //Volgend nummer 
+            }
+        }
+
+        private void TimeStatus_DragCompleted(object sender, DragCompletedEventArgs e)
+        {
+            userIsDraggingSlider = false;
+            mediaPlayer.Position = TimeSpan.FromSeconds(TimeStatus.Value);
+        }
+
+        private void TimeStatus_DragStarted(object sender, DragStartedEventArgs e)
+        {
+            userIsDraggingSlider = true;
+        }
+
+        private void TogglePlay(object sender, RoutedEventArgs e)
+        {
+            mediaPlayer.Play();
+            tbPlayPause.Content = "Pause";
+            mediaPlaying = true;
+        }
+
+        private void TogglePause(object sender, RoutedEventArgs e)
+        {
+            mediaPlayer.Pause();
+            tbPlayPause.Content = "Play";
+            mediaPlaying = false;
+        }
+
+        private void btnRewind_Checked(object sender, RoutedEventArgs e)
+        {
+            rewind = true;
+            //Volgend nummer wordt het huidige nummer
+        }
+
+        private void btnRewind_Unchecked(object sender, RoutedEventArgs e)
+        {
+            rewind = false;
         }
     }
 }
+

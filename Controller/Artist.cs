@@ -15,11 +15,12 @@ namespace Controller
         private string label;
         private string location;
 
-        public Artist(int artistID)
+        public Model.Artist GetArtist(int numberID)
         {
-            Model.Artist artist = getArtistFromDB(artistID);
+            Model.Artist artist = getArtistFromDB(numberID);
 
-            //hierna naar view sturen
+            return artist;
+            //naar view sturen
         }
 
         /// <summary>
