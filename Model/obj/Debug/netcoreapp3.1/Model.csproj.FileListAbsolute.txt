@@ -30,10 +30,10 @@ C:\Users\Dylan\source\Windefy\Windefy\Model\bin\Debug\netcoreapp3.1\Model.runtim
 C:\Users\Dylan\source\Windefy\Windefy\Model\bin\Debug\netcoreapp3.1\Model.runtimeconfig.dev.json
 C:\Users\Dylan\source\Windefy\Windefy\Model\bin\Debug\netcoreapp3.1\Model.dll
 C:\Users\Dylan\source\Windefy\Windefy\Model\bin\Debug\netcoreapp3.1\Model.pdb
-C:\Users\Dylan\source\Windefy\Windefy\Model\obj\Debug\netcoreapp3.1\Model.csprojAssemblyReference.cache
 C:\Users\Dylan\source\Windefy\Windefy\Model\obj\Debug\netcoreapp3.1\Model.AssemblyInfoInputs.cache
 C:\Users\Dylan\source\Windefy\Windefy\Model\obj\Debug\netcoreapp3.1\Model.AssemblyInfo.cs
 C:\Users\Dylan\source\Windefy\Windefy\Model\obj\Debug\netcoreapp3.1\Model.csproj.CoreCompileInputs.cache
 C:\Users\Dylan\source\Windefy\Windefy\Model\obj\Debug\netcoreapp3.1\Model.dll
 C:\Users\Dylan\source\Windefy\Windefy\Model\obj\Debug\netcoreapp3.1\Model.pdb
 C:\Users\Dylan\source\Windefy\Windefy\Model\obj\Debug\netcoreapp3.1\Model.genruntimeconfig.cache
+C:\Users\Dylan\source\Windefy\Windefy\Model\obj\Debug\netcoreapp3.1\Model.csprojAssemblyReference.cache

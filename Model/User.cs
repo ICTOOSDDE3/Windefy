@@ -28,5 +28,17 @@ namespace Model
             //Validate if the two passwords are correct
             //Update the password on the server
         }
+
+        public static string GetLanguage()
+        {
+            switch (Language)
+            {
+                case 1:
+                    return "Dutch";
+               default:
+                    return "English";
+            }
+
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,11 +24,24 @@ namespace View
         public MainWindow()
         {
             InitializeComponent();
+            User.Name = "Pietje";
+            User.Email = "Pietje@gmail.com";
+            User.Language = 1;
         }
 
         private void Login_Button_Click(object sender, RoutedEventArgs e)
         {
             LoginBackground.Visibility = Visibility.Visible;
+        }
+
+        private void Account_Button_Click(object sender, RoutedEventArgs e)
+        {
+            LoginBackground.Visibility = Visibility.Visible;
+            AccountDetailsGrid.Visibility = Visibility.Visible;
+
+            Email.Text = User.Email;
+            Username.Text = User.Name;
+            Language.Text = User.GetLanguage();
         }
 
         private void Register_Click(object sender, RoutedEventArgs e)
@@ -40,6 +54,11 @@ namespace View
         {
             RegisterGrid.Visibility = Visibility.Hidden;
             LoginGrid.Visibility = Visibility.Visible;
+        }
+
+        private void Email_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }
