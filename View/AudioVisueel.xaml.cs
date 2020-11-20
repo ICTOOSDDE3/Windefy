@@ -24,15 +24,14 @@ namespace View
         private bool userIsDraggingSlider = false;
         private bool mediaPlaying = false;
         private bool rewind = false;
-        private Model.Track CurrentTrack;
+
         public AudioVisueel()
         {
             InitializeComponent();
-            DataContext = new Model.Track("test", 1, 2, 3, DateTime.Now, 1, new List<int>(), new List<int>(), "https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3");
-            CurrentTrack = (Model.Track)this.DataContext;
 
-            mediaPlayer.Open(new Uri(CurrentTrack.File_path));
-            Song.Content = CurrentTrack.Title;
+            
+
+
             mediaPlayer.MediaEnded += MediaPlayer_MediaEnded;
             DispatcherTimer timer = new DispatcherTimer();
 
@@ -48,7 +47,7 @@ namespace View
                 lblStatus.Content = String.Format("{0} / {1}", mediaPlayer.Position.ToString(@"hh\:mm\:ss"), mediaPlayer.NaturalDuration.TimeSpan.ToString(@"hh\:mm\:ss"));
                 TimeStatus.Maximum = mediaPlayer.NaturalDuration.TimeSpan.TotalSeconds;
                 TimeStatus.Value = mediaPlayer.Position.TotalSeconds;
-                TimeStatus.Foreground = Brushes.Red;
+                //TimeStatus.Foreground = Brushes.Red;
             }
             else if (mediaPlayer.Source != null && mediaPlayer.NaturalDuration.HasTimeSpan)
             {

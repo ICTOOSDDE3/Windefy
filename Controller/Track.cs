@@ -17,10 +17,11 @@ namespace Controller
         private List<int> artistIDs;
         private string file_path;
 
-        public Track(int numberID)
+        public Model.Track GetTrack(int numberID)
         {
             Model.Track track = getTrackFromDB(numberID);
 
+            return track;
             //naar view sturen
         }
 
