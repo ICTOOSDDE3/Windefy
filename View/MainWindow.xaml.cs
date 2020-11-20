@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -50,14 +51,15 @@ namespace View
         {
             if (mediaPlayer.Source != null && !userIsDraggingSlider && mediaPlayer.NaturalDuration.HasTimeSpan)
             {
-                lblStatus.Content = String.Format("{0} / {1}", mediaPlayer.Position.ToString(@"hh\:mm\:ss"), mediaPlayer.NaturalDuration.TimeSpan.ToString(@"hh\:mm\:ss"));
+                CurrentTime.Content = mediaPlayer.Position.ToString(@"mm\:ss");
+                TotalTime.Content = mediaPlayer.NaturalDuration.TimeSpan.ToString(@"mm\:ss");
                 TimeStatus.Maximum = mediaPlayer.NaturalDuration.TimeSpan.TotalSeconds;
                 TimeStatus.Value = mediaPlayer.Position.TotalSeconds;
                 //TimeStatus.Foreground = Brushes.Red;
             }
             else if (mediaPlayer.Source != null && mediaPlayer.NaturalDuration.HasTimeSpan)
             {
-                lblStatus.Content = String.Format("{0} / {1}", mediaPlayer.Position.ToString(@"hh\:mm\:ss"), mediaPlayer.NaturalDuration.TimeSpan.ToString(@"hh\:mm\:ss"));
+                CurrentTime.Content = mediaPlayer.Position.ToString(@"mm\:ss");
             }
         }
 
