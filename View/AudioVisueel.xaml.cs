@@ -24,12 +24,15 @@ namespace View
         private bool userIsDraggingSlider = false;
         private bool mediaPlaying = false;
         private bool rewind = false;
-
+        private Model.Track CurrentTrack;
         public AudioVisueel()
         {
             InitializeComponent();
+            DataContext = new Model.Track("test", 1, 2, 3, DateTime.Now, 1, new List<int>(), new List<int>(), "https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3");
+            CurrentTrack = (Model.Track)this.DataContext;
 
-            Song.Content = mediaPlayer.Source;
+            mediaPlayer.Open(new Uri(CurrentTrack.File_path));
+            Song.Content = CurrentTrack.Title;
             mediaPlayer.MediaEnded += MediaPlayer_MediaEnded;
             DispatcherTimer timer = new DispatcherTimer();
 
