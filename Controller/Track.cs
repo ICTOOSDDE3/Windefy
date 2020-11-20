@@ -15,6 +15,7 @@ namespace Controller
         private DateTime date_created;
         private List<int> genreIDs;
         private List<int> artistIDs;
+        private string file_path;
 
         public Track(int numberID)
         {
@@ -43,13 +44,14 @@ namespace Controller
                 languageID = (int)reader["languageID"];
                 duration = (int)reader["duration"];
                 date_created = (DateTime)reader["date_created"];
+                file_path = reader["file_path"].ToString();
             }
             myConnection.Close();
 
             genreIDs = getGenreIDs(numberID);
             artistIDs = getArtistIDs(numberID);
 
-            Model.Track track = new Model.Track(title, listens, languageID, duration, date_created, numberID, artistIDs, genreIDs);
+            Model.Track track = new Model.Track(title, listens, languageID, duration, date_created, numberID, artistIDs, genreIDs, file_path);
 
             return track;
         }

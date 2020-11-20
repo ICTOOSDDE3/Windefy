@@ -5,14 +5,12 @@
     <StackPanel Margin="10">
         <Label Name="Song" Content="" HorizontalContentAlignment="Center" Margin="5" />
         <Label Name="lblStatus" Content="Not playing..." HorizontalContentAlignment="Center" Margin="5" />
-        <Slider Minimum="0" Maximum="100" Value="0" Name="TimeStatus" Thumb.DragStarted="TimeStatus_DragStarted" Thumb.DragCompleted="TimeStatus_DragCompleted" Foreground="PowderBlue"/>
+        <Slider Minimum="0" Maximum="100" Value="0" Name="TimeStatus" Thumb.DragStarted="TimeStatus_DragStarted" Thumb.DragCompleted="TimeStatus_DragCompleted" Foreground="#FFFF0303"/>
         <WrapPanel HorizontalAlignment="Center" Margin="62,0,61.6,0">
-            <Button x:Name="btnPrev" Click="btnPrev_Click" Content="Prev" Margin="5,0"/>
-            <Button x:Name="btnPlay" Click="btnPlay_Click" Content="Play" Margin="5,0"/>
-            <Button x:Name="btnPause" Click="btnPause_Click" Content="Pause" Margin="5,0"/>
-            <Button x:Name="btnStop" Click="btnStop_Click" Content="Stop" Margin="5,0"/>
+            <Button x:Name="btnPrev" MouseDoubleClick="btnPrev_MouseDoubleClick" Click="btnPrev_Click" Content="Prev" Margin="5,0"/>
+            <ToggleButton x:Name = "tbPlayPause" Content = "Play" Checked = "TogglePlay" Unchecked = "TogglePause"/>
             <Button x:Name="btnNext" Click="btnNext_Click" Content="Next" Margin="5,0"/>
-            <Button x:Name="btnRewind" Click="btnRewind_Click" Content="Rewind" Margin="5,0"/>
+            <ToggleButton x:Name="tbBtnRewind" Checked="btnRewind_Checked" Unchecked="btnRewind_Unchecked" Content="Rewind" Margin="5,0"/>
         </WrapPanel>
         <Slider Value="100" Maximum="100" TickPlacement="BottomRight" TickFrequency="5" ValueChanged="Volume_ValueChanged" Name="Volume"/>
     </StackPanel>
