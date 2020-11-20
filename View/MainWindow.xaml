@@ -53,7 +53,8 @@
             </Button>
         </Grid>
 
-        <Grid x:Name="LoginBackground" Background="#7F4F83CC" Grid.ColumnSpan="2" Grid.RowSpan="2" Visibility="Hidden" Margin="0,-8,0,-8">
+        <!-- the loginBackGround has to be visible if you want to change the loginGrid, RegisterGrid and the verify grid (put those grids on visible aswell) -->
+        <Grid x:Name="LoginBackground" Background="#7F4F83CC" Grid.ColumnSpan="2" Grid.RowSpan="2" Visibility="Visible" Margin="0,-8,0,-8">
             <!-- Login Grid and its components-->
             <Grid x:Name="LoginGrid" VerticalAlignment="Center" Width="552" Height="283" Background="White" Visibility="Hidden">
                 <Border CornerRadius="30" Margin="95,176,95,0" VerticalAlignment="Top" Width="363" Height="34" Grid.ColumnSpan="3" Background="#FF4F83CC" RenderTransformOrigin="0.5,0.5">
@@ -66,7 +67,7 @@
             </Grid>
 
             <!-- Register Grid and its components -->
-            <Grid x:Name="RegisterGrid" Width="588" Height="605" Background="White" Visibility="Hidden">
+            <Grid x:Name="RegisterGrid" Width="588" Height="605" Background="White" Visibility="Visible">
                 <TextBox x:Name="Email_Input" HorizontalAlignment="Center" Margin="0,176,0,0" Style="{StaticResource LoginInputs}" Tag="Email@example.com" TextWrapping="Wrap" VerticalAlignment="Top" Width="375" Height="42" Background="#7F4F83CC" TextAlignment="Center" FontSize="24"/>
                 <TextBox x:Name="Username_Input" HorizontalAlignment="Center" Margin="0,238,0,325" Style="{StaticResource LoginInputs}" Tag="Username" TextWrapping="Wrap" Width="376" Background="#7F4F83CC" FontSize="24" TextAlignment="Center" Foreground="#7F000000"/>
                 <TextBox x:Name="Password_Input" HorizontalAlignment="Center" Margin="0,300,0,0" Style="{StaticResource LoginInputs}" Tag="Password" TextWrapping="Wrap" VerticalAlignment="Top" Width="375" Height="42" Background="#7F4F83CC" TextAlignment="Center" FontSize="24" Foreground="#7F000000"/>
@@ -77,6 +78,7 @@
                 <Button x:Name="Button_To_LoginWindow" Content="Login" HorizontalAlignment="Center" Margin="0,500,0,0" VerticalAlignment="Top" Width="60" Height="27" BorderBrush="#00707070" Background="#00DDDDDD" Click="Login_Button_Register"/>
                 <Button x:Name="Close_register" Content="X" HorizontalAlignment="Left" Margin="534,23,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.48,0.377" Width="22" Foreground="Red" Background="{x:Null}" BorderBrush="{x:Null}" Click="Close_Login_Button_Click" FontWeight="Bold"/>
                 <Label x:Name="Title_Register" Content="Register" HorizontalAlignment="Center" Margin="0,63,0,0" VerticalAlignment="Top" FontSize="32" FontWeight="Bold"/>
+                <Label x:Name="Register_Headsup" Content="" HorizontalAlignment="Center" Height="28" Margin="0,541,0,0" VerticalAlignment="Top" Width="312" Foreground="Red"/>
             </Grid>
         </Grid>
     </Grid>

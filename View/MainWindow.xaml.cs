@@ -43,12 +43,23 @@ namespace View
         private void Register_Button_Click(object sender, RoutedEventArgs e)
         {
             string email = Email_Input.Text;
+            string userName = Username_Input.Text;
+            string password = Password_Input.Text;
+            string repeatedPassword = PasswordRepeat_Input.Text;
             if (registerAccount.IsValidEmail(email))
             {
-                string userName = Username_Input.Text;
-                string password = Password_Input.Text;
-                string repeatedPassword = PasswordRepeat_Input.Text;
-                registerAccount.RegisterAccount(email, userName, password, repeatedPassword);
+                if (registerAccount.ArePasswordsEqual(password, repeatedPassword))
+                {
+                    registerAccount.RegisterAccount(email, userName, password, repeatedPassword);
+                }
+                else
+                {
+                    Register_Headsup.Content = "Passwords do not match!";
+                }
+            }
+            else
+            {
+                Register_Headsup.Content = "Email adres is invalid";
             }
             Trace.WriteLine(registerAccount.IsValidEmail(email));
         }
