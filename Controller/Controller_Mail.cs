@@ -8,7 +8,7 @@ using Model;
 
 namespace Controller
 {
-    class Controller_Mail
+    public class Controller_Mail
     {
         private MailMessage email;
 

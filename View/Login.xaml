@@ -7,16 +7,11 @@
         mc:Ignorable="d"
         Title="Login" Height="283" Width="553">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0*"/>
-            <ColumnDefinition Width="51*"/>
-            <ColumnDefinition Width="28*"/>
-        </Grid.ColumnDefinitions>
         <Border CornerRadius="30" Margin="95,176,95,0" VerticalAlignment="Top" Width="363" Height="34" Grid.ColumnSpan="3" Background="#FF4F83CC" RenderTransformOrigin="0.5,0.5">
-            <Button Content="Login" VerticalAlignment="Center" Width="363" Height="34" Grid.ColumnSpan="2" Background="#004F83CC" Foreground="White" RenderTransformOrigin="0.5,0.5" BorderBrush="#00707070"/>
+            <Button Content="Login" VerticalAlignment="Center" Width="363" Height="34" Grid.ColumnSpan="2" Background="#004F83CC" Foreground="White" RenderTransformOrigin="0.5,0.5" BorderBrush="#00707070" HorizontalAlignment="Center"/>
         </Border>
-        <Button Content="Register" HorizontalAlignment="Left" Margin="237,232,0,0" VerticalAlignment="Top" Width="79" Height="30" Background="#00DDDDDD" BorderBrush="#00707070" Foreground="#FF4F83CC" Grid.ColumnSpan="2"/>
-        <TextBox HorizontalAlignment="Left" Margin="95,42,0,0" Style="{StaticResource LoginInputs}" Tag="email@voorbeeld.nl&#xD;&#xA;" TextWrapping="Wrap" VerticalAlignment="Top" Width="363" Height="28" Grid.ColumnSpan="3" TextAlignment="Center" FontSize="24" Background="#7F4F83CC" Foreground="#7F000000" BorderBrush="#00ABADB3"/>
-        <TextBox HorizontalAlignment="Left" Margin="95,109,0,0" Text="Wachtwoord" TextWrapping="Wrap" VerticalAlignment="Top" Width="363" Height="28" Grid.ColumnSpan="3" TextAlignment="Center" FontSize="24" Foreground="#7F000000" Background="#7F4F83CC" BorderBrush="#00ABADB3"/>
+        <Button Content="Register" HorizontalAlignment="Center" Margin="0,227,0,0" VerticalAlignment="Top" Width="80" Height="30" Background="#00DDDDDD" BorderBrush="#00707070" Foreground="#FF4F83CC" Click="Button_Click"/>
+        <TextBox x:Name="Email_TextBox" HorizontalAlignment="Center" Margin="0,50,0,0" Style="{StaticResource LoginInputs}" Tag="email@voorbeeld.nl&#xD;&#xA;" TextWrapping="Wrap" VerticalAlignment="Top" Width="363" Height="28" TextAlignment="Center" FontSize="24" Background="#7F4F83CC" Foreground="#7F000000" BorderBrush="#00ABADB3"/>
+        <TextBox x:Name="Wachtwoord_TextBox" HorizontalAlignment="Center" Margin="0,106,0,0" Style="{StaticResource LoginInputs}" Tag="Wachtwoord" TextWrapping="Wrap" VerticalAlignment="Top" Width="363" Height="28" TextAlignment="Center" FontSize="24" Foreground="#7F000000" Background="#7F4F83CC" BorderBrush="#00ABADB3"/>
     </Grid>
 </Window>

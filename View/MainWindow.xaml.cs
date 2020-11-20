@@ -28,7 +28,8 @@ namespace View
         private void Login_Button_Click(object sender, RoutedEventArgs e)
         {
             var loginWindow = new Login();
-            loginWindow.Show();
+            loginWindow.Owner = this;
+            loginWindow.ShowDialog();
         }
     }
 }

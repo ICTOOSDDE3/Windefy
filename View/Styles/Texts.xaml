@@ -49,7 +49,7 @@
                                     <Setter Property="Foreground" Value="Transparent"/>
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding Path=Text, Source={x:Reference textSource}}" Value="">
-                                            <Setter Property="Foreground" Value="Black"/>
+                                            <Setter Property="Foreground" Value="#7F000000"/>
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>

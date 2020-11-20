@@ -1,20 +1,82 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jortkuhlmann\\Documents\\Windefy\\View\\View.csproj": {}
+    "C:\\Users\\Rick\\Documents\\hbo-ict\\KBS\\Windify Git\\Windefy\\View\\View.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jortkuhlmann\\Documents\\Windefy\\Model\\Model.csproj": {
+    "C:\\Users\\Rick\\Documents\\hbo-ict\\KBS\\Windify Git\\Windefy\\Controller\\Controller.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jortkuhlmann\\Documents\\Windefy\\Model\\Model.csproj",
-        "projectName": "Model",
-        "projectPath": "C:\\Users\\jortkuhlmann\\Documents\\Windefy\\Model\\Model.csproj",
-        "packagesPath": "C:\\Users\\jortkuhlmann\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jortkuhlmann\\Documents\\Windefy\\Model\\obj\\",
+        "projectUniqueName": "C:\\Users\\Rick\\Documents\\hbo-ict\\KBS\\Windify Git\\Windefy\\Controller\\Controller.csproj",
+        "projectName": "Controller",
+        "projectPath": "C:\\Users\\Rick\\Documents\\hbo-ict\\KBS\\Windify Git\\Windefy\\Controller\\Controller.csproj",
+        "packagesPath": "C:\\Users\\Rick\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Rick\\Documents\\hbo-ict\\KBS\\Windify Git\\Windefy\\Controller\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\jortkuhlmann\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Rick\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "C:\\Users\\Rick\\Documents\\hbo-ict\\KBS\\Windify Git\\Windefy\\Model\\Model.csproj": {
+                "projectPath": "C:\\Users\\Rick\\Documents\\hbo-ict\\KBS\\Windify Git\\Windefy\\Model\\Model.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Rick\\Documents\\hbo-ict\\KBS\\Windify Git\\Windefy\\Model\\Model.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Rick\\Documents\\hbo-ict\\KBS\\Windify Git\\Windefy\\Model\\Model.csproj",
+        "projectName": "Model",
+        "projectPath": "C:\\Users\\Rick\\Documents\\hbo-ict\\KBS\\Windify Git\\Windefy\\Model\\Model.csproj",
+        "packagesPath": "C:\\Users\\Rick\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Rick\\Documents\\hbo-ict\\KBS\\Windify Git\\Windefy\\Model\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Rick\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -56,17 +118,20 @@
         }
       }
     },
-    "C:\\Users\\jortkuhlmann\\Documents\\Windefy\\View\\View.csproj": {
+    "C:\\Users\\Rick\\Documents\\hbo-ict\\KBS\\Windify Git\\Windefy\\View\\View.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jortkuhlmann\\Documents\\Windefy\\View\\View.csproj",
+        "projectUniqueName": "C:\\Users\\Rick\\Documents\\hbo-ict\\KBS\\Windify Git\\Windefy\\View\\View.csproj",
         "projectName": "View",
-        "projectPath": "C:\\Users\\jortkuhlmann\\Documents\\Windefy\\View\\View.csproj",
-        "packagesPath": "C:\\Users\\jortkuhlmann\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jortkuhlmann\\Documents\\Windefy\\View\\obj\\",
+        "projectPath": "C:\\Users\\Rick\\Documents\\hbo-ict\\KBS\\Windify Git\\Windefy\\View\\View.csproj",
+        "packagesPath": "C:\\Users\\Rick\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Rick\\Documents\\hbo-ict\\KBS\\Windify Git\\Windefy\\View\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\jortkuhlmann\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Rick\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -79,8 +144,11 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\jortkuhlmann\\Documents\\Windefy\\Model\\Model.csproj": {
-                "projectPath": "C:\\Users\\jortkuhlmann\\Documents\\Windefy\\Model\\Model.csproj"
+              "C:\\Users\\Rick\\Documents\\hbo-ict\\KBS\\Windify Git\\Windefy\\Controller\\Controller.csproj": {
+                "projectPath": "C:\\Users\\Rick\\Documents\\hbo-ict\\KBS\\Windify Git\\Windefy\\Controller\\Controller.csproj"
+              },
+              "C:\\Users\\Rick\\Documents\\hbo-ict\\KBS\\Windify Git\\Windefy\\Model\\Model.csproj": {
+                "projectPath": "C:\\Users\\Rick\\Documents\\hbo-ict\\KBS\\Windify Git\\Windefy\\Model\\Model.csproj"
               }
             }
           }

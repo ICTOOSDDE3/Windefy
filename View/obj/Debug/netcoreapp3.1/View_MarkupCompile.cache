@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\jortkuhlmann\Documents\Windefy\View\obj\Debug\netcoreapp3.1\
+C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\View\obj\Debug\netcoreapp3.1\
 View
 none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1
-C:\Users\jortkuhlmann\Documents\Windefy\View\App.xaml
-2-419086188
+C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\View\App.xaml
+4423361500
 
-4-127413797
-193898768757
-Login.xaml;MainWindow.xaml;
+61167312805
+194317044899
+Login.xaml;MainWindow.xaml;Register.xaml;Verify.xaml;
 
-True
+False
 

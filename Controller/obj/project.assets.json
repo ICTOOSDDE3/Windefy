@@ -27,19 +27,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\jortkuhlmann\\.nuget\\packages\\": {}
+    "C:\\Users\\Rick\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\jortkuhlmann\\Documents\\Windefy\\Controller\\Controller.csproj",
+      "projectUniqueName": "C:\\Users\\Rick\\Documents\\hbo-ict\\KBS\\Windify Git\\Windefy\\Controller\\Controller.csproj",
       "projectName": "Controller",
-      "projectPath": "C:\\Users\\jortkuhlmann\\Documents\\Windefy\\Controller\\Controller.csproj",
-      "packagesPath": "C:\\Users\\jortkuhlmann\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\jortkuhlmann\\Documents\\Windefy\\Controller\\obj\\",
+      "projectPath": "C:\\Users\\Rick\\Documents\\hbo-ict\\KBS\\Windify Git\\Windefy\\Controller\\Controller.csproj",
+      "packagesPath": "C:\\Users\\Rick\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Rick\\Documents\\hbo-ict\\KBS\\Windify Git\\Windefy\\Controller\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\jortkuhlmann\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Rick\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -52,8 +56,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\jortkuhlmann\\Documents\\Windefy\\Model\\Model.csproj": {
-              "projectPath": "C:\\Users\\jortkuhlmann\\Documents\\Windefy\\Model\\Model.csproj"
+            "C:\\Users\\Rick\\Documents\\hbo-ict\\KBS\\Windify Git\\Windefy\\Model\\Model.csproj": {
+              "projectPath": "C:\\Users\\Rick\\Documents\\hbo-ict\\KBS\\Windify Git\\Windefy\\Model\\Model.csproj"
             }
           }
         }

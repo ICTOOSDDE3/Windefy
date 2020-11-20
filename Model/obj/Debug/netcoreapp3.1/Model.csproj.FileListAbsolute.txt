@@ -11,3 +11,16 @@ C:\Users\jortkuhlmann\Documents\Windefy\Model\obj\Debug\netcoreapp3.1\Model.cspr
 C:\Users\jortkuhlmann\Documents\Windefy\Model\obj\Debug\netcoreapp3.1\Model.dll
 C:\Users\jortkuhlmann\Documents\Windefy\Model\obj\Debug\netcoreapp3.1\Model.pdb
 C:\Users\jortkuhlmann\Documents\Windefy\Model\obj\Debug\netcoreapp3.1\Model.genruntimeconfig.cache
+C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\Model\bin\Debug\netcoreapp3.1\Model.exe
+C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\Model\bin\Debug\netcoreapp3.1\Model.deps.json
+C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\Model\bin\Debug\netcoreapp3.1\Model.runtimeconfig.json
+C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\Model\bin\Debug\netcoreapp3.1\Model.runtimeconfig.dev.json
+C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\Model\bin\Debug\netcoreapp3.1\Model.dll
+C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\Model\bin\Debug\netcoreapp3.1\Model.pdb
+C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\Model\obj\Debug\netcoreapp3.1\Model.csprojAssemblyReference.cache
+C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\Model\obj\Debug\netcoreapp3.1\Model.AssemblyInfoInputs.cache
+C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\Model\obj\Debug\netcoreapp3.1\Model.AssemblyInfo.cs
+C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\Model\obj\Debug\netcoreapp3.1\Model.csproj.CoreCompileInputs.cache
+C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\Model\obj\Debug\netcoreapp3.1\Model.dll
+C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\Model\obj\Debug\netcoreapp3.1\Model.pdb
+C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\Model\obj\Debug\netcoreapp3.1\Model.genruntimeconfig.cache

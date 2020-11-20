@@ -8,25 +8,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace View
 {
     /// <summary>
-    /// Interaction logic for Login.xaml
+    /// Interaction logic for Verify.xaml
     /// </summary>
-    public partial class Login : Window
+    public partial class Verify : Page
     {
-        public Login()
+        public Verify()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-            var registerWindow = new Register();
-            registerWindow.ShowDialog();
         }
     }
 }
