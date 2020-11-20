@@ -1,14 +1,12 @@
-<<<<<<< HEAD
-﻿using Model;
+
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-=======
 ﻿using Controller;
 using System.Diagnostics;
->>>>>>> a1f5259c96ad0062ce6cd4459bee08fec4af718a
 using System.Windows;
 
 namespace View
@@ -55,16 +53,16 @@ namespace View
             LoginGrid.Visibility = Visibility.Visible;
         }
 
-<<<<<<< HEAD
-        private void Email_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-=======
         private void Close_Login_Button_Click(object sender, RoutedEventArgs e)
         {
             LoginBackground.Visibility = Visibility.Hidden;
             LoginGrid.Visibility = Visibility.Visible;
             RegisterGrid.Visibility = Visibility.Hidden;
+        }
+        private void Close_Account_Details_Button_Click(object sender, RoutedEventArgs e)
+        {
+            LoginBackground.Visibility = Visibility.Hidden;
+            AccountDetailsGrid.Visibility = Visibility.Hidden;
         }
 
         private void Register_Button_Click(object sender, RoutedEventArgs e)
@@ -89,7 +87,6 @@ namespace View
                 Register_Headsup.Content = "Email adres is invalid";
             }
             Trace.WriteLine(registerAccount.IsValidEmail(email));
->>>>>>> a1f5259c96ad0062ce6cd4459bee08fec4af718a
         }
     }
 }

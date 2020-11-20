@@ -86,13 +86,14 @@
                 <Label x:Name="Register_Headsup" Content="" HorizontalAlignment="Center" Height="28" Margin="0,541,0,0" VerticalAlignment="Top" Width="312" Foreground="Red"/>
             </Grid>
             <Grid x:Name="AccountDetailsGrid" Width="588" Height="605" Background="White" Visibility="Hidden">
-                <TextBox x:Name="Email" HorizontalAlignment="Center" Margin="0,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="375" Height="42" Background="#7F4F83CC" TextAlignment="Center" FontSize="24" IsEnabled="False" TextChanged="Email_TextChanged"/>
+                <TextBox x:Name="Email" HorizontalAlignment="Center" Margin="0,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="375" Height="42" Background="#7F4F83CC" TextAlignment="Center" FontSize="24" IsEnabled="False"/>
                 <TextBox x:Name="Username" HorizontalAlignment="Center" Margin="0,302,0,261" TextWrapping="Wrap" Width="376" Background="#7F4F83CC" FontSize="24" TextAlignment="Center" Foreground="#7F000000" Height="42" IsEnabled="False"/>
                 <TextBox x:Name="Language" HorizontalAlignment="Center" Margin="0,400,0,163" TextWrapping="Wrap" Width="376" Background="#7F4F83CC" FontSize="24" TextAlignment="Center" Foreground="#7F000000" Height="42" IsEnabled="False"/>
                 <TextBlock HorizontalAlignment="Center" Margin="0,42,0,0" Text="Personal Info" TextWrapping="Wrap" VerticalAlignment="Top" Height="42" Width="376" TextAlignment="Center" FontSize="32" FontWeight="Bold"/>
                 <TextBlock HorizontalAlignment="Left"  Margin="106,162,0,0" Text="Email:" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="110" FontSize="24"/>
                 <TextBlock HorizontalAlignment="Left"  Margin="106,261,0,0" Text="Name:" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="110" FontSize="24"/>
                 <TextBlock HorizontalAlignment="Left"  Margin="106,359,0,0" Text="Language:" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="110" FontSize="24"/>
+                <Button x:Name="Account_Details_register" Content="X" HorizontalAlignment="Left" Margin="534,23,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.48,0.377" Width="22" Foreground="Red" Background="{x:Null}" BorderBrush="{x:Null}" Click="Close_Account_Details_Button_Click" FontWeight="Bold"/>
             </Grid>
 
         </Grid>
