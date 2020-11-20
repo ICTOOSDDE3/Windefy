@@ -10,6 +10,7 @@
     <None Remove="Assets\Images\banner.png" />
     <None Remove="Assets\Images\banner.svg" />
     <None Remove="Assets\Images\mockSongImage.jpg" />
+    <None Remove="kruisje.png" />
     <None Remove="logint button.png" />
   </ItemGroup>
 
@@ -27,6 +28,7 @@
     <Resource Include="Assets\Images\mockSongImage.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="kruisje.png" />
     <Resource Include="logint button.png" />
     <Resource Include="Styles\Texts.xaml" />
   </ItemGroup>

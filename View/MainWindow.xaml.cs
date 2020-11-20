@@ -1,18 +1,15 @@
+<<<<<<< HEAD
 ﻿using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+=======
+﻿using Controller;
+using System.Diagnostics;
+>>>>>>> a1f5259c96ad0062ce6cd4459bee08fec4af718a
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace View
 {
@@ -21,6 +18,7 @@ namespace View
     /// </summary>
     public partial class MainWindow : Window
     {
+        Controller_Register registerAccount = new Controller_Register();
         public MainWindow()
         {
             InitializeComponent();
@@ -32,6 +30,7 @@ namespace View
         private void Login_Button_Click(object sender, RoutedEventArgs e)
         {
             LoginBackground.Visibility = Visibility.Visible;
+            LoginGrid.Visibility = Visibility.Visible;
         }
 
         private void Account_Button_Click(object sender, RoutedEventArgs e)
@@ -56,9 +55,41 @@ namespace View
             LoginGrid.Visibility = Visibility.Visible;
         }
 
+<<<<<<< HEAD
         private void Email_TextChanged(object sender, TextChangedEventArgs e)
         {
 
+=======
+        private void Close_Login_Button_Click(object sender, RoutedEventArgs e)
+        {
+            LoginBackground.Visibility = Visibility.Hidden;
+            LoginGrid.Visibility = Visibility.Visible;
+            RegisterGrid.Visibility = Visibility.Hidden;
+        }
+
+        private void Register_Button_Click(object sender, RoutedEventArgs e)
+        {
+            string email = Email_Input.Text;
+            string userName = Username_Input.Text;
+            string password = Password_Input.Text;
+            string repeatedPassword = PasswordRepeat_Input.Text;
+            if (registerAccount.IsValidEmail(email))
+            {
+                if (registerAccount.ArePasswordsEqual(password, repeatedPassword))
+                {
+                    registerAccount.RegisterAccount(email, userName, password, repeatedPassword);
+                }
+                else
+                {
+                    Register_Headsup.Content = "Passwords do not match!";
+                }
+            }
+            else
+            {
+                Register_Headsup.Content = "Email adres is invalid";
+            }
+            Trace.WriteLine(registerAccount.IsValidEmail(email));
+>>>>>>> a1f5259c96ad0062ce6cd4459bee08fec4af718a
         }
     }
 }

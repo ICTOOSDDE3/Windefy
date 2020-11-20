@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\Dylan\source\Windefy\Windefy\View\bin\Debug\netcoreapp3.1\Model.exe
 C:\Users\Dylan\source\Windefy\Windefy\View\bin\Debug\netcoreapp3.1\Controller.exe
 C:\Users\Dylan\source\Windefy\Windefy\View\bin\Debug\netcoreapp3.1\View.exe
@@ -25,3 +26,32 @@ C:\Users\Dylan\source\Windefy\Windefy\View\obj\Debug\netcoreapp3.1\View.dll
 C:\Users\Dylan\source\Windefy\Windefy\View\obj\Debug\netcoreapp3.1\View.pdb
 C:\Users\Dylan\source\Windefy\Windefy\View\obj\Debug\netcoreapp3.1\View.genruntimeconfig.cache
 C:\Users\Dylan\source\Windefy\Windefy\View\obj\Debug\netcoreapp3.1\View.csprojAssemblyReference.cache
+=======
+C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\View\bin\Debug\netcoreapp3.1\Controller.exe
+C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\View\bin\Debug\netcoreapp3.1\Model.exe
+C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\View\bin\Debug\netcoreapp3.1\View.exe
+C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\View\bin\Debug\netcoreapp3.1\View.deps.json
+C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\View\bin\Debug\netcoreapp3.1\View.runtimeconfig.json
+C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\View\bin\Debug\netcoreapp3.1\View.runtimeconfig.dev.json
+C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\View\bin\Debug\netcoreapp3.1\View.dll
+C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\View\bin\Debug\netcoreapp3.1\View.pdb
+C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\View\bin\Debug\netcoreapp3.1\Controller.dll
+C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\View\bin\Debug\netcoreapp3.1\Model.dll
+C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\View\bin\Debug\netcoreapp3.1\Controller.pdb
+C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\View\bin\Debug\netcoreapp3.1\Model.pdb
+C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\View\obj\Debug\netcoreapp3.1\View.csprojAssemblyReference.cache
+C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\View\obj\Debug\netcoreapp3.1\MainWindow.g.cs
+C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\View\obj\Debug\netcoreapp3.1\App.g.cs
+C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\View\obj\Debug\netcoreapp3.1\View_MarkupCompile.cache
+C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\View\obj\Debug\netcoreapp3.1\View_MarkupCompile.lref
+C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\View\obj\Debug\netcoreapp3.1\App.baml
+C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\View\obj\Debug\netcoreapp3.1\MainWindow.baml
+C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\View\obj\Debug\netcoreapp3.1\View.g.resources
+C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\View\obj\Debug\netcoreapp3.1\View.AssemblyInfoInputs.cache
+C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\View\obj\Debug\netcoreapp3.1\View.AssemblyInfo.cs
+C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\View\obj\Debug\netcoreapp3.1\View.csproj.CoreCompileInputs.cache
+C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\View\obj\Debug\netcoreapp3.1\View.csproj.CopyComplete
+C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\View\obj\Debug\netcoreapp3.1\View.dll
+C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\View\obj\Debug\netcoreapp3.1\View.pdb
+C:\Users\Rick\Documents\hbo-ict\KBS\Windify Git\Windefy\View\obj\Debug\netcoreapp3.1\View.genruntimeconfig.cache
+>>>>>>> a1f5259c96ad0062ce6cd4459bee08fec4af718a
