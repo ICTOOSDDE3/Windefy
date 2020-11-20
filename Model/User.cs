@@ -4,19 +4,29 @@ using System.Text;
 
 namespace Model
 {
-    public class User
+    public static class User
     {
-        public string User_Email { get; set; }
-        public string User_Name { get; set; }
-        public string User_Password { get; set; }
-        public int User_Language { get; set; }
 
-        public User(string user_Email, string user_Name, string user_Password)
+        public static string Email { get; set; }
+        public static string Name { get; set; }
+        public static int Language { get; set; }
+        public static bool Verificated { get; set; }
+
+        public static void UpdateEmail(string newEmai)
         {
-            User_Email = user_Email;
-            User_Name = user_Name;
-            User_Password = user_Password;
-            User_Language = 1;
+            //Validate if email is correct
+            //Validate if email is not in use yet
+            //Update the email in the object & on the server
+        }
+        public static void ChangeName(string newName)
+        {
+            //Update the name in the object & on the server
+        }
+
+        public static void ChangePassword(string newPassword)
+        {
+            //Validate if the two passwords are correct
+            //Update the password on the server
         }
     }
 }
