@@ -25,7 +25,7 @@
 
                 <WrapPanel  Background="Transparent" Margin="10,50,5,0" Height="749" >
 
-                <Label Content="Browse" FontSize="20" Height="54" Width="220"/>
+                    <Label Content="Browse" FontSize="20" Height="54" Width="220"/>
                     <Label Content="Explore" FontSize="20" Height="54" Width="220" Margin="50,0,0,0"/>
                     <Label Content="Recommended" FontSize="20" Height="54" Width="220" Margin="50,0,0,0"/>
                     <Label Content="Favorites" FontSize="20" Height="54" Width="220"/>
@@ -33,13 +33,13 @@
                     <Label Content="Albums" FontSize="20" Height="54" Width="220" Margin="50,0,0,0"/>
                     <Label Content="Songs" FontSize="20" Height="54" Width="220" Margin="50,0,0,0"/>
                     <Label Content="Playlists" FontSize="20" Height="54" Width="320"/>
-                <Image Source="Assets/Images/mockSongImage.jpg" Height="30" Width="30" Margin="20,0,0,0"  />
+                    <Image Source="Assets/Images/mockSongImage.jpg" Height="30" Width="30" Margin="20,0,0,0"  />
                     <Label Content="Mood" FontSize="20" Height="54" Width="100" Margin="15,0,0,0"/>
-                <Image Source="Assets/Images/mockSongImage.jpg" Height="30" Width="30" Margin="20,0,0,0"  />
+                    <Image Source="Assets/Images/mockSongImage.jpg" Height="30" Width="30" Margin="20,0,0,0"  />
                     <Label Content="The best album" FontSize="20" Height="54" Width="100" Margin="15,0,0,0"/>
-                <Image Source="Assets/Images/mockSongImage.jpg" Height="30" Width="30" Margin="20,0,0,0"  />
+                    <Image Source="Assets/Images/mockSongImage.jpg" Height="30" Width="30" Margin="20,0,0,0"  />
                     <Label Content="Good songs for cool..." FontSize="20" Height="54" Width="100" Margin="15,0,0,0"/>
-            </WrapPanel>
+                </WrapPanel>
             </ScrollViewer>
         </WrapPanel>
         <Image Source="Assets/Images/mockSongImage.jpg" Height="70" Width="70" Margin="30,10,100,10" Grid.Row="1" Grid.Column="0"/>
@@ -51,6 +51,28 @@
                     <ImageBrush ImageSource="/logint button.png"/>
                 </Button.Background>
             </Button>
+        </Grid>
+        
+        <Grid x:Name="LoginBackground" Background="#7F4F83CC" Grid.ColumnSpan="2" Grid.RowSpan="2" Visibility="Hidden" Margin="0,-8,0,-8">
+            <Grid x:Name="LoginGrid" VerticalAlignment="Center" Width="552" Height="283" Background="White" Visibility="Visible">
+                <Border CornerRadius="30" Margin="95,176,95,0" VerticalAlignment="Top" Width="363" Height="34" Grid.ColumnSpan="3" Background="#FF4F83CC" RenderTransformOrigin="0.5,0.5">
+                    <Button Content="Login" VerticalAlignment="Top" Width="363" Height="34" Grid.ColumnSpan="2" Background="#004F83CC" Foreground="White" RenderTransformOrigin="0.5,0.5" BorderBrush="#00707070" HorizontalAlignment="Center"/>
+                </Border>
+                <Button Content="Register" HorizontalAlignment="Center" Margin="0,227,0,0" VerticalAlignment="Top" Width="80" Height="30" Background="#00DDDDDD" BorderBrush="#00707070" Foreground="#FF4F83CC" Click="Register_Click"/>
+                <TextBox x:Name="Email_TextBox" HorizontalAlignment="Center" Margin="0,50,0,0" Style="{StaticResource LoginInputs}" Tag="email@voorbeeld.nl&#xD;&#xA;" TextWrapping="Wrap" VerticalAlignment="Top" Width="363" Height="28" TextAlignment="Center" FontSize="24" Background="#7F4F83CC" Foreground="#7F000000" BorderBrush="#00ABADB3"/>
+                <TextBox x:Name="Wachtwoord_TextBox" HorizontalAlignment="Center" Margin="0,106,0,0" Style="{StaticResource LoginInputs}" Tag="Wachtwoord" TextWrapping="Wrap" VerticalAlignment="Top" Width="363" Height="28" TextAlignment="Center" FontSize="24" Foreground="#7F000000" Background="#7F4F83CC" BorderBrush="#00ABADB3"/>
+            </Grid>
+
+            <Grid x:Name="RegisterGrid" Width="588" Height="605" Background="White" Visibility="Hidden">
+                <TextBox x:Name="Email_Input" HorizontalAlignment="Center" Margin="0,176,0,0" Style="{StaticResource LoginInputs}" Tag="Email@example.com" TextWrapping="Wrap" VerticalAlignment="Top" Width="375" Height="42" Background="#7F4F83CC" TextAlignment="Center" FontSize="24"/>
+                <TextBox x:Name="Username_Input" HorizontalAlignment="Center" Margin="0,238,0,325" Style="{StaticResource LoginInputs}" Tag="Username" TextWrapping="Wrap" Width="376" Background="#7F4F83CC" FontSize="24" TextAlignment="Center" Foreground="#7F000000"/>
+                <TextBox x:Name="Password_Input" HorizontalAlignment="Center" Margin="0,300,0,0" Style="{StaticResource LoginInputs}" Tag="Password" TextWrapping="Wrap" VerticalAlignment="Top" Width="375" Height="42" Background="#7F4F83CC" TextAlignment="Center" FontSize="24" Foreground="#7F000000"/>
+                <TextBox x:Name="PasswordRepeat_Input" HorizontalAlignment="Center" Margin="0,362,0,0" Style="{StaticResource LoginInputs}" Tag="Repeat password" TextWrapping="Wrap" VerticalAlignment="Top" Width="375" Height="42" Background="#7F4F83CC" FontSize="24" TextAlignment="Center"/>
+                <Border CornerRadius="30" Margin="112,441,112,0" VerticalAlignment="Top" Width="363" Height="34" Background="#FF4F83CC" RenderTransformOrigin="0.5,0.5">
+                    <Button x:Name="Register_Button" Content="Register" HorizontalAlignment="Center" VerticalAlignment="Center" Width="384" Height="48" Background="#00DDDDDD" BorderBrush="#00707070" Foreground="White"/>
+                </Border>
+                <Button x:Name="Button_To_LoginWindow" Content="Login" HorizontalAlignment="Center" Margin="0,500,0,0" VerticalAlignment="Top" Width="60" Height="27" BorderBrush="#00707070" Background="#00DDDDDD" Click="Login_Button_Register"/>
+            </Grid>
         </Grid>
     </Grid>
 </Window>
