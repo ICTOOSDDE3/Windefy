@@ -13,7 +13,11 @@ namespace Controller
     {
         private static ForwardedPortLocal portFwld = new ForwardedPortLocal("127.0.0.1", 1433, "127.0.0.1", 1433);
         private static PasswordConnectionInfo connectionInfo = new PasswordConnectionInfo("145.44.235.109", "student", "(7bk2PtkY*-4");
-        private static SqlConnection connection;
+        public static SqlConnection connection
+        {
+            get;
+            set;
+        }
 
         public static void Initialize()
         {
@@ -67,10 +71,7 @@ namespace Controller
 
             Console.WriteLine(connection.State.ToString());
             CloseConnection();
-            if (connection.State == System.Data.ConnectionState.Closed)
-            {
-                OpenConnection();
-            }
+            
 
 
 
@@ -78,7 +79,7 @@ namespace Controller
         }
 
         //open connection to database
-        private static bool OpenConnection()
+        public static bool OpenConnection()
         {
             try
             {
@@ -112,7 +113,7 @@ namespace Controller
         }
 
         //Close connection
-        private static bool CloseConnection()
+        public static bool CloseConnection()
         {
             try
             {

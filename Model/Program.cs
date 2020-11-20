@@ -11,10 +11,8 @@ namespace Model
         static void Main(string[] args)
         {
 
-            DBConnection.Initialize();
-            DBConnection.Insert("member", new string[] { "name"}, new string[] { "test1"} );
-            //DBConnection.Initialize();
-            //Console.WriteLine(DBConnection.Count("member"));
+            //execute the database codes here
+
 
             
         }
