@@ -8,10 +8,10 @@
              d:DesignHeight="1024" d:DesignWidth="1140">
     <Grid Background="White">
         <Grid Background="#FFFF72" Height="448" VerticalAlignment="Top">
-            <TextBlock FontWeight="Bold" FontSize="50" Margin="50,85,0,0" TextWrapping="Wrap" Height="133" VerticalAlignment="Top" HorizontalAlignment="Left" Width="482">
+            <TextBlock FontWeight="Bold" FontSize="50" HorizontalAlignment="Left" Margin="50,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="482">
                 The best music at the click of a button
             </TextBlock>
-            <Image Source="../Assets/Images/banner.png" Height="344" Margin="581,0,38,0" VerticalAlignment="Center" />
+            <Image Source="../Assets/Images/banner.png" Width="521" Margin="581,52,38,52" />
         </Grid>
     </Grid>
 </UserControl>

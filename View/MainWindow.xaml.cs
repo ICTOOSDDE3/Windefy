@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 ﻿using Controller;
 using System.Diagnostics;
 using System.Windows;
+using View.ViewModels;
 
 namespace View
 {
@@ -23,6 +24,7 @@ namespace View
             User.Name = "Pietje";
             User.Email = "Pietje@gmail.com";
             User.Language = 1;
+            DataContext = new Homepage();
         }
 
         private void Login_Button_Click(object sender, RoutedEventArgs e)

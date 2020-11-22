@@ -4,47 +4,58 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:View"
+        xmlns:viewmodels="clr-namespace:View.ViewModels"
+        xmlns:views="clr-namespace:View.Views"
         mc:Ignorable="d"
         Title="MainWindow" Height="1024" Width="1440">
-
-
+    <Window.Resources>
+        <DataTemplate x:Name="homepage" DataType="{x:Type viewmodels:Homepage}">
+            <views:Homepage DataContext="{Binding}" />
+        </DataTemplate>
+    </Window.Resources>
     <Grid Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="90" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="300" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid Grid.Row="1" Grid.ColumnSpan="2" Background="#4F83CC"/>
-        <WrapPanel Grid.Row="0" Grid.Column="0" Background="#FFFF72">
+        <Grid Grid.Row="0" Grid.Column="0" Background="#FFEB3B">
             <Label Content="Windefy" FontSize="35" Margin="10,30,0,0" />
 
             <ScrollViewer VerticalScrollBarVisibility="Auto">
 
-                <WrapPanel  Background="Transparent" Margin="10,50,5,0" Height="749" >
+                <Grid  Background="Transparent" Margin="10,50,5,0" Height="749" >
+                    <Label FontSize="25" Content="Browse" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <Label FontSize="20" Content="Explore" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,48,0,0"/>
+                    <Label FontSize="20" Content="Recommended" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,90,0,0"/>
 
-                    <Label Content="Browse" FontSize="20" Height="54" Width="220"/>
-                    <Label Content="Explore" FontSize="20" Height="54" Width="220" Margin="50,0,0,0"/>
-                    <Label Content="Recommended" FontSize="20" Height="54" Width="220" Margin="50,0,0,0"/>
-                    <Label Content="Favorites" FontSize="20" Height="54" Width="220"/>
-                    <Label Content="Artists" FontSize="20" Height="54" Width="220" Margin="50,0,0,0"/>
-                    <Label Content="Albums" FontSize="20" Height="54" Width="220" Margin="50,0,0,0"/>
-                    <Label Content="Songs" FontSize="20" Height="54" Width="220" Margin="50,0,0,0"/>
-                    <Label Content="Playlists" FontSize="20" Height="54" Width="320"/>
-                    <Image Source="Assets/Images/mockSongImage.jpg" Height="30" Width="30" Margin="20,0,0,0"  />
-                    <Label Content="Mood" FontSize="20" Height="54" Width="100" Margin="15,0,0,0"/>
-                    <Image Source="Assets/Images/mockSongImage.jpg" Height="30" Width="30" Margin="20,0,0,0"  />
-                    <Label Content="The best album" FontSize="20" Height="54" Width="100" Margin="15,0,0,0"/>
-                    <Image Source="Assets/Images/mockSongImage.jpg" Height="30" Width="30" Margin="20,0,0,0"  />
-                    <Label Content="Good songs for cool..." FontSize="20" Height="54" Width="100" Margin="15,0,0,0"/>
-                </WrapPanel>
+                    <Label FontSize="25" Content="Favorites" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-1,144,0,0"/>
+                    <Label FontSize="20" Content="Artists" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="44,192,0,0"/>
+                    <Label FontSize="20" Content="Albums" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="44,234,0,0"/>
+                    <Label FontSize="20" Content="Songs" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,276,0,0" RenderTransformOrigin="0.587,-0.614"/>
+
+                    <Grid Margin="0,331,0,0">
+                        <Label FontSize="25" Content="Playlists" HorizontalAlignment="Left" VerticalAlignment="Top" />
+
+                        <Image Height="30" Width="30" Source="Assets/images/mockSongImage.jpg" Margin="48,57,207,331" />
+                        <Label FontSize="20" Content="Mood" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.587,-0.614" Margin="86,54,0,0"/>
+
+                        <Image Height="30" Width="30" Source="Assets/images/mockSongImage.jpg" Margin="48,101,207,287" />
+                        <Label FontSize="20" Content="The best album" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.587,-0.614" Margin="86,98,0,0"/>
+                        <Image Height="30" Width="30" Source="Assets/images/mockSongImage.jpg" Margin="48,145,207,243" />
+                        <Label FontSize="20" Content="Good songs for cool..." HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.587,-0.614" Margin="86,142,0,0"/>
+                    </Grid>
+                </Grid>
             </ScrollViewer>
-        </WrapPanel>
+        </Grid>
         <Image Source="Assets/Images/mockSongImage.jpg" Height="70" Width="70" Margin="30,10,100,10" Grid.Row="1" Grid.Column="0"/>
 
         <Grid Grid.Row="0" Grid.Column="1" Background="White">
+            <ContentControl Content="{Binding}" />
             <TextBox Style="{StaticResource placeHolder}" Tag="Search for your next favorite thing" Width="490" Height="35" FontSize="18" Margin="38,33,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
             <Button x:Name="Login_Button" Content="" Margin="0,29,28,0" Width="44" Height="44" BorderBrush="#00707070" Click="Login_Button_Click" HorizontalAlignment="Right" VerticalAlignment="Top">
                 <Button.Background>
