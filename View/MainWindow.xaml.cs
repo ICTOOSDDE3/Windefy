@@ -17,7 +17,7 @@ namespace View
     /// </summary>
     public partial class MainWindow : Window
     {
-        Controller_Register registerAccount = new Controller_Register();
+        Register registerAccount = new Register();
         public MainWindow()
         {
             InitializeComponent();
@@ -91,6 +91,11 @@ namespace View
                 Register_Headsup.Content = "Email adres is invalid";
             }
             Trace.WriteLine(registerAccount.IsValidEmail(email));
+        }
+
+        private void Resend_Code_Button(object sender, RoutedEventArgs e)
+        {
+            //registerAccount.ResendVerificationCode();
         }
     }
 }

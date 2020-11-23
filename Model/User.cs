@@ -48,6 +48,7 @@ namespace Model
              *  return true;
              * }
              */
+            return true;
         }
 
         public static string GetLanguage()

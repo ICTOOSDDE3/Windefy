@@ -6,12 +6,13 @@ using System.Security.Cryptography;
 using System.Linq;
 using System.Data.SqlClient;
 
+
 namespace Controller
 {
-    public class Controller_Register
+    public class Register
     {
         private static Random random = new Random();
-        private Controller_Mail resendVerificationMail = new Controller_Mail();
+        private Mail resendVerificationMail = new Mail();
 
         //Method to register an account (validate and save to db)
         public void RegisterAccount(string email, string name, string pw1, string pw2)
@@ -28,21 +29,44 @@ namespace Controller
                         byte[] salt = GenerateSalt(20); // maybe a random number between 20 - 30?
                         byte[] genratedPasswordHash = GenerateHash(bytePassword, salt, 10, 10); // maybe these numbers random generate aswell?
 
+                        //database connection / inserting new user in database
                         DBConnection.Initialize();
                         DBConnection.OpenConnection();
 
-                        string query = "SELECT Count(*) FROM member";
-
-                        SqlCommand cmd = new SqlCommand(query, DBConnection.Connection);
-
-
+                        SqlCommand cmd = new SqlCommand(null, DBConnection.Connection);
+                        cmd.CommandText = $"INSERT INTO users (email, name, password, lang, verificationCode, verified, saltcode, iteration) " +
+                            $"VALUES(@email, @name, @password, @lang, @verificationCode, @verified, @saltcode, @iteration)";
 
 
-                        int count = int.Parse(cmd.ExecuteScalar() + "");
+                        SqlParameter paramEmail = new SqlParameter("@email", System.Data.SqlDbType.Text, 255);
+                        SqlParameter paramName = new SqlParameter("@name", System.Data.SqlDbType.Text, 255);
+                        SqlParameter paramPassword = new SqlParameter("@password", System.Data.SqlDbType.Binary);
+                        SqlParameter paramLang = new SqlParameter("@lang", System.Data.SqlDbType.Int);
+                        SqlParameter paramVerification = new SqlParameter("@verificationCode", System.Data.SqlDbType.Text, 255);
+                        SqlParameter paramVerified = new SqlParameter("@verified", System.Data.SqlDbType.Int);
+                        SqlParameter paramSalt = new SqlParameter("@saltcode", System.Data.SqlDbType.Binary);
+                        SqlParameter paramIteration = new SqlParameter("@iteration", System.Data.SqlDbType.Int);
 
-                        Console.WriteLine(count);
+                        paramEmail.Value = email;
+                        paramName.Value = name;
+                        paramPassword.Value = genratedPasswordHash;
+                        paramLang.Value = 0;
+                        paramVerification.Value = CreateCode();
+                        paramVerified.Value = 0;
+                        paramSalt.Value = salt;
+                        paramIteration.Value = 10;
 
+                        cmd.Parameters.Add(paramEmail);
+                        cmd.Parameters.Add(paramName);
+                        cmd.Parameters.Add(paramPassword);
+                        cmd.Parameters.Add(paramLang);
+                        cmd.Parameters.Add(paramVerification);
+                        cmd.Parameters.Add(paramVerified);
+                        cmd.Parameters.Add(paramSalt);
+                        cmd.Parameters.Add(paramIteration);
 
+                        cmd.Prepare();
+                        cmd.ExecuteNonQuery();
 
                         DBConnection.CloseConnection();
                         //INSERT INTO Users (User_Email, User_Name, User_Password(GenratedPasswordHash)) 
