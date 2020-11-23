@@ -33,9 +33,16 @@ namespace View
             DataContext = new Model.Track("test", 1, 2, 3, DateTime.Now, 1, new List<int>(), new List<int>(), "https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3");
             CurrentTrack = (Model.Track)this.DataContext;
 
-/*            Controller.Track track = new Controller.Track();
-            track.GetTrack(2);
-*/
+            Model.Artist a1 = new Model.Artist(1, "Thomas", "test", new List<int>(), "Label", "Nederland", DateTime.Now, DateTime.Today);
+            Model.Artist a2 = new Model.Artist(1, "Rick", "test", new List<int>(), "Label", "Nederland", DateTime.Now, DateTime.Today);
+            List<Model.Artist> artists = new List<Model.Artist>();
+            artists.Add(a1);
+            artists.Add(a2);
+            icArtistList.ItemsSource = artists;
+
+            /*            Controller.Track track = new Controller.Track();
+                        track.GetTrack(2);
+            */
 
 
 

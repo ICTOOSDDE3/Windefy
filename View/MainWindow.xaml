@@ -50,7 +50,23 @@
                 <Image Source="Assets/Images/mockSongImage.jpg" Height="70" Width="70"/>
                 <StackPanel Margin="5,0,0,0">
                     <Label Name="Track_Name" Content="{Binding Title}" Margin="0,20,0,0"/>
-                    <Label Name="Artist_Name" Content="Artist" Margin="0,0,0,20"/>
+                    <ItemsControl x:Name="icArtistList">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <Grid Margin="0,0,0,5">
+                                    <TextBlock Text="{Binding Name}" />
+                                </Grid>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                    
                 </StackPanel>
                 <ToggleButton x:Name="favoriteBtn" Content="Hart" Width="30" Height="30" Margin="50,0,0,0" />
             </WrapPanel>

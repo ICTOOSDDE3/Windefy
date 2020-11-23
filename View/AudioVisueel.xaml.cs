@@ -27,29 +27,29 @@ namespace View
 
         public AudioVisueel()
         {
-            InitializeComponent();
-            Artist a1 = new Artist(1, "Thomas", "test", new List<int>(), "Label", "Nederland", DateTime.Now, DateTime.Today);
-            Artist a2 = new Artist(1, "Rick", "test", new List<int>(), "Label", "Nederland", DateTime.Now, DateTime.Today);
-            List<Artist> artists = new List<Artist>();
-            artists.Add(a1);
-            artists.Add(a2);
-            icArtistList.ItemsSource = artists;
+            //InitializeComponent();
+            //Artist a1 = new Artist(1, "Thomas", "test", new List<int>(), "Label", "Nederland", DateTime.Now, DateTime.Today);
+            //Artist a2 = new Artist(1, "Rick", "test", new List<int>(), "Label", "Nederland", DateTime.Now, DateTime.Today);
+            //List<Artist> artists = new List<Artist>();
+            //artists.Add(a1);
+            //artists.Add(a2);
+            //icArtistList.ItemsSource = artists;
 
-            DataContext = new Model.Track("test", 1, 2, 3, DateTime.Now, 1, new List<int>(), new List<int>(), "https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3");
-            CurrentTrack = (Model.Track)this.DataContext;
-            //Controller.Artist ArtistController = new Controller.Artist();
-            //icArtistList.ItemsSource = ArtistController.GetArtistsByList(CurrentTrack.ArtistIDs);
-            mediaPlayer.Open(new Uri(CurrentTrack.File_path));
+            //DataContext = new Model.Track("test", 1, 2, 3, DateTime.Now, 1, new List<int>(), new List<int>(), "https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3");
+            //CurrentTrack = (Model.Track)this.DataContext;
+            ////Controller.Artist ArtistController = new Controller.Artist();
+            ////icArtistList.ItemsSource = ArtistController.GetArtistsByList(CurrentTrack.ArtistIDs);
+            //mediaPlayer.Open(new Uri(CurrentTrack.File_path));
 
-            mediaPlayer.Open(new Uri(""));
+            //mediaPlayer.Open(new Uri(""));
 
-            Song.Content = CurrentTrack.Title;
-            mediaPlayer.MediaEnded += MediaPlayer_MediaEnded;
-            DispatcherTimer timer = new DispatcherTimer();
+            //Song.Content = CurrentTrack.Title;
+            //mediaPlayer.MediaEnded += MediaPlayer_MediaEnded;
+            //DispatcherTimer timer = new DispatcherTimer();
 
-            timer.Interval = TimeSpan.FromSeconds(1);
-            timer.Tick += Timer_Tick;
-            timer.Start();
+            //timer.Interval = TimeSpan.FromSeconds(1);
+            //timer.Tick += Timer_Tick;
+            //timer.Start();
         }
 
         private void Timer_Tick(object sender, EventArgs e)
