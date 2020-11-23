@@ -16,7 +16,7 @@ namespace Model
         public List<int> GenreIDs { get; set; } 
         public string File_path { get; set; }
 
-        public Track(string title, int listens, int languageID, int duration, DateTime releaseDate, int numberID, List<int> artistIDs, List<int> genreIDs, string file_path)
+/*        public Track(string title, int listens, int languageID, int duration, DateTime releaseDate, int numberID, List<int> artistIDs, List<int> genreIDs, string file_path)
         {
             Title = title;
             Listens = listens;
@@ -27,6 +27,6 @@ namespace Model
             ArtistIDs = artistIDs;
             GenreIDs = genreIDs;
             File_path = file_path;
-        }
+        }*/
     }
 }

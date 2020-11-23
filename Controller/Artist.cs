@@ -14,7 +14,6 @@ namespace Controller
         private List<int> memberIDs;
         private string label;
         private string location;
-    
 
         public Model.Artist GetArtist(int artistID)
         {
@@ -23,11 +22,11 @@ namespace Controller
             return artist;
             //naar view sturen
         }
-        
+
         public List<Model.Artist> GetArtistsByList(List<int> artist_ids)
         {
             List<Model.Artist> list = new List<Model.Artist>();
-            foreach(var item in artist_ids)
+            foreach (var item in artist_ids)
             {
                 Model.Artist a = GetArtistFromDB(item);
                 list.Add(a);

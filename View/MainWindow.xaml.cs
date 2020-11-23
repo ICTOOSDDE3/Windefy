@@ -27,29 +27,29 @@ namespace View
         private bool mediaPlaying = false;
         private bool rewind = false;
         private Model.Track CurrentTrack;
+        private Controller.AudioPath audioPath = new Controller.AudioPath();
+        private Controller.Track track = new Controller.Track();
 
         public MainWindow() {
             InitializeComponent();
-            DataContext = new Model.Track("test", 1, 2, 3, DateTime.Now, 1, new List<int>(), new List<int>(), "https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3");
+            //DataContext = new Model.Track("test", 1, 2, 3, DateTime.Now, 1, new List<int>(), new List<int>(), "https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3");
+            
+
+            
+            DataContext = track.GetTrack(210);
             CurrentTrack = (Model.Track)this.DataContext;
 
-            Model.Artist a1 = new Model.Artist(1, "Thomas", "test", new List<int>(), "Label", "Nederland", DateTime.Now, DateTime.Today);
-            Model.Artist a2 = new Model.Artist(1, "Rick", "test", new List<int>(), "Label", "Nederland", DateTime.Now, DateTime.Today);
-            List<Model.Artist> artists = new List<Model.Artist>();
-            artists.Add(a1);
-            artists.Add(a2);
-            icArtistList.ItemsSource = artists;
-
-            /*            Controller.Track track = new Controller.Track();
-                        track.GetTrack(2);
-            */
+            icArtistList.ItemsSource = CurrentTrack.ArtistIDs;
 
 
+            string strin = CurrentTrack.File_path;
+            
+            mediaPlayer.Open(new Uri(audioPath.GetAudioPath(strin)));
 
             mediaPlayer.MediaEnded += MediaPlayer_MediaEnded;
             DispatcherTimer timer = new DispatcherTimer();
 
-            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Interval = TimeSpan.FromSeconds(0);
             timer.Tick += timer_Tick;
             timer.Start();
         }
@@ -62,7 +62,8 @@ namespace View
                 TotalTime.Content = mediaPlayer.NaturalDuration.TimeSpan.ToString(@"mm\:ss");
                 TimeStatus.Maximum = mediaPlayer.NaturalDuration.TimeSpan.TotalSeconds;
                 TimeStatus.Value = mediaPlayer.Position.TotalSeconds;
-                //TimeStatus.Foreground = Brushes.Red;
+
+                TimeStatus.Foreground = Brushes.Red;
             }
             else if (mediaPlayer.Source != null && mediaPlayer.NaturalDuration.HasTimeSpan)
             {
@@ -72,11 +73,28 @@ namespace View
 
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
-            //naar volgend liedje
+            DataContext = track.GetTrack(CurrentTrack.NumberID + 1);
+            CurrentTrack = (Model.Track)this.DataContext;
+            icArtistList.ItemsSource = CurrentTrack.ArtistIDs;
+            mediaPlayer.Open(new Uri(audioPath.GetAudioPath(CurrentTrack.File_path)));
+
+            if (mediaPlaying)
+            {
+                mediaPlayer.Play();
+            }
         }
         private void btnPrev_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            //naar vorig liedje
+            DataContext = track.GetTrack(CurrentTrack.NumberID - 1);
+            CurrentTrack = (Model.Track)this.DataContext;
+            icArtistList.ItemsSource = CurrentTrack.ArtistIDs;
+
+            mediaPlayer.Open(new Uri(audioPath.GetAudioPath(CurrentTrack.File_path)));
+
+            if (mediaPlaying)
+            {
+                mediaPlayer.Play();
+            }
         }
 
         private void btnPrev_Click(object sender, RoutedEventArgs e)
@@ -103,7 +121,12 @@ namespace View
             }
             else
             {
-                //Volgend nummer 
+                DataContext = track.GetTrack(CurrentTrack.NumberID + 1);
+                CurrentTrack = (Model.Track)this.DataContext;
+                icArtistList.ItemsSource = CurrentTrack.ArtistIDs;
+                mediaPlayer.Open(new Uri(audioPath.GetAudioPath(CurrentTrack.File_path)));
+
+                mediaPlayer.Play();
             }
         }
 
