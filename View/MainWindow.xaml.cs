@@ -78,6 +78,8 @@ namespace View
                 if (registerAccount.ArePasswordsEqual(password, repeatedPassword))
                 {
                     registerAccount.RegisterAccount(email, userName, password, repeatedPassword);
+                    RegisterGrid.Visibility = Visibility.Hidden;
+                    VerifyGrid.Visibility = Visibility.Visible;
                 }
                 else
                 {

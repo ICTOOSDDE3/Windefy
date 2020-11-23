@@ -33,7 +33,7 @@ namespace Controller
             // Set mail credentials
             emailSender.EnableSsl = true;
             emailSender.UseDefaultCredentials = false;
-            emailSender.Credentials = new NetworkCredential("windify80@gmail.com", "Windesheim1");
+            emailSender.Credentials = new NetworkCredential("windify80@gmail.com", Passwords.GetPassword("Gmail"));
             // Send the email
             emailSender.Send(email);
         }
@@ -43,7 +43,6 @@ namespace Controller
             Model_Mail mail = new Model_Mail(adres, "Windify80@gmail.com", "Mail verification", $"To verify your mail, insert code: {code}, \n\n kind regards, \n\n Windify ");
             SendMail(mail);
         }
-
     }
 }
 

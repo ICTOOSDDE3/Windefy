@@ -4,6 +4,7 @@ using System.Text;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Cryptography;
 using System.Linq;
+using System.Data.SqlClient;
 
 namespace Controller
 {
@@ -26,6 +27,24 @@ namespace Controller
                         byte[] bytePassword = PasswordToByte(pw1);
                         byte[] salt = GenerateSalt(20); // maybe a random number between 20 - 30?
                         byte[] genratedPasswordHash = GenerateHash(bytePassword, salt, 10, 10); // maybe these numbers random generate aswell?
+
+                        DBConnection.Initialize();
+                        DBConnection.OpenConnection();
+
+                        string query = "SELECT Count(*) FROM member";
+
+                        SqlCommand cmd = new SqlCommand(query, DBConnection.Connection);
+
+
+
+
+                        int count = int.Parse(cmd.ExecuteScalar() + "");
+
+                        Console.WriteLine(count);
+
+
+
+                        DBConnection.CloseConnection();
                         //INSERT INTO Users (User_Email, User_Name, User_Password(GenratedPasswordHash)) 
                         //we also need to store the salt (generated above) and the iterations and workfactor (which are the two 10's in GenerateHash())
                         //VALUES (email, name, generatedPasswordHash)
