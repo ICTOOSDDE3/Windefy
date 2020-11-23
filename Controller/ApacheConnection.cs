@@ -3,9 +3,8 @@ using Renci.SshNet.Common;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Controller;
 
-namespace Model
+namespace Controller
 {
     public static class ApacheConnection
     {
