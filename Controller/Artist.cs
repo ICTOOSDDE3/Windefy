@@ -64,7 +64,7 @@ namespace Controller
             List<int> IDsMembers = new List<int>();
 
             SqlConnection myConnection = new SqlConnection();
-            string dbString = $"Select * from artist_member where trackID = {artistID}";
+            string dbString = $"Select * from artist_member where artistID = {artistID}";
 
             SqlCommand oCmd = new SqlCommand(dbString, myConnection);
             myConnection.Open();

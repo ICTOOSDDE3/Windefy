@@ -39,8 +39,8 @@ namespace Controller
             myConnection.Open();
 
             using (SqlDataReader reader = oCmd.ExecuteReader())
-            { 
-                title = reader["title"].ToString();
+            {
+                string title = reader["title"].ToString();
                 listens = (int)reader["listens"];
                 languageID = (int)reader["languageID"];
                 duration = (int)reader["duration"];
