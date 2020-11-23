@@ -32,9 +32,6 @@ namespace View
 
         public MainWindow() {
             InitializeComponent();
-            //DataContext = new Model.Track("test", 1, 2, 3, DateTime.Now, 1, new List<int>(), new List<int>(), "https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3");
-            
-
             
             DataContext = track.GetTrack(210);
             CurrentTrack = (Model.Track)this.DataContext;

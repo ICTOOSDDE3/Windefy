@@ -44,6 +44,7 @@ namespace Controller
             }
             DBConnection.CloseConnection();
 
+            track.NumberID = numberID;
             track.GenreIDs = GetGenreIDs(numberID);
             track.ArtistIDs = GetArtistIDs(numberID);
             return track;
