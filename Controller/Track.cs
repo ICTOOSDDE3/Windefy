@@ -12,6 +12,11 @@ namespace Controller
         {
             DBConnection.Initialize();
         }
+        /// <summary>
+        /// Calls methods to create track object
+        /// </summary>
+        /// <param name="numberID"></param>
+        /// <returns>Track</returns>
         public Model.Track GetTrack(int numberID)
         {
             Model.Track track = GetTrackFromDB(numberID);
@@ -19,10 +24,10 @@ namespace Controller
         }
 
         /// <summary>
-        /// Haalt alle gegevens van track op uit de database en maakt hier een track object van
+        /// Gets track data from database and makes a track object
         /// </summary>
         /// <param name="numberID"></param>
-        /// <returns>een Track object</returns>
+        /// <returns>Track object</returns>
         private Model.Track GetTrackFromDB(int numberID)
         {
             DBConnection.OpenConnection();
@@ -51,10 +56,10 @@ namespace Controller
         }
 
         /// <summary>
-        /// Haalt de artist id's uit de Database die bij het nummer hoort
+        /// Gets artist ID's from database and makes a list of it
         /// </summary>
         /// <param name="numberID"></param>
-        /// <returns>list van artist id's</returns>
+        /// <returns>list of artist ID's </returns>
         private List<int> GetArtistIDs(int numberID)
         {
             List<int> IDArtist = new List<int>();
@@ -77,10 +82,10 @@ namespace Controller
         }
 
         /// <summary>
-        /// Haalt de genre id's uit de Database die bij het nummer hoort
+        /// Gets genre ID's from database and makes a list of it
         /// </summary>
         /// <param name="numberID"></param>
-        /// <returns>List van genre id's</returns>
+        /// <returns>List of genre id's</returns>
         private List<int> GetGenreIDs(int numberID)
         {
             List<int> IDsGenre = new List<int>();

@@ -7,6 +7,11 @@ namespace Controller
 {
     public class AudioPath
     {
+        /// <summary>
+        /// Gets full audio file path from static AppacheConnection class
+        /// </summary>
+        /// <param name="File_path"></param>
+        /// <returns>Full audio file path</returns>
         public string GetAudioPath(string File_path)
         {
             ApacheConnection.Initialize();

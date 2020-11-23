@@ -14,20 +14,20 @@ namespace Controller
         }
 
         /// <summary>
-        /// 
+        /// Calls methods to create artist object
         /// </summary>
         /// <param name="artistID"></param>
-        /// <returns></returns>
+        /// <returns>artist object</returns>
         public Model.Artist GetArtist(int artistID)
         {
             Model.Artist artist = GetArtistFromDB(artistID);
             return artist;
         }
         /// <summary>
-        /// 
+        /// Makes a list of artist objects
         /// </summary>
         /// <param name="artist_ids"></param>
-        /// <returns></returns>
+        /// <returns>artist object</returns>
         public List<Model.Artist> GetArtistsByList(List<int> artist_ids)
         {
             List<Model.Artist> list = new List<Model.Artist>();
@@ -40,10 +40,10 @@ namespace Controller
         }
 
         /// <summary>
-        ///  Haalt alle gegevens van artist op uit de database en maakt hier een artist object van
+        ///  Gets artist data from database and makes a artist object 
         /// </summary>
         /// <param name="artistID"></param>
-        /// <returns>een artist object</returns>
+        /// <returns> artist object</returns>
         private Model.Artist GetArtistFromDB(int artistID)
         {
             DBConnection.OpenConnection();
@@ -72,10 +72,10 @@ namespace Controller
         }
 
         /// <summary>
-        /// haalt alle member id's op die horen bij een artiest
+        /// Gets member id's from database
         /// </summary>
         /// <param name="artistID"></param>
-        /// <returns>list van member id's</returns>
+        /// <returns>list of member ID's</returns>
         private List<int> GetMemberIDs(int artistID)
         {
             List<int> IDsMembers = new List<int>();
