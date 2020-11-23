@@ -9,7 +9,6 @@ namespace Controller
         static void Main(string[] args)
         {
             Controller_Mail m1 = new Controller_Mail();
-
         }
     }
 }

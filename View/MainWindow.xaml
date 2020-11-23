@@ -57,12 +57,12 @@
         <Grid Grid.Row="0" Grid.Column="1" Background="White">
             <ContentControl Content="{Binding}" />
             <TextBox Style="{StaticResource placeHolder}" Tag="Search for your next favorite thing" Width="490" Height="35" FontSize="18" Margin="38,33,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
-            <Button x:Name="Login_Button" Content="" Margin="0,29,28,0" Width="44" Height="44" BorderBrush="#00707070" Click="Login_Button_Click" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <Button x:Name="Login_Button" Content="" Margin="0,24,85,0" Width="44" Height="44" BorderBrush="#00707070" Click="Login_Button_Click" HorizontalAlignment="Right" VerticalAlignment="Top">
                 <Button.Background>
                     <ImageBrush ImageSource="/logint button.png"/>
                 </Button.Background>
             </Button>
-            <Button x:Name="Account_Button" Content="" Margin="1090,24,106,850" Width="44" Height="44" BorderBrush="#00707070" Click="Account_Button_Click">
+            <Button x:Name="Account_Button" Content="" Margin="0,24,28,0" Width="44" Height="44" BorderBrush="#00707070" Click="Account_Button_Click" HorizontalAlignment="Right" VerticalAlignment="Top">
                 <Button.Background>
                     <ImageBrush ImageSource="/logint button.png"/>
                 </Button.Background>
@@ -72,7 +72,7 @@
         <!-- the loginBackGround has to be visible if you want to change the loginGrid, RegisterGrid and the verify grid (put those grids on visible aswell) -->
         <Grid x:Name="LoginBackground" Background="#7F4F83CC" Grid.ColumnSpan="2" Grid.RowSpan="2" Visibility="Visible" Margin="0,-8,0,-8">
             <!-- Login Grid and its components-->
-            <Grid x:Name="LoginGrid" VerticalAlignment="Center" Width="552" Height="283" Background="White" Visibility="Visible">
+            <Grid x:Name="LoginGrid" VerticalAlignment="Center" Width="552" Height="283" Background="White" Visibility="Hidden">
                 <Border CornerRadius="30" Margin="95,176,95,0" VerticalAlignment="Top" Width="363" Height="34" Grid.ColumnSpan="3" Background="#FF4F83CC" RenderTransformOrigin="0.5,0.5">
                     <Button Content="Login" VerticalAlignment="Top" Width="363" Height="34" Grid.ColumnSpan="2" Background="#004F83CC" Foreground="White" RenderTransformOrigin="0.5,0.5" BorderBrush="#00707070" HorizontalAlignment="Center"/>
                 </Border>
@@ -98,15 +98,20 @@
             </Grid>
 
             <!-- this grid shows the account details of which you are logged in with -->
-            <Grid x:Name="AccountDetailsGrid" Width="588" Height="605" Background="White" Visibility="Hidden">
-                <TextBox x:Name="Email" HorizontalAlignment="Center" Margin="0,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="375" Height="42" Background="#7F4F83CC" TextAlignment="Center" FontSize="24" IsEnabled="False"/>
-                <TextBox x:Name="Username" HorizontalAlignment="Center" Margin="0,302,0,261" TextWrapping="Wrap" Width="376" Background="#7F4F83CC" FontSize="24" TextAlignment="Center" Foreground="#7F000000" Height="42" IsEnabled="False"/>
-                <TextBox x:Name="Language" HorizontalAlignment="Center" Margin="0,400,0,163" TextWrapping="Wrap" Width="376" Background="#7F4F83CC" FontSize="24" TextAlignment="Center" Foreground="#7F000000" Height="42" IsEnabled="False"/>
+            <Grid x:Name="AccountDetailsGrid" Width="588" Height="605" Background="White" Visibility="Visible">
+                <TextBox x:Name="Details_Email_Input" HorizontalAlignment="Center" Margin="0,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="375" Height="42" Background="#7F4F83CC" TextAlignment="Center" FontSize="24" IsEnabled="True"/>
+                <TextBox x:Name="Details_Username_Input" HorizontalAlignment="Center" Margin="0,302,0,261" TextWrapping="Wrap" Width="376" Background="#7F4F83CC" FontSize="24" TextAlignment="Center" Foreground="#7F000000" Height="42" IsEnabled="True"/>
+                <TextBox x:Name="Details_Language_Input" HorizontalAlignment="Center" Margin="0,400,0,163" TextWrapping="Wrap" Width="376" Background="#7F4F83CC" FontSize="24" TextAlignment="Center" Foreground="#7F000000" Height="42" IsEnabled="False"/>
                 <TextBlock HorizontalAlignment="Center" Margin="0,42,0,0" Text="Personal Info" TextWrapping="Wrap" VerticalAlignment="Top" Height="42" Width="376" TextAlignment="Center" FontSize="32" FontWeight="Bold"/>
                 <TextBlock HorizontalAlignment="Left"  Margin="106,162,0,0" Text="Email:" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="110" FontSize="24"/>
                 <TextBlock HorizontalAlignment="Left"  Margin="106,261,0,0" Text="Name:" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="110" FontSize="24"/>
                 <TextBlock HorizontalAlignment="Left"  Margin="106,359,0,0" Text="Language:" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="110" FontSize="24"/>
-                <Button x:Name="Account_Details_register" Content="X" HorizontalAlignment="Left" Margin="534,23,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.48,0.377" Width="22" Foreground="Red" Background="{x:Null}" BorderBrush="{x:Null}" Click="Close_Account_Details_Button_Click" FontWeight="Bold"/>
+                <TextBlock Name="Updated_Text" HorizontalAlignment="Left"  Margin="112,519,0,0" Text="*Updated account" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="224" FontSize="20" Visibility="Hidden" Opacity="0.8"/>
+
+                <Button x:Name="Close_Account_Details" Content="X" HorizontalAlignment="Left" Margin="534,23,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.48,0.377" Width="22" Foreground="Red" Background="{x:Null}" BorderBrush="{x:Null}" Click="Close_Login_Button_Click" FontWeight="Bold"/>
+                <Border CornerRadius="30" Margin="112,480,112,0" VerticalAlignment="Top" Width="363" Height="34" Background="#FF4F83CC" RenderTransformOrigin="0.5,0.5">
+                    <Button x:Name="AccountDetailsButton" Content="Update" HorizontalAlignment="Center" VerticalAlignment="Center" Width="384" Height="48" Background="#00DDDDDD" BorderBrush="#00707070" Foreground="White" Click="AccountDetails_Button_Click"/>
+                </Border>
             </Grid>
 
             <!-- this grid show the verification tab where a registered user can verify its email adress-->

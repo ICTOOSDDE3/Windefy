@@ -21,9 +21,10 @@ namespace View
         public MainWindow()
         {
             InitializeComponent();
-            User.Name = "Pietje";
-            User.Email = "Pietje@gmail.com";
-            User.Language = 1;
+            Model.User.Name = "Pietje";
+            Model.User.Email = "Pietje@gmail.com";
+            Model.User.Language = 1;
+            Model.User.UserID = 1;
             DataContext = new Homepage();
         }
 
@@ -38,9 +39,9 @@ namespace View
             LoginBackground.Visibility = Visibility.Visible;
             AccountDetailsGrid.Visibility = Visibility.Visible;
 
-            Email.Text = User.Email;
-            Username.Text = User.Name;
-            Language.Text = User.GetLanguage();
+            Details_Email_Input.Text = Model.User.Email;
+            Details_Username_Input.Text = Model.User.Name;
+            Details_Language_Input.Text = Model.User.GetLanguage();
         }
 
         private void Register_Click(object sender, RoutedEventArgs e)
@@ -65,6 +66,24 @@ namespace View
         {
             LoginBackground.Visibility = Visibility.Hidden;
             AccountDetailsGrid.Visibility = Visibility.Hidden;
+        }
+        private void AccountDetails_Button_Click(object sender, RoutedEventArgs e)
+        {
+            string newEmail = Details_Email_Input.Text;
+            string newName = Details_Username_Input.Text;
+
+            //update email if different from current email
+            if(newEmail != Model.User.Email)
+            {
+                Controller.User.UpdateEmail(newEmail);
+            }
+            //Update username if different from current name
+            if (newEmail != Model.User.Name)
+            {
+                Controller.User.UpdateName(newName);
+            }
+
+            Updated_Text.Visibility = Visibility.Visible;
         }
 
         private void Register_Button_Click(object sender, RoutedEventArgs e)
