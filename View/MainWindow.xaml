@@ -84,7 +84,7 @@
             </Grid>
 
             <!-- Register Grid and its components -->
-            <Grid x:Name="RegisterGrid" Width="588" Height="605" Background="White" Visibility="hidden">
+            <Grid x:Name="RegisterGrid" Width="588" Height="605" Background="White" Visibility="Visible">
                 <TextBox x:Name="Email_Input" HorizontalAlignment="Center" Margin="0,176,0,0" Style="{StaticResource LoginInputs}" Tag="Email@example.com" TextWrapping="Wrap" VerticalAlignment="Top" Width="375" Height="42" Background="#7F4F83CC" TextAlignment="Center" FontSize="24"/>
                 <TextBox x:Name="Username_Input" HorizontalAlignment="Center" Margin="0,238,0,325" Style="{StaticResource LoginInputs}" Tag="Username" TextWrapping="Wrap" Width="376" Background="#7F4F83CC" FontSize="24" TextAlignment="Center" Foreground="#7F000000"/>
                 <TextBox x:Name="Password_Input" HorizontalAlignment="Center" Margin="0,300,0,0" Style="{StaticResource LoginInputs}" Tag="Password" TextWrapping="Wrap" VerticalAlignment="Top" Width="375" Height="42" Background="#7F4F83CC" TextAlignment="Center" FontSize="24" Foreground="#7F000000"/>
@@ -99,7 +99,7 @@
             </Grid>
 
             <!-- this grid shows the account details of which you are logged in with -->
-            <Grid x:Name="AccountDetailsGrid" Width="588" Height="605" Background="White" Visibility="Visible">
+            <Grid x:Name="AccountDetailsGrid" Width="588" Height="605" Background="White" Visibility="Hidden">
                 <TextBox x:Name="Details_Email_Input" HorizontalAlignment="Center" Margin="0,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="375" Height="42" Background="#7F4F83CC" TextAlignment="Center" FontSize="24" IsEnabled="True"/>
                 <TextBox x:Name="Details_Username_Input" HorizontalAlignment="Center" Margin="0,302,0,261" TextWrapping="Wrap" Width="376" Background="#7F4F83CC" FontSize="24" TextAlignment="Center" Foreground="#7F000000" Height="42" IsEnabled="True"/>
                 <TextBox x:Name="Details_Language_Input" HorizontalAlignment="Center" Margin="0,400,0,163" TextWrapping="Wrap" Width="376" Background="#7F4F83CC" FontSize="24" TextAlignment="Center" Foreground="#7F000000" Height="42" IsEnabled="False"/>

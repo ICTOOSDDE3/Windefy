@@ -118,6 +118,7 @@ namespace View
         {
             if (registerAccount.IsVerificationCodeCorrect(Verify_TextBox.Text, email)) {
                 LoginBackground.Visibility = Visibility.Hidden;
+                VerifyGrid.Visibility = Visibility.Hidden;
             }
             else
             {
