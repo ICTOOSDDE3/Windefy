@@ -30,20 +30,14 @@ namespace View
 
         public MainWindow() {
             InitializeComponent();
-            DataContext = new Model.Track("test", 1, 2, 3, DateTime.Now, 1, new List<int>(), new List<int>(), "https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3");
+            Controller.Track trackController = new Controller.Track();
+            
+            DataContext = trackController.GetTrack(5);
             CurrentTrack = (Model.Track)this.DataContext;
 
-            Model.Artist a1 = new Model.Artist(1, "Thomas", "test", new List<int>(), "Label", "Nederland", DateTime.Now, DateTime.Today);
-            Model.Artist a2 = new Model.Artist(1, "Rick", "test", new List<int>(), "Label", "Nederland", DateTime.Now, DateTime.Today);
-            List<Model.Artist> artists = new List<Model.Artist>();
-            artists.Add(a1);
-            artists.Add(a2);
-            icArtistList.ItemsSource = artists;
-
-            /*            Controller.Track track = new Controller.Track();
-                        track.GetTrack(2);
-            */
-
+            Controller.Artist artistController = new Controller.Artist();
+            //icArtistList.ItemsSource = artistController.GetArtistsByList(CurrentTrack.ArtistIDs);
+            icArtistList.ItemsSource = CurrentTrack.ArtistIDs;
 
 
             mediaPlayer.MediaEnded += MediaPlayer_MediaEnded;

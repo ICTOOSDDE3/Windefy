@@ -7,23 +7,27 @@ namespace Controller
 {
     public class Artist
     {
-        private string name;
-        private DateTime active_year_begin;
-        private DateTime active_year_end;
-        private string bio;
-        private List<int> memberIDs;
-        private string label;
-        private string location;
-    
+        public Artist()
+        {
 
+            //DBConnection.Initialize();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="artistID"></param>
+        /// <returns></returns>
         public Model.Artist GetArtist(int artistID)
         {
             Model.Artist artist = GetArtistFromDB(artistID);
-
             return artist;
-            //naar view sturen
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="artist_ids"></param>
+        /// <returns></returns>
         public List<Model.Artist> GetArtistsByList(List<int> artist_ids)
         {
             List<Model.Artist> list = new List<Model.Artist>();
@@ -42,26 +46,27 @@ namespace Controller
         /// <returns>een artist object</returns>
         private Model.Artist GetArtistFromDB(int artistID)
         {
-            SqlConnection myConnection = new SqlConnection(); //open connectie met database, moet via Berkay's db connection class
-            string dbString = $"Select * from artist where artistID = {artistID}";
+            DBConnection.OpenConnection();
+            string query = $"Select * from artist where artistID = {artistID}";
 
-            SqlCommand oCmd = new SqlCommand(dbString, myConnection);
-            myConnection.Open();
+            SqlCommand oCmd = new SqlCommand(query, DBConnection.Connection);
 
+            Model.Artist artist = new Model.Artist();
             using (SqlDataReader reader = oCmd.ExecuteReader())
             {
-                name = reader["title"].ToString();
-                active_year_begin = (DateTime)reader["active_year_begin"];
-                active_year_end = (DateTime)reader["active_year_end"];
-                bio = reader["bio"].ToString();
-                label = reader["associated_labels"].ToString();
-                location = reader["location"].ToString();
+                while (reader.Read())
+                {
+                    
+                    artist.Name = reader["name"].ToString();
+                    if(reader["active_year_begin"] != null) artist.active_year_begin = (DateTime)reader["active_year_begin"];
+                    if (reader["active_year_end"] != null) artist.active_year_end = (DateTime)reader["active_year_end"];
+                    artist.Bio = reader["bio"].ToString();
+                    artist.Associated_Labels = reader["associated_labels"].ToString();
+                    artist.Location = reader["location"].ToString();
+                }
             }
-            myConnection.Close();
-
-            memberIDs = GetMemberIDs(artistID);
-
-            Model.Artist artist = new Model.Artist(artistID, name, bio, memberIDs, label, location, active_year_begin, active_year_end);
+            DBConnection.CloseConnection();
+            artist.MemberIDs = GetMemberIDs(artistID);
 
             return artist;
         }
@@ -75,11 +80,11 @@ namespace Controller
         {
             List<int> IDsMembers = new List<int>();
 
-            SqlConnection myConnection = new SqlConnection();
-            string dbString = $"Select * from artist_member where artistID = {artistID}";
+            DBConnection.OpenConnection();
 
-            SqlCommand oCmd = new SqlCommand(dbString, myConnection);
-            myConnection.Open();
+            string query = $"Select * from artist_member where artistID = {artistID}";
+
+            SqlCommand oCmd = new SqlCommand(query, DBConnection.Connection);
 
             using (SqlDataReader reader = oCmd.ExecuteReader())
             {
@@ -88,7 +93,7 @@ namespace Controller
                     IDsMembers.Add((int)reader["memberID"]);
                 }
             }
-            myConnection.Close();
+            DBConnection.CloseConnection();
 
             return IDsMembers;
         }
