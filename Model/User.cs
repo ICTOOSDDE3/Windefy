@@ -6,7 +6,7 @@ namespace Model
 {
     public static class User
     {
-
+        public static int UserID { get; set; }
         public static string Email { get; set; }
         public static string Name { get; set; }
         public static int Language { get; set; }
@@ -21,12 +21,33 @@ namespace Model
         public static void ChangeName(string newName)
         {
             //Update the name in the object & on the server
+            //Update name in db
+            /* 
+             *UPDATE users 
+             *SET name = newName
+             *WHERE user_Id = UserID
+             */
         }
 
-        public static void ChangePassword(string newPassword)
+        public static void UpdatePassword(string newPassword)
         {
             //Validate if the two passwords are correct
             //Update the password on the server
+        }
+        public static bool IsUniqueMail(string mail)
+        {
+            /*
+             * COUNT = 
+             * 
+             * SELECT COUNT(*)
+             * FROM users
+             * WHERE email = mail
+             * 
+             * 
+             * if(count == 0) {
+             *  return true;
+             * }
+             */
         }
 
         public static string GetLanguage()
