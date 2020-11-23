@@ -14,13 +14,25 @@ namespace Controller
         private List<int> memberIDs;
         private string label;
         private string location;
+    
 
-        public Model.Artist GetArtist(int numberID)
+        public Model.Artist GetArtist(int artistID)
         {
-            Model.Artist artist = getArtistFromDB(numberID);
+            Model.Artist artist = GetArtistFromDB(artistID);
 
             return artist;
             //naar view sturen
+        }
+        
+        public List<Model.Artist> GetArtistsByList(List<int> artist_ids)
+        {
+            List<Model.Artist> list = new List<Model.Artist>();
+            foreach(var item in artist_ids)
+            {
+                Model.Artist a = GetArtistFromDB(item);
+                list.Add(a);
+            }
+            return list;
         }
 
         /// <summary>
@@ -28,7 +40,7 @@ namespace Controller
         /// </summary>
         /// <param name="artistID"></param>
         /// <returns>een artist object</returns>
-        private Model.Artist getArtistFromDB(int artistID)
+        private Model.Artist GetArtistFromDB(int artistID)
         {
             SqlConnection myConnection = new SqlConnection(); //open connectie met database, moet via Berkay's db connection class
             string dbString = $"Select * from artist where artistID = {artistID}";
@@ -47,7 +59,7 @@ namespace Controller
             }
             myConnection.Close();
 
-            memberIDs = getMemberIDs(artistID);
+            memberIDs = GetMemberIDs(artistID);
 
             Model.Artist artist = new Model.Artist(artistID, name, bio, memberIDs, label, location, active_year_begin, active_year_end);
 
@@ -59,7 +71,7 @@ namespace Controller
         /// </summary>
         /// <param name="artistID"></param>
         /// <returns>list van member id's</returns>
-        private List<int> getMemberIDs(int artistID)
+        private List<int> GetMemberIDs(int artistID)
         {
             List<int> IDsMembers = new List<int>();
 

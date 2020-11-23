@@ -19,7 +19,7 @@ namespace Controller
 
         public Model.Track GetTrack(int numberID)
         {
-            Model.Track track = getTrackFromDB(numberID);
+            Model.Track track = GetTrackFromDB(numberID);
 
             return track;
             //naar view sturen
@@ -30,7 +30,7 @@ namespace Controller
         /// </summary>
         /// <param name="numberID"></param>
         /// <returns>een Track object</returns>
-        private Model.Track getTrackFromDB(int numberID)
+        private Model.Track GetTrackFromDB(int numberID)
         {
             SqlConnection myConnection = new SqlConnection();
             string dbString = $"Select * from track where trackID = {numberID}";
@@ -49,8 +49,8 @@ namespace Controller
             }
             myConnection.Close();
 
-            genreIDs = getGenreIDs(numberID);
-            artistIDs = getArtistIDs(numberID);
+            genreIDs = GetGenreIDs(numberID);
+            artistIDs = GetArtistIDs(numberID);
 
             Model.Track track = new Model.Track(title, listens, languageID, duration, date_created, numberID, artistIDs, genreIDs, file_path);
 
@@ -62,7 +62,7 @@ namespace Controller
         /// </summary>
         /// <param name="numberID"></param>
         /// <returns>list van artist id's</returns>
-        private List<int> getArtistIDs(int numberID)
+        private List<int> GetArtistIDs(int numberID)
         {
             List<int> IDArtist = new List<int>();
 
@@ -89,7 +89,7 @@ namespace Controller
         /// </summary>
         /// <param name="numberID"></param>
         /// <returns>List van genre id's</returns>
-        private List<int> getGenreIDs(int numberID)
+        private List<int> GetGenreIDs(int numberID)
         {
             List<int> IDsGenre = new List<int>();
 

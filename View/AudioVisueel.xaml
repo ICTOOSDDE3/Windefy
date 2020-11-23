@@ -13,5 +13,21 @@
             <ToggleButton x:Name="tbBtnRewind" Checked="btnRewind_Checked" Unchecked="btnRewind_Unchecked" Content="Rewind" Margin="5,0"/>
         </WrapPanel>
         <Slider Value="100" Maximum="100" TickPlacement="BottomRight" TickFrequency="5" ValueChanged="Volume_ValueChanged" Name="Volume"/>
+        <ItemsControl Name="icArtistList">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <Grid Margin="0,0,0,5">
+                            <TextBlock Text="{Binding Name}" />
+                       </Grid>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
     </StackPanel>
 </Window>
