@@ -12,11 +12,12 @@ namespace Controller
     public class Register
     {
         private static Random random = new Random();
-        private Mail resendVerificationMail = new Mail();
+        private Mail VerificationMail = new Mail();
 
         //Method to register an account (validate and save to db)
         public void RegisterAccount(string email, string name, string pw1, string pw2)
         {
+            DBConnection.Initialize();
             if (IsValidEmail(email))
             {
                 if (IsEmailUnique(email))
@@ -27,10 +28,10 @@ namespace Controller
 
                         byte[] bytePassword = PasswordToByte(pw1);
                         byte[] salt = GenerateSalt(20); // maybe a random number between 20 - 30?
-                        byte[] genratedPasswordHash = GenerateHash(bytePassword, salt, 10, 10); // maybe these numbers random generate aswell?
+                        byte[] genratedPasswordHash = GenerateHash(bytePassword, salt, 10, 10);// maybe these numbers random generate aswell?
+                        string verificationCode = CreateCode();
 
                         //database connection / inserting new user in database
-                        DBConnection.Initialize();
                         DBConnection.OpenConnection();
 
                         SqlCommand cmd = new SqlCommand(null, DBConnection.Connection);
@@ -40,20 +41,20 @@ namespace Controller
 
                         SqlParameter paramEmail = new SqlParameter("@email", System.Data.SqlDbType.Text, 255);
                         SqlParameter paramName = new SqlParameter("@name", System.Data.SqlDbType.Text, 255);
-                        SqlParameter paramPassword = new SqlParameter("@password", System.Data.SqlDbType.Binary);
-                        SqlParameter paramLang = new SqlParameter("@lang", System.Data.SqlDbType.Int);
+                        SqlParameter paramPassword = new SqlParameter("@password", System.Data.SqlDbType.Text, 255);
+                        SqlParameter paramLang = new SqlParameter("@lang", System.Data.SqlDbType.Int, 1);
                         SqlParameter paramVerification = new SqlParameter("@verificationCode", System.Data.SqlDbType.Text, 255);
-                        SqlParameter paramVerified = new SqlParameter("@verified", System.Data.SqlDbType.Int);
-                        SqlParameter paramSalt = new SqlParameter("@saltcode", System.Data.SqlDbType.Binary);
-                        SqlParameter paramIteration = new SqlParameter("@iteration", System.Data.SqlDbType.Int);
+                        SqlParameter paramVerified = new SqlParameter("@verified", System.Data.SqlDbType.Int, 1);
+                        SqlParameter paramSalt = new SqlParameter("@saltcode", System.Data.SqlDbType.Text, 255);
+                        SqlParameter paramIteration = new SqlParameter("@iteration", System.Data.SqlDbType.Int, 100);
 
                         paramEmail.Value = email;
                         paramName.Value = name;
-                        paramPassword.Value = genratedPasswordHash;
+                        paramPassword.Value = Encoding.UTF8.GetString(genratedPasswordHash, 0, genratedPasswordHash.Length);
                         paramLang.Value = 0;
-                        paramVerification.Value = CreateCode();
+                        paramVerification.Value = verificationCode;
                         paramVerified.Value = 0;
-                        paramSalt.Value = salt;
+                        paramSalt.Value = Encoding.UTF8.GetString(salt, 0, salt.Length);
                         paramIteration.Value = 10;
 
                         cmd.Parameters.Add(paramEmail);
@@ -69,9 +70,8 @@ namespace Controller
                         cmd.ExecuteNonQuery();
 
                         DBConnection.CloseConnection();
-                        //INSERT INTO Users (User_Email, User_Name, User_Password(GenratedPasswordHash)) 
-                        //we also need to store the salt (generated above) and the iterations and workfactor (which are the two 10's in GenerateHash())
-                        //VALUES (email, name, generatedPasswordHash)
+                        VerificationMail.SendValidationMail(email, verificationCode);
+
                     }
                 }
             }
@@ -92,7 +92,22 @@ namespace Controller
         //Check if email is already in use
         public bool IsEmailUnique(string email)
         {
-            //TODO: Add code to check if email already excists in database when db connection is written
+            DBConnection.OpenConnection();
+
+            string query = "SELECT email FROM users";
+
+            SqlCommand cmd = new SqlCommand(query, DBConnection.Connection);
+            SqlDataReader dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+            {
+                if (email.Equals(dataReader["email"].ToString()))
+                {
+                    DBConnection.CloseConnection();
+                    return false;
+                }
+            }
+            dataReader.Close();
+            DBConnection.CloseConnection();
             return true;
         }
 
@@ -162,14 +177,27 @@ namespace Controller
         }
 
         // method check verification code
-        public bool IsVerificationCodeCorrect(string verificationCode, int userID)
+        public bool IsVerificationCodeCorrect(string verificationCode, string email)
         {
-            //get verification code of user, using userID (database)
-            //compare if verificationcode is same as input verificationcode return true
-            // else false
-            string dbCode = GetUserVerificationCode(userID);
-            if (dbCode.Equals(verificationCode))
+
+            DBConnection.OpenConnection();
+
+            string query = $"SELECT verificationCode FROM users where email = '{email}'";
+
+            SqlCommand cmd = new SqlCommand(query, DBConnection.Connection);
+
+            string code = cmd.ExecuteScalar().ToString();
+            DBConnection.CloseConnection();
+            if (code.Equals(verificationCode))
             {
+
+                DBConnection.OpenConnection();
+
+                string query2 = $"UPDATE users SET verified = 1 where email = '{email}'";
+
+                SqlCommand cmd2 = new SqlCommand(query2, DBConnection.Connection);
+                cmd2.ExecuteNonQuery();
+                DBConnection.CloseConnection();
                 return true;
             }
             return false;
@@ -181,7 +209,7 @@ namespace Controller
         {
             string userMail = "";
             string newCode = CreateCode();
-            resendVerificationMail.SendValidationMail(userMail, newCode);
+            //resendVerificationMail.SendValidationMail(userMail, newCode);
         }
     }
 }
