@@ -6,7 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+<<<<<<< HEAD
     <ProjectReference Include="..\Model\Model.csproj" />
+=======
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+>>>>>>> develop
   </ItemGroup>
 
 </Project>
