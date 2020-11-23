@@ -11,9 +11,9 @@ namespace Controller
 {
     public static class DBConnection
     {
-        private static ForwardedPortLocal portFwld = new ForwardedPortLocal("127.0.0.1", 1433, "127.0.0.1", 1433);
-        private static PasswordConnectionInfo connectionInfo = new PasswordConnectionInfo("145.44.235.109", "student", "(7bk2PtkY*-4");
-        public static SqlConnection connection
+        private static ForwardedPortLocal PortFwld = new ForwardedPortLocal("127.0.0.1", 1433, "127.0.0.1", 1433);
+        private static PasswordConnectionInfo ConnectionInfo = new PasswordConnectionInfo("145.44.235.109", "student", "");
+        public static SqlConnection Connection
         {
             get;
             set;
@@ -21,9 +21,9 @@ namespace Controller
 
         public static void Initialize()
         {
-            connectionInfo.Timeout = TimeSpan.FromSeconds(30);
+            ConnectionInfo.Timeout = TimeSpan.FromSeconds(30);
 
-            var client = new SshClient(connectionInfo);
+            var client = new SshClient(ConnectionInfo);
 
                 try
                 {
@@ -40,11 +40,11 @@ namespace Controller
 
                     Console.WriteLine("\r\nTrying port forwarding...");
 
-                    client.AddForwardedPort(portFwld);
-                    portFwld.Start();
-                    if (portFwld.IsStarted)
+                    client.AddForwardedPort(PortFwld);
+                    PortFwld.Start();
+                    if (PortFwld.IsStarted)
                     {
-                        Console.WriteLine("Port forwarded: {0}", portFwld.ToString());
+                        Console.WriteLine("Port forwarded: {0}", PortFwld.ToString());
                     }
                     else
                     {
@@ -65,11 +65,11 @@ namespace Controller
                 }
 
             string connectionString;
-            connectionString = "Server = 127.0.0.1; Database = WindefyDB; User Id = SA; Password = (7bk2PtkY*-4;";
+            connectionString = "Server = 127.0.0.1; Database = WindefyDB; User Id = SA; Password = ;";
 
-            connection = new SqlConnection(connectionString);
+            Connection = new SqlConnection(connectionString);
 
-            Console.WriteLine(connection.State.ToString());
+            Console.WriteLine(Connection.State.ToString());
             CloseConnection();
             
 
@@ -83,7 +83,7 @@ namespace Controller
         {
             try
             {
-                connection.Open();
+                Connection.Open();
                 Console.WriteLine("MySQL connected.");
                 return true;
             }
@@ -117,7 +117,7 @@ namespace Controller
         {
             try
             {
-                connection.Close();
+                Connection.Close();
                 return true;
             }
             catch (MySqlException ex)
@@ -128,7 +128,7 @@ namespace Controller
         }
 
         //Insert statement
-        public static void Insert(string table, string[] columns, string[] values)
+        /*public static void Insert(string table, string[] columns, string[] values)
         {
             int columnCount = columns.Length;
             int valuesCount = values.Length;
@@ -174,10 +174,10 @@ namespace Controller
 
 
                 //open connection
-                if (connection.State == System.Data.ConnectionState.Open)
+                if (Connection.State == System.Data.ConnectionState.Open)
                 {
                     //create command and assign the query and connection from the constructor
-                    SqlCommand cmd = new SqlCommand(null, connection);
+                    SqlCommand cmd = new SqlCommand(null, Connection);
 
                     cmd.CommandText = sb.ToString();
 
@@ -223,14 +223,14 @@ namespace Controller
             string query = "UPDATE tableinfo SET name='Joe', age='22' WHERE name='John Smith'";
 
             //Open connection
-            if (connection.State == ConnectionState.Open)
+            if (Connection.State == ConnectionState.Open)
             {
                 //create mysql command
                 SqlCommand cmd = new SqlCommand();
                 //Assign the query using CommandText
                 cmd.CommandText = query;
                 //Assign the connection using Connection
-                cmd.Connection = connection;
+                cmd.Connection = Connection;
 
                 //Execute query
                 cmd.ExecuteNonQuery();
@@ -245,9 +245,9 @@ namespace Controller
         {
             string query = "DELETE FROM tableinfo WHERE name='John Smith'";
 
-            if (connection.State == System.Data.ConnectionState.Open)
+            if (Connection.State == System.Data.ConnectionState.Open)
             {
-                SqlCommand cmd = new SqlCommand(query, connection);
+                SqlCommand cmd = new SqlCommand(query, Connection);
                 cmd.ExecuteNonQuery();
                 CloseConnection();
             }
@@ -262,10 +262,10 @@ namespace Controller
             List<string> list = new List<string>();
 
             //Open connection
-            if (connection.State == System.Data.ConnectionState.Open)
+            if (Connection.State == System.Data.ConnectionState.Open)
             {
                 //Create Command
-                SqlCommand cmd = new SqlCommand(query, connection);
+                SqlCommand cmd = new SqlCommand(query, Connection);
                 //Create a data reader and Execute the command
                 SqlDataReader dataReader = cmd.ExecuteReader();
 
@@ -300,10 +300,10 @@ namespace Controller
             int Count = -1;
 
             //Open Connection
-            if (connection.State == System.Data.ConnectionState.Open)
+            if (Connection.State == System.Data.ConnectionState.Open)
             {
                 //Create Mysql Command
-                SqlCommand cmd = new SqlCommand(query, connection);
+                SqlCommand cmd = new SqlCommand(query, Connection);
 
                 //ExecuteScalar will return one value
                 Count = int.Parse(cmd.ExecuteScalar() + "");
@@ -316,7 +316,7 @@ namespace Controller
 
             return Count;
 
-        }
+        }*/
 
     }
 

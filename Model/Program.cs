@@ -3,6 +3,7 @@ using Renci.SshNet;
 using System;
 using Controller;
 using System.Threading;
+using System.Data.SqlClient;
 
 namespace Model
 {
@@ -10,11 +11,17 @@ namespace Model
     {
         static void Main(string[] args)
         {
+            DBConnection.Initialize();
+            DBConnection.OpenConnection();
 
-            //execute the database codes here
+            SqlCommand cmd = new SqlCommand(null, DBConnection.Connection);
+
+            DBConnection.CloseConnection();
 
 
-            
+
+
+
         }
     }
 }
