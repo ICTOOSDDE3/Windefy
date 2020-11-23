@@ -10,7 +10,7 @@ namespace Model
         public static string Email { get; set; }
         public static string Name { get; set; }
         public static int Language { get; set; }
-        public static bool Verificated { get; set; }
+        public static bool Verified { get; set; }
 
         public static string GetLanguage()
         {

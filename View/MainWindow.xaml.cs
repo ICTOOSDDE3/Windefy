@@ -17,14 +17,12 @@ namespace View
     /// </summary>
     public partial class MainWindow : Window
     {
-        Controller_Register registerAccount = new Controller_Register();
+        Register registerAccount = new Register();
+        Login login = new Login();
+        private string email = "";
         public MainWindow()
         {
             InitializeComponent();
-            Model.User.Name = "Pietje";
-            Model.User.Email = "Pietje@gmail.com";
-            Model.User.Language = 1;
-            Model.User.UserID = 1;
             DataContext = new Homepage();
         }
 
@@ -88,7 +86,7 @@ namespace View
 
         private void Register_Button_Click(object sender, RoutedEventArgs e)
         {
-            string email = Email_Input.Text;
+            email = Email_Input.Text;
             string userName = Username_Input.Text;
             string password = Password_Input.Text;
             string repeatedPassword = PasswordRepeat_Input.Text;
@@ -109,7 +107,33 @@ namespace View
             {
                 Register_Headsup.Content = "Email adres is invalid";
             }
-            Trace.WriteLine(registerAccount.IsValidEmail(email));
+        }
+
+        private void Resend_Code_Button(object sender, RoutedEventArgs e)
+        {
+            //registerAccount.ResendVerificationCode();
+        }
+
+        private void Verify_Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (registerAccount.IsVerificationCodeCorrect(Verify_TextBox.Text, email)) {
+                LoginBackground.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                Trace.WriteLine("Code not valid!");
+            }
+        }
+
+        private void Login_Click(object sender, RoutedEventArgs e)
+        {
+            if(login.IsLogin(Email_TextBox.Text, Wachtwoord_TextBox.Text))
+            {
+                LoginBackground.Visibility = Visibility.Hidden;
+            } else
+            {
+                Login_HeadsUp.Content = "Email or password invalid!";
+            }
         }
     }
 }
