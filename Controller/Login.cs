@@ -9,6 +9,7 @@ namespace Controller
     {
         public bool IsLogin(string email, string password)
         {
+            bool passed = false;
             DBConnection.Initialize();
             DBConnection.OpenConnection();
             try
@@ -31,20 +32,19 @@ namespace Controller
                         int language = 1;
                         bool verified = Convert.ToBoolean(dataReader["verified"]);
                         User.UpdateUserModel(id, email, name, language, verified);
-                        return true;
+                        passed = true;
                     }
                 }
-
-                dataReader.Close();
-                DBConnection.CloseConnection();
-                
             }
             catch (Exception e)
             {
-                DBConnection.CloseConnection();
-                return false;
+                Console.WriteLine(e.StackTrace);
             }
-            return false;
+            finally
+            {
+                DBConnection.CloseConnection();
+            }
+            return passed;
         }
 
         public string GenerateHash(string password, string salt)

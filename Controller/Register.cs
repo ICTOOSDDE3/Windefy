@@ -35,14 +35,14 @@ namespace Controller
                         DBConnection.OpenConnection();
 
                         SqlCommand cmd = new SqlCommand(null, DBConnection.Connection);
-                        cmd.CommandText = $"INSERT INTO users (email, name, password, verificationCode, verified, saltcode) " +
-                            $"VALUES(@email, @name, @password, @verificationCode, @verified, @saltcode)";
+                        cmd.CommandText = $"INSERT INTO users (email, name, password, verificationCode, verified, saltcode) " + //if language is going to be implemented in the registration add lang to this statement
+                            $"VALUES(@email, @name, @password, @verificationCode, @verified, @saltcode)";// if language is goint to be implemented in the registration add lang to this statement
 
 
                         SqlParameter paramEmail = new SqlParameter("@email", System.Data.SqlDbType.Text, 255);
                         SqlParameter paramName = new SqlParameter("@name", System.Data.SqlDbType.Text, 255);
                         SqlParameter paramPassword = new SqlParameter("@password", System.Data.SqlDbType.Text, 255);
-                        //SqlParameter paramLang = new SqlParameter("@lang", System.Data.SqlDbType.Int, 1);
+                        //SqlParameter paramLang = new SqlParameter("@lang", System.Data.SqlDbType.Int, 1);      //uncomment when lang is goint to be implemented
                         SqlParameter paramVerification = new SqlParameter("@verificationCode", System.Data.SqlDbType.Text, 255);
                         SqlParameter paramVerified = new SqlParameter("@verified", System.Data.SqlDbType.Int, 1);
                         SqlParameter paramSalt = new SqlParameter("@saltcode", System.Data.SqlDbType.Text, 255);
@@ -50,7 +50,7 @@ namespace Controller
                         paramEmail.Value = email;
                         paramName.Value = name;
                         paramPassword.Value = genratedPasswordHash;
-                        //paramLang.Value = ;
+                        //paramLang.Value = ;      //uncomment when lang is goint to be implemented
                         paramVerification.Value = verificationCode;
                         paramVerified.Value = 0;
                         paramSalt.Value = salt;
@@ -58,7 +58,7 @@ namespace Controller
                         cmd.Parameters.Add(paramEmail);
                         cmd.Parameters.Add(paramName);
                         cmd.Parameters.Add(paramPassword);
-                        //cmd.Parameters.Add(paramLang);
+                        //cmd.Parameters.Add(paramLang);      //uncomment when lang is goint to be implemented
                         cmd.Parameters.Add(paramVerification);
                         cmd.Parameters.Add(paramVerified);
                         cmd.Parameters.Add(paramSalt);
@@ -68,7 +68,6 @@ namespace Controller
 
                         DBConnection.CloseConnection();
                         VerificationMail.SendValidationMail(email, verificationCode);
-
                     }
                 }
             }
