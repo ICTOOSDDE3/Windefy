@@ -31,7 +31,7 @@ namespace Controller
         private Model.Track GetTrackFromDB(int numberID)
         {
             DBConnection.OpenConnection();
-            string query = $"Select * from track where trackID = {numberID}";
+            string query = $"SELECT title,listens,languageID,duration,date_created,file_path,image_path FROM track WHERE trackID = {numberID}";
             SqlCommand oCmd = new SqlCommand(query, DBConnection.Connection);
 
             Model.Track track = new Model.Track();

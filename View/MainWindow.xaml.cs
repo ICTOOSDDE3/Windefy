@@ -38,12 +38,10 @@ namespace View
         public MainWindow()
         {
             InitializeComponent();
-            //DataContext = new Homepage();
-            DataContext = track.GetTrack(210);
-            CurrentTrack = (Model.Track)this.DataContext;
-
-            icArtistList.ItemsSource = CurrentTrack.ArtistIDs;
-
+            DataContext = new Homepage();
+            MusicBar.DataContext = track.GetTrack(210);
+            CurrentTrack = (Model.Track)MusicBar.DataContext;
+            //icArtistList.ItemsSource = CurrentTrack.ArtistIDs;
 
             string strin = CurrentTrack.File_path;
             
@@ -195,8 +193,8 @@ namespace View
         /// <param name="e"></param>
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
-            DataContext = track.GetTrack(CurrentTrack.NumberID + 1);
-            CurrentTrack = (Model.Track)this.DataContext;
+            MusicBar.DataContext = track.GetTrack(CurrentTrack.NumberID + 1);
+            CurrentTrack = (Model.Track)MusicBar.DataContext;
             icArtistList.ItemsSource = CurrentTrack.ArtistIDs;
             mediaPlayer.Open(new Uri(audioPath.GetAudioPath(CurrentTrack.File_path)));
 
@@ -212,8 +210,8 @@ namespace View
         /// <param name="e"></param>
         private void btnPrev_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            DataContext = track.GetTrack(CurrentTrack.NumberID - 1);
-            CurrentTrack = (Model.Track)this.DataContext;
+            MusicBar.DataContext = track.GetTrack(CurrentTrack.NumberID - 1);
+            CurrentTrack = (Model.Track)MusicBar.DataContext;
             icArtistList.ItemsSource = CurrentTrack.ArtistIDs;
 
             mediaPlayer.Open(new Uri(audioPath.GetAudioPath(CurrentTrack.File_path)));
@@ -261,8 +259,8 @@ namespace View
             }
             else
             {
-                DataContext = track.GetTrack(CurrentTrack.NumberID + 1);
-                CurrentTrack = (Model.Track)this.DataContext;
+                MusicBar.DataContext = track.GetTrack(CurrentTrack.NumberID + 1);
+                CurrentTrack = (Model.Track)MusicBar.DataContext;
                 icArtistList.ItemsSource = CurrentTrack.ArtistIDs;
                 mediaPlayer.Open(new Uri(audioPath.GetAudioPath(CurrentTrack.File_path)));
 
