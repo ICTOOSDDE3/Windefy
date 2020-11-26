@@ -1,8 +1,8 @@
 using Model;
-﻿using Controller;
+using Controller;
 using System.Diagnostics;
 using View.ViewModels;
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -41,11 +41,11 @@ namespace View
             DataContext = new Homepage();
             MusicBar.DataContext = track.GetTrack(210);
             CurrentTrack = (Model.Track)MusicBar.DataContext;
-            //icArtistList.ItemsSource = CurrentTrack.ArtistIDs;
+            icArtistList.ItemsSource = CurrentTrack.Artists;
 
-            string strin = CurrentTrack.File_path;
-            
-            mediaPlayer.Open(new Uri(audioPath.GetAudioPath(strin)));
+            string file_path = CurrentTrack.File_path;
+
+            mediaPlayer.Open(new Uri(audioPath.GetAudioPath(file_path)));
 
             mediaPlayer.MediaEnded += MediaPlayer_MediaEnded;
             DispatcherTimer timer = new DispatcherTimer();
@@ -100,7 +100,7 @@ namespace View
             string newName = Details_Username_Input.Text;
 
             //update email if different from current email
-            if(newEmail != Model.User.Email)
+            if (newEmail != Model.User.Email)
             {
                 Controller.User.UpdateEmail(newEmail);
             }
@@ -145,7 +145,8 @@ namespace View
 
         private void Verify_Button_Click(object sender, RoutedEventArgs e)
         {
-            if (registerAccount.IsVerificationCodeCorrect(Verify_TextBox.Text, email)) {
+            if (registerAccount.IsVerificationCodeCorrect(Verify_TextBox.Text, email))
+            {
                 LoginBackground.Visibility = Visibility.Hidden;
                 VerifyGrid.Visibility = Visibility.Hidden;
             }
@@ -157,10 +158,11 @@ namespace View
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-            if(login.IsLogin(Email_TextBox.Text, Wachtwoord_TextBox.Text))
+            if (login.IsLogin(Email_TextBox.Text, Wachtwoord_TextBox.Text))
             {
                 LoginBackground.Visibility = Visibility.Hidden;
-            } else
+            }
+            else
             {
                 Login_HeadsUp.Content = "Email or password invalid!";
             }
@@ -195,7 +197,7 @@ namespace View
         {
             MusicBar.DataContext = track.GetTrack(CurrentTrack.NumberID + 1);
             CurrentTrack = (Model.Track)MusicBar.DataContext;
-            icArtistList.ItemsSource = CurrentTrack.ArtistIDs;
+            icArtistList.ItemsSource = CurrentTrack.Artists;
             mediaPlayer.Open(new Uri(audioPath.GetAudioPath(CurrentTrack.File_path)));
 
             if (mediaPlaying)
@@ -212,7 +214,7 @@ namespace View
         {
             MusicBar.DataContext = track.GetTrack(CurrentTrack.NumberID - 1);
             CurrentTrack = (Model.Track)MusicBar.DataContext;
-            icArtistList.ItemsSource = CurrentTrack.ArtistIDs;
+            icArtistList.ItemsSource = CurrentTrack.Artists;
 
             mediaPlayer.Open(new Uri(audioPath.GetAudioPath(CurrentTrack.File_path)));
 
@@ -261,7 +263,7 @@ namespace View
             {
                 MusicBar.DataContext = track.GetTrack(CurrentTrack.NumberID + 1);
                 CurrentTrack = (Model.Track)MusicBar.DataContext;
-                icArtistList.ItemsSource = CurrentTrack.ArtistIDs;
+                icArtistList.ItemsSource = CurrentTrack.Artists;
                 mediaPlayer.Open(new Uri(audioPath.GetAudioPath(CurrentTrack.File_path)));
 
                 mediaPlayer.Play();
