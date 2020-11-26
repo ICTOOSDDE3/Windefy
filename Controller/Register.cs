@@ -26,52 +26,48 @@ namespace Controller
                     {
                         //TODO: Create the account in the database when the db connection is made
 
-                        byte[] bytePassword = PasswordToByte(pw1);
-                        byte[] salt = GenerateSalt(20); // maybe a random number between 20 - 30?
-                        byte[] genratedPasswordHash = GenerateHash(bytePassword, salt, 10, 10);// maybe these numbers random generate aswell?
+                        
+                        string salt = GenerateSalt(20); // maybe a random number between 20 - 30?
+                        string genratedPasswordHash = GenerateHash(pw1, salt);// maybe these numbers random generate aswell?
                         string verificationCode = CreateCode();
 
                         //database connection / inserting new user in database
                         DBConnection.OpenConnection();
 
                         SqlCommand cmd = new SqlCommand(null, DBConnection.Connection);
-                        cmd.CommandText = $"INSERT INTO users (email, name, password, lang, verificationCode, verified, saltcode, iteration) " +
-                            $"VALUES(@email, @name, @password, @lang, @verificationCode, @verified, @saltcode, @iteration)";
+                        cmd.CommandText = $"INSERT INTO users (email, name, password, verificationCode, verified, saltcode) " + //if language is going to be implemented in the registration add lang to this statement
+                            $"VALUES(@email, @name, @password, @verificationCode, @verified, @saltcode)";// if language is goint to be implemented in the registration add lang to this statement
 
 
                         SqlParameter paramEmail = new SqlParameter("@email", System.Data.SqlDbType.Text, 255);
                         SqlParameter paramName = new SqlParameter("@name", System.Data.SqlDbType.Text, 255);
                         SqlParameter paramPassword = new SqlParameter("@password", System.Data.SqlDbType.Text, 255);
-                        SqlParameter paramLang = new SqlParameter("@lang", System.Data.SqlDbType.Int, 1);
+                        //SqlParameter paramLang = new SqlParameter("@lang", System.Data.SqlDbType.Int, 1);      //uncomment when lang is goint to be implemented
                         SqlParameter paramVerification = new SqlParameter("@verificationCode", System.Data.SqlDbType.Text, 255);
                         SqlParameter paramVerified = new SqlParameter("@verified", System.Data.SqlDbType.Int, 1);
                         SqlParameter paramSalt = new SqlParameter("@saltcode", System.Data.SqlDbType.Text, 255);
-                        SqlParameter paramIteration = new SqlParameter("@iteration", System.Data.SqlDbType.Int, 100);
 
                         paramEmail.Value = email;
                         paramName.Value = name;
-                        paramPassword.Value = Encoding.UTF8.GetString(genratedPasswordHash, 0, genratedPasswordHash.Length);
-                        paramLang.Value = 0;
+                        paramPassword.Value = genratedPasswordHash;
+                        //paramLang.Value = ;      //uncomment when lang is goint to be implemented
                         paramVerification.Value = verificationCode;
                         paramVerified.Value = 0;
-                        paramSalt.Value = Encoding.UTF8.GetString(salt, 0, salt.Length);
-                        paramIteration.Value = 10;
+                        paramSalt.Value = salt;
 
                         cmd.Parameters.Add(paramEmail);
                         cmd.Parameters.Add(paramName);
                         cmd.Parameters.Add(paramPassword);
-                        cmd.Parameters.Add(paramLang);
+                        //cmd.Parameters.Add(paramLang);      //uncomment when lang is goint to be implemented
                         cmd.Parameters.Add(paramVerification);
                         cmd.Parameters.Add(paramVerified);
                         cmd.Parameters.Add(paramSalt);
-                        cmd.Parameters.Add(paramIteration);
 
                         cmd.Prepare();
                         cmd.ExecuteNonQuery();
 
                         DBConnection.CloseConnection();
                         VerificationMail.SendValidationMail(email, verificationCode);
-
                     }
                 }
             }
@@ -127,16 +123,13 @@ namespace Controller
         /// </summary>
         /// <param name="length">amount of bytes</param>
         /// <returns>byte array with the given length</returns>
-        public byte[] GenerateSalt(int length)
+        public string GenerateSalt(int length)
         {
-            var bytes = new byte[length];
-
-            using (var rng = new RNGCryptoServiceProvider())
-            {
-                rng.GetBytes(bytes);
-            }
-
-            return bytes;
+            //Generate a cryptographic random number.
+            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
+            byte[] buff = new byte[length];
+            rng.GetBytes(buff);
+            return Convert.ToBase64String(buff);
         }
 
         /// <summary>
@@ -147,12 +140,12 @@ namespace Controller
         /// <param name="iterations"></param>
         /// <param name="length"></param>
         /// <returns>a byte array of the bytepassword combined with the byte salt</returns>
-        public byte[] GenerateHash(byte[] password, byte[] salt, int iterations, int length)
+        public string GenerateHash(string password, string salt)
         {
-            using (var deriveBytes = new Rfc2898DeriveBytes(password, salt, iterations))
-            {
-                return deriveBytes.GetBytes(length);
-            }
+            byte[] bytes = Encoding.UTF8.GetBytes(password + salt);
+            SHA256Managed sHA256ManagedString = new SHA256Managed();
+            byte[] hash = sHA256ManagedString.ComputeHash(bytes);
+            return Convert.ToBase64String(hash);
         }
 
         /// <summary>
