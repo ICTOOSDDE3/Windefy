@@ -47,7 +47,7 @@ namespace Controller
         private Model.Artist GetArtistFromDB(int artistID)
         {
             DBConnection.OpenConnection();
-            string query = $"Select * from artist where artistID = {artistID}";
+            string query = $"SELECT name, active_year_begin, active_year_end, bio, associated_labels, location FROM artist WHERE artistID = {artistID}";
 
             SqlCommand oCmd = new SqlCommand(query, DBConnection.Connection);
 
@@ -82,7 +82,7 @@ namespace Controller
 
             DBConnection.OpenConnection();
 
-            string query = $"Select * from artist_member where artistID = {artistID}";
+            string query = $"SELECT memberID FROM artist_member WHERE artistID = {artistID}";
 
             SqlCommand oCmd = new SqlCommand(query, DBConnection.Connection);
 

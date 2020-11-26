@@ -39,17 +39,19 @@ namespace View
         {
             InitializeComponent();
             DataContext = new Homepage();
+
+            // puts the data of the chosen song in the MusicBar
             MusicBar.DataContext = track.GetTrack(210);
             CurrentTrack = (Model.Track)MusicBar.DataContext;
             //icArtistList.ItemsSource = CurrentTrack.ArtistIDs;
 
-            string strin = CurrentTrack.File_path;
-            
-            mediaPlayer.Open(new Uri(audioPath.GetAudioPath(strin)));
-
+            // fetch path of the current track and add it to the mediaplayer.
+            string track_path = CurrentTrack.File_path; 
+            mediaPlayer.Open(new Uri(audioPath.GetAudioPath(track_path)));
             mediaPlayer.MediaEnded += MediaPlayer_MediaEnded;
-            DispatcherTimer timer = new DispatcherTimer();
 
+            // initialize and setup of timer
+            DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(0);
             timer.Tick += timer_Tick;
             timer.Start();
@@ -309,13 +311,20 @@ namespace View
             tbPlayPause.Content = "Play";
             mediaPlaying = false;
         }
-
+        /// <summary>
+        /// Enables rewind to listen to the current song again
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnRewind_Checked(object sender, RoutedEventArgs e)
         {
             rewind = true;
-            //Volgend nummer wordt het huidige nummer
         }
-
+        /// <summary>
+        /// Disables rewind to stop listening to the same song.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnRewind_Unchecked(object sender, RoutedEventArgs e)
         {
             rewind = false;
