@@ -27,12 +27,12 @@ namespace Controller
         /// <summary>
         /// Gets track data from database and makes a track object
         /// </summary>
-        /// <param name="numberID"></param>
+        /// <param name="trackID"></param>
         /// <returns>Track object</returns>
-        private Model.Track GetTrackFromDB(int numberID)
+        private Model.Track GetTrackFromDB(int trackID)
         {
             DBConnection.OpenConnection();
-            string query = $"SELECT title,listens,languageID,duration,date_created,file_path,image_path FROM track WHERE trackID = {numberID}";
+            string query = $"SELECT title,listens,languageID,duration,date_created,file_path,image_path FROM track WHERE trackID = {trackID}";
             SqlCommand oCmd = new SqlCommand(query, DBConnection.Connection);
 
             Model.Track track = new Model.Track();
@@ -51,9 +51,9 @@ namespace Controller
             }
             DBConnection.CloseConnection();
 
-            track.NumberID = numberID;
-            track.Genres = GetGenres(numberID);
-            track.Artists = GetArtists(numberID);
+            track.NumberID = trackID;
+            track.Genres = GetGenres(trackID);
+            track.Artists = GetArtists(trackID);
             return track;
         }
 
