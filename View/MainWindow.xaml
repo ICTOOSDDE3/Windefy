@@ -110,30 +110,35 @@
         <!-- the loginBackGround has to be visible if you want to change the loginGrid, RegisterGrid and the verify grid (put those grids on visible aswell) -->
         <Grid x:Name="LoginBackground" Background="#7F4F83CC" Grid.ColumnSpan="2" Grid.RowSpan="2" Visibility="Visible" Margin="0,-8,0,-8">
             <!-- Login Grid and its components-->
-            <Grid x:Name="LoginGrid" VerticalAlignment="Center" Width="552" Height="283" Background="White" Visibility="Hidden">
-                <Border CornerRadius="30" Margin="95,176,95,0" VerticalAlignment="Top" Width="363" Height="34" Grid.ColumnSpan="3" Background="#FF4F83CC" RenderTransformOrigin="0.5,0.5">
+            <Grid x:Name="LoginGrid" VerticalAlignment="Center" Width="552" Height="283" Background="White" Visibility="Visible">
+                <Border CornerRadius="30" Margin="95,176,94,0" VerticalAlignment="Top" Width="363" Height="34" Background="#FF4F83CC" RenderTransformOrigin="0.5,0.5">
                     <Button Content="Login" VerticalAlignment="Top" Width="363" Height="34" Grid.ColumnSpan="2" Background="#004F83CC" Foreground="White" RenderTransformOrigin="0.5,0.5" BorderBrush="#00707070" HorizontalAlignment="Center" Click="Login_Click"/>
                 </Border>
                 <Button Content="Register" HorizontalAlignment="Center" Margin="0,227,0,0" VerticalAlignment="Top" Width="80" Height="30" Background="#00DDDDDD" BorderBrush="#00707070" Foreground="#FF4F83CC" Click="Register_Click"/>
-                <TextBox x:Name="Email_TextBox" HorizontalAlignment="Center" Margin="0,50,0,0" Style="{StaticResource LoginInputs}" Tag="email@voorbeeld.nl&#xD;&#xA;" TextWrapping="Wrap" VerticalAlignment="Top" Width="363" Height="28" TextAlignment="Center" FontSize="24" Background="#7F4F83CC" Foreground="#7F000000" BorderBrush="#00ABADB3"/>
-                <TextBox x:Name="Wachtwoord_TextBox" HorizontalAlignment="Center" Margin="0,106,0,0" Style="{StaticResource LoginInputs}" Tag="Wachtwoord" TextWrapping="Wrap" VerticalAlignment="Top" Width="363" Height="28" TextAlignment="Center" FontSize="24" Foreground="#7F000000" Background="#7F4F83CC" BorderBrush="#00ABADB3"/>
-                <Button x:Name="Close_Login_Button" Content="X" HorizontalAlignment="Left" Margin="516,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.48,0.377" Width="22" Foreground="Red" Background="{x:Null}" BorderBrush="{x:Null}" Click="Close_Login_Button_Click" FontWeight="Bold" FontSize="16"/>
-                <Label x:Name="Login_HeadsUp" Content="" HorizontalAlignment="Center" Height="23" Margin="0,142,0,0" VerticalAlignment="Top" Width="363" Foreground="Red"/>
+                <TextBox x:Name="Email_TextBox" HorizontalAlignment="Center" Margin="0,70,0,0" Style="{StaticResource LoginInputs}" Tag="email@voorbeeld.nl&#xD;&#xA;" TextWrapping="Wrap" VerticalAlignment="Top" Width="364" Height="35" TextAlignment="Center" FontSize="24" Background="#7F4F83CC" Foreground="#7F000000" BorderBrush="#00ABADB3"/>
+                <PasswordBox x:Name="Wachtwoord_TextBox" HorizontalAlignment="Center" VerticalAlignment="Center" Width="364" Height="31" FontSize="24" Foreground="Black" Background="#7F4F83CC" BorderBrush="#00ABADB3"/>
+                <Label x:Name="Login_HeadsUp" Content="" HorizontalAlignment="Center" Height="23" Margin="0,153,0,0" VerticalAlignment="Top" Width="363" Foreground="Red"/>
+                <Label x:Name="Password_Label_Copy" Content="Password:" HorizontalAlignment="Left" Height="21" Margin="94,105,0,0" VerticalAlignment="Top" Width="272" FontSize="10" FontWeight="Bold"/>
+                <Label x:Name="Email_Label_Copy" Content="Email:" HorizontalAlignment="Left" Height="21" Margin="95,49,0,0" VerticalAlignment="Top" Width="272" FontSize="10" FontWeight="Bold"/>
+                <Label Content="Login" HorizontalAlignment="Center" Height="56" Margin="0,4,0,0" VerticalAlignment="Top" Width="100" FontWeight="Bold" FontSize="32"/>
             </Grid>
 
             <!-- Register Grid and its components -->
-            <Grid x:Name="RegisterGrid" Width="588" Height="605" Background="White" Visibility="Visible">
-                <TextBox x:Name="Email_Input" HorizontalAlignment="Center" Margin="0,176,0,0" Style="{StaticResource LoginInputs}" Tag="Email@example.com" TextWrapping="Wrap" VerticalAlignment="Top" Width="375" Height="42" Background="#7F4F83CC" TextAlignment="Center" FontSize="24"/>
+            <Grid x:Name="RegisterGrid" Width="588" Height="605" Background="White" Visibility="Hidden">
+                <TextBox x:Name="Email_Input" HorizontalAlignment="Center" Margin="0,176,0,0" Style="{StaticResource LoginInputs}" Tag="Email@example.com" TextWrapping="Wrap" VerticalAlignment="Top" Width="376" Height="42" Background="#7F4F83CC" TextAlignment="Center" FontSize="24"/>
                 <TextBox x:Name="Username_Input" HorizontalAlignment="Center" Margin="0,238,0,325" Style="{StaticResource LoginInputs}" Tag="Username" TextWrapping="Wrap" Width="376" Background="#7F4F83CC" FontSize="24" TextAlignment="Center" Foreground="#7F000000"/>
-                <TextBox x:Name="Password_Input" HorizontalAlignment="Center" Margin="0,300,0,0" Style="{StaticResource LoginInputs}" Tag="Password" TextWrapping="Wrap" VerticalAlignment="Top" Width="375" Height="42" Background="#7F4F83CC" TextAlignment="Center" FontSize="24" Foreground="#7F000000"/>
-                <TextBox x:Name="PasswordRepeat_Input" HorizontalAlignment="Center" Margin="0,362,0,0" Style="{StaticResource LoginInputs}" Tag="Repeat password" TextWrapping="Wrap" VerticalAlignment="Top" Width="375" Height="42" Background="#7F4F83CC" FontSize="24" TextAlignment="Center"/>
+                <PasswordBox x:Name="Password_Input" HorizontalAlignment="Center" Margin="0,300,0,0" Tag="Password" VerticalAlignment="Top" Width="375" Height="42" Background="#7F4F83CC" FontSize="24" Foreground="Black"/>
+                <PasswordBox x:Name="PasswordRepeat_Input" HorizontalAlignment="Center" Margin="0,362,0,0" Tag="Repeat password" VerticalAlignment="Top" Width="375" Height="42" Background="#7F4F83CC" FontSize="24"/>
                 <Border CornerRadius="30" Margin="112,441,112,0" VerticalAlignment="Top" Width="363" Height="34" Background="#FF4F83CC" RenderTransformOrigin="0.5,0.5">
                     <Button x:Name="Register_Button" Content="Register" HorizontalAlignment="Center" VerticalAlignment="Center" Width="384" Height="48" Background="#00DDDDDD" BorderBrush="#00707070" Foreground="White" Click="Register_Button_Click"/>
                 </Border>
                 <Button x:Name="Button_To_LoginWindow" Content="Login" HorizontalAlignment="Center" Margin="0,500,0,0" VerticalAlignment="Top" Width="60" Height="27" BorderBrush="#00707070" Background="#00DDDDDD" Click="Login_Button_Register"/>
-                <Button x:Name="Close_register" Content="X" HorizontalAlignment="Left" Margin="534,23,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.48,0.377" Width="22" Foreground="Red" Background="{x:Null}" BorderBrush="{x:Null}" Click="Close_Login_Button_Click" FontWeight="Bold"/>
                 <Label x:Name="Title_Register" Content="Register" HorizontalAlignment="Center" Margin="0,63,0,0" VerticalAlignment="Top" FontSize="32" FontWeight="Bold"/>
                 <Label x:Name="Register_Headsup" Content="" HorizontalAlignment="Center" Height="28" Margin="0,541,0,0" VerticalAlignment="Top" Width="312" Foreground="Red"/>
+                <Label x:Name="Email_Label" Content="Email:" HorizontalAlignment="Left" Height="21" Margin="106,150,0,0" VerticalAlignment="Top" Width="272" FontSize="10" FontWeight="Bold"/>
+                <Label x:Name="Username_Label" Content="Username:" HorizontalAlignment="Left" Height="21" Margin="106,217,0,0" VerticalAlignment="Top" Width="272" FontSize="10" FontWeight="Bold"/>
+                <Label x:Name="Password_Label" Content="Password:" HorizontalAlignment="Left" Height="21" Margin="106,279,0,0" VerticalAlignment="Top" Width="272" FontSize="10" FontWeight="Bold"/>
+                <Label x:Name="PasswordRepeat_Label" Content="Repeat password:" HorizontalAlignment="Left" Height="21" Margin="106,341,0,0" VerticalAlignment="Top" Width="272" FontSize="10" FontWeight="Bold"/>
             </Grid>
 
             <!-- this grid shows the account details of which you are logged in with -->
@@ -155,13 +160,13 @@
 
             <!-- this grid show the verification tab where a registered user can verify its email adress-->
             <Grid x:Name="VerifyGrid" VerticalAlignment="Center" Width="552" Height="283" Background="White" Visibility="Hidden">
-                <Border CornerRadius="30" Margin="95,147,95,0" VerticalAlignment="Top" Width="363" Height="34" Grid.ColumnSpan="3" Background="#FF4F83CC" RenderTransformOrigin="0.5,0.5">
+                <Border CornerRadius="30" Margin="95,147,94,0" VerticalAlignment="Top" Width="363" Height="34" Background="#FF4F83CC" RenderTransformOrigin="0.5,0.5">
                     <Button Content="Verify" VerticalAlignment="Center" Width="363" Height="34" Grid.ColumnSpan="2" Background="#004F83CC" Foreground="White" RenderTransformOrigin="0.5,0.5" BorderBrush="#00707070" HorizontalAlignment="Center" FontSize="24" Click="Verify_Button_Click"/>
                 </Border>
                 <Button Content="Resend_code" HorizontalAlignment="Center" Margin="0,211,0,0" VerticalAlignment="Top" Width="260" Height="36" Background="#00DDDDDD" BorderBrush="#00707070" Foreground="#FF4F83CC" FontSize="24" Click="Resend_Code_Button"/>
                 <TextBox x:Name="Verify_TextBox" HorizontalAlignment="Center" Margin="0,83,0,0" Style="{StaticResource LoginInputs}" Tag="Enter code" TextWrapping="Wrap" VerticalAlignment="Top" Width="364" Height="34" TextAlignment="Center" FontSize="24" Foreground="#7F000000" Background="#7F4F83CC" BorderBrush="#00ABADB3"/>
-                <Button x:Name="Close_Verify_Button" Content="X" HorizontalAlignment="Left" Margin="516,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.48,0.377" Width="22" Foreground="Red" Background="{x:Null}" BorderBrush="{x:Null}" Click="Close_Login_Button_Click" FontWeight="Bold" FontSize="16"/>
                 <Label Content="Verification" HorizontalAlignment="Center" Height="58" Margin="0,12,0,0" VerticalAlignment="Top" Width="186" FontSize="32" FontWeight="Bold"/>
+                <Label x:Name="Verification_Headsup" Content="" HorizontalAlignment="Center" Height="26" Margin="0,247,0,0" VerticalAlignment="Top" Width="363" Foreground="Red"/>
             </Grid>
         </Grid>
     </Grid>
