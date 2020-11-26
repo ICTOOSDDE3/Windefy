@@ -120,6 +120,7 @@
                 <Button x:Name="Close_Verify_Button" Content="X" HorizontalAlignment="Left" Margin="516,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.48,0.377" Width="22" Foreground="Red" Background="{x:Null}" BorderBrush="{x:Null}" Click="Close_Login_Button_Click" FontWeight="Bold" FontSize="16"/>
                 <Label Content="Verification" HorizontalAlignment="Center" Height="58" Margin="0,12,0,0" VerticalAlignment="Top" Width="186" FontSize="32" FontWeight="Bold"/>
             </Grid>
+            <PasswordBox HorizontalAlignment="Left" Margin="1094,572,0,0" VerticalAlignment="Top" Width="120"/>
 
         </Grid>
     </Grid>

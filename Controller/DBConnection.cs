@@ -70,6 +70,7 @@ namespace Controller
             Connection = new SqlConnection(connectionString);
 
             Console.WriteLine(Connection.State.ToString());
+            client.Disconnect();
             CloseConnection();
             
 
