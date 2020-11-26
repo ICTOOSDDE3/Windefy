@@ -41,11 +41,11 @@ namespace View
             DataContext = new Homepage();
             MusicBar.DataContext = track.GetTrack(210);
             CurrentTrack = (Model.Track)MusicBar.DataContext;
-            icArtistList.ItemsSource = CurrentTrack.Artists;
+            //icArtistList.ItemsSource = CurrentTrack.ArtistIDs;
 
-            string file_path = CurrentTrack.File_path;
+            string strin = CurrentTrack.File_path;
             
-            mediaPlayer.Open(new Uri(audioPath.GetAudioPath(file_path)));
+            mediaPlayer.Open(new Uri(audioPath.GetAudioPath(strin)));
 
             mediaPlayer.MediaEnded += MediaPlayer_MediaEnded;
             DispatcherTimer timer = new DispatcherTimer();
@@ -195,7 +195,7 @@ namespace View
         {
             MusicBar.DataContext = track.GetTrack(CurrentTrack.NumberID + 1);
             CurrentTrack = (Model.Track)MusicBar.DataContext;
-            icArtistList.ItemsSource = CurrentTrack.Artists;
+            icArtistList.ItemsSource = CurrentTrack.ArtistIDs;
             mediaPlayer.Open(new Uri(audioPath.GetAudioPath(CurrentTrack.File_path)));
 
             if (mediaPlaying)
@@ -212,7 +212,7 @@ namespace View
         {
             MusicBar.DataContext = track.GetTrack(CurrentTrack.NumberID - 1);
             CurrentTrack = (Model.Track)MusicBar.DataContext;
-            icArtistList.ItemsSource = CurrentTrack.Artists;
+            icArtistList.ItemsSource = CurrentTrack.ArtistIDs;
 
             mediaPlayer.Open(new Uri(audioPath.GetAudioPath(CurrentTrack.File_path)));
 
@@ -261,7 +261,7 @@ namespace View
             {
                 MusicBar.DataContext = track.GetTrack(CurrentTrack.NumberID + 1);
                 CurrentTrack = (Model.Track)MusicBar.DataContext;
-                icArtistList.ItemsSource = CurrentTrack.Artists;
+                icArtistList.ItemsSource = CurrentTrack.ArtistIDs;
                 mediaPlayer.Open(new Uri(audioPath.GetAudioPath(CurrentTrack.File_path)));
 
                 mediaPlayer.Play();

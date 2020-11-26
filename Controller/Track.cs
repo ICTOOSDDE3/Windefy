@@ -10,7 +10,6 @@ namespace Controller
     {
         public Track()
         {
-            
             DBConnection.Initialize();
         }
         /// <summary>
@@ -36,7 +35,6 @@ namespace Controller
             SqlCommand oCmd = new SqlCommand(query, DBConnection.Connection);
 
             Model.Track track = new Model.Track();
-
             using (SqlDataReader reader = oCmd.ExecuteReader())
             {
                 while (reader.Read())
@@ -52,22 +50,22 @@ namespace Controller
             DBConnection.CloseConnection();
 
             track.NumberID = numberID;
-            track.Genres = GetGenres(numberID);
-            track.Artists = GetArtists(numberID);
+            track.GenreIDs = GetGenreIDs(numberID);
+            track.ArtistIDs = GetArtistIDs(numberID);
             return track;
         }
 
         /// <summary>
-        /// Gets artists from database and makes a list of it
+        /// Gets artist ID's from database and makes a list of it
         /// </summary>
         /// <param name="numberID"></param>
-        /// <returns>list of artist names </returns>
-        private List<Model.Artist> GetArtists(int numberID)
+        /// <returns>list of artist ID's </returns>
+        private List<int> GetArtistIDs(int numberID)
         {
-            List<Model.Artist> artistList = new List<Model.Artist>();
+            List<int> IDArtist = new List<int>();
 
             DBConnection.OpenConnection();
-            string query = $"Select name, artist.artistID from track_artist join artist on track_artist.artistID = artist.artistID where trackID = {numberID}";
+            string query = $"Select * from track_artist where trackID = {numberID}";
 
             SqlCommand oCmd = new SqlCommand(query, DBConnection.Connection);
 
@@ -75,17 +73,12 @@ namespace Controller
             {
                 while (reader.Read())
                 {
-
-                    Model.Artist artist = new Model.Artist();
-                    artist.Name = reader["name"].ToString();
-                    artist.ArtistID = (int)reader["artistID"];
-
-                    artistList.Add(artist);
+                    IDArtist.Add((int)reader["artistID"]);
                 }
             }
             DBConnection.CloseConnection();
 
-            return artistList;
+            return IDArtist;
         }
 
         /// <summary>
@@ -93,12 +86,12 @@ namespace Controller
         /// </summary>
         /// <param name="numberID"></param>
         /// <returns>List of genre id's</returns>
-        private List<string> GetGenres(int numberID)
+        private List<int> GetGenreIDs(int numberID)
         {
-            List<string> genreList = new List<string>();
+            List<int> IDsGenre = new List<int>();
 
             DBConnection.OpenConnection();
-            string query = $"Select name from track_genre join genre on track_genre.genreID = genre.genreID where trackID = {numberID}";
+            string query = $"Select * from track_genre where trackID = {numberID}";
 
             SqlCommand oCmd = new SqlCommand(query, DBConnection.Connection);
 
@@ -106,12 +99,12 @@ namespace Controller
             {
                 while (reader.Read())
                 {
-                    genreList.Add(reader["name"].ToString());
+                    IDsGenre.Add((int)reader["genreID"]);
                 }
             }
             DBConnection.CloseConnection();
 
-            return genreList;
+            return IDsGenre;
         }
     }
 }

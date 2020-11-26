@@ -63,7 +63,7 @@
                                     <StackPanel>
                                         <Grid Margin="0,0,0,5">
                                             <!--<TextBlock Text="{Binding Name}" />-->
-                                            <TextBlock Text="{Binding Name}" />
+                                            <TextBlock Text="{Binding}" />
                                         </Grid>
                                     </StackPanel>
                                 </DataTemplate>
@@ -79,16 +79,10 @@
                     <ToggleButton x:Name="favoriteBtn" Content="Hart" Width="30" Height="30" Margin="50,0,0,0" />
                 </WrapPanel>
                 <WrapPanel VerticalAlignment="Center" >
-                    <ToggleButton x:Name="shuffleBtn" Height="32" Width="32" Margin="49,0,0,0">
-                        <Image Source="\Assets\Images\Shuffle.png"/>
-                    </ToggleButton>
-                    <Button x:Name="btnPrev" MouseDoubleClick="btnPrev_MouseDoubleClick" Click="btnPrev_Click" Width="32" Height="24" Margin="60,0,0,0">
-                        <Image Source="\Assets\Images\Rewind.png"/>
-                    </Button>
+                    <ToggleButton x:Name="shuffleBtn" Content="Shuffle" Height="32" Width="32" Margin="49,0,0,0" />
+                    <Button x:Name="btnPrev" MouseDoubleClick="btnPrev_MouseDoubleClick" Click="btnPrev_Click" Content="Prev" Width="32" Height="24" Margin="60,0,0,0"/>
                     <ToggleButton x:Name="tbPlayPause" Content = "Play" Checked = "TogglePlay" Unchecked = "TogglePause" Margin="60,0,0,0" Width="40" Height="40" />
-                    <Button x:Name="btnNext" Click="btnNext_Click" Width="32" Height="24" Margin="60,0,5,0" >
-                        <Image Source="\Assets\Images\Forward.png"/>
-                    </Button>
+                    <Button x:Name="btnNext" Click="btnNext_Click" Width="32" Height="24" Content="Next" Margin="60,0,5,0"/>
                     <ToggleButton x:Name="tbBtnRewind" Checked="btnRewind_Checked" Unchecked="btnRewind_Unchecked" Content="Rewind" Margin="60,0,5,0" Width="32" Height="32"/>
                 </WrapPanel>
                 <WrapPanel VerticalAlignment="Center">
