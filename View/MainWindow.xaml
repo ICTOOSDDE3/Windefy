@@ -23,7 +23,7 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid Grid.Row="1" Grid.ColumnSpan="2" Background="#4F83CC"/>
-        <Grid Grid.Row="0" Grid.Column="0" Background="#FFEB3B">
+        <Grid Grid.Row="0" Grid.Column="0" Background="#FFFF72">
             <Label Content="Windefy" FontSize="35" Margin="10,30,0,0" />
 
             <ScrollViewer VerticalScrollBarVisibility="Auto">
@@ -43,7 +43,6 @@
 
                         <Image Height="30" Width="30" Source="Assets/images/mockSongImage.jpg" Margin="48,57,207,331" />
                         <Label FontSize="20" Content="Mood" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.587,-0.614" Margin="86,54,0,0"/>
-
                         <Image Height="30" Width="30" Source="Assets/images/mockSongImage.jpg" Margin="48,101,207,287" />
                         <Label FontSize="20" Content="The best album" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.587,-0.614" Margin="86,98,0,0"/>
                         <Image Height="30" Width="30" Source="Assets/images/mockSongImage.jpg" Margin="48,145,207,243" />
@@ -52,8 +51,52 @@
                 </Grid>
             </ScrollViewer>
         </Grid>
-        <Image Source="Assets/Images/mockSongImage.jpg" Height="70" Width="70" Margin="30,10,100,10" Grid.Row="1" Grid.Column="0"/>
+        <Grid Grid.ColumnSpan="5">
+            <WrapPanel x:Name="MusicBar" Background="Transparent" Height="96" VerticalAlignment="Bottom" Margin="-6,0,6,-97" >
+                <WrapPanel VerticalAlignment="Center" Height="80">
+                    <Image Source="Assets/Images/mockSongImage.jpg" Height="70" Width="70"/>
+                    <StackPanel Margin="5,0,0,0">
+                        <Label Name="Track_Name" Content="{Binding Title}" Margin="0,20,0,0"/>
+                        <ItemsControl x:Name="icArtistList">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <Grid Margin="0,0,0,5">
+                                            <!--<TextBlock Text="{Binding Name}" />-->
+                                            <TextBlock Text="{Binding}" />
+                                        </Grid>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
 
+                    </StackPanel>
+                    <ToggleButton x:Name="favoriteBtn" Content="Hart" Width="30" Height="30" Margin="50,0,0,0" />
+                </WrapPanel>
+                <WrapPanel VerticalAlignment="Center" >
+                    <ToggleButton x:Name="shuffleBtn" Content="Shuffle" Height="32" Width="32" Margin="49,0,0,0" />
+                    <Button x:Name="btnPrev" MouseDoubleClick="btnPrev_MouseDoubleClick" Click="btnPrev_Click" Content="Prev" Width="32" Height="24" Margin="60,0,0,0"/>
+                    <ToggleButton x:Name="tbPlayPause" Content = "Play" Checked = "TogglePlay" Unchecked = "TogglePause" Margin="60,0,0,0" Width="40" Height="40" />
+                    <Button x:Name="btnNext" Click="btnNext_Click" Width="32" Height="24" Content="Next" Margin="60,0,5,0"/>
+                    <ToggleButton x:Name="tbBtnRewind" Checked="btnRewind_Checked" Unchecked="btnRewind_Unchecked" Content="Rewind" Margin="60,0,5,0" Width="32" Height="32"/>
+                </WrapPanel>
+                <WrapPanel VerticalAlignment="Center">
+                    <Label Name="CurrentTime" Content="" Margin="100,0,0,0" VerticalAlignment="Center"/>
+                    <Slider Minimum="0" Maximum="100" Value="0" Name="TimeStatus" Thumb.DragStarted="TimeStatus_DragStarted" Thumb.DragCompleted="TimeStatus_DragCompleted" Margin="0,3,0,0" Width="300" Height="10" />
+                    <Label Name="TotalTime" Content="" Margin="0,0,0,0" />
+                </WrapPanel>
+                <WrapPanel VerticalAlignment="Center">
+                    <!--<Image Source="" Width="30" Height="30" Margin="5,0,0,0"/>-->
+                    <Slider Value="50" Maximum="100" Minimum="0" ValueChanged="Volume_ValueChanged" Name="Volume" Width="142" Height="9" Margin="100,0,0,0" />
+                </WrapPanel>
+            </WrapPanel>
+
+        </Grid>
         <Grid Grid.Row="0" Grid.Column="1" Background="White">
             <ContentControl Content="{Binding}" />
             <TextBox Style="{StaticResource placeHolder}" Tag="Search for your next favorite thing" Width="490" Height="35" FontSize="18" Margin="38,33,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
@@ -120,8 +163,6 @@
                 <Button x:Name="Close_Verify_Button" Content="X" HorizontalAlignment="Left" Margin="516,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.48,0.377" Width="22" Foreground="Red" Background="{x:Null}" BorderBrush="{x:Null}" Click="Close_Login_Button_Click" FontWeight="Bold" FontSize="16"/>
                 <Label Content="Verification" HorizontalAlignment="Center" Height="58" Margin="0,12,0,0" VerticalAlignment="Top" Width="186" FontSize="32" FontWeight="Bold"/>
             </Grid>
-            <PasswordBox HorizontalAlignment="Left" Margin="1094,572,0,0" VerticalAlignment="Top" Width="120"/>
-
         </Grid>
     </Grid>
 </Window>

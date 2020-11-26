@@ -25,58 +25,53 @@ namespace Controller
 
             var client = new SshClient(ConnectionInfo);
 
-                try
+            try
+            {
+                Console.WriteLine("Trying SSH connection...");
+                client.Connect();
+                if (client.IsConnected)
                 {
-                    Console.WriteLine("Trying SSH connection...");
-                    client.Connect();
-                    if (client.IsConnected)
-                    {
-                        Console.WriteLine("SSH connection is active: {0}", client.ConnectionInfo.ToString());
-                    }
-                    else
-                    {
-                        Console.WriteLine("SSH connection has failed: {0}", client.ConnectionInfo.ToString());
-                    }
-
-                    Console.WriteLine("\r\nTrying port forwarding...");
-
-                    client.AddForwardedPort(PortFwld);
-                    PortFwld.Start();
-                    if (PortFwld.IsStarted)
-                    {
-                        Console.WriteLine("Port forwarded: {0}", PortFwld.ToString());
-                    }
-                    else
-                    {
-                        Console.WriteLine("Port forwarding has failed.");
-                    }
-
-                    Console.WriteLine("\r\nTrying database connection...");
-                    
-
+                    Console.WriteLine("SSH connection is active: {0}", client.ConnectionInfo.ToString());
                 }
-                catch (SshException e)
+                else
                 {
-                    Console.WriteLine("SSH client connection error: {0}", e.Message);
+                    Console.WriteLine("SSH connection has failed: {0}", client.ConnectionInfo.ToString());
                 }
-                catch (System.Net.Sockets.SocketException e)
+
+                Console.WriteLine("\r\nTrying port forwarding...");
+
+                client.AddForwardedPort(PortFwld);
+                PortFwld.Start();
+                if (PortFwld.IsStarted)
                 {
-                    Console.WriteLine("Socket connection error: {0}", e.Message);
+                    Console.WriteLine("Port forwarded: {0}", PortFwld.ToString());
                 }
+                else
+                {
+                    Console.WriteLine("Port forwarding has failed.");
+                }
+
+                Console.WriteLine("\r\nTrying database connection...");
+
+
+            }
+            catch (SshException e)
+            {
+                Console.WriteLine("SSH client connection error: {0}", e.Message);
+            }
+            catch (System.Net.Sockets.SocketException e)
+            {
+                Console.WriteLine("Socket connection error: {0}", e.Message);
+            }
 
             string connectionString;
-            connectionString = $"Server = 127.0.0.1; Database = TestDB; User Id = SA; Password = {Passwords.GetPassword("DB")};";
+            connectionString = $"Server = 127.0.0.1; Database = WindefyDB; User Id = SA; Password = {Passwords.GetPassword("DB")};";
 
             Connection = new SqlConnection(connectionString);
 
             Console.WriteLine(Connection.State.ToString());
             client.Disconnect();
             CloseConnection();
-            
-
-
-
-
         }
 
         //open connection to database

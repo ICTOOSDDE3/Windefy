@@ -339,3 +339,34 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+
+*.suo
+*.user
+_ReSharper.*
+bin/
+obj/
+packages/
+.vs/Windify/v16/.suo
+Controller/obj/Controller.csproj.nuget.dgspec.json
+Controller/obj/Controller.csproj.nuget.g.props
+Controller/obj/Debug/netcoreapp3.1/Controller.assets.cache
+Controller/obj/Debug/netcoreapp3.1/Controller.csprojAssemblyReference.cache
+Controller/obj/project.assets.json
+Controller/obj/project.nuget.cache
+Model/obj/Debug/netcoreapp3.1/Model.assets.cache
+Model/obj/Debug/netcoreapp3.1/Model.csprojAssemblyReference.cache
+Model/obj/Model.csproj.nuget.dgspec.json
+Model/obj/Model.csproj.nuget.g.props
+Model/obj/project.assets.json
+Model/obj/project.nuget.cache
+View/obj/Debug/netcoreapp3.1/App.g.i.cs
+View/obj/Debug/netcoreapp3.1/MainWindow.g.i.cs
+View/obj/Debug/netcoreapp3.1/View.assets.cache
+View/obj/Debug/netcoreapp3.1/View.csprojAssemblyReference.cache
+View/obj/Debug/netcoreapp3.1/View.designer.runtimeconfig.json
+View/obj/Debug/netcoreapp3.1/View_MarkupCompile.i.cache
+View/obj/project.assets.json
+View/obj/project.nuget.cache
+View/obj/View.csproj.nuget.dgspec.json
+View/obj/View.csproj.nuget.g.props
+.vs/Windify/v16/.suo
