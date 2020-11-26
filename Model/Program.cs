@@ -1,4 +1,3 @@
-﻿using System;
 using System.IO;
 
 namespace Model
@@ -7,7 +6,7 @@ namespace Model
     {
         static void Main(string[] args)
         {
-
+          
         }
     }
 }
