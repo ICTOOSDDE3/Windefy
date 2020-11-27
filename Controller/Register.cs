@@ -13,6 +13,7 @@ namespace Controller
     {
         private static Random random = new Random();
         private Mail VerificationMail = new Mail();
+        private Login account = new Login();
 
         //Method to register an account (validate and save to db)
         public void RegisterAccount(string email, string name, string pw1, string pw2)
@@ -68,6 +69,7 @@ namespace Controller
 
                         DBConnection.CloseConnection();
                         VerificationMail.SendValidationMail(email, verificationCode);
+                        account.IsLogin(email, pw1);
                     }
                 }
             }
@@ -198,11 +200,17 @@ namespace Controller
 
 
         // method resend verification code
-        public void ResendVerificationCode(int userID)
+        public void ResendVerificationCode(string email)
         {
-            string userMail = "";
             string newCode = CreateCode();
-            //resendVerificationMail.SendValidationMail(userMail, newCode);
+            VerificationMail.SendValidationMail(email, newCode);
+            DBConnection.OpenConnection();
+
+            string query2 = $"UPDATE users SET verificationCode = '{newCode}' where email = '{email}'";
+
+            SqlCommand cmd2 = new SqlCommand(query2, DBConnection.Connection);
+            cmd2.ExecuteNonQuery();
+            DBConnection.CloseConnection();
         }
     }
 }
