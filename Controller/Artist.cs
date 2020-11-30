@@ -23,6 +23,11 @@ namespace Controller
             Model.Artist artist = GetArtistFromDB(artistID);
             return artist;
         }
+
+        public List<Model.Track> GetArtistTracks(int artistID)
+        {
+            return GetArtistTracksFromDB(artistID);
+        }
         /// <summary>
         /// Makes a list of artist objects
         /// </summary>
@@ -58,8 +63,9 @@ namespace Controller
                 {
                     
                     artist.Name = reader["name"].ToString();
-                    if(reader["active_year_begin"] != null) artist.active_year_begin = (DateTime)reader["active_year_begin"];
-                    if (reader["active_year_end"] != null) artist.active_year_end = (DateTime)reader["active_year_end"];
+                    artist.ArtistID = (int)reader["artistID"];
+                    if (reader["active_year_begin"].GetType().GetProperties().Length > 0) artist.active_year_begin = (DateTime)reader["active_year_begin"];
+                    if (reader["active_year_end"].GetType().GetProperties().Length > 0) artist.active_year_end = (DateTime)reader["active_year_end"];
                     artist.Bio = reader["bio"].ToString();
                     artist.Associated_Labels = reader["associated_labels"].ToString();
                     artist.Location = reader["location"].ToString();
@@ -69,6 +75,33 @@ namespace Controller
             artist.MemberIDs = GetMemberIDs(artistID);
 
             return artist;
+        }
+
+        private List<Model.Track> GetArtistTracksFromDB(int artistID)
+        {
+            DBConnection.OpenConnection();
+            string query = $"SELECT * FROM track where trackID IN (SELECT trackID from track_artist where artistID = {artistID})";
+
+            SqlCommand oCmd = new SqlCommand(query, DBConnection.Connection);
+
+            List<Model.Track> tracks = new List<Model.Track>();
+
+            using (SqlDataReader reader = oCmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+
+                    tracks.Add(new Model.Track()
+                    {
+                        Title = reader["title"].ToString(),
+                        Listens = (int)reader["listens"]
+                    });;
+           
+                }
+            }
+            DBConnection.CloseConnection();
+
+            return tracks;
         }
 
         /// <summary>
