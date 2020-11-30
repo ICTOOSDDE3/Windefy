@@ -3,7 +3,7 @@
 namespace Test
 {
     [TestFixture]
-    class Controller_Track
+    class Controller_Track_GetTrack
     {
         Controller.Track controller;
         [SetUp]
@@ -18,7 +18,7 @@ namespace Test
             Assert.IsNotNull(track);
         }
         [Test]
-        public void GetNonExcistingTrack()
+        public void GetNonExistingTrack()
         {
             var track = controller.GetTrack(-1);
             Assert.IsNull(track);
