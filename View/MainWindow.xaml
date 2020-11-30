@@ -9,8 +9,14 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="1024" Width="1440">
     <Window.Resources>
-        <DataTemplate x:Name="homepage" DataType="{x:Type viewmodels:Homepage}">
-            <views:Homepage DataContext="{Binding}" />
+        <DataTemplate x:Name="SearchArtistViewModel" DataType="{x:Type viewmodels:SearchArtistViewModel}">
+            <views:SearchArtist />
+        </DataTemplate>
+        <DataTemplate x:Name="Homepage" DataType="{x:Type viewmodels:Homepage}">
+            <views:Homepage />
+        </DataTemplate>
+        <DataTemplate x:Name="SearchSong" DataType="{x:Type viewmodels:SearchSongModel}">
+            <views:SearchSong />
         </DataTemplate>
     </Window.Resources>
     <Grid Background="Transparent">
@@ -116,7 +122,7 @@
         </Grid>
 
         <!-- the loginBackGround has to be visible if you want to change the loginGrid, RegisterGrid and the verify grid (put those grids on visible aswell) -->
-        <Grid x:Name="LoginBackground" Background="#7F4F83CC" Grid.ColumnSpan="2" Grid.RowSpan="2" Visibility="Visible" Margin="0,-8,0,-8">
+        <Grid x:Name="LoginBackground" Background="#7F4F83CC" Grid.ColumnSpan="2" Grid.RowSpan="2" Visibility="Hidden" Margin="0,-8,0,-8">
             <!-- Login Grid and its components-->
             <Grid x:Name="LoginGrid" VerticalAlignment="Center" Width="552" Height="283" Background="White" Visibility="Hidden">
                 <Border CornerRadius="30" Margin="95,176,95,0" VerticalAlignment="Top" Width="363" Height="34" Grid.ColumnSpan="3" Background="#FF4F83CC" RenderTransformOrigin="0.5,0.5">
