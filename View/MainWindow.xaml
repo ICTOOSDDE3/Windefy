@@ -100,12 +100,13 @@
         <Grid Grid.Row="0" Grid.Column="1" Background="White">
             <ContentControl Content="{Binding}" />
             <TextBox Style="{StaticResource placeHolder}" Tag="Search for your next favorite thing" Width="490" Height="35" FontSize="18" Margin="38,33,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
-            <Button x:Name="Login_Button" Content="" Margin="0,24,85,0" Width="44" Height="44" BorderBrush="#00707070" Click="Login_Button_Click" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <Button x:Name="Account_Button" Content="" Margin="0,24,28,0" Width="44" Height="44" BorderBrush="#00707070" Click="Account_Button_Click" HorizontalAlignment="Right" VerticalAlignment="Top">
                 <Button.Background>
                     <ImageBrush ImageSource="/logint button.png"/>
                 </Button.Background>
             </Button>
         </Grid>
+        
 
         <!-- the loginBackGround has to be visible if you want to change the loginGrid, RegisterGrid and the verify grid (put those grids on visible aswell) -->
         <Grid x:Name="LoginBackground" Background="#7F4F83CC" Grid.ColumnSpan="2" Grid.RowSpan="2" Visibility="Visible" Margin="0,-8,0,-8">
