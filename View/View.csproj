@@ -10,8 +10,16 @@
     <None Remove="Assets\Images\banner.png" />
     <None Remove="Assets\Images\banner.svg" />
     <None Remove="Assets\Images\mockSongImage.jpg" />
+    <None Remove="Forward.png" />
     <None Remove="kruisje.png" />
     <None Remove="logint button.png" />
+    <None Remove="Pause.png" />
+    <None Remove="Play.png" />
+    <None Remove="Rectangle.png" />
+    <None Remove="Repeat.png" />
+    <None Remove="Rewind.png" />
+    <None Remove="Shuffle.png" />
+    <None Remove="Volume.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,9 +36,17 @@
     <Resource Include="Assets\Images\mockSongImage.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Forward.png" />
     <Resource Include="kruisje.png" />
     <Resource Include="logint button.png" />
+    <Resource Include="Pause.png" />
+    <Resource Include="Play.png" />
+    <Resource Include="Rectangle.png" />
+    <Resource Include="Repeat.png" />
+    <Resource Include="Rewind.png" />
+    <Resource Include="Shuffle.png" />
     <Resource Include="Styles\Texts.xaml" />
+    <Resource Include="Volume.png" />
   </ItemGroup>
 
 </Project>

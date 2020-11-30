@@ -298,7 +298,9 @@ namespace View
         private void TogglePlay(object sender, RoutedEventArgs e)
         {
             mediaPlayer.Play();
-            tbPlayPause.Content = "Pause";
+            ImageBrush imageBrush = new ImageBrush();
+            imageBrush.ImageSource = new BitmapImage(new Uri(@"C:\Users\AdeRm\Source\Repos\Windefy3\View\Pause.png", UriKind.Relative));
+            tbPlayPause.Background = imageBrush;
             mediaPlaying = true;
         }
         /// <summary>
@@ -309,7 +311,9 @@ namespace View
         private void TogglePause(object sender, RoutedEventArgs e)
         {
             mediaPlayer.Pause();
-            tbPlayPause.Content = "Play";
+            ImageBrush imageBrush = new ImageBrush();
+            imageBrush.ImageSource = new BitmapImage(new Uri(@"C:\Users\AdeRm\Source\Repos\Windefy3\View\Play.png", UriKind.Relative));
+            tbPlayPause.Background = imageBrush;           
             mediaPlaying = false;
         }
         /// <summary>
