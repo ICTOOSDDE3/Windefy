@@ -8,7 +8,9 @@ namespace Controller
     {
         static void Main(string[] args)
         {
-            Mail m1 = new Mail();
+            Playlist playlist = new Playlist();
+
+            playlist.createUserPlaylist("Dylan zijn test ding", true);
         }
     }
 }
