@@ -11,9 +11,9 @@ namespace Controller
 {
     public class Register
     {
-        private static Random random = new Random();
-        private Mail VerificationMail = new Mail();
-        private Login account = new Login();
+        private static Random _random = new Random();
+        private Mail _verificationMail = new Mail();
+        private Login _account = new Login();
 
         //Method to register an account (validate and save to db)
         public void RegisterAccount(string email, string name, string pw1, string pw2)
@@ -23,7 +23,7 @@ namespace Controller
             {
                 if (IsEmailUnique(email))
                 {
-                    if (ArePasswordsEqual(pw1, pw2))
+                    if (IsPasswordEqual(pw1, pw2))
                     {
                         //TODO: Create the account in the database when the db connection is made
 
@@ -36,11 +36,11 @@ namespace Controller
                         DBConnection.OpenConnection();
 
                         SqlCommand cmd = new SqlCommand(null, DBConnection.Connection);
-                        cmd.CommandText = $"INSERT INTO users (email, name, password, verificationCode, verified, saltcode) " + //if language is going to be implemented in the registration add lang to this statement
-                            $"VALUES(@email, @name, @password, @verificationCode, @verified, @saltcode)";// if language is goint to be implemented in the registration add lang to this statement
+                        cmd.CommandText = $"INSERT INTO users (_email, name, password, verificationCode, verified, saltcode) " + //if language is going to be implemented in the registration add lang to this statement
+                            $"VALUES(@_email, @name, @password, @verificationCode, @verified, @saltcode)";// if language is goint to be implemented in the registration add lang to this statement
 
 
-                        SqlParameter paramEmail = new SqlParameter("@email", System.Data.SqlDbType.Text, 255);
+                        SqlParameter paramEmail = new SqlParameter("@_email", System.Data.SqlDbType.Text, 255);
                         SqlParameter paramName = new SqlParameter("@name", System.Data.SqlDbType.Text, 255);
                         SqlParameter paramPassword = new SqlParameter("@password", System.Data.SqlDbType.Text, 255);
                         //SqlParameter paramLang = new SqlParameter("@lang", System.Data.SqlDbType.Int, 1);      //uncomment when lang is goint to be implemented
@@ -68,8 +68,8 @@ namespace Controller
                         cmd.ExecuteNonQuery();
 
                         DBConnection.CloseConnection();
-                        VerificationMail.SendValidationMail(email, verificationCode);
-                        account.IsLogin(email, pw1);
+                        _verificationMail.SendValidationMail(email, verificationCode);
+                        _account.IsLogin(email, pw1);
                     }
                 }
             }
@@ -82,7 +82,7 @@ namespace Controller
         }
 
         //Check if two passwords are equal
-        public bool ArePasswordsEqual(string str1, string str2)
+        public bool IsPasswordEqual(string str1, string str2)
         {
             return str1.Equals(str2);
         }
@@ -92,13 +92,13 @@ namespace Controller
         {
             DBConnection.OpenConnection();
 
-            string query = "SELECT email FROM users";
+            string query = "SELECT _email FROM users";
 
             SqlCommand cmd = new SqlCommand(query, DBConnection.Connection);
             SqlDataReader dataReader = cmd.ExecuteReader();
             while (dataReader.Read())
             {
-                if (email.Equals(dataReader["email"].ToString()))
+                if (email.Equals(dataReader["_email"].ToString()))
                 {
                     DBConnection.CloseConnection();
                     return false;
@@ -107,17 +107,6 @@ namespace Controller
             dataReader.Close();
             DBConnection.CloseConnection();
             return true;
-        }
-
-        /// <summary>
-        ///generate a byte array from a password
-        /// </summary>
-        /// <param name="password"></param>
-        /// <returns>bytePassword</returns>
-        public byte[] PasswordToByte(string password)
-        {
-            byte[] bytePassword = Encoding.ASCII.GetBytes(password);
-            return bytePassword;
         }
 
         /// <summary>
@@ -159,16 +148,8 @@ namespace Controller
             //Linq statement to create random string based on the given chars and amount
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             string code = new string(Enumerable.Repeat(chars, 10)
-              .Select(s => s[random.Next(s.Length)]).ToArray());
-            Console.WriteLine(code);
+              .Select(s => s[_random.Next(s.Length)]).ToArray());
             return code;
-        }
-
-        // method get verifcation code
-        public string GetUserVerificationCode(int userID)
-        {
-            string verificationCode = "";// search verificationcode in database filtered on userID
-            return verificationCode;
         }
 
         // method check verification code
@@ -177,7 +158,7 @@ namespace Controller
 
             DBConnection.OpenConnection();
 
-            string query = $"SELECT verificationCode FROM users where email = '{email}'";
+            string query = $"SELECT verificationCode FROM users where _email = '{email}'";
 
             SqlCommand cmd = new SqlCommand(query, DBConnection.Connection);
 
@@ -188,7 +169,7 @@ namespace Controller
 
                 DBConnection.OpenConnection();
 
-                string query2 = $"UPDATE users SET verified = 1 where email = '{email}'";
+                string query2 = $"UPDATE users SET verified = 1 where _email = '{email}'";
 
                 SqlCommand cmd2 = new SqlCommand(query2, DBConnection.Connection);
                 cmd2.ExecuteNonQuery();
@@ -203,10 +184,10 @@ namespace Controller
         public void ResendVerificationCode(string email)
         {
             string newCode = CreateCode();
-            VerificationMail.SendValidationMail(email, newCode);
+            _verificationMail.SendValidationMail(email, newCode);
             DBConnection.OpenConnection();
 
-            string query2 = $"UPDATE users SET verificationCode = '{newCode}' where email = '{email}'";
+            string query2 = $"UPDATE users SET verificationCode = '{newCode}' where _email = '{email}'";
 
             SqlCommand cmd2 = new SqlCommand(query2, DBConnection.Connection);
             cmd2.ExecuteNonQuery();

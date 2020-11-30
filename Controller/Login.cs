@@ -14,18 +14,18 @@ namespace Controller
             DBConnection.OpenConnection();
             try
             {
-                string query = $"SELECT * FROM users WHERE email = '{email}'";
+                string query = $"SELECT * FROM users WHERE _email = '{email}'";
 
                 SqlCommand cmd = new SqlCommand(query, DBConnection.Connection);
                 SqlDataReader dataReader = cmd.ExecuteReader();
                 while (dataReader.Read())
                 {
-                    var temp = dataReader["email"].ToString();
+                    var temp = dataReader["_email"].ToString();
 
                     string DataBasePassword = dataReader["password"].ToString();
                     string DataBaseSalt = dataReader["saltcode"].ToString();
 
-                    if (AreEqual(password,DataBasePassword,DataBaseSalt))
+                    if (IsEqual(password,DataBasePassword,DataBaseSalt))
                     {
                         int id = Convert.ToInt32(dataReader["user_Id"]);
                         string name = dataReader["name"].ToString();
@@ -55,12 +55,7 @@ namespace Controller
             return Convert.ToBase64String(hash);
         }
 
-        public byte[] PasswordToByte(string password)
-        {
-            byte[] bytePassword = Encoding.ASCII.GetBytes(password);
-            return bytePassword;
-        }
-        public bool AreEqual(string plainTextInput, string hashedInput, string salt)
+        public bool IsEqual(string plainTextInput, string hashedInput, string salt)
         {
             string newHashedPin = GenerateHash(plainTextInput, salt);
             return newHashedPin.Equals(hashedInput);

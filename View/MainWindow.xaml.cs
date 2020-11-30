@@ -121,7 +121,7 @@ namespace View
             string repeatedPassword = PasswordRepeat_Input.Password;
             if (registerAccount.IsValidEmail(email))
             {
-                if (registerAccount.ArePasswordsEqual(password, repeatedPassword))
+                if (registerAccount.IsPasswordEqual(password, repeatedPassword))
                 {
                     registerAccount.RegisterAccount(email, userName, password, repeatedPassword);
                     RegisterGrid.Visibility = Visibility.Hidden;
