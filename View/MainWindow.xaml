@@ -40,6 +40,11 @@
 
                     <Grid Margin="0,331,0,0">
                         <Label FontSize="25" Content="Playlists" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                        <Button x:Name="Playlist_Plus_Button" Content="" Margin="0,10,9,0" Width="27" Height="27" BorderBrush="#00707070" Click="Playlist_Plus_Button_Click" HorizontalAlignment="Right" VerticalAlignment="Top">
+                            <Button.Background>
+                                <ImageBrush ImageSource="/Plus.png"/>
+                            </Button.Background>
+                        </Button>
 
                         <Image Height="30" Width="30" Source="Assets/images/mockSongImage.jpg" Margin="48,57,207,331" />
                         <Label FontSize="20" Content="Mood" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.587,-0.614" Margin="86,54,0,0"/>
@@ -98,11 +103,11 @@
 
         </Grid>
         <Grid Grid.Row="0" Grid.Column="1" Background="White">
-            <ContentControl Content="{Binding}" />
+            <ContentControl Content="{Binding}" Margin="0,-2,0,2" />
             <TextBox Style="{StaticResource placeHolder}" Tag="Search for your next favorite thing" Width="490" Height="35" FontSize="18" Margin="38,33,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
             <Button x:Name="Login_Button" Content="" Margin="0,24,85,0" Width="44" Height="44" BorderBrush="#00707070" Click="Login_Button_Click" HorizontalAlignment="Right" VerticalAlignment="Top">
                 <Button.Background>
-                    <ImageBrush ImageSource="/logint button.png"/>
+                    <ImageBrush ImageSource="/loginButton.png"/>
                 </Button.Background>
             </Button>
         </Grid>
@@ -150,6 +155,19 @@
                 <Button x:Name="Close_Account_Details" Content="X" HorizontalAlignment="Left" Margin="534,23,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.48,0.377" Width="22" Foreground="Red" Background="{x:Null}" BorderBrush="{x:Null}" Click="Close_Login_Button_Click" FontWeight="Bold"/>
                 <Border CornerRadius="30" Margin="112,480,112,0" VerticalAlignment="Top" Width="363" Height="34" Background="#FF4F83CC" RenderTransformOrigin="0.5,0.5">
                     <Button x:Name="AccountDetailsButton" Content="Update" HorizontalAlignment="Center" VerticalAlignment="Center" Width="384" Height="48" Background="#00DDDDDD" BorderBrush="#00707070" Foreground="White" Click="AccountDetails_Button_Click"/>
+                </Border>
+            </Grid>
+
+            <Grid x:Name="AddPlaylistGrid" Width="588" Height="605" Background="White" Visibility="Visible">
+                <TextBox x:Name="Details_Title_Input" HorizontalAlignment="Center" Margin="0,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="375" Height="42" Background="#7F4F83CC" TextAlignment="Center" FontSize="24" IsEnabled="True"/>
+                <CheckBox x:Name="Details_Public_Input" HorizontalAlignment="Left" Margin="241,282,0,281" Width="53" Background="#7F4F83CC" FontSize="50" Height="42" IsEnabled="True"/>
+                <TextBlock HorizontalAlignment="Center" Margin="0,42,0,0" Text="Create Playlist" TextWrapping="Wrap" VerticalAlignment="Top" Height="42" Width="376" TextAlignment="Center" FontSize="32" FontWeight="Bold"/>
+                <TextBlock HorizontalAlignment="Left"  Margin="106,162,0,0" Text="Title:" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="110" FontSize="24"/>
+                <TextBlock HorizontalAlignment="Left"  Margin="106,266,0,0" Text="Private:" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="110" FontSize="24"/>
+
+                <Button x:Name="Close_AddPlaylist_Details" Content="X" HorizontalAlignment="Left" Margin="534,23,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.48,0.377" Width="22" Foreground="Red" Background="{x:Null}" BorderBrush="{x:Null}" Click="Close_Login_Button_Click" FontWeight="Bold"/>
+                <Border CornerRadius="30" Margin="112,480,112,0" VerticalAlignment="Top" Width="363" Height="34" Background="#FF4F83CC" RenderTransformOrigin="0.5,0.5">
+                    <Button x:Name="PlaylistDetailsButton" Content="Create" HorizontalAlignment="Center" VerticalAlignment="Top" Width="384" Height="48" Background="#00DDDDDD" BorderBrush="#00707070" Foreground="White" Click="PlaylistDetails_Button_Click" Margin="0,-7,0,0"/>
                 </Border>
             </Grid>
 

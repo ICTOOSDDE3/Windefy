@@ -60,6 +60,16 @@ namespace View
             LoginBackground.Visibility = Visibility.Visible;
             LoginGrid.Visibility = Visibility.Visible;
         }
+        private void Playlist_Plus_Button_Click(object sender, RoutedEventArgs e)
+        {
+            LoginBackground.Visibility = Visibility.Visible;
+            AddPlaylistGrid.Visibility = Visibility.Visible;
+        }
+        private void PlaylistDetails_Button_Click(object sender, RoutedEventArgs e)
+        {
+            LoginBackground.Visibility = Visibility.Hidden;
+            AddPlaylistGrid.Visibility = Visibility.Hidden;
+        }
 
         private void Account_Button_Click(object sender, RoutedEventArgs e)
         {
