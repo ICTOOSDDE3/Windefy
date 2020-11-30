@@ -298,9 +298,6 @@ namespace View
         private void TogglePlay(object sender, RoutedEventArgs e)
         {
             mediaPlayer.Play();
-            ImageBrush imageBrush = new ImageBrush();
-            imageBrush.ImageSource = new BitmapImage(new Uri(@"C:\Users\AdeRm\Source\Repos\Windefy3\View\Pause.png", UriKind.Relative));
-            tbPlayPause.Background = imageBrush;
             mediaPlaying = true;
         }
         /// <summary>
@@ -311,9 +308,6 @@ namespace View
         private void TogglePause(object sender, RoutedEventArgs e)
         {
             mediaPlayer.Pause();
-            ImageBrush imageBrush = new ImageBrush();
-            imageBrush.ImageSource = new BitmapImage(new Uri(@"C:\Users\AdeRm\Source\Repos\Windefy3\View\Play.png", UriKind.Relative));
-            tbPlayPause.Background = imageBrush;           
             mediaPlaying = false;
         }
         /// <summary>
@@ -333,6 +327,26 @@ namespace View
         private void btnRewind_Unchecked(object sender, RoutedEventArgs e)
         {
             rewind = false;
+        }
+
+        private void favoriteBtn_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void favoriteBtn_Unchecked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void shuffleBtn_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void shuffleBtn_Unchecked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

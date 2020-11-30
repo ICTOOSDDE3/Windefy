@@ -12,7 +12,94 @@
         <DataTemplate x:Name="homepage" DataType="{x:Type viewmodels:Homepage}">
             <views:Homepage DataContext="{Binding}" />
         </DataTemplate>
+
+        <Image x:Key="Play_icon" Source="/Play.png"/>
+        <Image x:Key="Pause_icon" Source="/Pause.png"/>
+        <Image x:Key="ShuffleUnChecked_icon" Source="/Shuffle.png"/>
+        <Image x:Key="ShuffleChecked_icon" Source="/ShuffleChecked.png"/>
+        <Image x:Key="RepeatChecked_icon" Source="/RepeatChecked.png"/>
+        <Image x:Key="RepeatUnchecked_icon" Source="/Repeat.png"/>
+        <Image x:Key="HeartChecked_icon" Source="/HeartChecked.png"/>
+        <Image x:Key="HeartUnchecked_icon" Source="/Rectangle.png"/>
+
+        <Style TargetType="{x:Type ToggleButton}" x:Key="PausePlay">
+            <Setter Property="Content" Value="{DynamicResource Play_icon}" />
+            <Setter Property="Background">
+                <Setter.Value>
+                    <ImageBrush ImageSource="/Play.png"/>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Content" Value="{DynamicResource Pause_icon}" />
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <ImageBrush ImageSource="/Pause.png"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="{x:Type ToggleButton}" x:Key="Repeat">
+            <Setter Property="Content" Value="{DynamicResource RepeatUnchecked_icon}" />
+            <Setter Property="Background">
+                <Setter.Value>
+                    <ImageBrush ImageSource="/Repeat.png"/>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Content" Value="{DynamicResource RepeatChecked_icon}" />
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <ImageBrush ImageSource="/RepeatChecked.png"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="{x:Type ToggleButton}" x:Key="Heart">
+            <Setter Property="Content" Value="{DynamicResource HeartUnchecked_icon}" />
+            <Setter Property="Background">
+                <Setter.Value>
+                    <ImageBrush ImageSource="/Rectangle.png"/>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Content" Value="{DynamicResource HeartChecked_icon}" />
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <ImageBrush ImageSource="/HeartChecked.png"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="{x:Type ToggleButton}" x:Key="Shuffle">
+            <Setter Property="Content" Value="{DynamicResource ShuffleUnChecked_icon}" />
+            <Setter Property="Background">
+                <Setter.Value>
+                    <ImageBrush ImageSource="/Shuffle.png"/>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Content" Value="{DynamicResource ShuffleChecked_icon}"/>
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <ImageBrush ImageSource="/ShuffleChecked.png"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
+
     <Grid Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -53,10 +140,7 @@
         </Grid>
         <Grid Grid.ColumnSpan="5">
             <WrapPanel x:Name="MusicBar" Background="Transparent" Height="96" VerticalAlignment="Bottom" Margin="-6,0,6,-97" >
-                <WrapPanel VerticalAlignment="Center" Height="82" HorizontalAlignment="Center">
-                    <WrapPanel.Background>
-                        <ImageBrush/>
-                    </WrapPanel.Background>
+                <WrapPanel VerticalAlignment="Center" Height="80" HorizontalAlignment="Center">
                     <Image Source="Assets/Images/mockSongImage.jpg" Height="70" Width="70"/>
                     <StackPanel Margin="5,0,0,0">
                         <Label Name="Track_Name" Content="{Binding Title}" Margin="0,20,0,0"/>
@@ -77,43 +161,29 @@
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
                         </ItemsControl>
-
                     </StackPanel>
-                    <ToggleButton x:Name="favoriteBtn" Width="30" Height="30" Margin="50,0,0,0" >
-                        <ToggleButton.Background>
-                            <ImageBrush ImageSource="/Rectangle.png"/>
-                        </ToggleButton.Background>
-                    </ToggleButton>
+                    <ToggleButton x:Name="favoriteBtn" Width="30" Height="30" Margin="50,0,0,0" BorderThickness="0" Style="{StaticResource Heart}" Checked="favoriteBtn_Checked" Unchecked="favoriteBtn_Unchecked"/>
                 </WrapPanel>
                 <WrapPanel VerticalAlignment="Center" >
-                    <WrapPanel.Background>
-                        <ImageBrush/>
-                    </WrapPanel.Background>
-                    <ToggleButton x:Name="shuffleBtn" Height="32" Width="32" Margin="49,0,0,0">
-                        <ToggleButton.Background>
-                            <ImageBrush ImageSource="/Shuffle.png"/>
-                        </ToggleButton.Background>
-                    </ToggleButton>
-                    <Button x:Name="btnPrev" MouseDoubleClick="btnPrev_MouseDoubleClick" Click="btnPrev_Click" Width="32" Height="24" Margin="60,0,0,0">
+                    <ToggleButton x:Name="shuffleBtn" Height="32" Width="32" Margin="49,0,0,0" BorderThickness="0" Style="{StaticResource Shuffle}" Checked="shuffleBtn_Checked" Unchecked="shuffleBtn_Unchecked"/>
+                    <Button x:Name="btnPrev" MouseDoubleClick="btnPrev_MouseDoubleClick" Click="btnPrev_Click" Width="32" Height="24" Margin="60,0,0,0" BorderThickness="0">
                         <Button.Background>
                             <ImageBrush ImageSource="/Rewind.png"/>
                         </Button.Background>
+                        <Button.Content>
+                            <Image Source="/Rewind.png"/>
+                        </Button.Content>
                     </Button>
-                    <ToggleButton x:Name="tbPlayPause" Checked = "TogglePlay" Unchecked = "TogglePause" Margin="60,0,0,0" Width="40" Height="40" >
-                        <ToggleButton.Background>
-                            <ImageBrush ImageSource="/Play.png"/>
-                        </ToggleButton.Background>
-                    </ToggleButton>
-                    <Button x:Name="btnNext" Click="btnNext_Click" Width="32" Height="24" Margin="60,0,5,0" >
+                    <ToggleButton x:Name="tbPlayPause" Checked = "TogglePlay" Unchecked = "TogglePause" Margin="60,0,0,0" Width="40" Height="40" BorderThickness="0" Style="{StaticResource PausePlay}" />
+                    <Button x:Name="btnNext" Click="btnNext_Click" Width="32" Height="24" Margin="60,0,5,0" BorderThickness="0">
                         <Button.Background>
                             <ImageBrush ImageSource="/Forward.png"/>
                         </Button.Background>
+                        <Button.Content>
+                            <Image Source="/Forward.png"/>
+                        </Button.Content>
                     </Button>
-                    <ToggleButton x:Name="tbBtnRewind" Checked="btnRewind_Checked" Unchecked="btnRewind_Unchecked" Margin="60,0,5,0" Width="32" Height="32">
-                        <ToggleButton.Background>
-                            <ImageBrush ImageSource="/Repeat.png"/>
-                        </ToggleButton.Background>
-                    </ToggleButton>
+                    <ToggleButton x:Name="tbBtnRewind" Checked="btnRewind_Checked" Unchecked="btnRewind_Unchecked" Margin="60,0,5,0" Width="32" Height="32" BorderThickness="0" Style="{StaticResource Repeat}"/>
                 </WrapPanel>
                 <WrapPanel VerticalAlignment="Center">
                     <Label Name="CurrentTime" Content="" Margin="100,0,0,0" VerticalAlignment="Center"/>
@@ -139,8 +209,12 @@
 
         <!-- the loginBackGround has to be visible if you want to change the loginGrid, RegisterGrid and the verify grid (put those grids on visible aswell) -->
         <Grid x:Name="LoginBackground" Background="#7F4F83CC" Grid.ColumnSpan="2" Grid.RowSpan="2" Visibility="Visible" Margin="0,-8,0,-8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="967*"/>
+                <RowDefinition Height="57*"/>
+            </Grid.RowDefinitions>
             <!-- Login Grid and its components-->
-            <Grid x:Name="LoginGrid" VerticalAlignment="Center" Width="552" Height="283" Background="White" Visibility="Hidden">
+            <Grid x:Name="LoginGrid" VerticalAlignment="Top" Width="552" Height="283" Background="White" Visibility="Hidden" Margin="444,371,444,0">
                 <Border CornerRadius="30" Margin="95,176,95,0" VerticalAlignment="Top" Width="363" Height="34" Grid.ColumnSpan="3" Background="#FF4F83CC" RenderTransformOrigin="0.5,0.5">
                     <Button Content="Login" VerticalAlignment="Top" Width="363" Height="34" Grid.ColumnSpan="2" Background="#004F83CC" Foreground="White" RenderTransformOrigin="0.5,0.5" BorderBrush="#00707070" HorizontalAlignment="Center" Click="Login_Click"/>
                 </Border>
@@ -152,7 +226,7 @@
             </Grid>
 
             <!-- Register Grid and its components -->
-            <Grid x:Name="RegisterGrid" Width="588" Height="605" Background="White" Visibility="Visible">
+            <Grid x:Name="RegisterGrid" Width="588" Height="605" Background="White" Visibility="Visible" Margin="426,210,426,152">
                 <TextBox x:Name="Email_Input" HorizontalAlignment="Center" Margin="0,176,0,0" Style="{StaticResource LoginInputs}" Tag="Email@example.com" TextWrapping="Wrap" VerticalAlignment="Top" Width="375" Height="42" Background="#7F4F83CC" TextAlignment="Center" FontSize="24"/>
                 <TextBox x:Name="Username_Input" HorizontalAlignment="Center" Margin="0,238,0,325" Style="{StaticResource LoginInputs}" Tag="Username" TextWrapping="Wrap" Width="376" Background="#7F4F83CC" FontSize="24" TextAlignment="Center" Foreground="#7F000000"/>
                 <TextBox x:Name="Password_Input" HorizontalAlignment="Center" Margin="0,300,0,0" Style="{StaticResource LoginInputs}" Tag="Password" TextWrapping="Wrap" VerticalAlignment="Top" Width="375" Height="42" Background="#7F4F83CC" TextAlignment="Center" FontSize="24" Foreground="#7F000000"/>
@@ -167,7 +241,7 @@
             </Grid>
 
             <!-- this grid shows the account details of which you are logged in with -->
-            <Grid x:Name="AccountDetailsGrid" Width="588" Height="605" Background="White" Visibility="Hidden">
+            <Grid x:Name="AccountDetailsGrid" Width="588" Height="605" Background="White" Visibility="Hidden" Margin="426,210,426,152">
                 <TextBox x:Name="Details_Email_Input" HorizontalAlignment="Center" Margin="0,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="375" Height="42" Background="#7F4F83CC" TextAlignment="Center" FontSize="24" IsEnabled="True"/>
                 <TextBox x:Name="Details_Username_Input" HorizontalAlignment="Center" Margin="0,302,0,261" TextWrapping="Wrap" Width="376" Background="#7F4F83CC" FontSize="24" TextAlignment="Center" Foreground="#7F000000" Height="42" IsEnabled="True"/>
                 <TextBox x:Name="Details_Language_Input" HorizontalAlignment="Center" Margin="0,400,0,163" TextWrapping="Wrap" Width="376" Background="#7F4F83CC" FontSize="24" TextAlignment="Center" Foreground="#7F000000" Height="42" IsEnabled="False"/>
@@ -184,7 +258,7 @@
             </Grid>
 
             <!-- this grid show the verification tab where a registered user can verify its email adress-->
-            <Grid x:Name="VerifyGrid" VerticalAlignment="Center" Width="552" Height="283" Background="White" Visibility="Hidden">
+            <Grid x:Name="VerifyGrid" VerticalAlignment="Top" Width="552" Height="283" Background="White" Visibility="Hidden" Margin="444,371,444,0">
                 <Border CornerRadius="30" Margin="95,147,95,0" VerticalAlignment="Top" Width="363" Height="34" Grid.ColumnSpan="3" Background="#FF4F83CC" RenderTransformOrigin="0.5,0.5">
                     <Button Content="Verify" VerticalAlignment="Center" Width="363" Height="34" Grid.ColumnSpan="2" Background="#004F83CC" Foreground="White" RenderTransformOrigin="0.5,0.5" BorderBrush="#00707070" HorizontalAlignment="Center" FontSize="24" Click="Verify_Button_Click"/>
                 </Border>
