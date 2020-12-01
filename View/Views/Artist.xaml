@@ -22,6 +22,7 @@
                         <Image Source="../Assets/Images/mockSongImage.jpg" Width="70" Height="70" HorizontalAlignment="Left" Margin="0,0,0,25" VerticalAlignment="Bottom" />
                         <Label Content="{Binding Title}" Margin="94,10,94,0" Width="312" Height="24" VerticalAlignment="Top" />
                         <Label Content="" Height="24" VerticalAlignment="Center" HorizontalAlignment="Left" Width="406" Margin="94,0,0,0" />
+                        <Image Source="../Assets/Images/like.png" Width="30" Height="30" HorizontalAlignment="Right" Margin="0,0,50,40" VerticalAlignment="Bottom" />
                     </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>

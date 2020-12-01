@@ -13,6 +13,7 @@ namespace Model
         public DateTime Date_Created { get; set; }
         public int NumberID { get; set; }
         public List<int> ArtistIDs { get; set; }
+        public List<Artist> Artists { get; set; }
         public List<int> GenreIDs { get; set; } 
         public string File_path { get; set; }
     }
