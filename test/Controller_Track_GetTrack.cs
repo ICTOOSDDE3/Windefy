@@ -11,6 +11,7 @@ namespace Test
         {
             controller = new Controller.Track();
         }
+        //This test checks whether the function returns a track object when you use an existing trackID as parameter
         [Test]
         public void GetExistingTrack()
         {
@@ -18,6 +19,7 @@ namespace Test
             Assert.IsNotNull(track);
         }
         [Test]
+        // This test checks whether the function returns a track object when you use an non existing ArtistID as parameter
         public void GetNonExistingTrack()
         {
             var track = controller.GetTrack(-1);

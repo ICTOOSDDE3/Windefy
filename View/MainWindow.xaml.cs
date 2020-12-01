@@ -37,9 +37,8 @@ namespace View
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new Homepage();
-
-            // puts the data of the chosen song in the MusicBar
+            // DataContext = new Homepage();
+            DataContext = new ViewModels.Artist(1);
             MusicBar.DataContext = track.GetTrack(210);
             CurrentTrack = (Model.Track)MusicBar.DataContext;
             icArtistList.ItemsSource = CurrentTrack.Artists;
