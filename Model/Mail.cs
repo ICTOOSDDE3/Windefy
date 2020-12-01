@@ -4,14 +4,14 @@ using System.Text;
 
 namespace Model
 {
-    public class Model_Mail
+    public class Mail
     {
         public string RecipientEmail { get; set; }
         public string SenderEmail { get; set; }
         public string Subject { get; set; }
         public string Message { get; set; }
 
-        public Model_Mail(string recipientEmail, string senderEmail, string subject, string message)
+        public Mail(string recipientEmail, string senderEmail, string subject, string message)
         {
             RecipientEmail = recipientEmail;
             SenderEmail = senderEmail;
