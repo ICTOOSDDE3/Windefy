@@ -13,17 +13,13 @@ namespace Controller
         private List<PlaylistPreview> _playlists = new List<PlaylistPreview>();
 
         //checks if there are any playlists of the user
-        //public void CheckIfUserHasPlaylists()
-        //{
-        //    if (Convert.ToBoolean(ShowPlaylists(_userID)))
-        //    {
-        //        // show all playlists as a button
-        //    }
-        //    else
-        //    {
-        //        // show make playlist button
-        //    }
-        //}
+        public void CheckIfUserHasPlaylists()
+        {
+            if (_playlists.Count == 0)
+            {
+                // no playlists, button to make a playlist
+            }
+        }
 
         // shows playlist that the user has made
         public void ShowPlaylists(int userID)
@@ -47,16 +43,25 @@ namespace Controller
 
             }
             
+            DBConnection.CloseConnection();
+
+        }
+
+        public void InsertToPlaylist(int playlistID, int trackID)
+        {
+            DBConnection.Initialize();
+            DBConnection.OpenConnection();
+
+            //Build the query
+            string query = $"INSTERT INTO playlist_track (trackID, playlistID) VALUES ('{trackID}', '{playlistID}')";
+
+            //Prepare the query
+            SqlCommand cmd = new SqlCommand(query, DBConnection.Connection);
 
             cmd.ExecuteScalar();
             DBConnection.CloseConnection();
 
         }
-
-        //public bool InsertToPlaylist(int playlistID, int trackID)
-        //{
-
-        //}
         //on click playlist name insert song
         //notify if inserted or not
 
