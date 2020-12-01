@@ -10,8 +10,7 @@ namespace Controller
     {
         //this is the logged in user ID
         private int _userID = Model.User.UserID;
-        private List<int> _playlistId = new List<int>(); 
-        private int playlistID;
+        private List<PlaylistPreview> _playlists = new List<PlaylistPreview>(); 
 
         //checks if there are any playlists of the user
         //public void CheckIfUserHasPlaylists()
@@ -38,7 +37,15 @@ namespace Controller
 
             //Prepare the query
             SqlCommand cmd = new SqlCommand(query, DBConnection.Connection);
-            string titles = cmd.CommandText;
+            SqlDataReader dataReader = cmd.ExecuteReader();
+
+            while (dataReader.Read())
+            {
+                int playlistId = Convert.ToInt32(dataReader["playlistID"]);
+                //string playlistTitle = dataReader[]
+                //_playlists.Add(new PlaylistPreview(dataReader[]))
+
+            }
             
 
             cmd.ExecuteScalar();
