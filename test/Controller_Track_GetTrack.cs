@@ -14,19 +14,25 @@ namespace Test
         /// <summary>
         /// This test checks whether the function returns a track object when you use an existing trackID as parameter
         /// </summary>
+        [TestCase(210)]
+        [TestCase(211)]
+        [TestCase(212)]
         [Test]
-        public void GetExistingTrack()
+        public void GetExistingTrack(int trackID)
         {
-            var track = controller.GetTrack(211);
+            var track = controller.GetTrack(trackID);
             Assert.IsNotNull(track);
         }
         /// <summary>
         /// This test checks whether the function returns a track object when you use an non existing ArtistID as parameter
         /// </summary>
+        [TestCase(-1)]
+        [TestCase(-2)]
+        [TestCase(-3)]
         [Test]
-        public void GetNonExistingTrack()
+        public void GetNonExistingTrack(int trackID)
         {
-            var track = controller.GetTrack(-1);
+            var track = controller.GetTrack(trackID);
             Assert.IsNull(track);
         }
     }

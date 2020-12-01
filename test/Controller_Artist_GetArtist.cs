@@ -12,20 +12,26 @@ namespace Test
         }
         /// <summary>
         /// This test checks whether the function returns a Artist object when you use an existing Artist ID as parameter
-        /// </summary>
+        /// </summary> 
+        [TestCase(1)]
+        [TestCase(2)]
+        [TestCase(127)]
         [Test]
-        public void GetExistingArtist()
+        public void GetExistingArtist(int trackID)
         {
-            var artist = controller.GetArtist(127);
+            var artist = controller.GetArtist(trackID);
             Assert.IsNotNull(artist);
         }
         /// <summary>
         /// This test checks whether the function returns null when you use an non existing Artist ID as parameter
         /// </summary>
+        [TestCase(-1)]
+        [TestCase(-2)]
+        [TestCase(-3)]
         [Test]
-        public void GetNonExistingArtist()
+        public void GetNonExistingArtist(int trackID)
         {
-            var artist = controller.GetArtist(-1);
+            var artist = controller.GetArtist(trackID);
             Assert.IsNull(artist);
         }
     }
