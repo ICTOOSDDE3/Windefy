@@ -10,7 +10,7 @@ namespace Controller
     {
         //this is the logged in user ID
         private int _userID = Model.User.UserID;
-        private List<PlaylistPreview> _playlists = new List<PlaylistPreview>(); 
+        private List<PlaylistPreview> _playlists = new List<PlaylistPreview>();
 
         //checks if there are any playlists of the user
         //public void CheckIfUserHasPlaylists()
@@ -42,8 +42,8 @@ namespace Controller
             while (dataReader.Read())
             {
                 int playlistId = Convert.ToInt32(dataReader["playlistID"]);
-                //string playlistTitle = dataReader[]
-                //_playlists.Add(new PlaylistPreview(dataReader[]))
+                string playlistTitle = dataReader["title"].ToString();
+                _playlists.Add(new PlaylistPreview(playlistId, playlistTitle));
 
             }
             
