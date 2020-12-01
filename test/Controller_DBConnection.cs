@@ -22,7 +22,7 @@ namespace Test
             SqlCommand cmd = new SqlCommand(query, DBConnection.Connection);
 
             string result = cmd.ExecuteScalar().ToString();
-
+            DBConnection.CloseConnection();
             Assert.AreEqual("Weasel Walter", result);
         }
 

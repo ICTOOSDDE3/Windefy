@@ -11,15 +11,19 @@ namespace Test
         {
             controller = new Controller.Track();
         }
-        //This test checks whether the function returns a track object when you use an existing trackID as parameter
+        /// <summary>
+        /// This test checks whether the function returns a track object when you use an existing trackID as parameter
+        /// </summary>
         [Test]
         public void GetExistingTrack()
         {
             var track = controller.GetTrack(211);
             Assert.IsNotNull(track);
         }
+        /// <summary>
+        /// This test checks whether the function returns a track object when you use an non existing ArtistID as parameter
+        /// </summary>
         [Test]
-        // This test checks whether the function returns a track object when you use an non existing ArtistID as parameter
         public void GetNonExistingTrack()
         {
             var track = controller.GetTrack(-1);
