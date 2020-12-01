@@ -17,7 +17,8 @@ namespace Controller
         //Method to register an account (validate and save to db)
         public void RegisterAccount(string email, string name, string pw1, string pw2)
         {
-            DBConnection.Initialize();
+            
+
             if (IsValidEmail(email))
             {
                 if (IsEmailUnique(email))

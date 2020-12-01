@@ -5,14 +5,14 @@ using System.Text;
 
 namespace Controller
 {
-    class Playlist
+    public class Playlist
     {
         public void createUserPlaylist(string playlistTitle, bool playlist_is_Public)
         {
             Model.Playlist NewPlaylist = new Model.Playlist();
 
             //Initialize and open a db connection
-            DBConnection.Initialize();
+            //DBConnection.Initialize();
             DBConnection.OpenConnection();
 
             int PublicPlaylist = 0;

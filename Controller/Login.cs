@@ -15,7 +15,8 @@ namespace Controller
             // return true if so
 
 
-            DBConnection.Initialize();
+            //
+            //DBConnection.Initialize();
             DBConnection.OpenConnection();
             try
             {

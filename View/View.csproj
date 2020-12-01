@@ -12,6 +12,7 @@
     <None Remove="Assets\Images\mockSongImage.jpg" />
     <None Remove="kruisje.png" />
     <None Remove="loginbutton.png" />
+    <None Remove="Plus.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,6 +32,12 @@
     <Resource Include="kruisje.png" />
     <Resource Include="loginbutton.png" />
     <Resource Include="Styles\Texts.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Plus.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

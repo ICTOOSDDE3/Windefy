@@ -37,6 +37,7 @@ namespace View
         private string email = "";
         public MainWindow()
         {
+            DBConnection.Initialize();
             InitializeComponent();
             DataContext = new Homepage();
             MusicBar.DataContext = track.GetTrack(210);
@@ -65,12 +66,33 @@ namespace View
             LoginBackground.Visibility = Visibility.Visible;
             AddPlaylistGrid.Visibility = Visibility.Visible;
         }
+        //A new playlist wants to be created
         private void PlaylistDetails_Button_Click(object sender, RoutedEventArgs e)
+        {
+            string title = Details_Title_Input.Text;
+            bool isprivate = (bool)AddPlaylist_Private.IsChecked;
+            //Check if title is filled out
+            if(title != null)
+            {
+                Controller.Playlist newPlaylist = new Controller.Playlist();
+
+                newPlaylist.createUserPlaylist(title, isprivate);
+
+                //Call controller to make playlist
+                LoginBackground.Visibility = Visibility.Hidden;
+                AddPlaylistGrid.Visibility = Visibility.Hidden;
+            }
+            //Give error if no title is filled in
+            else
+            {
+                AddPlaylist_Comment.Visibility = Visibility.Visible;
+            }                        
+        }
+        private void Close_AddPlaylist_Button_Click(object sender, RoutedEventArgs e)
         {
             LoginBackground.Visibility = Visibility.Hidden;
             AddPlaylistGrid.Visibility = Visibility.Hidden;
         }
-
         private void Account_Button_Click(object sender, RoutedEventArgs e)
         {
             LoginBackground.Visibility = Visibility.Visible;
@@ -329,6 +351,11 @@ namespace View
         private void btnRewind_Unchecked(object sender, RoutedEventArgs e)
         {
             rewind = false;
+        }
+
+        private void HandleCheck(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

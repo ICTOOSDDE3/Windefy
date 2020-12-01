@@ -115,7 +115,7 @@
         <!-- the loginBackGround has to be visible if you want to change the loginGrid, RegisterGrid and the verify grid (put those grids on visible aswell) -->
         <Grid x:Name="LoginBackground" Background="#7F4F83CC" Grid.ColumnSpan="2" Grid.RowSpan="2" Visibility="Visible" Margin="0,-8,0,-8">
             <!-- Login Grid and its components-->
-            <Grid x:Name="LoginGrid" VerticalAlignment="Center" Width="552" Height="283" Background="White" Visibility="Hidden">
+            <Grid x:Name="LoginGrid" VerticalAlignment="Center" Width="552" Height="283" Background="White" Visibility="Visible">
                 <Border CornerRadius="30" Margin="95,176,95,0" VerticalAlignment="Top" Width="363" Height="34" Grid.ColumnSpan="3" Background="#FF4F83CC" RenderTransformOrigin="0.5,0.5">
                     <Button Content="Login" VerticalAlignment="Top" Width="363" Height="34" Grid.ColumnSpan="2" Background="#004F83CC" Foreground="White" RenderTransformOrigin="0.5,0.5" BorderBrush="#00707070" HorizontalAlignment="Center" Click="Login_Click"/>
                 </Border>
@@ -127,7 +127,7 @@
             </Grid>
 
             <!-- Register Grid and its components -->
-            <Grid x:Name="RegisterGrid" Width="588" Height="605" Background="White" Visibility="Visible">
+            <Grid x:Name="RegisterGrid" Width="588" Height="605" Background="White" Visibility="Hidden">
                 <TextBox x:Name="Email_Input" HorizontalAlignment="Center" Margin="0,176,0,0" Style="{StaticResource LoginInputs}" Tag="Email@example.com" TextWrapping="Wrap" VerticalAlignment="Top" Width="375" Height="42" Background="#7F4F83CC" TextAlignment="Center" FontSize="24"/>
                 <TextBox x:Name="Username_Input" HorizontalAlignment="Center" Margin="0,238,0,325" Style="{StaticResource LoginInputs}" Tag="Username" TextWrapping="Wrap" Width="376" Background="#7F4F83CC" FontSize="24" TextAlignment="Center" Foreground="#7F000000"/>
                 <TextBox x:Name="Password_Input" HorizontalAlignment="Center" Margin="0,300,0,0" Style="{StaticResource LoginInputs}" Tag="Password" TextWrapping="Wrap" VerticalAlignment="Top" Width="375" Height="42" Background="#7F4F83CC" TextAlignment="Center" FontSize="24" Foreground="#7F000000"/>
@@ -158,16 +158,19 @@
                 </Border>
             </Grid>
 
-            <Grid x:Name="AddPlaylistGrid" Width="588" Height="605" Background="White" Visibility="Visible">
-                <TextBox x:Name="Details_Title_Input" HorizontalAlignment="Center" Margin="0,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="375" Height="42" Background="#7F4F83CC" TextAlignment="Center" FontSize="24" IsEnabled="True"/>
-                <CheckBox x:Name="Details_Public_Input" HorizontalAlignment="Left" Margin="241,282,0,281" Width="53" Background="#7F4F83CC" FontSize="50" Height="42" IsEnabled="True"/>
-                <TextBlock HorizontalAlignment="Center" Margin="0,42,0,0" Text="Create Playlist" TextWrapping="Wrap" VerticalAlignment="Top" Height="42" Width="376" TextAlignment="Center" FontSize="32" FontWeight="Bold"/>
-                <TextBlock HorizontalAlignment="Left"  Margin="106,162,0,0" Text="Title:" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="110" FontSize="24"/>
-                <TextBlock HorizontalAlignment="Left"  Margin="106,266,0,0" Text="Private:" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="110" FontSize="24"/>
+            <Grid x:Name="AddPlaylistGrid" Background="White" Visibility="Hidden" Margin="494,210,376,486">
+                <TextBox x:Name="Details_Title_Input" HorizontalAlignment="Left" Margin="100,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="375" Height="42" Background="#7F4F83CC" TextAlignment="Center" FontSize="24" IsEnabled="True"/>
 
-                <Button x:Name="Close_AddPlaylist_Details" Content="X" HorizontalAlignment="Left" Margin="534,23,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.48,0.377" Width="22" Foreground="Red" Background="{x:Null}" BorderBrush="{x:Null}" Click="Close_Login_Button_Click" FontWeight="Bold"/>
-                <Border CornerRadius="30" Margin="112,480,112,0" VerticalAlignment="Top" Width="363" Height="34" Background="#FF4F83CC" RenderTransformOrigin="0.5,0.5">
-                    <Button x:Name="PlaylistDetailsButton" Content="Create" HorizontalAlignment="Center" VerticalAlignment="Top" Width="384" Height="48" Background="#00DDDDDD" BorderBrush="#00707070" Foreground="White" Click="PlaylistDetails_Button_Click" Margin="0,-7,0,0"/>
+                <CheckBox x:Name = "AddPlaylist_Private" Content ="Is public" HorizontalAlignment = "Left" 
+                 Margin = "100,186,0,0" VerticalAlignment = "Top" Width = "100" Height="56"/>
+
+                <TextBlock HorizontalAlignment="Center" Margin="0,23,0,0" Text="Create Playlist" TextWrapping="Wrap" VerticalAlignment="Top" Height="42" Width="376" TextAlignment="Center" FontSize="32" FontWeight="Bold"/>
+                <TextBlock HorizontalAlignment="Left"  Margin="106,90,0,0" Text="Title:" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="110" FontSize="24"></TextBlock>
+                <TextBlock x:Name="AddPlaylist_Comment" HorizontalAlignment="Left"  Margin="106,286,0,0" Text="*Please add a title" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="289" FontSize="24" Opacity="0.6" Visibility="Hidden"></TextBlock>
+
+                <Button x:Name="Close_AddPlaylist_Details" Content="X" HorizontalAlignment="Left" Margin="534,23,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.48,0.377" Width="22" Foreground="Red" Background="{x:Null}" BorderBrush="{x:Null}" Click="Close_AddPlaylist_Button_Click" FontWeight="Bold"/>
+                <Border CornerRadius="30" Margin="97,247,110,0" VerticalAlignment="Top" Width="363" Height="34" Background="#FF4F83CC" RenderTransformOrigin="0.5,0.5">
+                    <Button x:Name="PlaylistDetailsButton" Content="Create" HorizontalAlignment="Center" VerticalAlignment="Center" Width="384" Height="48" Background="#00DDDDDD" BorderBrush="#00707070" Foreground="White" Click="PlaylistDetails_Button_Click"/>
                 </Border>
             </Grid>
 
