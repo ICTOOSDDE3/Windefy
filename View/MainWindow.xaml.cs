@@ -38,7 +38,7 @@ namespace View
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new Homepage();
+            DataContext = new SearchSongModel();
             MusicBar.DataContext = track.GetTrack(210);
             CurrentTrack = (Model.Track)MusicBar.DataContext;
             //icArtistList.ItemsSource = CurrentTrack.ArtistIDs;
