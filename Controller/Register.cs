@@ -36,11 +36,11 @@ namespace Controller
                         DBConnection.OpenConnection();
 
                         SqlCommand cmd = new SqlCommand(null, DBConnection.Connection);
-                        cmd.CommandText = $"INSERT INTO users (_email, name, password, verificationCode, verified, saltcode) " + //if language is going to be implemented in the registration add lang to this statement
-                            $"VALUES(@_email, @name, @password, @verificationCode, @verified, @saltcode)";// if language is goint to be implemented in the registration add lang to this statement
+                        cmd.CommandText = $"INSERT INTO users (email, name, password, verificationCode, verified, saltcode) " + //if language is going to be implemented in the registration add lang to this statement
+                            $"VALUES(@email, @name, @password, @verificationCode, @verified, @saltcode)";// if language is goint to be implemented in the registration add lang to this statement
 
 
-                        SqlParameter paramEmail = new SqlParameter("@_email", System.Data.SqlDbType.Text, 255);
+                        SqlParameter paramEmail = new SqlParameter("@email", System.Data.SqlDbType.Text, 255);
                         SqlParameter paramName = new SqlParameter("@name", System.Data.SqlDbType.Text, 255);
                         SqlParameter paramPassword = new SqlParameter("@password", System.Data.SqlDbType.Text, 255);
                         //SqlParameter paramLang = new SqlParameter("@lang", System.Data.SqlDbType.Int, 1);      //uncomment when lang is goint to be implemented
@@ -92,13 +92,13 @@ namespace Controller
         {
             DBConnection.OpenConnection();
 
-            string query = "SELECT _email FROM users";
+            string query = "SELECT email FROM users";
 
             SqlCommand cmd = new SqlCommand(query, DBConnection.Connection);
             SqlDataReader dataReader = cmd.ExecuteReader();
             while (dataReader.Read())
             {
-                if (email.Equals(dataReader["_email"].ToString()))
+                if (email.Equals(dataReader["email"].ToString()))
                 {
                     DBConnection.CloseConnection();
                     return false;

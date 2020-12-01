@@ -53,7 +53,7 @@ namespace Controller
             DBConnection.OpenConnection();
 
             //Build the query
-            string query = $"UPDATE users SET _email = '{mail}' WHERE user_Id = {userID}";
+            string query = $"UPDATE users SET email = '{mail}' WHERE user_Id = {userID}";
 
             //Prepare the query
             SqlCommand cmd = new SqlCommand(query, DBConnection.Connection);
@@ -72,7 +72,7 @@ namespace Controller
             DBConnection.OpenConnection();
 
             //Build the query
-            string query = $"SELECT COUNT(*) FROM users WHERE _email = '{mail}'";
+            string query = $"SELECT COUNT(*) FROM users WHERE email = '{mail}'";
 
             //Prepare the query
             SqlCommand cmd = new SqlCommand(query, DBConnection.Connection);

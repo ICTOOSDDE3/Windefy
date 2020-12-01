@@ -14,13 +14,13 @@ namespace Controller
             DBConnection.OpenConnection();
             try
             {
-                string query = $"SELECT * FROM users WHERE _email = '{email}'";
+                string query = $"SELECT * FROM users WHERE email = '{email}'";
 
                 SqlCommand cmd = new SqlCommand(query, DBConnection.Connection);
                 SqlDataReader dataReader = cmd.ExecuteReader();
                 while (dataReader.Read())
                 {
-                    var temp = dataReader["_email"].ToString();
+                    var temp = dataReader["email"].ToString();
 
                     string DataBasePassword = dataReader["password"].ToString();
                     string DataBaseSalt = dataReader["saltcode"].ToString();
