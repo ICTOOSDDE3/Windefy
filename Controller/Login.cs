@@ -18,6 +18,7 @@ namespace Controller
             //
             //DBConnection.Initialize();
             DBConnection.OpenConnection();
+                bool passed = false;
             try
             {
                 string query = $"SELECT * FROM users WHERE _email = '{email}'";
