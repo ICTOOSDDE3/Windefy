@@ -39,7 +39,7 @@ namespace View
         public MainWindow()
         {
             InitializeComponent();
-            // DataContext = new Homepage();
+            //DataContext = new Homepage();
             DataContext = new ViewModels.Artist(1);
             MusicBar.DataContext = track.GetTrack(210);
             CurrentTrack = (Model.Track)MusicBar.DataContext;

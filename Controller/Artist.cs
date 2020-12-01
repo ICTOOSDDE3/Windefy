@@ -32,7 +32,7 @@ namespace Controller
                     while (reader.Read())
                     {
                         artist.Name = reader["name"].ToString();
-                        artist.ArtistID = (int)reader["artistID"];
+                        artist.ArtistID = artistID;
                         if (reader["active_year_begin"].GetType().GetProperties().Length > 0) artist.active_year_begin = (DateTime)reader["active_year_begin"];
                         if (reader["active_year_end"].GetType().GetProperties().Length > 0) artist.active_year_end = (DateTime)reader["active_year_end"];
                         artist.Bio = reader["bio"].ToString();
@@ -62,12 +62,13 @@ namespace Controller
             foreach(var item in artist_ids)
             {
                 Model.Artist a = GetArtist(item);
-                list.Add(a);
+                if (a != null) list.Add(a);
             }
-            return list;
+            if (list.Count > 0) return list;
+            else return null;
         }
 
-        private List<Model.Track> GetArtistTracks(int artistID)
+        public List<Model.Track> GetArtistTracks(int artistID)
         {
             DBConnection.OpenConnection();
             string query = $"SELECT * FROM track where trackID IN (SELECT trackID from track_artist where artistID = {artistID})";

@@ -9,18 +9,18 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="1024" Width="1440">
     <Window.Resources>
-        <DataTemplate x:Name="SearchArtistViewModel" DataType="{x:Type viewmodels:SearchArtistViewModel}">
+        <!--<DataTemplate x:Name="SearchArtistViewModel" DataType="{x:Type viewmodels:SearchArtistViewModel}">
             <views:SearchArtist />
-        </DataTemplate>
+        </DataTemplate>-->
         <DataTemplate x:Name="artist" DataType="{x:Type viewmodels:Artist}">
             <views:Artist DataContext="{Binding}" />
         </DataTemplate>
         <DataTemplate x:Name="Homepage" DataType="{x:Type viewmodels:Homepage}">
             <views:Homepage />
         </DataTemplate>
-        <DataTemplate x:Name="SearchSong" DataType="{x:Type viewmodels:SearchSongModel}">
+        <!--<DataTemplate x:Name="SearchSong" DataType="{x:Type viewmodels:SearchSongModel}">
             <views:SearchSong />
-        </DataTemplate>
+        </DataTemplate>-->
 
         <Image x:Key="Play_icon" Source="Play.png"/>
         <Image x:Key="Pause_icon" Source="Pause.png"/>
