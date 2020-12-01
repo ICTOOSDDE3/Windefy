@@ -22,17 +22,31 @@
             <views:SearchSong />
         </DataTemplate>
 
-        <Image x:Key="Play_icon" Source="/Play.png"/>
-        <Image x:Key="Pause_icon" Source="/Pause.png"/>
-        <Image x:Key="ShuffleUnChecked_icon" Source="/Shuffle.png"/>
-        <Image x:Key="ShuffleChecked_icon" Source="/ShuffleChecked.png"/>
-        <Image x:Key="RepeatChecked_icon" Source="/RepeatChecked.png"/>
-        <Image x:Key="RepeatUnchecked_icon" Source="/Repeat.png"/>
-        <Image x:Key="HeartChecked_icon" Source="/HeartChecked.png"/>
-        <Image x:Key="HeartUnchecked_icon" Source="/Rectangle.png"/>
+        <Image x:Key="Play_icon" Source="Play.png"/>
+        <Image x:Key="Pause_icon" Source="Pause.png"/>
+        <Image x:Key="ShuffleUnChecked_icon" Source="Shuffle.png"/>
+        <Image x:Key="ShuffleChecked_icon" Source="ShuffleChecked.png"/>
+        <Image x:Key="RepeatChecked_icon" Source="RepeatChecked.png"/>
+        <Image x:Key="RepeatUnchecked_icon" Source="Repeat.png"/>
+        <Image x:Key="HeartChecked_icon" Source="HeartChecked.png"/>
+        <Image x:Key="HeartUnchecked_icon" Source="Rectangle.png"/>
 
         <Style TargetType="{x:Type ToggleButton}" x:Key="PausePlay">
             <Setter Property="Content" Value="{DynamicResource Play_icon}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Grid Background="{TemplateBinding Background}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="MouseOver"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
             <Setter Property="Background">
                 <Setter.Value>
                     <ImageBrush ImageSource="/Play.png"/>
@@ -53,6 +67,20 @@
 
         <Style TargetType="{x:Type ToggleButton}" x:Key="Repeat">
             <Setter Property="Content" Value="{DynamicResource RepeatUnchecked_icon}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Grid Background="{TemplateBinding Background}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="MouseOver"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
             <Setter Property="Background">
                 <Setter.Value>
                     <ImageBrush ImageSource="/Repeat.png"/>
@@ -72,6 +100,20 @@
 
         <Style TargetType="{x:Type ToggleButton}" x:Key="Heart">
             <Setter Property="Content" Value="{DynamicResource HeartUnchecked_icon}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Grid Background="{TemplateBinding Background}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="MouseOver"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
             <Setter Property="Background">
                 <Setter.Value>
                     <ImageBrush ImageSource="/Rectangle.png"/>
@@ -92,6 +134,20 @@
 
         <Style TargetType="{x:Type ToggleButton}" x:Key="Shuffle">
             <Setter Property="Content" Value="{DynamicResource ShuffleUnChecked_icon}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Grid Background="{TemplateBinding Background}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="MouseOver"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
             <Setter Property="Background">
                 <Setter.Value>
                     <ImageBrush ImageSource="/Shuffle.png"/>
@@ -109,6 +165,24 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+
+        <Style TargetType="{x:Type Button}" x:Key="PrevNext">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Background="{TemplateBinding Background}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="MouseOver"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </Window.Resources>
 
     <Grid Background="Transparent">
@@ -180,7 +254,7 @@
                 </WrapPanel>
                 <WrapPanel VerticalAlignment="Center" >
                     <ToggleButton x:Name="shuffleBtn" Height="32" Width="32" Margin="49,0,0,0" BorderThickness="0" Style="{StaticResource Shuffle}" Checked="shuffleBtn_Checked" Unchecked="shuffleBtn_Unchecked"/>
-                    <Button x:Name="btnPrev" MouseDoubleClick="btnPrev_MouseDoubleClick" Click="btnPrev_Click" Width="32" Height="24" Margin="60,0,0,0" BorderThickness="0">
+                    <Button x:Name="btnPrev" MouseDoubleClick="btnPrev_MouseDoubleClick" Click="btnPrev_Click" Width="32" Height="24" Margin="60,0,0,0" BorderThickness="0" Style="{StaticResource PrevNext}">
                         <Button.Background>
                             <ImageBrush ImageSource="/Rewind.png"/>
                         </Button.Background>
@@ -189,7 +263,7 @@
                         </Button.Content>
                     </Button>
                     <ToggleButton x:Name="tbPlayPause" Checked = "TogglePlay" Unchecked = "TogglePause" Margin="60,0,0,0" Width="40" Height="40" BorderThickness="0" Style="{StaticResource PausePlay}" />
-                    <Button x:Name="btnNext" Click="btnNext_Click" Width="32" Height="24" Margin="60,0,5,0" BorderThickness="0">
+                    <Button x:Name="btnNext" Click="btnNext_Click" Width="32" Height="24" Margin="60,0,5,0" BorderThickness="0" Style="{StaticResource PrevNext}">
                         <Button.Background>
                             <ImageBrush ImageSource="/Forward.png"/>
                         </Button.Background>
@@ -202,10 +276,10 @@
                 <WrapPanel VerticalAlignment="Center">
                     <Label Name="CurrentTime" Content="" Margin="100,0,0,0" VerticalAlignment="Center"/>
                     <Slider Minimum="0" Maximum="100" Value="0" Name="TimeStatus" Thumb.DragStarted="TimeStatus_DragStarted" Thumb.DragCompleted="TimeStatus_DragCompleted" Margin="0,3,0,0" Width="300" Height="10" />
-                    <Label Name="TotalTime" Content="" Margin="0,0,0,0" />
+                    <Label Name="TotalTime" Content="" Margin="0,0,0,0"/>
                 </WrapPanel>
                 <WrapPanel VerticalAlignment="Center">
-                    <Image Source="/Volume.png" Width="30" Height="30" Margin="50,0,0,0"/>
+                    <Image Source="/Volume.png" Width="30" Height="30" Margin="25,0,0,0"/>
                     <Slider Value="50" Maximum="100" Minimum="0" ValueChanged="Volume_ValueChanged" Name="Volume" Width="142" Height="9" />
                 </WrapPanel>
             </WrapPanel>

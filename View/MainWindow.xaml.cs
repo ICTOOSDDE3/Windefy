@@ -34,6 +34,8 @@ namespace View
         Register registerAccount = new Register();
         Login login = new Login();
         private string email = "";
+        Queue<Model.Track> queue = new Queue<Model.Track>();
+
         public MainWindow()
         {
             InitializeComponent();
