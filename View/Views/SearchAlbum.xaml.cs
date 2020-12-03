@@ -24,7 +24,7 @@ namespace View.Views
         {
             InitializeComponent();
 
-            ApacheConnection.Initialize();
+            /*ApacheConnection.Initialize();
 
             List<PlaylistInfo> items = new List<PlaylistInfo>();
             DBConnection.OpenConnection();
@@ -53,12 +53,12 @@ namespace View.Views
             DBConnection.CloseConnection();
 
             //items.Add("testdfsadfsajfhdsajfhjkdsahfjkdsahfjkdsahfjdksa" );
-            //items.Add("test2ghdflspkgfdls;gkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk" );
+            //items.Add("test2ghdflspkgfdls;gkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk" );*/
 
 
 
 
-            icTodoList.ItemsSource = items;
+            //icTodoList.ItemsSource = items;
         }
     }
 
