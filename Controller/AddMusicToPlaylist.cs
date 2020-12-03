@@ -11,14 +11,16 @@ namespace Controller
         //this is the logged in user ID
         private int _userID = Model.User.UserID;
         private List<PlaylistPreview> _playlists = new List<PlaylistPreview>();
+        private bool _isPlaylistMade = false;
 
         //checks if there are any playlists of the user
-        public void CheckIfUserHasPlaylists()
+        public bool CheckIfUserHasPlaylists()
         {
-            if (_playlists.Count == 0)
+            if (_playlists.Count > 0)
             {
-                // no playlists, button to make a playlist
+                return _isPlaylistMade = true;
             }
+            return _isPlaylistMade;
         }
 
         // shows playlist that the user has made
@@ -29,7 +31,7 @@ namespace Controller
 
 
             //Build the query
-            string query = $"SELECT playlistID, title FROM playlist Where ownerID = {userID}";
+            string query = $"SELECT playlistID, title FROM playlist Where ownerID = {_userID}";
 
             //Prepare the query
             SqlCommand cmd = new SqlCommand(query, DBConnection.Connection);
@@ -53,7 +55,7 @@ namespace Controller
             DBConnection.OpenConnection();
 
             //Build the query
-            string query = $"INSTERT INTO playlist_track (trackID, playlistID) VALUES ('{trackID}', '{playlistID}')";
+            string query = $"INSERT INTO playlist_track (trackID, playlistID, number) VALUES({trackID}, {playlistID}, -1)";
 
             //Prepare the query
             SqlCommand cmd = new SqlCommand(query, DBConnection.Connection);

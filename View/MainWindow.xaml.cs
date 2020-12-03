@@ -184,7 +184,7 @@ namespace View
             }
             else
             {
-                Trace.WriteLine("Code not valid!");
+                Verification_Headsup.Content = "Code not valid!";
             }
         }
 
