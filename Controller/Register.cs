@@ -158,7 +158,7 @@ namespace Controller
 
             DBConnection.OpenConnection();
 
-            string query = $"SELECT verificationCode FROM users where _email = '{email}'";
+            string query = $"SELECT verificationCode FROM users where email = '{email}'";
 
             SqlCommand cmd = new SqlCommand(query, DBConnection.Connection);
 
@@ -169,7 +169,7 @@ namespace Controller
 
                 DBConnection.OpenConnection();
 
-                string query2 = $"UPDATE users SET verified = 1 where _email = '{email}'";
+                string query2 = $"UPDATE users SET verified = 1 where email = '{email}'";
 
                 SqlCommand cmd2 = new SqlCommand(query2, DBConnection.Connection);
                 cmd2.ExecuteNonQuery();
@@ -187,7 +187,7 @@ namespace Controller
             _verificationMail.SendValidationMail(email, newCode);
             DBConnection.OpenConnection();
 
-            string query2 = $"UPDATE users SET verificationCode = '{newCode}' where _email = '{email}'";
+            string query2 = $"UPDATE users SET verificationCode = '{newCode}' where email = '{email}'";
 
             SqlCommand cmd2 = new SqlCommand(query2, DBConnection.Connection);
             cmd2.ExecuteNonQuery();

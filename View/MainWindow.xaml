@@ -10,9 +10,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="1024" Width="1440">
     <Window.Resources>
-        <DataTemplate x:Name="homepage" DataType="{x:Type viewmodels:Homepage}">
-            <views:Homepage DataContext="{Binding}" />
-        </DataTemplate>
         <LinearGradientBrush x:Key="NormalBrush" StartPoint="0,0" EndPoint="0,1">
             <GradientBrush.GradientStops>
                 <GradientStopCollection>
@@ -162,6 +159,22 @@
                 </Grid>
             </ScrollViewer>
         </Grid>
+        <Grid Grid.Row="0" Grid.Column="1" Background="White">
+            <Border CornerRadius="5"/>
+            <Button x:Name="Login_Button" Content="" Margin="0,24,85,0" Width="44" Height="44" BorderBrush="#00707070" Click="Login_Button_Click" HorizontalAlignment="Right" VerticalAlignment="Top" />
+            <TextBox x:Name="SearchBar" Style="{DynamicResource TextBoxStyle1}" Tag="Search for your next favorite thing" Width="490" Height="35" FontSize="18" Margin="38,33,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" TextChanged="SearchBarTextChanged" Background="#FF4F83CC" BorderBrush="#FF4F83CC" Foreground="White" CaretBrush="#FF4F83CC" OpacityMask="#FF4F83CC" TextAlignment="Justify" SelectionBrush="#FFFFFF72" SelectionTextBrush="Black" BorderThickness="0,0,0,0" />
+            <ComboBox x:Name="SearchDropdown" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Height="35" SelectedIndex="0" BorderBrush="#FF4F83CC" Foreground="White" Background="#FF4F83CC" FontSize="20" FontStyle="Normal" Margin="528,33,0,0">
+                <System:String>Artist</System:String>
+                <System:String>Album</System:String>
+                <System:String>Playlist</System:String>
+                <System:String>Track</System:String>
+            </ComboBox>
+            <Button x:Name="Account_Button" Margin="0,24,28,0" Width="44" Height="44" BorderBrush="#00707070" Click="Account_Button_Click" HorizontalAlignment="Right" VerticalAlignment="Top">
+                <Button.Background>
+                    <ImageBrush ImageSource="/logint button.png"/>
+                </Button.Background>
+            </Button>
+        </Grid>
         <Grid Grid.ColumnSpan="5">
             <WrapPanel x:Name="MusicBar" Background="Transparent" Height="96" VerticalAlignment="Bottom" Margin="-6,0,6,-97" >
                 <WrapPanel VerticalAlignment="Center" Height="80">
@@ -208,28 +221,7 @@
             </WrapPanel>
 
         </Grid>
-        <Grid Grid.Row="0" Grid.Column="1" Background="White">
-            <Border CornerRadius="5">
-                <Grid>
-                    <ComboBox x:Name="SearchDropdown" HorizontalAlignment="Left" Margin="528,33,0,0" VerticalAlignment="Top" Width="120" Height="35" SelectedIndex="0" BorderBrush="#FF4F83CC" Foreground="White" Background="#FF4F83CC" FontSize="20" FontStyle="Normal">
-                        <System:String>Artist</System:String>
-                        <System:String>Album</System:String>
-                        <System:String>Playlist</System:String>
-                        <System:String>Track</System:String>
-                    </ComboBox>
-                    <TextBox x:Name="SearchBar" Style="{DynamicResource TextBoxStyle1}" Tag="Search for your next favorite thing" Width="490" Height="35" FontSize="18" Margin="38,33,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" TextChanged="SearchBarTextChanged" Background="#FF4F83CC" BorderBrush="#FF4F83CC" Foreground="White" CaretBrush="#FF4F83CC" OpacityMask="#FF4F83CC" TextAlignment="Justify" SelectionBrush="#FFFFFF72" SelectionTextBrush="Black" BorderThickness="0,0,0,0" />
-                </Grid>
-            </Border>
-            <Button x:Name="Login_Button" Content="" Margin="0,24,85,0" Width="44" Height="44" BorderBrush="#00707070" Click="Login_Button_Click" HorizontalAlignment="Right" VerticalAlignment="Top">
-            <ContentControl Content="{Binding}" />
-            <TextBox Style="{StaticResource placeHolder}" Tag="Search for your next favorite thing" Width="490" Height="35" FontSize="18" Margin="38,33,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
-            <Button x:Name="Account_Button" Content="" Margin="0,24,28,0" Width="44" Height="44" BorderBrush="#00707070" Click="Account_Button_Click" HorizontalAlignment="Right" VerticalAlignment="Top">
-                <Button.Background>
-                    <ImageBrush ImageSource="/logint button.png"/>
-                </Button.Background>
-            </Button>
-        </Grid>
-        
+
 
         <!-- the loginBackGround has to be visible if you want to change the loginGrid, RegisterGrid and the verify grid (put those grids on visible aswell) -->
         <Grid x:Name="LoginBackground" Background="#7F4F83CC" Grid.ColumnSpan="2" Grid.RowSpan="2" Visibility="Visible" Margin="1,0,-1,-16" d:IsHidden="True">
