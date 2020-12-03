@@ -230,8 +230,8 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                        <Grid>
-                            <Button x:Name="btnLight" Width="200" Height="200" Margin="0,100,0,100" Style="{StaticResource MyButtonStyleImage}" >
+                        <StackPanel Orientation="Vertical" Margin="25,100,0,0" VerticalAlignment="Top">
+                            <Button x:Name="btnLight" Width="200" Height="200" Style="{StaticResource MyButtonStyleImage}" >
 
                                 <!--<Button.Template>
                                     <ControlTemplate>
@@ -248,8 +248,8 @@
 
 
 
-                            <Label Content="{Binding name}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,50" FontWeight="Bold" FontFamily="Bahnschrift Light SemiCondensed" FontSize="20" ToolTip="{Binding name}"/>
-                        </Grid>
+                            <Label Content="{Binding Name}"   FontWeight="Bold" FontFamily="Bahnschrift Light SemiCondensed" FontSize="20" ToolTip="{Binding Name}" HorizontalAlignment="Center"/>
+                        </StackPanel>
                         
                     </DataTemplate>
             </ItemsControl.ItemTemplate>
