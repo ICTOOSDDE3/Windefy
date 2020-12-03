@@ -40,6 +40,7 @@ namespace View
 
         public MainWindow()
         {
+            DBConnection.Initialize();
             InitializeComponent();
             //DataContext = new Homepage();
             DataContext = new ViewModels.Artist(1);
