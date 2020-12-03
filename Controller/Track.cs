@@ -36,6 +36,7 @@ namespace Controller
                         track.Duration = (int)reader["duration"];
                         track.Date_Created = (DateTime)reader["date_created"];
                         track.File_path = reader["file_path"].ToString();
+                        track.Image_path = reader["image_path"].ToString();
                     }
                 }
                 else
@@ -46,7 +47,7 @@ namespace Controller
                 }
             }
             DBConnection.CloseConnection();
-            track.NumberID = trackID;
+            track.TrackID = trackID;
             track.Genres = GetGenres(trackID);
             track.Artists = GetArtists(trackID);
             return track;

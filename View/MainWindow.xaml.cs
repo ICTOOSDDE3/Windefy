@@ -28,26 +28,22 @@ namespace View
         private bool userIsDraggingSlider = false;
         private bool mediaPlaying = false;
         private bool rewind = false;
+        private bool shuffle = false;
         private Model.Track CurrentTrack;
-        private Controller.AudioPath audioPath = new Controller.AudioPath();
+        private Controller.AudioPath audioPath = new AudioPath();
+        private Controller.ImagePath imagePath = new ImagePath();
         private Controller.Track track = new Controller.Track();
         Register registerAccount = new Register();
         Login login = new Login();
         private string email = "";
-        Queue<Model.Track> queue = new Queue<Model.Track>();
+        private int PlaylistID;
 
         public MainWindow()
         {
             InitializeComponent();
             //DataContext = new Homepage();
             DataContext = new ViewModels.Artist(1);
-            MusicBar.DataContext = track.GetTrack(210);
-            CurrentTrack = (Model.Track)MusicBar.DataContext;
-            icArtistList.ItemsSource = CurrentTrack.Artists;
-
-            string file_path = CurrentTrack.File_path;
-
-            mediaPlayer.Open(new Uri(audioPath.GetAudioPath(file_path)));
+            UpdateMusicBar(210);
             mediaPlayer.MediaEnded += MediaPlayer_MediaEnded;
 
             // initialize and setup of timer
@@ -197,10 +193,7 @@ namespace View
         /// <param name="e"></param>
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
-            MusicBar.DataContext = track.GetTrack(CurrentTrack.NumberID + 1);
-            CurrentTrack = (Model.Track)MusicBar.DataContext;
-            icArtistList.ItemsSource = CurrentTrack.Artists;
-            mediaPlayer.Open(new Uri(audioPath.GetAudioPath(CurrentTrack.File_path)));
+            UpdateMusicBar(CurrentTrack.TrackID + 1);
 
             if (mediaPlaying)
             {
@@ -214,11 +207,7 @@ namespace View
         /// <param name="e"></param>
         private void btnPrev_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            MusicBar.DataContext = track.GetTrack(CurrentTrack.NumberID - 1);
-            CurrentTrack = (Model.Track)MusicBar.DataContext;
-            icArtistList.ItemsSource = CurrentTrack.Artists;
-
-            mediaPlayer.Open(new Uri(audioPath.GetAudioPath(CurrentTrack.File_path)));
+            UpdateMusicBar(CurrentTrack.TrackID - 1);
 
             if (mediaPlaying)
             {
@@ -263,10 +252,7 @@ namespace View
             }
             else
             {
-                MusicBar.DataContext = track.GetTrack(CurrentTrack.NumberID + 1);
-                CurrentTrack = (Model.Track)MusicBar.DataContext;
-                icArtistList.ItemsSource = CurrentTrack.Artists;
-                mediaPlayer.Open(new Uri(audioPath.GetAudioPath(CurrentTrack.File_path)));
+                UpdateMusicBar(CurrentTrack.TrackID+1);
 
                 mediaPlayer.Play();
             }
@@ -332,22 +318,48 @@ namespace View
 
         private void favoriteBtn_Checked(object sender, RoutedEventArgs e)
         {
+            //controller aanroepen om track toe te voegen aan fav afspeellijst
 
         }
 
         private void favoriteBtn_Unchecked(object sender, RoutedEventArgs e)
         {
-
+            //controller aanroepen om track te verwijderen van fav afspeellijst
         }
 
         private void shuffleBtn_Checked(object sender, RoutedEventArgs e)
         {
+            shuffle = true;
 
+            //shuffle wachtrij
         }
 
         private void shuffleBtn_Unchecked(object sender, RoutedEventArgs e)
         {
+            shuffle = false;
 
+            //unshuffle wachtrij
+        }
+
+        private void Track_Click(object sender, RoutedEventArgs e)
+        {
+            //Search_Track.TrackID
+            //PlaylistID = Search_Track.PlaylistID
+            //UpdateMusicBar(Search_TrackID);          
+        }
+
+        /// <summary>
+        /// Updates all music related data
+        /// </summary>
+        /// <param name="trackID"></param>
+        private void UpdateMusicBar(int trackID)
+        {
+            MusicBar.DataContext = track.GetTrack(trackID);
+            CurrentTrack = (Model.Track)MusicBar.DataContext;
+            icArtistList.ItemsSource = CurrentTrack.Artists;
+            TrackImage.Source = new BitmapImage(new Uri(imagePath.GetImagePath(CurrentTrack.Image_path), UriKind.RelativeOrAbsolute));
+            //SetQueue(Search_TrackID, Search_PlaylistID)
+            mediaPlayer.Open(new Uri(audioPath.GetAudioPath(CurrentTrack.File_path)));
         }
     }
 }
