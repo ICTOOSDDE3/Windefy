@@ -58,7 +58,38 @@ namespace View
             LoginBackground.Visibility = Visibility.Visible;
             LoginGrid.Visibility = Visibility.Visible;
         }
+        private void Playlist_Plus_Button_Click(object sender, RoutedEventArgs e)
+        {
+            LoginBackground.Visibility = Visibility.Visible;
+            AddPlaylistGrid.Visibility = Visibility.Visible;
+        }
+        //A new playlist wants to be created
+        private void PlaylistDetails_Button_Click(object sender, RoutedEventArgs e)
+        {
+            string title = Details_Title_Input.Text;
+            bool isprivate = (bool)AddPlaylist_Private.IsChecked;
+            //Check if title is filled out
+            if(title != null)
+            {
+                Controller.Playlist newPlaylist = new Controller.Playlist();
 
+                newPlaylist.CreateUserPlaylist(title, isprivate);
+
+                //Call controller to make playlist
+                LoginBackground.Visibility = Visibility.Hidden;
+                AddPlaylistGrid.Visibility = Visibility.Hidden;
+            }
+            //Give error if no title is filled in
+            else
+            {
+                AddPlaylist_Comment.Visibility = Visibility.Visible;
+            }                        
+        }
+        private void Close_AddPlaylist_Button_Click(object sender, RoutedEventArgs e)
+        {
+            LoginBackground.Visibility = Visibility.Hidden;
+            AddPlaylistGrid.Visibility = Visibility.Hidden;
+        }
         private void Account_Button_Click(object sender, RoutedEventArgs e)
         {
             LoginBackground.Visibility = Visibility.Visible;
@@ -115,11 +146,11 @@ namespace View
         {
             email = Email_Input.Text;
             string userName = Username_Input.Text;
-            string password = Password_Input.Text;
-            string repeatedPassword = PasswordRepeat_Input.Text;
+            string password = Password_Input.Password;
+            string repeatedPassword = PasswordRepeat_Input.Password;
             if (registerAccount.IsValidEmail(email))
             {
-                if (registerAccount.ArePasswordsEqual(password, repeatedPassword))
+                if (registerAccount.IsPasswordEqual(password, repeatedPassword))
                 {
                     registerAccount.RegisterAccount(email, userName, password, repeatedPassword);
                     RegisterGrid.Visibility = Visibility.Hidden;
@@ -138,7 +169,8 @@ namespace View
 
         private void Resend_Code_Button(object sender, RoutedEventArgs e)
         {
-            //registerAccount.ResendVerificationCode();
+            registerAccount.ResendVerificationCode(Model.User.Email.ToString());
+            Verification_Headsup.Content = "A verification code has been send to your email adres";
         }
 
         private void Verify_Button_Click(object sender, RoutedEventArgs e)
@@ -150,17 +182,25 @@ namespace View
             }
             else
             {
-                Trace.WriteLine("Code not valid!");
+                Verification_Headsup.Content = "Code not valid!";
             }
         }
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-            if (login.IsLogin(Email_TextBox.Text, Wachtwoord_TextBox.Text))
+            if(login.IsLogin(Email_TextBox.Text, Wachtwoord_TextBox.Password))
             {
-                LoginBackground.Visibility = Visibility.Hidden;
-            }
-            else
+                bool verified = Model.User.Verified;
+                if (verified)
+                {
+                    LoginBackground.Visibility = Visibility.Hidden;
+                } else
+                {
+                    email = Model.User.Email.ToString();
+                    LoginGrid.Visibility = Visibility.Hidden;
+                    VerifyGrid.Visibility = Visibility.Visible;
+                }
+            } else
             {
                 Login_HeadsUp.Content = "Email or password invalid!";
             }
@@ -361,6 +401,38 @@ namespace View
             TrackImage.Source = new BitmapImage(new Uri(imagePath.GetImagePath(CurrentTrack.Image_path), UriKind.RelativeOrAbsolute));
             //TrackQueue.SetQueue(Search_TrackID, PlaylistID)
             mediaPlayer.Open(new Uri(audioPath.GetAudioPath(CurrentTrack.File_path)));
+        }
+
+        private void SearchBarTextChanged(object sender, TextChangedEventArgs e)
+        {
+            string searchBarValue = SearchBar.Text;
+
+            if (searchBarValue.Length > 2)
+            {
+                string dropDownValue = SearchDropdown.SelectedItem.ToString();
+
+                // If the searchvalue is 3 characters or more, search
+                switch (dropDownValue)
+                {
+                    case "Artist":
+                        DataContext = new SearchArtistViewModel(searchBarValue);
+                        break;
+                    case "Album":
+                        DataContext = new SearchAlbumViewModel(searchBarValue, false);
+                        break;
+                    case "Playlist":
+                        DataContext = new SearchAlbumViewModel(searchBarValue, true);
+                        break;
+                    default:
+                        // Track as default
+                        DataContext = new SearchSongModel(searchBarValue);
+                        break;
+                }
+            }
+            else
+            {
+                DataContext = new Homepage();
+            }
         }
     }
 }

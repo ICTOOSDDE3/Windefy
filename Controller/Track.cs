@@ -9,7 +9,8 @@ namespace Controller
     {
         public Track()
         {
-            DBConnection.Initialize();
+            
+
         }
         /// <summary>
         /// Calls methods to create track object

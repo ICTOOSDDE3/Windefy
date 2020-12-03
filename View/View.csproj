@@ -9,6 +9,8 @@
   <ItemGroup>
     <None Remove="Assets\Images\banner.png" />
     <None Remove="Assets\Images\banner.svg" />
+    <None Remove="Assets\Images\Like.png" />
+    <None Remove="Assets\Images\LikeEmpty.png" />
     <None Remove="Assets\Images\mockSongImage.jpg" />
     <None Remove="Forward.png" />
     <None Remove="HeartChecked.png" />
@@ -23,10 +25,16 @@
     <None Remove="Shuffle.png" />
     <None Remove="ShuffleChecked.png" />
     <None Remove="Volume.png" />
+    <None Remove="loginbutton.png" />
+    <None Remove="Plus.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Page Remove="Styles\Texts.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Caliburn.Micro.Core" Version="3.2.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,13 +44,18 @@
 
   <ItemGroup>
     <Resource Include="Assets\Images\banner.png" />
+    <Resource Include="Assets\Images\Like.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Images\LikeEmpty.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\Images\mockSongImage.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Forward.png" />
     <Resource Include="HeartChecked.png" />
     <Resource Include="kruisje.png" />
-    <Resource Include="logint button.png" />
     <Resource Include="Pause.png" />
     <Resource Include="Play.png" />
     <Resource Include="Rectangle.png" />
@@ -51,8 +64,15 @@
     <Resource Include="Rewind.png" />
     <Resource Include="Shuffle.png" />
     <Resource Include="ShuffleChecked.png" />
+    <Resource Include="loginbutton.png" />
     <Resource Include="Styles\Texts.xaml" />
     <Resource Include="Volume.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Plus.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

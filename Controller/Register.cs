@@ -11,18 +11,20 @@ namespace Controller
 {
     public class Register
     {
-        private static Random random = new Random();
-        private Mail VerificationMail = new Mail();
+        private static Random _random = new Random();
+        private Mail _verificationMail = new Mail();
+        private Login _account = new Login();
 
         //Method to register an account (validate and save to db)
         public void RegisterAccount(string email, string name, string pw1, string pw2)
         {
-            DBConnection.Initialize();
+            
+
             if (IsValidEmail(email))
             {
                 if (IsEmailUnique(email))
                 {
-                    if (ArePasswordsEqual(pw1, pw2))
+                    if (IsPasswordEqual(pw1, pw2))
                     {
                         //TODO: Create the account in the database when the db connection is made
 
@@ -67,7 +69,8 @@ namespace Controller
                         cmd.ExecuteNonQuery();
 
                         DBConnection.CloseConnection();
-                        VerificationMail.SendValidationMail(email, verificationCode);
+                        _verificationMail.SendValidationMail(email, verificationCode);
+                        _account.IsLogin(email, pw1);
                     }
                 }
             }
@@ -80,7 +83,7 @@ namespace Controller
         }
 
         //Check if two passwords are equal
-        public bool ArePasswordsEqual(string str1, string str2)
+        public bool IsPasswordEqual(string str1, string str2)
         {
             return str1.Equals(str2);
         }
@@ -105,17 +108,6 @@ namespace Controller
             dataReader.Close();
             DBConnection.CloseConnection();
             return true;
-        }
-
-        /// <summary>
-        ///generate a byte array from a password
-        /// </summary>
-        /// <param name="password"></param>
-        /// <returns>bytePassword</returns>
-        public byte[] PasswordToByte(string password)
-        {
-            byte[] bytePassword = Encoding.ASCII.GetBytes(password);
-            return bytePassword;
         }
 
         /// <summary>
@@ -157,16 +149,8 @@ namespace Controller
             //Linq statement to create random string based on the given chars and amount
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             string code = new string(Enumerable.Repeat(chars, 10)
-              .Select(s => s[random.Next(s.Length)]).ToArray());
-            Console.WriteLine(code);
+              .Select(s => s[_random.Next(s.Length)]).ToArray());
             return code;
-        }
-
-        // method get verifcation code
-        public string GetUserVerificationCode(int userID)
-        {
-            string verificationCode = "";// search verificationcode in database filtered on userID
-            return verificationCode;
         }
 
         // method check verification code
@@ -198,11 +182,17 @@ namespace Controller
 
 
         // method resend verification code
-        public void ResendVerificationCode(int userID)
+        public void ResendVerificationCode(string email)
         {
-            string userMail = "";
             string newCode = CreateCode();
-            //resendVerificationMail.SendValidationMail(userMail, newCode);
+            _verificationMail.SendValidationMail(email, newCode);
+            DBConnection.OpenConnection();
+
+            string query2 = $"UPDATE users SET verificationCode = '{newCode}' where email = '{email}'";
+
+            SqlCommand cmd2 = new SqlCommand(query2, DBConnection.Connection);
+            cmd2.ExecuteNonQuery();
+            DBConnection.CloseConnection();
         }
     }
 }
