@@ -116,6 +116,18 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <DataTemplate x:Name="homepage" DataType="{x:Type viewmodels:Homepage}">
+            <views:Homepage DataContext="{Binding}" />
+        </DataTemplate>
+        <DataTemplate x:Name="searchArtistViewModel" DataType="{x:Type viewmodels:SearchArtistViewModel}">
+            <views:SearchArtist DataContext="{Binding}" />
+        </DataTemplate>
+        <DataTemplate x:Name="SearchSongModel" DataType="{x:Type viewmodels:SearchSongModel}">
+            <views:SearchSong DataContext="{Binding}" />
+        </DataTemplate>
+        <DataTemplate x:Name="SearchAlbumViewModel" DataType="{x:Type viewmodels:SearchAlbumViewModel}">
+            <views:SearchAlbum DataContext="{Binding}" />
+        </DataTemplate>
     </Window.Resources>
     <Grid Background="Transparent">
         <Grid.RowDefinitions>
