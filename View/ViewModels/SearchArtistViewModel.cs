@@ -19,7 +19,10 @@ namespace View.ViewModels
 
             SqlCommand cmd = new SqlCommand(null, DBConnection.Connection);
             cmd.CommandText = "SELECT name FROM artist " +
-                "WHERE name LIKE '%' + @que + '%';";
+                "WHERE name LIKE '%' + @que + '%' " +
+                "ORDER BY artistID " +
+                "OFFSET 0 ROWS " +
+                "FETCH NEXT 50 ROWS ONLY";
 
             SqlParameter que = new SqlParameter("@que", System.Data.SqlDbType.VarChar, 255);
             que.Value = q;

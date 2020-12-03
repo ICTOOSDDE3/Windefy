@@ -347,10 +347,10 @@ namespace View
                         DataContext = new SearchArtistViewModel(searchBarValue);
                         break;
                     case "Album":
-                        DataContext = new SearchAlbumViewModel(searchBarValue);
+                        DataContext = new SearchAlbumViewModel(searchBarValue, false);
                         break;
                     case "Playlist":
-                        DataContext = new SearchAlbumViewModel(searchBarValue);
+                        DataContext = new SearchAlbumViewModel(searchBarValue, true);
                         break;
                     default:
                         // Track as default

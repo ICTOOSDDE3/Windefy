@@ -22,6 +22,7 @@ namespace View.Views
     {
         public SearchArtist()
         {
+            InitializeComponent();
         }
     }
 }

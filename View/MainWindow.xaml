@@ -123,6 +123,7 @@
             <views:SearchArtist DataContext="{Binding}" />
         </DataTemplate>
         <DataTemplate x:Name="SearchSongModel" DataType="{x:Type viewmodels:SearchSongModel}">
+            <views:SearchSong DataContext="{Binding}" />
         </DataTemplate>
         <DataTemplate x:Name="SearchAlbumViewModel" DataType="{x:Type viewmodels:SearchAlbumViewModel}">
             <views:SearchAlbum DataContext="{Binding}" />

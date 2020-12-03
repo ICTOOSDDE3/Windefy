@@ -20,6 +20,9 @@ namespace View.Views
     /// </summary>
     public partial class SearchAlbum : UserControl
     {
-        public SearchAlbum() { }
+        public SearchAlbum() 
+        {
+            InitializeComponent();
+        }
     }
 }

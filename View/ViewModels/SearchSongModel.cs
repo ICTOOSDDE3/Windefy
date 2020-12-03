@@ -22,13 +22,15 @@ namespace View.ViewModels
                 "FROM track_artist " +
                 "JOIN artist ON track_artist.artistID = artist.artistID " +
                 "JOIN track ON track_artist.trackID = track.trackID " +
-                "WHERE title LIKE '%' + @que + '%'";
+                "WHERE title LIKE '%' + @que + '%' " +
+                "ORDER BY track.trackID " +
+                "OFFSET 0 ROWS " +
+                "FETCH NEXT 50 ROWS ONLY";
 
             SqlParameter que = new SqlParameter("@que", System.Data.SqlDbType.VarChar, 255);
             que.Value = q;
 
             cmd.Parameters.Add(que);
-
             cmd.Prepare();
 
             SqlDataReader dataReader = cmd.ExecuteReader();
@@ -41,7 +43,6 @@ namespace View.ViewModels
             }
 
             dataReader.Close();
-
             DBConnection.CloseConnection();
         }
     }
