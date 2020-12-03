@@ -248,7 +248,7 @@
 
 
 
-                            <Label Content="{Binding name}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,50" FontWeight="Bold" FontFamily="Bahnschrift Light SemiCondensed" FontSize="20" ToolTip="{Binding name}"/>
+                            <Label Content="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,50" FontWeight="Bold" FontFamily="Bahnschrift Light SemiCondensed" FontSize="20" ToolTip="{Binding Name}"/>
                         </Grid>
                         
                     </DataTemplate>
