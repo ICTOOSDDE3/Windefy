@@ -18,6 +18,9 @@
         <DataTemplate x:Name="SearchSongModel" DataType="{x:Type viewmodels:SearchSongModel}">
             <views:SearchSong DataContext="{Binding}" />
         </DataTemplate>
+        <DataTemplate x:Name="SearchAlbumViewModel" DataType="{x:Type viewmodels:SearchAlbumViewModel}">
+            <views:SearchAlbum DataContext="{Binding}" />
+        </DataTemplate>
     </Window.Resources>
     <Grid Background="Transparent">
         <Grid.RowDefinitions>
@@ -115,7 +118,7 @@
         
 
         <!-- the loginBackGround has to be visible if you want to change the loginGrid, RegisterGrid and the verify grid (put those grids on visible aswell) -->
-        <Grid x:Name="LoginBackground" Background="#7F4F83CC" Grid.ColumnSpan="2" Grid.RowSpan="2" Visibility="Visible" Margin="0,-8,0,-8">
+        <Grid x:Name="LoginBackground" Background="#7F4F83CC" Grid.ColumnSpan="2" Grid.RowSpan="2" Visibility="Hidden" Margin="0,-8,0,-8">
             <!-- Login Grid and its components-->
             <Grid x:Name="LoginGrid" VerticalAlignment="Center" Width="552" Height="283" Background="White" Visibility="Visible">
                 <Border CornerRadius="30" Margin="95,176,94,0" VerticalAlignment="Top" Width="363" Height="34" Background="#FF4F83CC" RenderTransformOrigin="0.5,0.5">
