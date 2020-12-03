@@ -8,7 +8,15 @@ namespace Controller
     {
         static void Main(string[] args)
         {
+            DBConnection.Initialize();
+            DBConnection.OpenConnection();
             Playlist playlist = new Playlist();
+
+            Model.User.UserID = 1;
+
+            SideBarList.SetAllPlaylistsFromUser();
+
+            Console.WriteLine(SideBarList.sideBarList);
         }
     }
 }
