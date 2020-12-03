@@ -76,7 +76,7 @@ namespace View
             {
                 Controller.Playlist newPlaylist = new Controller.Playlist();
 
-                newPlaylist.createUserPlaylist(title, isprivate);
+                newPlaylist.CreateUserPlaylist(title, isprivate);
 
                 //Call controller to make playlist
                 LoginBackground.Visibility = Visibility.Hidden;

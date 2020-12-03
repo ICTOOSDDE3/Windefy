@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Model
 {
-    enum PlaylistType
+    public enum PlaylistType
     {
         Album,
         SingleTracks,
