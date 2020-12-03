@@ -9,8 +9,6 @@ namespace Controller
         static void Main(string[] args)
         {
             Playlist playlist = new Playlist();
-
-            playlist.createUserPlaylist("Dylan zijn test ding", true);
         }
     }
 }

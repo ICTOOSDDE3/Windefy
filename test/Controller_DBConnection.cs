@@ -23,6 +23,8 @@ namespace Test
 
             string result = cmd.ExecuteScalar().ToString();
 
+            DBConnection.CloseConnection();
+
             Assert.AreEqual("Weasel Walter", result);
         }
 
