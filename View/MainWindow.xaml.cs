@@ -38,8 +38,7 @@ namespace View
         public MainWindow()
         {
             InitializeComponent();
-            // DataContext = new Homepage();
-            DataContext = new ViewModels.Artist(1);
+            DataContext = new Homepage();
             MusicBar.DataContext = track.GetTrack(210);
             CurrentTrack = (Model.Track)MusicBar.DataContext;
             //icArtistList.ItemsSource = CurrentTrack.ArtistIDs;
@@ -320,6 +319,11 @@ namespace View
         private void btnRewind_Unchecked(object sender, RoutedEventArgs e)
         {
             rewind = false;
+        }
+
+        private void Label_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DataContext = new ViewModels.Artist(1);
         }
     }
 }
