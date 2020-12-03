@@ -22,6 +22,83 @@
             <views:SearchSong />
         </DataTemplate>-->
 
+        <Style x:Key="SliderRepeatButton" TargetType="RepeatButton">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="IsTabStop" Value="false" />
+            <Setter Property="Focusable" Value="false" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Border  BorderThickness="1" BorderBrush="White" Background="white" Height="3"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SliderRepeatButton1" TargetType="RepeatButton">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Border SnapsToDevicePixels="True" Background="#FFFF72"  BorderThickness="1" BorderBrush="#FFFF72" Height="3"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SliderThumb" TargetType="Thumb">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Thumb">
+                        <Ellipse Height="15" Width="15">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="HeartChecked.png"></ImageBrush>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <ControlTemplate x:Key="Slider"  TargetType="Slider">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Track Grid.Row="1" x:Name="PART_Track"   >
+                    <Track.DecreaseRepeatButton>
+                        <RepeatButton Style="{StaticResource SliderRepeatButton1}"  Command="Slider.DecreaseLarge" />
+                    </Track.DecreaseRepeatButton>
+                    <Track.Thumb>
+                        <Thumb Style="{StaticResource SliderThumb}"  />
+                    </Track.Thumb>
+                    <Track.IncreaseRepeatButton>
+                        <RepeatButton Style="{StaticResource SliderRepeatButton}" Command="Slider.IncreaseLarge" />
+                    </Track.IncreaseRepeatButton>
+                </Track>
+            </Grid>
+        </ControlTemplate>
+
+        <Style x:Key="Horizontal_Slider" TargetType="Slider">
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Style.Triggers>
+                <Trigger Property="Orientation" Value="Horizontal">
+                    <Setter Property="MinHeight" Value="21" />
+                    <Setter Property="MinWidth" Value="104" />
+                    <Setter Property="Template" Value="{StaticResource Slider}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
         <Image x:Key="Play_icon" Source="Play.png"/>
         <Image x:Key="Pause_icon" Source="Pause.png"/>
         <Image x:Key="ShuffleUnChecked_icon" Source="Shuffle.png"/>
@@ -275,12 +352,12 @@
                 </WrapPanel>
                 <WrapPanel VerticalAlignment="Center">
                     <Label Name="CurrentTime" Content="" Margin="100,0,0,0" VerticalAlignment="Center"/>
-                    <Slider Minimum="0" Maximum="100" Value="0" Name="TimeStatus" Thumb.DragStarted="TimeStatus_DragStarted" Thumb.DragCompleted="TimeStatus_DragCompleted" Margin="0,3,0,0" Width="300" Height="10" />
+                    <Slider Style="{StaticResource Horizontal_Slider}" Minimum="0" Maximum="100" Value="0" Name="TimeStatus" Thumb.DragStarted="TimeStatus_DragStarted" Thumb.DragCompleted="TimeStatus_DragCompleted" Margin="0,3,0,0" Width="300" Height="15" />
                     <Label Name="TotalTime" Content="" Margin="0,0,0,0"/>
                 </WrapPanel>
                 <WrapPanel VerticalAlignment="Center">
                     <Image Source="/Volume.png" Width="30" Height="30" Margin="25,0,0,0"/>
-                    <Slider Value="50" Maximum="100" Minimum="0" ValueChanged="Volume_ValueChanged" Name="Volume" Width="142" Height="9" />
+                    <Slider Style="{StaticResource Horizontal_Slider}" Value="50" Maximum="100" Minimum="0" ValueChanged="Volume_ValueChanged" Name="Volume" Width="142" Height="9" />
                 </WrapPanel>
             </WrapPanel>
 
