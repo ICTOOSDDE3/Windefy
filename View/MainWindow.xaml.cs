@@ -28,7 +28,6 @@ namespace View
         private bool userIsDraggingSlider = false;
         private bool mediaPlaying = false;
         private bool rewind = false;
-        private bool shuffle = false;
         private Model.Track CurrentTrack;
         private Controller.AudioPath audioPath = new AudioPath();
         private Controller.ImagePath imagePath = new ImagePath();
@@ -194,7 +193,7 @@ namespace View
         /// <param name="e"></param>
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
-            UpdateMusicBar(CurrentTrack.TrackID + 1);
+            UpdateMusicBar(CurrentTrack.TrackID + 1 /*TrackQueue.Dequeue() */);
 
             if (mediaPlaying)
             {
@@ -208,7 +207,7 @@ namespace View
         /// <param name="e"></param>
         private void btnPrev_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            UpdateMusicBar(CurrentTrack.TrackID - 1);
+            UpdateMusicBar(TrackHistory.trackHistory.Pop());
 
             if (mediaPlaying)
             {
@@ -253,7 +252,7 @@ namespace View
             }
             else
             {
-                UpdateMusicBar(CurrentTrack.TrackID+1);
+                UpdateMusicBar(CurrentTrack.TrackID+1 /*TrackQueue.Dequeue() */);
 
                 mediaPlayer.Play();
             }
@@ -330,16 +329,12 @@ namespace View
 
         private void shuffleBtn_Checked(object sender, RoutedEventArgs e)
         {
-            shuffle = true;
-
-            //shuffle wachtrij
+            //TrackQueue.ShuffleEnabled = true;
         }
 
         private void shuffleBtn_Unchecked(object sender, RoutedEventArgs e)
         {
-            shuffle = false;
-
-            //unshuffle wachtrij
+            //TrackQueue.ShuffleEnabled = false;
         }
 
         private void Track_Click(object sender, RoutedEventArgs e)
@@ -355,11 +350,16 @@ namespace View
         /// <param name="trackID"></param>
         private void UpdateMusicBar(int trackID)
         {
+            if (CurrentTrack != null)
+            {
+                TrackHistory.trackHistory.Push(CurrentTrack.TrackID);
+            }
+
             MusicBar.DataContext = track.GetTrack(trackID);
             CurrentTrack = (Model.Track)MusicBar.DataContext;
             icArtistList.ItemsSource = CurrentTrack.Artists;
             TrackImage.Source = new BitmapImage(new Uri(imagePath.GetImagePath(CurrentTrack.Image_path), UriKind.RelativeOrAbsolute));
-            //SetQueue(Search_TrackID, Search_PlaylistID)
+            //TrackQueue.SetQueue(Search_TrackID, PlaylistID)
             mediaPlayer.Open(new Uri(audioPath.GetAudioPath(CurrentTrack.File_path)));
         }
     }
