@@ -38,7 +38,7 @@ namespace View
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new Homepage();
+            DataContext = new SearchSongModel();
             MusicBar.DataContext = track.GetTrack(210);
             CurrentTrack = (Model.Track)MusicBar.DataContext;
             //icArtistList.ItemsSource = CurrentTrack.ArtistIDs;
@@ -117,11 +117,11 @@ namespace View
         {
             email = Email_Input.Text;
             string userName = Username_Input.Text;
-            string password = Password_Input.Text;
-            string repeatedPassword = PasswordRepeat_Input.Text;
+            string password = Password_Input.Password;
+            string repeatedPassword = PasswordRepeat_Input.Password;
             if (registerAccount.IsValidEmail(email))
             {
-                if (registerAccount.ArePasswordsEqual(password, repeatedPassword))
+                if (registerAccount.IsPasswordEqual(password, repeatedPassword))
                 {
                     registerAccount.RegisterAccount(email, userName, password, repeatedPassword);
                     RegisterGrid.Visibility = Visibility.Hidden;
@@ -140,7 +140,8 @@ namespace View
 
         private void Resend_Code_Button(object sender, RoutedEventArgs e)
         {
-            //registerAccount.ResendVerificationCode();
+            registerAccount.ResendVerificationCode(Model.User.Email.ToString());
+            Verification_Headsup.Content = "A verification code has been send to your email adres";
         }
 
         private void Verify_Button_Click(object sender, RoutedEventArgs e)
@@ -157,9 +158,18 @@ namespace View
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-            if(login.IsLogin(Email_TextBox.Text, Wachtwoord_TextBox.Text))
+            if(login.IsLogin(Email_TextBox.Text, Wachtwoord_TextBox.Password))
             {
-                LoginBackground.Visibility = Visibility.Hidden;
+                bool verified = Model.User.Verified;
+                if (verified)
+                {
+                    LoginBackground.Visibility = Visibility.Hidden;
+                } else
+                {
+                    email = Model.User.Email.ToString();
+                    LoginGrid.Visibility = Visibility.Hidden;
+                    VerifyGrid.Visibility = Visibility.Visible;
+                }
             } else
             {
                 Login_HeadsUp.Content = "Email or password invalid!";

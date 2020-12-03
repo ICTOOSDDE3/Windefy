@@ -9,58 +9,56 @@ namespace Controller
     {
         public bool IsLogin(string email, string password)
         {
-            // check if there is an email similar to the given email in the database
-            //password to byte
-            // check if passwords are equal
-            // return true if so
-
-
+            bool passed = false;
             DBConnection.Initialize();
             DBConnection.OpenConnection();
             try
             {
-                string query = $"SELECT email, password, saltcode, iteration FROM users WHERE email = '{email}'";
+                string query = $"SELECT * FROM users WHERE email = '{email}'";
 
                 SqlCommand cmd = new SqlCommand(query, DBConnection.Connection);
                 SqlDataReader dataReader = cmd.ExecuteReader();
-
-                var temp = dataReader["email"].ToString();
-
-                string tempPassword = dataReader["password"].ToString();
-                byte[] tempSalt = Encoding.UTF8.GetBytes(dataReader["saltcode"].ToString());
-                int tempIteration = (int)dataReader["iteration"];
-
-                byte[] currentPassword = PasswordToByte(password);
-                string currentHash = Convert.ToString(GenerateHash(currentPassword, tempSalt, tempIteration, tempIteration));
-
-                if (currentHash.Equals(tempPassword))
+                while (dataReader.Read())
                 {
-                    return true;
-                }
+                    var temp = dataReader["email"].ToString();
 
-                dataReader.Close();
-                DBConnection.CloseConnection();
+                    string DataBasePassword = dataReader["password"].ToString();
+                    string DataBaseSalt = dataReader["saltcode"].ToString();
+
+                    if (IsEqual(password,DataBasePassword,DataBaseSalt))
+                    {
+                        int id = Convert.ToInt32(dataReader["user_Id"]);
+                        string name = dataReader["name"].ToString();
+                        int language = 1;
+                        bool verified = Convert.ToBoolean(dataReader["verified"]);
+                        User.UpdateUserModel(id, email, name, language, verified);
+                        passed = true;
+                    }
+                }
             }
             catch (Exception e)
             {
-                DBConnection.CloseConnection();
-                return false;
+                Console.WriteLine(e.StackTrace);
             }
-            return false;
-        }
-
-        public byte[] GenerateHash(byte[] password, byte[] salt, int iterations, int length)
-        {
-            using (var deriveBytes = new Rfc2898DeriveBytes(password, salt, iterations))
+            finally
             {
-                return deriveBytes.GetBytes(length);
+                DBConnection.CloseConnection();
             }
+            return passed;
         }
 
-        public byte[] PasswordToByte(string password)
+        public string GenerateHash(string password, string salt)
         {
-            byte[] bytePassword = Encoding.ASCII.GetBytes(password);
-            return bytePassword;
+            byte[] bytes = Encoding.UTF8.GetBytes(password + salt);
+            SHA256Managed sHA256ManagedString = new SHA256Managed();
+            byte[] hash = sHA256ManagedString.ComputeHash(bytes);
+            return Convert.ToBase64String(hash);
+        }
+
+        public bool IsEqual(string plainTextInput, string hashedInput, string salt)
+        {
+            string newHashedPin = GenerateHash(plainTextInput, salt);
+            return newHashedPin.Equals(hashedInput);
         }
     }
 }
