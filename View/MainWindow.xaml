@@ -123,7 +123,6 @@
             <views:SearchArtist DataContext="{Binding}" />
         </DataTemplate>
         <DataTemplate x:Name="SearchSongModel" DataType="{x:Type viewmodels:SearchSongModel}">
-            <views:SearchSong DataContext="{Binding}" />
         </DataTemplate>
         <DataTemplate x:Name="SearchAlbumViewModel" DataType="{x:Type viewmodels:SearchAlbumViewModel}">
             <views:SearchAlbum DataContext="{Binding}" />
@@ -172,6 +171,7 @@
             </ScrollViewer>
         </Grid>
         <Grid Grid.Row="0" Grid.Column="1" Background="White">
+            <ContentControl Content="{Binding}" />
             <Border CornerRadius="5"/>
             <Button x:Name="Login_Button" Content="" Margin="0,24,85,0" Width="44" Height="44" BorderBrush="#00707070" Click="Login_Button_Click" HorizontalAlignment="Right" VerticalAlignment="Top" />
             <TextBox x:Name="SearchBar" Style="{DynamicResource TextBoxStyle1}" Tag="Search for your next favorite thing" Width="490" Height="35" FontSize="18" Margin="38,33,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" TextChanged="SearchBarTextChanged" Background="#FF4F83CC" BorderBrush="#FF4F83CC" Foreground="White" CaretBrush="#FF4F83CC" OpacityMask="#FF4F83CC" TextAlignment="Justify" SelectionBrush="#FFFFFF72" SelectionTextBrush="Black" BorderThickness="0,0,0,0" />

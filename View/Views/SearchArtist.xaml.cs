@@ -22,44 +22,6 @@ namespace View.Views
     {
         public SearchArtist()
         {
-            InitializeComponent();
-
-            List<string> items = new List<string>();
-            DBConnection.OpenConnection();
-
-            string query = "SELECT name FROM member WHERE memberID < 20";
-
-            SqlCommand cmd = new SqlCommand(query, DBConnection.Connection);
-
-            SqlDataReader dataReader = cmd.ExecuteReader();
-
-            while(dataReader.Read())
-            {
-                items.Add(Convert.ToString(dataReader["name"]));
-            }
-
-
-
-             dataReader.Close();
-
-            //items.Add(cmd.ExecuteScalar().ToString());
-
-            DBConnection.CloseConnection();
-
-            //items.Add("testdfsadfsajfhdsajfhjkdsahfjkdsahfjkdsahfjdksa" );
-            //items.Add("test2ghdflspkgfdls;gkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk" );
-
-
-
-
-            icTodoList.ItemsSource = items;
-
-
         }
-    }
-
-    public class TodoItem
-    {
-        public string Title { get; set; }
     }
 }

@@ -39,7 +39,7 @@ namespace View
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new SearchAlbumViewModel();
+            DataContext = new Homepage();
             MusicBar.DataContext = track.GetTrack(210);
             CurrentTrack = (Model.Track)MusicBar.DataContext;
             //icArtistList.ItemsSource = CurrentTrack.ArtistIDs;
@@ -344,24 +344,23 @@ namespace View
                 switch (dropDownValue)
                 {
                     case "Artist":
-
+                        DataContext = new SearchArtistViewModel(searchBarValue);
                         break;
                     case "Album":
-
+                        DataContext = new SearchAlbumViewModel(searchBarValue);
                         break;
                     case "Playlist":
-
+                        DataContext = new SearchAlbumViewModel(searchBarValue);
                         break;
                     default:
                         // Track as default
-
+                        DataContext = new SearchSongModel(searchBarValue);
                         break;
                 }
             }
             else
             {
-                // TODO: Set homescreen to default homescreen
-
+                DataContext = new Homepage();
             }
         }
     }

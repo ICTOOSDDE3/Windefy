@@ -194,7 +194,7 @@
     <Grid Background="White">
         
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" >
-        <ItemsControl x:Name="icTodoList">
+            <ItemsControl ItemsSource="{Binding items}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Columns="4" />
