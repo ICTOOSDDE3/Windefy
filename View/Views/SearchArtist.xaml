@@ -186,6 +186,34 @@
             </Setter>
         </Style>
 
+        <Style x:Key="MyButtonStyleImage" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        
+                        <Border Name="border" 
+                        BorderThickness="3"
+                        BorderBrush="White"  
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="360">
+                            <Ellipse Name="Ellipse">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="../Assets/Images/mockSongImage.jpg"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="Yellow" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
 
     </UserControl.Resources>
 
@@ -197,15 +225,15 @@
         <ItemsControl x:Name="icTodoList">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <UniformGrid Columns="4" />
+                    <UniformGrid Columns="3" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                         <Grid>
-                            <Button x:Name="btnLight" Width="200" Height="200" Margin="0,100,0,100" >
-                                
-                                <Button.Template>
+                            <Button x:Name="btnLight" Width="200" Height="200" Margin="0,100,0,100" Style="{StaticResource MyButtonStyleImage}" >
+
+                                <!--<Button.Template>
                                     <ControlTemplate>
                                         <Ellipse Name="Ellipse">
                                             <Ellipse.Fill>
@@ -213,14 +241,14 @@
                                             </Ellipse.Fill>
                                         </Ellipse>
                                     </ControlTemplate>
-                                </Button.Template>
+                                </Button.Template>-->
 
 
                             </Button>
 
 
 
-                            <Label Content="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,50" FontWeight="Bold" FontFamily="Bahnschrift Light SemiCondensed" FontSize="20"/>
+                            <Label Content="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,50" FontWeight="Bold" FontFamily="Bahnschrift Light SemiCondensed" FontSize="20" ToolTip="{Binding}"/>
                         </Grid>
                         
                     </DataTemplate>
