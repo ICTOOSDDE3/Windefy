@@ -51,23 +51,6 @@ namespace Controller
 
             return artist;
         }
-        /// <summary>
-        /// Makes a list of artist objects
-        /// </summary>
-        /// <param name="artist_ids"></param>
-        /// <returns>artist object</returns>
-        public List<Model.Artist> GetArtistsByList(List<int> artist_ids)
-        {
-            List<Model.Artist> list = new List<Model.Artist>();
-            foreach(var item in artist_ids)
-            {
-                Model.Artist a = GetArtist(item);
-                if (a != null) list.Add(a);
-            }
-            if (list.Count > 0) return list;
-            else return null;
-        }
-
         public List<Model.Track> GetArtistTracks(int artistID)
         {
             DBConnection.OpenConnection();

@@ -95,7 +95,7 @@ namespace Controller
         /// </summary>
         /// <param name="trackID"></param>
         /// <returns>List of genre id's</returns>
-        private List<string> GetGenres(int trackID)
+        public List<string> GetGenres(int trackID)
         {
             List<string> genreList = new List<string>();
 
@@ -120,6 +120,29 @@ namespace Controller
             DBConnection.CloseConnection();
 
             return genreList;
+        }
+        public Queue<int> GetTracksToQueue(string query)
+        {
+            Queue<int> returnQueue = new Queue<int>();
+            DBConnection.OpenConnection();
+            SqlCommand oCmd = new SqlCommand(query, DBConnection.Connection);
+            using (SqlDataReader reader = oCmd.ExecuteReader())
+            {
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        returnQueue.Enqueue((int)reader["trackID"]);
+                    }
+                }
+                else
+                {
+                    DBConnection.CloseConnection();
+                    return null;
+                }
+            }
+            DBConnection.CloseConnection();
+            return returnQueue;
         }
     }
 }
