@@ -1,4 +1,4 @@
-﻿<Window x:Name="Index" x:Class="View.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,11 +6,127 @@
         xmlns:local="clr-namespace:View"
         xmlns:viewmodels="clr-namespace:View.ViewModels"
         xmlns:views="clr-namespace:View.Views"
+        xmlns:System="clr-namespace:System;assembly=System.Runtime" x:Name="Index" x:Class="View.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow" Height="1024" Width="1440">
     <Window.Resources>
+        <LinearGradientBrush x:Key="NormalBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#4F83CC" Offset="0.0"/>
+                    <GradientStop Color="#4F83CC" Offset="1.0"/>
+                </GradientStopCollection>
+            </GradientBrush.GradientStops>
+        </LinearGradientBrush>
+        <SolidColorBrush x:Key="WindowBackgroundBrush" Color="#4F83CC" />
+        <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="ToggleButton">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="20" />
+                </Grid.ColumnDefinitions>
+                <Border x:Name="Border" Grid.ColumnSpan="2"
+                    Background="{StaticResource NormalBrush}"
+                    BorderThickness="0" />
+                <Border 
+                    Grid.Column="0"
+                    CornerRadius="2,0,0,2" 
+                    Margin="1" 
+                    Background="{StaticResource WindowBackgroundBrush}" 
+                    BorderThickness="0,0,1,0" />
+                <Path
+                    x:Name="Arrow"
+                    Grid.Column="1"     
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Data="M 0 0 L 4 4 L 8 0 Z" Fill="White"/>
+            </Grid>
+        </ControlTemplate>
+        <ControlTemplate x:Key="ComboBoxTextBox" TargetType="TextBox">
+            <Border x:Name="PART_ContentHost" Focusable="False" Background="{TemplateBinding Background}" />
+        </ControlTemplate>
+        <Style x:Key="{x:Type ComboBox}" TargetType="ComboBox">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <ToggleButton 
+                                Name="ToggleButton" 
+                                Template="{StaticResource ComboBoxToggleButton}" 
+                                Grid.Column="2" 
+                                Focusable="false"
+                                IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
+                                ClickMode="Press">
+                            </ToggleButton>
+                            <ContentPresenter
+                                Name="ContentSite"
+                                Margin="3,3,3,3"
+                                Width="98"
+                                Height="25"
+                                IsHitTestVisible="False"
+                                Content="{TemplateBinding SelectionBoxItem}"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Left" OpacityMask="White" />
+                            <Popup 
+                                Name="Popup"
+                                Placement="Bottom"
+                                IsOpen="{TemplateBinding IsDropDownOpen}"
+                                AllowsTransparency="True" 
+                                Focusable="False"
+                                PopupAnimation="Slide">
+                                <Grid 
+                                    Name="DropDown"
+                                    SnapsToDevicePixels="True"                
+                                    MinWidth="{TemplateBinding ActualWidth}"
+                                    MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <Border 
+                                        x:Name="DropDownBorder"
+                                        Background="{StaticResource WindowBackgroundBrush}"
+                                        BorderThickness="1"/>
+                                    <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="TextBoxStyle1" BasedOn="{StaticResource {x:Type TextBox}}" TargetType="{x:Type TextBox}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Grid>
+                            <TextBox x:Name="textSource" Background="Transparent" Text="{Binding Text, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}, UpdateSourceTrigger=PropertyChanged}" Panel.ZIndex="2" Foreground="White" BorderBrush="#FF4F83CC" SelectionBrush="#FFFFFF72" SelectionTextBrush="Black" VerticalContentAlignment="Center"/>
+                            <TextBox Background="{TemplateBinding Background}" Text="{TemplateBinding Tag}" Panel.ZIndex="1" SelectionBrush="#FFFFFF72" VerticalContentAlignment="Center" Padding="5,0,0,0" UseLayoutRounding="False" BorderBrush="#FF4F83CC">
+                                <TextBox.Style>
+                                    <Style TargetType="{x:Type TextBox}">
+                                        <Setter Property="Foreground" Value="#00FFFFFF"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, Source={x:Reference textSource}}" Value="">
+                                                <Setter Property="Foreground" Value="#70FFFFFF"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBox.Style>
+                            </TextBox>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <DataTemplate x:Name="homepage" DataType="{x:Type viewmodels:Homepage}">
             <views:Homepage DataContext="{Binding}" />
+        </DataTemplate>
+        <DataTemplate x:Name="searchArtistViewModel" DataType="{x:Type viewmodels:SearchArtistViewModel}">
+            <views:SearchArtist DataContext="{Binding}" />
+        </DataTemplate>
+        <DataTemplate x:Name="SearchSongModel" DataType="{x:Type viewmodels:SearchSongModel}">
+            <views:SearchSong DataContext="{Binding}" />
+        </DataTemplate>
+        <DataTemplate x:Name="SearchAlbumViewModel" DataType="{x:Type viewmodels:SearchAlbumViewModel}">
+            <views:SearchAlbum DataContext="{Binding}" />
         </DataTemplate>
     </Window.Resources>
     <Grid Background="Transparent">
@@ -22,7 +138,11 @@
             <ColumnDefinition Width="300" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <Grid Grid.Row="1" Grid.ColumnSpan="2" Background="#4F83CC"/>
+        <Grid Grid.Row="1" Grid.ColumnSpan="2" Background="#E54F83CC">
+            <Grid.Effect>
+                <BlurEffect/>
+            </Grid.Effect>
+        </Grid>
         <Grid Grid.Row="0" Grid.Column="0" Background="#FFFF72">
             <Label Content="Windefy" FontSize="35" Margin="10,30,0,0" />
 
@@ -56,12 +176,24 @@
                 </Grid>
             </ScrollViewer>
         </Grid>
+        <Grid Grid.Row="0" Grid.Column="1" Background="White">
+            <ContentControl Content="{Binding}" />
+            <Border CornerRadius="5"/>
+            <Button x:Name="Login_Button" Content="" Margin="0,24,85,0" Width="44" Height="44" BorderBrush="#00707070" Click="Login_Button_Click" HorizontalAlignment="Right" VerticalAlignment="Top" />
+            <TextBox x:Name="SearchBar" Style="{DynamicResource TextBoxStyle1}" Tag="Search for your next favorite thing" Width="490" Height="35" FontSize="18" Margin="38,33,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" TextChanged="SearchBarTextChanged" Background="#FF4F83CC" BorderBrush="#FF4F83CC" Foreground="White" CaretBrush="#FF4F83CC" OpacityMask="#FF4F83CC" TextAlignment="Justify" SelectionBrush="#FFFFFF72" SelectionTextBrush="Black" BorderThickness="0,0,0,0" />
+            <ComboBox x:Name="SearchDropdown" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Height="35" SelectedIndex="0" BorderBrush="#FF4F83CC" Foreground="White" Background="#FF4F83CC" FontSize="20" FontStyle="Normal" Margin="528,33,0,0">
+                <System:String>Artist</System:String>
+                <System:String>Album</System:String>
+                <System:String>Playlist</System:String>
+                <System:String>Track</System:String>
+            </ComboBox>
+        </Grid>
         <Grid Grid.ColumnSpan="5">
             <WrapPanel x:Name="MusicBar" Background="Transparent" Height="96" VerticalAlignment="Bottom" Margin="-6,0,6,-97" >
                 <WrapPanel VerticalAlignment="Center" Height="80">
                     <Image Source="Assets/Images/mockSongImage.jpg" Height="70" Width="70"/>
                     <StackPanel Margin="5,0,0,0">
-                        <Label Name="Track_Name" Content="{Binding Title}" Margin="0,20,0,0"/>
+                        <Label x:Name="Track_Name" Content="{Binding Title}" Margin="0,20,0,0"/>
                         <ItemsControl x:Name="icArtistList">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
@@ -91,13 +223,13 @@
                     <ToggleButton x:Name="tbBtnRewind" Checked="btnRewind_Checked" Unchecked="btnRewind_Unchecked" Content="Rewind" Margin="60,0,5,0" Width="32" Height="32"/>
                 </WrapPanel>
                 <WrapPanel VerticalAlignment="Center">
-                    <Label Name="CurrentTime" Content="" Margin="100,0,0,0" VerticalAlignment="Center"/>
-                    <Slider Minimum="0" Maximum="100" Value="0" Name="TimeStatus" Thumb.DragStarted="TimeStatus_DragStarted" Thumb.DragCompleted="TimeStatus_DragCompleted" Margin="0,3,0,0" Width="300" Height="10" />
-                    <Label Name="TotalTime" Content="" Margin="0,0,0,0" />
+                    <Label x:Name="CurrentTime" Content="" Margin="100,0,0,0" VerticalAlignment="Center"/>
+                    <Slider Minimum="0" Maximum="100" Value="0" x:Name="TimeStatus" Thumb.DragStarted="TimeStatus_DragStarted" Thumb.DragCompleted="TimeStatus_DragCompleted" Margin="0,3,0,0" Width="300" Height="10" />
+                    <Label x:Name="TotalTime" Content="" Margin="0,0,0,0" />
                 </WrapPanel>
                 <WrapPanel VerticalAlignment="Center">
                     <!--<Image Source="" Width="30" Height="30" Margin="5,0,0,0"/>-->
-                    <Slider Value="50" Maximum="100" Minimum="0" ValueChanged="Volume_ValueChanged" Name="Volume" Width="142" Height="9" Margin="100,0,0,0" />
+                    <Slider Value="50" Maximum="100" Minimum="0" ValueChanged="Volume_ValueChanged" x:Name="Volume" Width="142" Height="9" Margin="100,0,0,0" />
                 </WrapPanel>
             </WrapPanel>
 
@@ -111,10 +243,9 @@
                 </Button.Background>
             </Button>
         </Grid>
-        
 
         <!-- the loginBackGround has to be visible if you want to change the loginGrid, RegisterGrid and the verify grid (put those grids on visible aswell) -->
-        <Grid x:Name="LoginBackground" Background="#7F4F83CC" Grid.ColumnSpan="2" Grid.RowSpan="2" Visibility="Visible" Margin="0,-8,0,-8">
+        <Grid x:Name="LoginBackground" Background="#7F4F83CC" Grid.ColumnSpan="2" Grid.RowSpan="2" Visibility="Visible" Margin="1,0,-1,-16" d:IsHidden="True">
             <!-- Login Grid and its components-->
             <Grid x:Name="LoginGrid" VerticalAlignment="Center" Width="552" Height="283" Background="White" Visibility="Visible">
                 <Border CornerRadius="30" Margin="95,176,95,0" VerticalAlignment="Top" Width="363" Height="34" Grid.ColumnSpan="3" Background="#FF4F83CC" RenderTransformOrigin="0.5,0.5">
@@ -156,7 +287,7 @@
                 <TextBlock HorizontalAlignment="Left"  Margin="106,162,0,0" Text="Email:" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="110" FontSize="24"/>
                 <TextBlock HorizontalAlignment="Left"  Margin="106,261,0,0" Text="Name:" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="110" FontSize="24"/>
                 <TextBlock HorizontalAlignment="Left"  Margin="106,359,0,0" Text="Language:" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="110" FontSize="24"/>
-                <TextBlock Name="Updated_Text" HorizontalAlignment="Left"  Margin="112,519,0,0" Text="*Updated account" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="224" FontSize="20" Visibility="Hidden" Opacity="0.8"/>
+                <TextBlock x:Name="Updated_Text" HorizontalAlignment="Left"  Margin="112,519,0,0" Text="*Updated account" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="224" FontSize="20" Visibility="Hidden" Opacity="0.8"/>
 
                 <Button x:Name="Close_Account_Details" Content="X" HorizontalAlignment="Left" Margin="534,23,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.48,0.377" Width="22" Foreground="Red" Background="{x:Null}" BorderBrush="{x:Null}" Click="Close_Login_Button_Click" FontWeight="Bold"/>
                 <Border CornerRadius="30" Margin="112,480,112,0" VerticalAlignment="Top" Width="363" Height="34" Background="#FF4F83CC" RenderTransformOrigin="0.5,0.5">
@@ -165,7 +296,7 @@
             </Grid>
 
             <Grid x:Name="AddPlaylistGrid" Width="588" Height="340" Background="White" Visibility="Hidden" >
-                 <TextBox x:Name="Details_Title_Input" HorizontalAlignment="Left" Margin="100,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="375" Height="42" Background="#7F4F83CC" TextAlignment="Center" FontSize="24" IsEnabled="True"/>
+                <TextBox x:Name="Details_Title_Input" HorizontalAlignment="Left" Margin="100,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="375" Height="42" Background="#7F4F83CC" TextAlignment="Center" FontSize="24" IsEnabled="True"/>
 
                 <CheckBox x:Name = "AddPlaylist_Private" Content ="Is public" HorizontalAlignment = "Left" 
                  Margin = "100,186,0,0" VerticalAlignment = "Top" Width = "100" Height="56" RenderTransformOrigin="0.5,0.5">
