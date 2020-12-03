@@ -35,6 +35,7 @@ namespace View
         Register registerAccount = new Register();
         Login login = new Login();
         private string email = "";
+
         public MainWindow()
         {
             InitializeComponent();
@@ -319,6 +320,39 @@ namespace View
         private void btnRewind_Unchecked(object sender, RoutedEventArgs e)
         {
             rewind = false;
+        }
+
+        private void SearchBarTextChanged(object sender, TextChangedEventArgs e)
+        {
+            string searchBarValue = SearchBar.Text;
+
+            if (searchBarValue.Length > 2)
+            {
+                string dropDownValue = SearchDropdown.SelectedItem.ToString();
+
+                // If the searchvalue is 3 characters or more, search
+                switch (dropDownValue)
+                {
+                    case "Artist":
+
+                        break;
+                    case "Album":
+
+                        break;
+                    case "Playlist":
+
+                        break;
+                    default:
+                        // Track as default
+
+                        break;
+                }
+            }
+            else
+            {
+                // TODO: Set homescreen to default homescreen
+
+            }
         }
     }
 }
