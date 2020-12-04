@@ -20,7 +20,7 @@ namespace View.Views
     /// </summary>
     public partial class SearchSong : UserControl
     {
-        public SearchSong() 
+        public SearchSong()
         {
             InitializeComponent();
             
@@ -29,7 +29,7 @@ namespace View.Views
         {
             var x = (Button)e.OriginalSource;
             var data = x.DataContext as ViewModels.TrackInfo;
-            
+            TrackQueue.SetQueue(data.TrackID, data.PlaylistID);
             TrackClicked.TrackID = data.TrackID;
         }
     }
