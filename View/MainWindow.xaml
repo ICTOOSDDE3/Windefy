@@ -490,7 +490,7 @@
         </Grid>
 
         <!-- the loginBackGround has to be visible if you want to change the loginGrid, RegisterGrid and the verify grid (put those grids on visible aswell) -->
-        <Grid x:Name="LoginBackground" Background="#7F4F83CC" Grid.ColumnSpan="2" Grid.RowSpan="2" Visibility="Visible" Margin="1,0,-1,-16" d:IsHidden="True">
+        <Grid x:Name="LoginBackground" Background="#7F4F83CC" Grid.ColumnSpan="2" Grid.RowSpan="2" Visibility="Hidden" Margin="1,0,-1,-16" d:IsHidden="True">
             <!-- Login Grid and its components-->
             <Grid x:Name="LoginGrid" VerticalAlignment="Center" Width="552" Height="283" Background="White" Visibility="Visible">
                 <Border CornerRadius="30" Margin="95,176,95,0" VerticalAlignment="Top" Width="363" Height="34" Grid.ColumnSpan="3" Background="#FF4F83CC" RenderTransformOrigin="0.5,0.5">

@@ -37,7 +37,11 @@ namespace View.ViewModels
 
             while (dataReader.Read())
             {
-                TrackInfo trackInfo = new TrackInfo(Convert.ToInt32(dataReader["trackID"]) , Convert.ToString(dataReader["title"]), Convert.ToInt32(dataReader["duration"]), Convert.ToString(dataReader["image_path"]), Convert.ToString(dataReader["name"]));
+                TrackInfo trackInfo = new TrackInfo(Convert.ToString(dataReader["title"]),
+                    Convert.ToInt32(dataReader["duration"]),
+                    Convert.ToString(dataReader["image_path"]),
+                    Convert.ToString(dataReader["name"]),
+                    Convert.ToInt32(dataReader["trackID"]));
 
                 items.Add(trackInfo);
             }
@@ -46,9 +50,6 @@ namespace View.ViewModels
             DBConnection.CloseConnection();
         }
     }
-
-
-
     public class TrackInfo
     {
         public int TrackID { get; set; }
@@ -57,20 +58,19 @@ namespace View.ViewModels
         public string ImagePath { get; set; }
         public string ArtistName { get; set; }
 
-        public TrackInfo(int ID, string T, int D, string I, string A)
+        public TrackInfo(string T, int D, string I, string A, int ID)
         {
+            TrackID = ID;
             string seconds = (D % 60).ToString();
             if (seconds.Length == 1)
             {
                 seconds = "0" + seconds;
             }
 
-            TrackID = ID;
             Title = T;
             Duration = $"{ Math.Floor(Convert.ToDouble(D) / 60)}:{seconds}";
             ImagePath = $"{ApacheConnection.GetImageFullPath(I)}";
             ArtistName = A;
         }
-
     }
 }

@@ -21,14 +21,14 @@ namespace View.ViewModels
                 DBConnection.OpenConnection();
 
                 SqlCommand cmd = new SqlCommand(null, DBConnection.Connection);
-                cmd.CommandText = "SELECT title, COUNT(trackID) as trackCount, name " +
+                cmd.CommandText = "SELECT playlist.playlistID playlistID, title, COUNT(trackID) as trackCount, name " +
                     "FROM playlist_track " +
                     "JOIN playlist ON playlist_track.playlistID = playlist.playlistID " +
                     "JOIN artist_album ON playlist_track.playlistID = artist_album.playlistID " +
                     "JOIN artist ON artist_album.artistID = artist.artistID " +
-                    "WHERE playlist_typeID = 5 " +
+                    "WHERE playlist_typeID != 5 " +
                     "AND title LIKE '%' + @que + '%' " +
-                    "GROUP BY title, name";
+                    "GROUP BY title, name, playlist.playlistID";
 
                 SqlParameter que = new SqlParameter("@que", System.Data.SqlDbType.VarChar, 255);
                 que.Value = q;
@@ -41,7 +41,10 @@ namespace View.ViewModels
 
                 while (dataReader.Read())
                 {
-                    PlaylistInfo playlistInfo = new PlaylistInfo(Convert.ToString(dataReader["title"]), Convert.ToString(dataReader["trackCount"]), Convert.ToString(dataReader["name"]));
+                    PlaylistInfo playlistInfo = new PlaylistInfo(Convert.ToString(dataReader["title"]),
+                        Convert.ToString(dataReader["trackCount"]),
+                        Convert.ToString(dataReader["name"]),
+                        Convert.ToInt32(dataReader["playlistID"]));
 
                     items.Add(playlistInfo);
                 }
@@ -58,14 +61,14 @@ namespace View.ViewModels
                 DBConnection.OpenConnection();
 
                 SqlCommand cmd = new SqlCommand(null, DBConnection.Connection);
-                cmd.CommandText = "SELECT title, COUNT(trackID) as trackCount, name " +
+                cmd.CommandText = "SELECT playlist.playlistID playlistID, title, COUNT(trackID) as trackCount, name " +
                     "FROM playlist_track " +
                     "JOIN playlist ON playlist_track.playlistID = playlist.playlistID " +
                     "JOIN artist_album ON playlist_track.playlistID = artist_album.playlistID " +
                     "JOIN artist ON artist_album.artistID = artist.artistID " +
-                    "WHERE playlist_typeID != 5 " +
+                    "WHERE playlist_typeID = 5 " +
                     "AND title LIKE '%' + @que + '%' " +
-                    "GROUP BY title, name";
+                    "GROUP BY title, name, playlist.playlistID";
 
                 SqlParameter que = new SqlParameter("@que", System.Data.SqlDbType.VarChar, 255);
                 que.Value = q;
@@ -78,7 +81,10 @@ namespace View.ViewModels
 
                 while (dataReader.Read())
                 {
-                    PlaylistInfo playlistInfo = new PlaylistInfo(Convert.ToString(dataReader["title"]), Convert.ToString(dataReader["trackCount"]), Convert.ToString(dataReader["name"]));
+                    PlaylistInfo playlistInfo = new PlaylistInfo(Convert.ToString(dataReader["title"]),
+                        Convert.ToString(dataReader["trackCount"]),
+                        Convert.ToString(dataReader["name"]),
+                        Convert.ToInt32(dataReader["playlistID"]));
 
                     items.Add(playlistInfo);
                 }
@@ -95,10 +101,11 @@ namespace View.ViewModels
         public string Title { get; set; }
         public string Quantity { get; set; }
         public string ArtistName { get; set; }
+        public int PlaylistID { get; set; }
 
-        public PlaylistInfo(string T, string Q, string A)
+        public PlaylistInfo(string T, string Q, string A, int ID)
         {
-
+            PlaylistID = ID;
             Title = T;
             Quantity = Q;
             ArtistName = A;
