@@ -13,9 +13,12 @@ namespace Controller
         {           
             string query = $"SELECT * FROM playlist WHERE ownerID = {Model.User.UserID}";
 
+            DBConnection.OpenConnection();
             //Prepare the query
             SqlCommand cmd = new SqlCommand(query, DBConnection.Connection);
             SqlDataReader dataReader = cmd.ExecuteReader();
+
+            sideBarList.playlists.Clear();
 
             while (dataReader.Read())
             {

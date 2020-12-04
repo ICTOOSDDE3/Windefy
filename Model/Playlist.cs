@@ -20,7 +20,7 @@ namespace Model
         }
 
         private int playlistID { get; set; }
-        private string title { get; set; }
+        public string title { get; set; }
         private DateTime release_date { get; set; }
         private int listens { get; set; }
         private PlaylistType playlist_type {get; set;}
