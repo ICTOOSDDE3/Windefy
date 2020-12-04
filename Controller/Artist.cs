@@ -118,7 +118,8 @@ namespace Controller
                     Model.Track track = new Model.Track()
                     {
                         Title = reader["title"].ToString(),
-                        Listens = (int)reader["listens"]
+                        Listens = (int)reader["listens"],
+                        NumberID = (int)reader["trackID"]
                     };
                     
                     tracks.Add(track);

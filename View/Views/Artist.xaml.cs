@@ -25,8 +25,12 @@ namespace View.Views
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            MainWindow subWindow = new MainWindow();
-            subWindow.Show();
+           
+        }
+
+        private void Label_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+           
         }
     }
 }
