@@ -18,7 +18,7 @@ namespace View.ViewModels
             DBConnection.OpenConnection();
 
             SqlCommand cmd = new SqlCommand(null, DBConnection.Connection);
-            cmd.CommandText = "SELECT title, duration, image_path, name " +
+            cmd.CommandText = "SELECT title, duration, image_path, name, track.trackID trackID " +
                 "FROM track_artist " +
                 "JOIN artist ON track_artist.artistID = artist.artistID " +
                 "JOIN track ON track_artist.trackID = track.trackID " +
@@ -37,7 +37,11 @@ namespace View.ViewModels
 
             while (dataReader.Read())
             {
-                TrackInfo trackInfo = new TrackInfo(Convert.ToString(dataReader["title"]), Convert.ToInt32(dataReader["duration"]), Convert.ToString(dataReader["image_path"]), Convert.ToString(dataReader["name"]));
+                TrackInfo trackInfo = new TrackInfo(Convert.ToString(dataReader["title"]),
+                    Convert.ToInt32(dataReader["duration"]),
+                    Convert.ToString(dataReader["image_path"]),
+                    Convert.ToString(dataReader["name"]),
+                    Convert.ToInt32(dataReader["trackID"]));
 
                 items.Add(trackInfo);
             }
@@ -48,13 +52,15 @@ namespace View.ViewModels
     }
     public class TrackInfo
     {
+        public int TrackID { get; set; }
         public string Title { get; set; }
         public string Duration { get; set; }
         public string ImagePath { get; set; }
         public string ArtistName { get; set; }
 
-        public TrackInfo(string T, int D, string I, string A)
+        public TrackInfo(string T, int D, string I, string A, int ID)
         {
+            TrackID = ID;
             string seconds = (D % 60).ToString();
             if (seconds.Length == 1)
             {
