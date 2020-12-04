@@ -26,9 +26,9 @@ namespace View.ViewModels
                     "JOIN playlist ON playlist_track.playlistID = playlist.playlistID " +
                     "JOIN artist_album ON playlist_track.playlistID = artist_album.playlistID " +
                     "JOIN artist ON artist_album.artistID = artist.artistID " +
-                    "WHERE playlist_typeID = 5 " +
+                    "WHERE playlist_typeID != 5 " +
                     "AND title LIKE '%' + @que + '%' " +
-                    "GROUP BY title, name";
+                    "GROUP BY title, name, playlist.playlistID";
 
                 SqlParameter que = new SqlParameter("@que", System.Data.SqlDbType.VarChar, 255);
                 que.Value = q;
@@ -66,9 +66,9 @@ namespace View.ViewModels
                     "JOIN playlist ON playlist_track.playlistID = playlist.playlistID " +
                     "JOIN artist_album ON playlist_track.playlistID = artist_album.playlistID " +
                     "JOIN artist ON artist_album.artistID = artist.artistID " +
-                    "WHERE playlist_typeID != 5 " +
+                    "WHERE playlist_typeID = 5 " +
                     "AND title LIKE '%' + @que + '%' " +
-                    "GROUP BY title, name";
+                    "GROUP BY title, name, playlist.playlistID";
 
                 SqlParameter que = new SqlParameter("@que", System.Data.SqlDbType.VarChar, 255);
                 que.Value = q;
