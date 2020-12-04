@@ -14,6 +14,7 @@
         </DataTemplate>
         <DataTemplate x:Name="artist" DataType="{x:Type viewmodels:Artist}">
             <views:Artist DataContext="{Binding}" />
+        </DataTemplate>
         <DataTemplate x:Name="searchArtistViewModel" DataType="{x:Type viewmodels:SearchArtistViewModel}">
             <views:SearchArtist DataContext="{Binding}" />
         </DataTemplate>

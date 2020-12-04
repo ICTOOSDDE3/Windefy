@@ -333,7 +333,7 @@ namespace View
 
         private void Label_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            DataContext = new ViewModels.Artist(1);
+            DataContext = new ViewModels.Artist(2);
         }
     }
 }

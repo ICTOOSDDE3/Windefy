@@ -77,6 +77,31 @@ namespace Controller
             return artist;
         }
 
+        private List<Model.Artist> getTrackArtists(int trackID)
+        {
+            DBConnection.OpenConnection();
+            string query2 = $"SELECT * from artist where artistID IN (select artistID from track_artist where trackID = {trackID})";
+
+            SqlCommand oCmd2 = new SqlCommand(query2, DBConnection.Connection);
+            List<Model.Artist> artists = new List<Model.Artist>();
+
+            using (SqlDataReader reader2 = oCmd2.ExecuteReader())
+            {
+                while (reader2.Read())
+                {
+                    artists.Add(new Model.Artist()
+                    {
+                        ArtistID = (int)reader2["artistID"],
+                        Name = reader2["name"].ToString()
+                    });
+                }
+                reader2.Close();
+            }
+            DBConnection.CloseConnection();
+
+            return artists;
+        }
+
         private List<Model.Track> GetArtistTracksFromDB(int artistID)
         {
             DBConnection.OpenConnection();
@@ -90,16 +115,21 @@ namespace Controller
             {
                 while (reader.Read())
                 {
-
-                    tracks.Add(new Model.Track()
+                    Model.Track track = new Model.Track()
                     {
                         Title = reader["title"].ToString(),
                         Listens = (int)reader["listens"]
-                    });;
-           
+                    };
+                    
+                    tracks.Add(track);
                 }
             }
             DBConnection.CloseConnection();
+
+            tracks.ForEach(track =>
+            {
+                track.Artists = getTrackArtists(track.NumberID);
+            });
 
             return tracks;
         }
