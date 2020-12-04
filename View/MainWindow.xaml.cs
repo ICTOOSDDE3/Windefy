@@ -19,6 +19,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 namespace View
 {
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -35,7 +36,8 @@ namespace View
         Register registerAccount = new Register();
         Login login = new Login();
         private string email = "";
-        private int PlaylistID;
+        private int playlistID;
+        private int clickedTrackID = 0;
 
         public MainWindow()
         {
@@ -43,8 +45,10 @@ namespace View
             InitializeComponent();
             //DataContext = new Homepage();
             DataContext = new ViewModels.Artist(1);
-            UpdateMusicBar(210);
+
             mediaPlayer.MediaEnded += MediaPlayer_MediaEnded;
+
+
 
             // initialize and setup of timer
             DispatcherTimer timer = new DispatcherTimer();
@@ -212,18 +216,25 @@ namespace View
         /// <param name="e"></param>
         private void timer_Tick(object sender, EventArgs e)
         {
+
             if (mediaPlayer.Source != null && !userIsDraggingSlider && mediaPlayer.NaturalDuration.HasTimeSpan)
             {
                 CurrentTime.Content = mediaPlayer.Position.ToString(@"mm\:ss");
                 TotalTime.Content = mediaPlayer.NaturalDuration.TimeSpan.ToString(@"mm\:ss");
                 TimeStatus.Maximum = mediaPlayer.NaturalDuration.TimeSpan.TotalSeconds;
                 TimeStatus.Value = mediaPlayer.Position.TotalSeconds;
-
-                //TimeStatus.Foreground = Brushes.Red;
             }
             else if (mediaPlayer.Source != null && mediaPlayer.NaturalDuration.HasTimeSpan)
             {
                 CurrentTime.Content = mediaPlayer.Position.ToString(@"mm\:ss");
+            }
+            if (clickedTrackID != TrackClicked.TrackID)
+            {
+                clickedTrackID = TrackClicked.TrackID;
+                UpdateMusicBar(clickedTrackID);
+                tbPlayPause.IsChecked = true;
+                mediaPlayer.Play();
+
             }
         }
         /// <summary>
@@ -379,10 +390,12 @@ namespace View
 
         private void Track_Click(object sender, RoutedEventArgs e)
         {
+            
             //Search_Track.TrackID
             //PlaylistID = Search_Track.PlaylistID
             //UpdateMusicBar(Search_TrackID);          
         }
+
 
         /// <summary>
         /// Updates all music related data
@@ -394,7 +407,7 @@ namespace View
             {
                 TrackHistory.trackHistory.Push(CurrentTrack.TrackID);
             }
-
+            
             MusicBar.DataContext = track.GetTrack(trackID);
             CurrentTrack = (Model.Track)MusicBar.DataContext;
             icArtistList.ItemsSource = CurrentTrack.Artists;

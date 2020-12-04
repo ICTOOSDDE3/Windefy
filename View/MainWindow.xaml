@@ -203,8 +203,7 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-
-
+        
         <Image x:Key="Play_icon" Source="Play.png"/>
         <Image x:Key="Pause_icon" Source="Pause.png"/>
         <Image x:Key="ShuffleUnChecked_icon" Source="Shuffle.png"/>
@@ -365,8 +364,8 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
     </Window.Resources>
+    
 
     <Grid Background="Transparent">
         <Grid.RowDefinitions>

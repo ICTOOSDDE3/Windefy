@@ -23,6 +23,14 @@ namespace View.Views
         public SearchSong() 
         {
             InitializeComponent();
+            
+        }
+        private void Track_Click(object sender, RoutedEventArgs e)
+        {
+            var x = (Button)e.OriginalSource;
+            var data = x.DataContext as ViewModels.TrackInfo;
+            
+            TrackClicked.TrackID = data.TrackID;
         }
     }
 }
