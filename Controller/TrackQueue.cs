@@ -12,10 +12,11 @@ namespace Controller
         /// <summary>
         /// 
         /// </summary>
-        public static Model.Track Dequeue()
+        public static int Dequeue()
         {
-            Track TrackController = new Track();
-            return TrackController.GetTrack(trackQueue.Dequeue());
+            //if(trackQueue.Count > 0) return trackQueue.Dequeue();
+            //else { return false; }
+            return trackQueue.Dequeue();
         }
         /// <summary>
         /// 
@@ -27,15 +28,13 @@ namespace Controller
             //Playlist PlaylistController = new Playlist();
             //Model.Playlist p = PlaylistController.GetPlaylist(playlistID);
             Model.Playlist p = new Model.Playlist(playlistID,"test",DateTime.Now,100000,0,"test",true,1);
-            
-
             Track TrackController = new Track();
             var genres = TrackController.GetGenres(trackID);
 
             string query = "";
             if (p.playlist_type == Model.PlaylistType.Album || p.playlist_type == Model.PlaylistType.UserPlaylists)
             {
-                query = $"SELECT trackID FROM playlist_track WHERE playlistID = {playlistID} {(ShuffleEnabled ? "ORDER BY RAND()" : "")}";
+                query = $"SELECT trackID FROM playlist_track WHERE playlistID = {playlistID} AND trackID != {trackID} {(ShuffleEnabled ? "ORDER BY RAND()" : "")}";
             }
             if (p.playlist_type == Model.PlaylistType.SingleTracks)
             {

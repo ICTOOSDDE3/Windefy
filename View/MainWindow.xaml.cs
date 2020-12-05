@@ -244,7 +244,7 @@ namespace View
         /// <param name="e"></param>
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
-            UpdateMusicBar(CurrentTrack.TrackID + 1 /*TrackQueue.Dequeue() */);
+            UpdateMusicBar(TrackQueue.Dequeue());
 
             if (mediaPlaying)
             {
@@ -303,8 +303,8 @@ namespace View
             }
             else
             {
-                UpdateMusicBar(CurrentTrack.TrackID+1 /*TrackQueue.Dequeue() */);
 
+                UpdateMusicBar(TrackQueue.Dequeue());
                 mediaPlayer.Play();
             }
         }
