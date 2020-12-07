@@ -26,8 +26,12 @@ namespace View.ViewModels
                 // Select needed variables from track, limiting to 50 results
                 CommandText = "SELECT title, duration, image_path, track.trackID, playlistID " +
                 "FROM track " +
-                "WHERE title LIKE '%' + @que + '%' " +
                 "JOIN playlist_track ON track.trackID = playlist_track.trackID " +
+                "WHERE title LIKE '%' + @que + '%' " +
+                "AND playlistID IN (" +
+                "   SELECT playlistID FROM playlist " +
+                "   WHERE playlist_typeID != 5" +
+                ") " +
                 "ORDER BY track.trackID " +
                 "OFFSET 0 ROWS " +
                 "FETCH NEXT 50 ROWS ONLY"
