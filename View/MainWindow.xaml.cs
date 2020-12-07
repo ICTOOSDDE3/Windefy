@@ -40,11 +40,11 @@ namespace View
         public MainWindow()
         {
             DBConnection.Initialize();
+
             ApacheConnection.Initialize();
             InitializeComponent();
             //DataContext = new Homepage();
             DataContext = new ViewModels.Artist(1);
-
             mediaPlayer.MediaEnded += MediaPlayer_MediaEnded;
 
 
@@ -54,6 +54,11 @@ namespace View
             timer.Interval = TimeSpan.FromSeconds(0);
             timer.Tick += timer_Tick;
             timer.Start();
+        }
+
+        private void Add_PlayLists_To_Left_Sidebar()
+        {
+            LeftSideBarPlayLists.ItemsSource = SideBarList.sideBarList.playlists;
         }
 
         private void Login_Button_Click(object sender, RoutedEventArgs e)
@@ -78,9 +83,19 @@ namespace View
 
                 newPlaylist.CreateUserPlaylist(title, isprivate);
 
+
                 //Call controller to make playlist
                 LoginBackground.Visibility = Visibility.Hidden;
                 AddPlaylistGrid.Visibility = Visibility.Hidden;
+
+                //Load all the playlists from the db
+                SideBarList.SetAllPlaylistsFromUser();
+                Add_PlayLists_To_Left_Sidebar();
+
+                //Reset the sidebar
+                LeftSideBarPlayLists.ItemsSource = null;
+                //Load all the playlists into the sidebar
+                LeftSideBarPlayLists.ItemsSource = SideBarList.sideBarList.playlists;
             }
             //Give error if no title is filled in
             else
@@ -197,11 +212,19 @@ namespace View
                 if (verified)
                 {
                     LoginBackground.Visibility = Visibility.Hidden;
+                    //Get all the playlists from the current users into a playlistlistobject
+                    SideBarList.SetAllPlaylistsFromUser();
+
+                    Add_PlayLists_To_Left_Sidebar();
                 } else
                 {
                     email = Model.User.Email.ToString();
                     LoginGrid.Visibility = Visibility.Hidden;
                     VerifyGrid.Visibility = Visibility.Visible;
+                    //Get all the playlists from the current users into a playlistlistobject
+                    SideBarList.SetAllPlaylistsFromUser();
+
+                    Add_PlayLists_To_Left_Sidebar();
                 }
             } else
             {

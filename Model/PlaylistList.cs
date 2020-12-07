@@ -7,7 +7,8 @@ namespace Model
 {
     public class PlaylistList
     {
-        private List<Playlist> playlists = new List<Playlist>();
+
+        public List<Playlist> playlists { get; set; } = new List<Playlist>();
 
         public void AddPlaylistToList(Playlist playlist)
         {

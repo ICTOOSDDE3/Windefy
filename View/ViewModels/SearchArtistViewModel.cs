@@ -16,23 +16,26 @@ namespace View.ViewModels
         {
             items = new List<ArtistInfo>();
             DBConnection.OpenConnection();
-
-            SqlCommand cmd = new SqlCommand(null, DBConnection.Connection);
-            cmd.CommandText = "SELECT name, artistID FROM artist " +
+            
+            // Fetch all artists based on the search query
+            SqlCommand cmd = new SqlCommand(null, DBConnection.Connection)
+            {
+                CommandText = "SELECT name, artistID FROM artist " +
                 "WHERE name LIKE '%' + @que + '%' " +
                 "ORDER BY artistID " +
                 "OFFSET 0 ROWS " +
-                "FETCH NEXT 50 ROWS ONLY";
+                "FETCH NEXT 50 ROWS ONLY"
+            };
 
-            SqlParameter que = new SqlParameter("@que", System.Data.SqlDbType.VarChar, 255);
-            que.Value = q;
+            SqlParameter que = new SqlParameter("@que", System.Data.SqlDbType.VarChar, 255)
+            {
+                Value = q
+            };
 
             cmd.Parameters.Add(que);
-
             cmd.Prepare();
 
             SqlDataReader dataReader = cmd.ExecuteReader();
-
             while (dataReader.Read())
             {
                 items.Add(new ArtistInfo(Convert.ToString(dataReader["name"]),
@@ -45,6 +48,7 @@ namespace View.ViewModels
         }
     }
 
+    // Data template for artist info on the search screen
     public class ArtistInfo
     {
         public string Name { get; set; }

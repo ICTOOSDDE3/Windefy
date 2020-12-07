@@ -18,7 +18,7 @@ namespace Model
             this.is_Public = is_Public;
             this.ownerID = ownerID;
         }
-
+      
         public int playlistID { get; set; }
         public string title { get; set; }
         public DateTime release_date { get; set; }

@@ -1,6 +1,7 @@
 ﻿using Controller;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 
@@ -13,39 +14,44 @@ namespace View.ViewModels
         public SearchSongModel(string q)
         {
             ApacheConnection.Initialize();
-
-            items = new List<TrackInfo>();
             DBConnection.OpenConnection();
 
-            SqlCommand cmd = new SqlCommand(null, DBConnection.Connection);
-            cmd.CommandText ="SELECT track.title, duration, image_path, name, track.trackID trackID, playlist_track.playlistID FROM track_artist " +
-                "JOIN artist ON track_artist.artistID = artist.artistID " +
-                "JOIN track ON track_artist.trackID = track.trackID " +
+            // Initialize or empty the items
+            items = new List<TrackInfo>();
 
-                "JOIN playlist_track ON track.trackID = playlist_track.trackID " + 
 
-                "JOIN playlist ON playlist_track.playlistID = playlist.playlistID " +
-                "WHERE track.title LIKE '%' + @que + '%' AND(playlist.playlist_typeID = 0 OR playlist.playlist_typeID = 1) " +
+            // Fetch all tracks
+            SqlCommand cmd = new SqlCommand(null, DBConnection.Connection)
+            {
+                // Select needed variables from track, limiting to 50 results
+                CommandText = "SELECT title, duration, image_path, track.trackID, playlistID " +
+                "FROM track " +
+                "WHERE title LIKE '%' + @que + '%' " +
+                "JOIN playlist_track ON track.trackID = playlist_track.trackID " +
                 "ORDER BY track.trackID " +
                 "OFFSET 0 ROWS " +
-                "FETCH NEXT 50 ROWS ONLY";
+                "FETCH NEXT 50 ROWS ONLY"
+            };
 
-            SqlParameter que = new SqlParameter("@que", System.Data.SqlDbType.VarChar, 255);
-            que.Value = q;
+            SqlParameter que = new SqlParameter("@que", System.Data.SqlDbType.VarChar, 255)
+            {
+                Value = q
+            };
 
             cmd.Parameters.Add(que);
             cmd.Prepare();
 
+            // Fetch all rows based on the search query and put them in items
             SqlDataReader dataReader = cmd.ExecuteReader();
-
             while (dataReader.Read())
             {
                 TrackInfo trackInfo = new TrackInfo(Convert.ToString(dataReader["title"]),
                     Convert.ToInt32(dataReader["duration"]),
                     Convert.ToString(dataReader["image_path"]),
-                    Convert.ToString(dataReader["name"]),
+                    
                     Convert.ToInt32(dataReader["trackID"]),
                     Convert.ToInt32(dataReader["playlistID"]));
+
                 items.Add(trackInfo);
             }
 
@@ -53,6 +59,8 @@ namespace View.ViewModels
             DBConnection.CloseConnection();
         }
     }
+
+    // Data template for tracksinfo for the search screen
     public class TrackInfo
     {
         public int TrackID { get; set; }
@@ -62,9 +70,10 @@ namespace View.ViewModels
         public string ArtistName { get; set; }
         public int PlaylistID { get; set; }
 
-        public TrackInfo(string T, int D, string I, string A, int T_ID, int P_ID)
+
+        public TrackInfo(string T, int D, string I, int ID, int P_ID)
         {
-            TrackID = T_ID;
+            TrackID = ID;
             string seconds = (D % 60).ToString();
             if (seconds.Length == 1)
             {
@@ -74,8 +83,42 @@ namespace View.ViewModels
             Title = T;
             Duration = $"{ Math.Floor(Convert.ToDouble(D) / 60)}:{seconds}";
             ImagePath = $"{ApacheConnection.GetImageFullPath(I)}";
-            ArtistName = A;
             PlaylistID = P_ID;
+
+
+            // TODO: Make artistName an array instead of a string so that it can be
+            // linked to artist pages in the XAML
+            ArtistName = "";
+
+            
+            SqlConnection con = new SqlConnection($"Server = 127.0.0.1; Database = WindefyDB; User Id = SA; Password = {Passwords.GetPassword("DB")};");
+            con.Open();
+
+            // Fetch all artists that worked on a track based on the ID of the track
+            SqlCommand cmd = new SqlCommand(null, con)
+            {
+                CommandText = "SELECT name " +
+                "FROM artist " +
+                "WHERE artistID IN (" +
+                "   SELECT artistID " +
+                "   FROM track_artist " +
+                $"   WHERE trackID = {ID} " +
+                ")"
+            };
+
+            // Put all of the artists into a string
+            SqlDataReader dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+            {
+                ArtistName += Convert.ToString(dataReader["name"]) + ", ";
+            }
+
+            // Remove last 2 characters (', ') from the string
+            ArtistName = ArtistName[0..^2];
+
+            dataReader.Close();
+            con.Close();
+            con.Dispose();
         }
     }
 }

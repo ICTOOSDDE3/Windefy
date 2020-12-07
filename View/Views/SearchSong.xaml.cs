@@ -1,17 +1,8 @@
 ﻿using Controller;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Text;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Windows.Controls.Primitives;
 
 namespace View.Views
 {
@@ -20,6 +11,7 @@ namespace View.Views
     /// </summary>
     public partial class SearchSong : UserControl
     {
+        AddMusicToPlaylist addTrackToPlaylist = new AddMusicToPlaylist();
         public SearchSong()
         {
             InitializeComponent();
@@ -49,8 +41,21 @@ namespace View.Views
                     SingleTrackClicked.QueueTrackIDs.AddLast(test.TrackID);
                 }
             }
+         }
 
-
+        private void LikeButton_Click(object sender, RoutedEventArgs e)
+        {
+            var addToPlaylist = (ToggleButton)e.OriginalSource;
+            var data = addToPlaylist.DataContext as ViewModels.TrackInfo;
+            int trackid = data.trackID;
+            if (addTrackToPlaylist.FavoritesContainsTrack(trackid))
+            {
+                addTrackToPlaylist.InsertToFavorites(trackid);
+                Trace.WriteLine("added to playlist");
+            } else
+            {
+                Trace.WriteLine("already added to favorites");
+            }       
         }
     }
 }

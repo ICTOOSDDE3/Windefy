@@ -15,7 +15,6 @@
     <None Remove="Forward.png" />
     <None Remove="HeartChecked.png" />
     <None Remove="kruisje.png" />
-    <None Remove="logint button.png" />
     <None Remove="Pause.png" />
     <None Remove="Play.png" />
     <None Remove="Rectangle.png" />
@@ -27,8 +26,10 @@
     <None Remove="Volume.png" />
     <None Remove="loginbutton.png" />
     <None Remove="Plus.png" />
+    <None Remove="Views\Like.png" />
+    <None Remove="Views\LikeEmpty.png" />
   </ItemGroup>
-
+   
   <ItemGroup>
     <Page Remove="Styles\Texts.xaml" />
   </ItemGroup>
@@ -56,6 +57,7 @@
     <Resource Include="Forward.png" />
     <Resource Include="HeartChecked.png" />
     <Resource Include="kruisje.png" />
+
     <Resource Include="Pause.png" />
     <Resource Include="Play.png" />
     <Resource Include="Rectangle.png" />
@@ -67,6 +69,8 @@
     <Resource Include="loginbutton.png" />
     <Resource Include="Styles\Texts.xaml" />
     <Resource Include="Volume.png" />
+    <Resource Include="Views\Like.png" />
+    <Resource Include="Views\LikeEmpty.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -74,5 +78,4 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-
 </Project>
