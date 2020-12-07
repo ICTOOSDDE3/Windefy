@@ -30,8 +30,6 @@ namespace View
         private bool mediaPlaying = false;
         private bool rewind = false;
         private Model.Track CurrentTrack;
-        private Controller.AudioPath audioPath = new AudioPath();
-        private Controller.ImagePath imagePath = new ImagePath();
         private Controller.Track track = new Controller.Track();
         Register registerAccount = new Register();
         Login login = new Login();
@@ -42,6 +40,7 @@ namespace View
         public MainWindow()
         {
             DBConnection.Initialize();
+            ApacheConnection.Initialize();
             InitializeComponent();
             //DataContext = new Homepage();
             DataContext = new ViewModels.Artist(1);
@@ -467,8 +466,8 @@ namespace View
             MusicBar.DataContext = track.GetTrack(trackID);
             CurrentTrack = (Model.Track)MusicBar.DataContext;
             icArtistList.ItemsSource = CurrentTrack.Artists;
-            TrackImage.Source = new BitmapImage(new Uri(imagePath.GetImagePath(CurrentTrack.Image_path), UriKind.RelativeOrAbsolute));
-            mediaPlayer.Open(new Uri(audioPath.GetAudioPath(CurrentTrack.File_path)));
+            TrackImage.Source = new BitmapImage(new Uri(ApacheConnection.GetImageFullPath(CurrentTrack.Image_path), UriKind.RelativeOrAbsolute));
+            mediaPlayer.Open(new Uri(ApacheConnection.GetAudioFullPath(CurrentTrack.File_path)));
         }
 
         private void SearchBarTextChanged(object sender, TextChangedEventArgs e)
