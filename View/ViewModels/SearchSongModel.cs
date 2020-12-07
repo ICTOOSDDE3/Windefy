@@ -47,7 +47,6 @@ namespace View.ViewModels
                     Convert.ToInt32(dataReader["duration"]),
                     Convert.ToString(dataReader["image_path"]),
                     Convert.ToInt32(dataReader["trackID"]));
-
                 items.Add(trackInfo);
             }
 

@@ -45,6 +45,54 @@
         <ControlTemplate x:Key="ComboBoxTextBox" TargetType="TextBox">
             <Border x:Name="PART_ContentHost" Focusable="False" Background="{TemplateBinding Background}" />
         </ControlTemplate>
+
+        <Style x:Key="RoundedButton" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" 
+                        BorderThickness="3"
+                        Padding="4,2" 
+                        BorderBrush="#FFFF72" 
+                        CornerRadius="5" 
+                        Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#FF4F83CC" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="HoverOverPlaylistText" TargetType="Label">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Label">
+                        <Border Name="border" 
+                        BorderThickness="3"
+                        Padding="4,2" 
+                        BorderBrush="#FFFF72" 
+                        CornerRadius="0" 
+                        Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#FF4F83CC" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style x:Key="{x:Type ComboBox}" TargetType="ComboBox">
             <Setter Property="Template">
                 <Setter.Value>
@@ -160,13 +208,31 @@
 
                     <Grid Margin="0,331,0,0">
                         <Label FontSize="25" Content="Playlists" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                        <Button x:Name="Playlist_Plus_Button" Content="" Margin="0,10,9,0" Width="27" Height="27" BorderBrush="#00707070" Click="Playlist_Plus_Button_Click" HorizontalAlignment="Right" VerticalAlignment="Top">
+                            <Button.Background>
+                                <ImageBrush ImageSource="/Plus.png"/>
+                            </Button.Background>
+                        </Button>
+                        <ItemsControl x:Name="LeftSideBarPlayLists" Margin="0,0,0,-48">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Columns="1" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" Margin="25,30,0,0" VerticalAlignment="Center">
+                                        <Button x:Name="Playlist_Plus_Button" Content="" Width="42" Height="42" Style="{StaticResource RoundedButton}">
+                                            <Button.Background>
+                                                <ImageBrush ImageSource="/Assets/Images/mockSongImage.jpg"/>
+                                            </Button.Background>
+                                        </Button>
+                                        <Label Content="{Binding title}" FontFamily="Segoe" FontSize="20" Style="{StaticResource HoverOverPlaylistText}" ToolTip="{Binding title}"></Label>
 
-                        <Image Height="30" Width="30" Source="Assets/images/mockSongImage.jpg" Margin="48,57,207,331" />
-                        <Label FontSize="20" Content="Mood" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.587,-0.614" Margin="86,54,0,0"/>
-                        <Image Height="30" Width="30" Source="Assets/images/mockSongImage.jpg" Margin="48,101,207,287" />
-                        <Label FontSize="20" Content="The best album" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.587,-0.614" Margin="86,98,0,0"/>
-                        <Image Height="30" Width="30" Source="Assets/images/mockSongImage.jpg" Margin="48,145,207,243" />
-                        <Label FontSize="20" Content="Good songs for cool..." HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.587,-0.614" Margin="86,142,0,0"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </Grid>
                 </Grid>
             </ScrollViewer>
@@ -174,7 +240,11 @@
         <Grid Grid.Row="0" Grid.Column="1" Background="White">
             <ContentControl Content="{Binding}" />
             <Border CornerRadius="5"/>
-            <Button x:Name="Login_Button" Content="" Margin="0,24,85,0" Width="44" Height="44" BorderBrush="#00707070" Click="Login_Button_Click" HorizontalAlignment="Right" VerticalAlignment="Top" />
+            <Button x:Name="Account_Button" Content="" Margin="0,24,28,0" Width="44" Height="44" BorderBrush="#00707070" Click="Account_Button_Click" HorizontalAlignment="Right" VerticalAlignment="Top">
+                <Button.Background>
+                    <ImageBrush ImageSource="/loginButton.png"/>
+                </Button.Background>
+            </Button>
             <TextBox x:Name="SearchBar" Style="{DynamicResource TextBoxStyle1}" Tag="Search for your next favorite thing" Width="490" Height="35" FontSize="18" Margin="38,33,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" TextChanged="SearchBarTextChanged" Background="#FF4F83CC" BorderBrush="#FF4F83CC" Foreground="White" CaretBrush="#FF4F83CC" OpacityMask="#FF4F83CC" TextAlignment="Justify" SelectionBrush="#FFFFFF72" SelectionTextBrush="Black" BorderThickness="0,0,0,0" />
             <ComboBox x:Name="SearchDropdown" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Height="35" SelectedIndex="0" BorderBrush="#FF4F83CC" Foreground="White" Background="#FF4F83CC" FontSize="20" FontStyle="Normal" Margin="528,33,0,0">
                 <System:String>Artist</System:String>
@@ -182,11 +252,6 @@
                 <System:String>Playlist</System:String>
                 <System:String>Track</System:String>
             </ComboBox>
-            <Button x:Name="Account_Button" Margin="0,24,28,0" Width="44" Height="44" BorderBrush="#00707070" Click="Account_Button_Click" HorizontalAlignment="Right" VerticalAlignment="Top">
-                <Button.Background>
-                    <ImageBrush ImageSource="/logint button.png"/>
-                </Button.Background>
-            </Button>
         </Grid>
         <Grid Grid.ColumnSpan="5">
             <WrapPanel x:Name="MusicBar" Background="Transparent" Height="96" VerticalAlignment="Bottom" Margin="-6,0,6,-97" >
@@ -232,15 +297,13 @@
                     <Slider Value="50" Maximum="100" Minimum="0" ValueChanged="Volume_ValueChanged" x:Name="Volume" Width="142" Height="9" Margin="100,0,0,0" />
                 </WrapPanel>
             </WrapPanel>
-
         </Grid>
-
 
         <!-- the loginBackGround has to be visible if you want to change the loginGrid, RegisterGrid and the verify grid (put those grids on visible aswell) -->
         <Grid x:Name="LoginBackground" Background="#7F4F83CC" Grid.ColumnSpan="2" Grid.RowSpan="2" Visibility="Hidden" Margin="1,0,-1,-16" d:IsHidden="True">
             <!-- Login Grid and its components-->
             <Grid x:Name="LoginGrid" VerticalAlignment="Center" Width="552" Height="283" Background="White" Visibility="Visible">
-                <Border CornerRadius="30" Margin="95,176,94,0" VerticalAlignment="Top" Width="363" Height="34" Background="#FF4F83CC" RenderTransformOrigin="0.5,0.5">
+                <Border CornerRadius="30" Margin="95,176,95,0" VerticalAlignment="Top" Width="363" Height="34" Grid.ColumnSpan="3" Background="#FF4F83CC" RenderTransformOrigin="0.5,0.5">
                     <Button Content="Login" VerticalAlignment="Top" Width="363" Height="34" Grid.ColumnSpan="2" Background="#004F83CC" Foreground="White" RenderTransformOrigin="0.5,0.5" BorderBrush="#00707070" HorizontalAlignment="Center" Click="Login_Click"/>
                 </Border>
                 <Button Content="Register" HorizontalAlignment="Center" Margin="0,227,0,0" VerticalAlignment="Top" Width="80" Height="30" Background="#00DDDDDD" BorderBrush="#00707070" Foreground="#FF4F83CC" Click="Register_Click"/>
@@ -254,7 +317,7 @@
 
             <!-- Register Grid and its components -->
             <Grid x:Name="RegisterGrid" Width="588" Height="605" Background="White" Visibility="Hidden">
-                <TextBox x:Name="Email_Input" HorizontalAlignment="Center" Margin="0,176,0,0" Style="{StaticResource LoginInputs}" Tag="Email@example.com" TextWrapping="Wrap" VerticalAlignment="Top" Width="376" Height="42" Background="#7F4F83CC" TextAlignment="Center" FontSize="24"/>
+                <TextBox x:Name="Email_Input" HorizontalAlignment="Center" Margin="0,176,0,0" Style="{StaticResource LoginInputs}" Tag="Email@example.com" TextWrapping="Wrap" VerticalAlignment="Top" Width="375" Height="42" Background="#7F4F83CC" TextAlignment="Center" FontSize="24"/>
                 <TextBox x:Name="Username_Input" HorizontalAlignment="Center" Margin="0,238,0,325" Style="{StaticResource LoginInputs}" Tag="Username" TextWrapping="Wrap" Width="376" Background="#7F4F83CC" FontSize="24" TextAlignment="Center" Foreground="#7F000000"/>
                 <PasswordBox x:Name="Password_Input" HorizontalAlignment="Center" Margin="0,300,0,0" Tag="Password" VerticalAlignment="Top" Width="375" Height="42" Background="#7F4F83CC" FontSize="24" Foreground="Black"/>
                 <PasswordBox x:Name="PasswordRepeat_Input" HorizontalAlignment="Center" Margin="0,362,0,0" Tag="Repeat password" VerticalAlignment="Top" Width="375" Height="42" Background="#7F4F83CC" FontSize="24"/>
@@ -284,6 +347,31 @@
                 <Button x:Name="Close_Account_Details" Content="X" HorizontalAlignment="Left" Margin="534,23,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.48,0.377" Width="22" Foreground="Red" Background="{x:Null}" BorderBrush="{x:Null}" Click="Close_Login_Button_Click" FontWeight="Bold"/>
                 <Border CornerRadius="30" Margin="112,480,112,0" VerticalAlignment="Top" Width="363" Height="34" Background="#FF4F83CC" RenderTransformOrigin="0.5,0.5">
                     <Button x:Name="AccountDetailsButton" Content="Update" HorizontalAlignment="Center" VerticalAlignment="Center" Width="384" Height="48" Background="#00DDDDDD" BorderBrush="#00707070" Foreground="White" Click="AccountDetails_Button_Click"/>
+                </Border>
+            </Grid>
+
+            <Grid x:Name="AddPlaylistGrid" Width="588" Height="340" Background="White" Visibility="Hidden" >
+                <TextBox x:Name="Details_Title_Input" HorizontalAlignment="Left" Margin="100,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="375" Height="42" Background="#7F4F83CC" TextAlignment="Center" FontSize="24" IsEnabled="True"/>
+
+                <CheckBox x:Name = "AddPlaylist_Private" Content ="Is public" HorizontalAlignment = "Left" 
+                 Margin = "100,186,0,0" VerticalAlignment = "Top" Width = "100" Height="56" RenderTransformOrigin="0.5,0.5">
+                    <CheckBox.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="2" ScaleY="2"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform X="50" Y="30"/>
+                        </TransformGroup>
+                    </CheckBox.RenderTransform>
+                </CheckBox>
+
+                <TextBlock HorizontalAlignment="Center" Margin="0,23,0,0" Text="Create Playlist" TextWrapping="Wrap" VerticalAlignment="Top" Height="42" Width="376" TextAlignment="Center" FontSize="32" FontWeight="Bold"/>
+                <TextBlock HorizontalAlignment="Left"  Margin="106,90,0,0" Text="Title:" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="110" FontSize="24"></TextBlock>
+                <TextBlock x:Name="AddPlaylist_Comment" HorizontalAlignment="Left"  Margin="106,286,0,0" Text="*Please add a title" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="289" FontSize="24" Opacity="0.6" Visibility="Hidden"></TextBlock>
+
+                <Button x:Name="Close_AddPlaylist_Details" Content="X" HorizontalAlignment="Left" Margin="534,23,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.48,0.377" Width="22" Foreground="Red" Background="{x:Null}" BorderBrush="{x:Null}" Click="Close_AddPlaylist_Button_Click" FontWeight="Bold"/>
+                <Border CornerRadius="30" Margin="97,247,110,0" VerticalAlignment="Top" Width="363" Height="34" Background="#FF4F83CC" RenderTransformOrigin="0.5,0.5">
+                    <Button x:Name="PlaylistDetailsButton" Content="Create" HorizontalAlignment="Center" VerticalAlignment="Center" Width="384" Height="48" Background="#00DDDDDD" BorderBrush="#00707070" Foreground="White" Click="PlaylistDetails_Button_Click"/>
                 </Border>
             </Grid>
 

@@ -9,9 +9,16 @@ namespace Controller
     {
         public bool IsLogin(string email, string password)
         {
-            bool passed = false;
-            DBConnection.Initialize();
+            // check if there is an email similar to the given email in the database
+            //password to byte
+            // check if passwords are equal
+            // return true if so
+
+
+            //
+            //DBConnection.Initialize();
             DBConnection.OpenConnection();
+                bool passed = false;
             try
             {
                 string query = $"SELECT * FROM users WHERE email = '{email}'";

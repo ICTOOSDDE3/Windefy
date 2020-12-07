@@ -305,7 +305,7 @@
 
 
 
-                            <ToggleButton x:Name="LikeButton" Width="40" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" OpacityMask="{x:Null}" Style="{StaticResource MyToggleButtonStyle}" ToolTip="Add this number to favorites" >
+                            <ToggleButton x:Name="LikeButton" Width="40" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" OpacityMask="{x:Null}" Style="{StaticResource MyToggleButtonStyle}" ToolTip="Add this number to playlist" >
                                 <Image>
                                     <Image.Style>
                                         <Style TargetType="Image">
@@ -328,6 +328,28 @@
                                 </Image>
 
                             </ToggleButton>
+
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                                <ItemsControl ItemsSource="{Binding items}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid Columns="3" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Vertical" Margin="25,100,0,0" Width="300" VerticalAlignment="Top">
+                                                <Button>Button 1</Button>
+                                                <Button>Button 2</Button>
+                                                <Button>Button 3</Button>
+                                                <Button>Button 4</Button>
+                                                <Button>Button 5</Button>
+                                                <Button>Button 6</Button>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </ScrollViewer>
 
 
 

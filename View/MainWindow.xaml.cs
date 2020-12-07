@@ -38,6 +38,7 @@ namespace View
 
         public MainWindow()
         {
+            DBConnection.Initialize();
             InitializeComponent();
             DataContext = new Homepage();
             MusicBar.DataContext = track.GetTrack(210);
@@ -45,9 +46,8 @@ namespace View
             //icArtistList.ItemsSource = CurrentTrack.ArtistIDs;
 
             string strin = CurrentTrack.File_path;
-            
-            mediaPlayer.Open(new Uri(audioPath.GetAudioPath(strin)));
 
+            mediaPlayer.Open(new Uri(audioPath.GetAudioPath(strin)));
             mediaPlayer.MediaEnded += MediaPlayer_MediaEnded;
             DispatcherTimer timer = new DispatcherTimer();
 
@@ -56,12 +56,58 @@ namespace View
             timer.Start();
         }
 
+        private void Add_PlayLists_To_Left_Sidebar()
+        {
+            LeftSideBarPlayLists.ItemsSource = SideBarList.sideBarList.playlists;
+        }
+
         private void Login_Button_Click(object sender, RoutedEventArgs e)
         {
             LoginBackground.Visibility = Visibility.Visible;
             LoginGrid.Visibility = Visibility.Visible;
         }
+        private void Playlist_Plus_Button_Click(object sender, RoutedEventArgs e)
+        {
+            LoginBackground.Visibility = Visibility.Visible;
+            AddPlaylistGrid.Visibility = Visibility.Visible;
+        }
+        //A new playlist wants to be created
+        private void PlaylistDetails_Button_Click(object sender, RoutedEventArgs e)
+        {
+            string title = Details_Title_Input.Text;
+            bool isprivate = (bool)AddPlaylist_Private.IsChecked;
+            //Check if title is filled out
+            if(title != null)
+            {
+                Controller.Playlist newPlaylist = new Controller.Playlist();
 
+                newPlaylist.CreateUserPlaylist(title, isprivate);
+
+                //Call controller to make playlist
+                LoginBackground.Visibility = Visibility.Hidden;
+                AddPlaylistGrid.Visibility = Visibility.Hidden;
+
+                //Load all the playlists from the db
+                SideBarList.SetAllPlaylistsFromUser();
+                Add_PlayLists_To_Left_Sidebar();
+
+                //Reset the sidebar
+                LeftSideBarPlayLists.ItemsSource = null;
+                //Load all the playlists into the sidebar
+                LeftSideBarPlayLists.ItemsSource = SideBarList.sideBarList.playlists;
+
+            }
+            //Give error if no title is filled in
+            else
+            {
+                AddPlaylist_Comment.Visibility = Visibility.Visible;
+            }                        
+        }
+        private void Close_AddPlaylist_Button_Click(object sender, RoutedEventArgs e)
+        {
+            LoginBackground.Visibility = Visibility.Hidden;
+            AddPlaylistGrid.Visibility = Visibility.Hidden;
+        }
         private void Account_Button_Click(object sender, RoutedEventArgs e)
         {
             LoginBackground.Visibility = Visibility.Visible;
@@ -153,7 +199,7 @@ namespace View
             }
             else
             {
-                Trace.WriteLine("Code not valid!");
+                Verification_Headsup.Content = "Code not valid!";
             }
         }
 
@@ -165,11 +211,19 @@ namespace View
                 if (verified)
                 {
                     LoginBackground.Visibility = Visibility.Hidden;
+                    //Get all the playlists from the current users into a playlistlistobject
+                    SideBarList.SetAllPlaylistsFromUser();
+
+                    Add_PlayLists_To_Left_Sidebar();
                 } else
                 {
                     email = Model.User.Email.ToString();
                     LoginGrid.Visibility = Visibility.Hidden;
                     VerifyGrid.Visibility = Visibility.Visible;
+                    //Get all the playlists from the current users into a playlistlistobject
+                    SideBarList.SetAllPlaylistsFromUser();
+
+                    Add_PlayLists_To_Left_Sidebar();
                 }
             } else
             {
@@ -331,6 +385,7 @@ namespace View
         {
             rewind = false;
         }
+
 
         private void SearchBarTextChanged(object sender, TextChangedEventArgs e)
         {
