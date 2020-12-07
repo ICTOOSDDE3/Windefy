@@ -5,11 +5,11 @@ namespace Test
     [TestFixture]
     class Controller_Artist_GetArtist
     {
-        Controller.Artist controller;
+        Artist controller;
         [SetUp]
         public void Init()
         {
-            controller = new Controller.Artist();
+            controller = new Artist();
             DBConnection.Initialize();
         }
         /// <summary>

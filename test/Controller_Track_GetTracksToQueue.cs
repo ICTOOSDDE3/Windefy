@@ -9,11 +9,11 @@ namespace Test
     [TestFixture]
     class Controller_Track_GetTracksToQueue
     {
-        Controller.Track controller;
+        Track controller;
         [SetUp]
         public void Init()
         {
-            controller = new Controller.Track();
+            controller = new Track();
             DBConnection.Initialize();
         }
         [TestCase("SELECT trackID FROM playlist_track WHERE playlistID = -1 ")]

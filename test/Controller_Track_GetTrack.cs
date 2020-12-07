@@ -10,7 +10,7 @@ namespace Test
         [SetUp]
         public void Init()
         {
-            controller = new Controller.Track();
+            controller = new Track();
             DBConnection.Initialize();
         }
         /// <summary>
