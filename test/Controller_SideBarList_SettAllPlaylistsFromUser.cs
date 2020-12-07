@@ -1,5 +1,6 @@
 ﻿using Controller;
 using NUnit.Framework;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 
 namespace Test
@@ -22,6 +23,8 @@ namespace Test
             var result = cmd.ExecuteScalar();
             DBConnection.CloseConnection();
 
+            SideBarList.sideBarList.playlists = null;
+            SideBarList.sideBarList.playlists = new List<Model.Playlist>();
             SideBarList.SetAllPlaylistsFromUser();
             
             Assert.AreEqual(result, SideBarList.sideBarList.playlists.Count);
