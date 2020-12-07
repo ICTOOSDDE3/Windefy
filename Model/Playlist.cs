@@ -18,15 +18,15 @@ namespace Model
             this.is_Public = is_Public;
             this.ownerID = ownerID;
         }
-
-        private int playlistID { get; set; }
+      
+        public int playlistID { get; set; }
         public string title { get; set; }
-        private DateTime release_date { get; set; }
-        private int listens { get; set; }
-        private PlaylistType playlist_type {get; set;}
-        private string information { get; set; }
-        private bool is_Public { get; set; }
-        private int ownerID { get; set; }
+        public DateTime release_date { get; set; }
+        public int listens { get; set; }
+        public PlaylistType playlist_type {get; set;}
+        public string information { get; set; }
+        public bool is_Public { get; set; }
+        public int ownerID { get; set; }
 
         
     }

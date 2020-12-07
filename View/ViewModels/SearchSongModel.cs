@@ -19,13 +19,15 @@ namespace View.ViewModels
             // Initialize or empty the items
             items = new List<TrackInfo>();
 
+
             // Fetch all tracks
             SqlCommand cmd = new SqlCommand(null, DBConnection.Connection)
             {
                 // Select needed variables from track, limiting to 50 results
-                CommandText = "SELECT title, duration, image_path, trackID " +
+                CommandText = "SELECT title, duration, image_path, track.trackID, playlistID " +
                 "FROM track " +
                 "WHERE title LIKE '%' + @que + '%' " +
+                "JOIN playlist_track ON track.trackID = playlist_track.trackID " +
                 "ORDER BY track.trackID " +
                 "OFFSET 0 ROWS " +
                 "FETCH NEXT 50 ROWS ONLY"
@@ -46,7 +48,10 @@ namespace View.ViewModels
                 TrackInfo trackInfo = new TrackInfo(Convert.ToString(dataReader["title"]),
                     Convert.ToInt32(dataReader["duration"]),
                     Convert.ToString(dataReader["image_path"]),
-                    Convert.ToInt32(dataReader["trackID"]));
+                    
+                    Convert.ToInt32(dataReader["trackID"]),
+                    Convert.ToInt32(dataReader["playlistID"]));
+
                 items.Add(trackInfo);
             }
 
@@ -63,8 +68,10 @@ namespace View.ViewModels
         public string Duration { get; set; }
         public string ImagePath { get; set; }
         public string ArtistName { get; set; }
+        public int PlaylistID { get; set; }
 
-        public TrackInfo(string T, int D, string I, int ID)
+
+        public TrackInfo(string T, int D, string I, int ID, int P_ID)
         {
             TrackID = ID;
             string seconds = (D % 60).ToString();
@@ -76,6 +83,7 @@ namespace View.ViewModels
             Title = T;
             Duration = $"{ Math.Floor(Convert.ToDouble(D) / 60)}:{seconds}";
             ImagePath = $"{ApacheConnection.GetImageFullPath(I)}";
+            PlaylistID = P_ID;
 
 
             // TODO: Make artistName an array instead of a string so that it can be

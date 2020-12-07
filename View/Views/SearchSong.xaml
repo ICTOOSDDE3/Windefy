@@ -262,7 +262,7 @@
              
     <Grid Background="White">
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" >
-            <ItemsControl ItemsSource="{Binding items}">
+            <ItemsControl ItemsSource="{Binding items}" Name="items">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Columns="2" />
@@ -271,7 +271,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal" Margin="25,100,0,0" VerticalAlignment="Top" >
-                            <Button Width="75" Height="75" Style="{StaticResource MyButtonStyleImage}">
+                            <Button Width="75" Height="75" Style="{StaticResource MyButtonStyleImage}" Click="Track_Click">
                                 <Button.Background>
                                     <ImageBrush ImageSource="{Binding ImagePath}" Stretch="Fill"/>
                                 </Button.Background>
@@ -285,8 +285,8 @@
 
                             <StackPanel Orientation="Vertical" Width="300" >
                                 <Border Height="50">
-                                    <Button Height="50" Foreground="{x:Null}" BorderBrush="{x:Null}" Background="{x:Null}" Style="{StaticResource MyButtonStyle}" HorizontalAlignment="Left" ToolTip="{Binding Title}">
-                                        <Label Content="{Binding Title}"   FontWeight="Bold" FontFamily="Bahnschrift Light SemiCondensed" FontSize="20"/>
+                                    <Button Height="50" Foreground="{x:Null}" BorderBrush="{x:Null}" Background="{x:Null}" Style="{StaticResource MyButtonStyle}" HorizontalAlignment="Left" Click="Track_Click">
+                                        <Label Content="{Binding Title}" FontWeight="Bold" FontFamily="Bahnschrift Light SemiCondensed" FontSize="20"/>
                                     </Button>
                                 </Border>
 
@@ -300,7 +300,6 @@
                             <Border Width="75" Height="50" Margin="0,15,0,0" >
                                 <Label Content="{Binding Duration}"   FontWeight="Bold" FontFamily="Bahnschrift Light SemiCondensed" FontSize="20"/>
                             </Border>
-
                             <ToggleButton x:Name="LikeButton" Width="40" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" OpacityMask="{x:Null}" Style="{StaticResource MyToggleButtonStyle}" ToolTip="Add this number to favorites" Click="LikeButton_Click">
                                 <Image>
                                     <Image.Style>

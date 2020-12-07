@@ -14,7 +14,5 @@ namespace Model
         public string Location { get; set; }
         public DateTime active_year_begin { get; set; }
         public DateTime active_year_end { get; set; }
-
-
     }
 }

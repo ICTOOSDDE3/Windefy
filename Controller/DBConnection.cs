@@ -12,6 +12,7 @@ namespace Controller
         private static bool isInitialized = false;
         private static ForwardedPortLocal PortFwld = new ForwardedPortLocal("127.0.0.1", 1433, "127.0.0.1", 1433);
         private static PasswordConnectionInfo ConnectionInfo = new PasswordConnectionInfo("145.44.235.109", "student", Passwords.GetPassword("DB"));
+
         public static SqlConnection Connection
         {
             get;

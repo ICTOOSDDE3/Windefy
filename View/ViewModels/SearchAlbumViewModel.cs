@@ -21,6 +21,7 @@ namespace View.ViewModels
 
                 items = new List<PlaylistInfo>();
 
+
                 // Get playlists based on query
                 SqlCommand cmd = new SqlCommand(null, DBConnection.Connection)
                 {
@@ -59,6 +60,7 @@ namespace View.ViewModels
 
                 items = new List<PlaylistInfo>();
                 DBConnection.OpenConnection();
+
 
                 SqlCommand cmd = new SqlCommand(null, DBConnection.Connection)
                 {

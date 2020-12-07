@@ -12,12 +12,36 @@ namespace View.Views
     public partial class SearchSong : UserControl
     {
         AddMusicToPlaylist addTrackToPlaylist = new AddMusicToPlaylist();
-        public int userID = Model.User.UserID;
         public SearchSong()
         {
             InitializeComponent();
             
         }
+        private void Track_Click(object sender, RoutedEventArgs e)
+        {
+            var x = (Button)e.OriginalSource;
+            var data = x.DataContext as ViewModels.TrackInfo;
+
+            TrackQueue.SetQueue(data.TrackID, data.PlaylistID);
+            
+            SingleTrackClicked.TrackID = data.TrackID;
+            SingleTrackClicked.TrackClicked = true;
+            bool itemData = false;
+
+            SingleTrackClicked.QueueTrackIDs.Clear();
+            foreach (var item in items.Items)
+            {
+                if (item == data)
+                {
+                    itemData = true;
+                }
+                if (item != data && itemData)
+                {
+                    var test = item as ViewModels.TrackInfo;
+                    SingleTrackClicked.QueueTrackIDs.AddLast(test.TrackID);
+                }
+            }
+         }
 
         private void LikeButton_Click(object sender, RoutedEventArgs e)
         {
@@ -31,13 +55,7 @@ namespace View.Views
             } else
             {
                 Trace.WriteLine("already added to favorites");
-            }
-                
-        }
-
-        private void PlaylistStackPanel(object sender, RoutedEventArgs e)
-        {
-            var playlistStackPanel = (StackPanel)e.OriginalSource;
+            }       
         }
     }
 }
