@@ -1,13 +1,13 @@
-﻿<UserControl x:Class="View.Views.SearchArtist"
+﻿<UserControl x:Class="View.Views.SearchAlbum"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:View.Views" xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:local="clr-namespace:View.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="1024" d:DesignWidth="1140">
-
+             d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
+
         <SolidColorBrush x:Key="StandardBorderBrush" Color="#888" />
         <SolidColorBrush x:Key="StandardBackgroundBrush" Color="Black" />
         <SolidColorBrush x:Key="HoverBorderBrush" Color="#DDD" />
@@ -192,17 +192,13 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        
                         <Border Name="border" 
                         BorderThickness="3"
-                        BorderBrush="White"  
-                        Background="{TemplateBinding Background}"
-                        CornerRadius="360">
-                            <Ellipse Name="Ellipse">
-                                <Ellipse.Fill>
-                                    <ImageBrush ImageSource="../Assets/Images/mockSongImage.jpg"/>
-                                </Ellipse.Fill>
-                            </Ellipse>
+                        Padding="4,2" 
+                        BorderBrush="White" 
+                        CornerRadius="3" 
+                        Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
@@ -214,46 +210,133 @@
             </Setter>
         </Style>
 
+        <Style x:Key="MyButtonStyle" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" 
+                        BorderThickness="1"
+                        Padding="4,2" 
+                        BorderBrush="White" 
+                        CornerRadius="3" 
+                        Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="yellow" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="MyToggleButtonStyle" TargetType="ToggleButton">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border Name="border" 
+                        BorderThickness="0"
+                        Padding="4,2" 
+                        BorderBrush="White" 
+                        CornerRadius="3" 
+                        Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="Black" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
     </UserControl.Resources>
 
-
-
     <Grid Background="White">
-        
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" >
             <ItemsControl ItemsSource="{Binding items}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <UniformGrid Columns="3" />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                        <StackPanel Orientation="Vertical" Margin="25,100,0,0" VerticalAlignment="Top">
-                            <Button x:Name="btnLight" Width="200" Height="200" Style="{StaticResource MyButtonStyleImage}" >
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="2" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Margin="25,100,0,0" VerticalAlignment="Top" >
+                            <Button Width="75" Height="75" Style="{StaticResource MyButtonStyleImage}">
+                                <Button.Background>
+                                    <ImageBrush ImageSource="../Assets/Images/mockSongImage.jpg" Stretch="Fill"/>
+                                </Button.Background>
 
-                                <!--<Button.Template>
-                                    <ControlTemplate>
-                                        <Ellipse Name="Ellipse">
-                                            <Ellipse.Fill>
-                                                <ImageBrush ImageSource="../Assets/Images/mockSongImage.jpg"/>
-                                            </Ellipse.Fill>
-                                        </Ellipse>
-                                    </ControlTemplate>
-                                </Button.Template>-->
-
-
+                                <Button.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="5"/>
+                                    </Style>
+                                </Button.Resources>
                             </Button>
 
+                            <StackPanel Orientation="Vertical" Width="300">
+                                <Border  Height="50">
+                                    <Button Height="50" Foreground="{x:Null}" BorderBrush="{x:Null}" Background="{x:Null}" Style="{StaticResource MyButtonStyle}" HorizontalAlignment="Left" ToolTip="{Binding Title}">
+                                        <Label Content="{Binding Title}" FontWeight="Bold" FontFamily="Bahnschrift Light SemiCondensed" FontSize="20"/>
+                                    </Button>
+                                </Border>
+
+                                <Border Height="50">
+                                    <Button Height="50" Foreground="{x:Null}" BorderBrush="{x:Null}" Background="{x:Null}" Style="{StaticResource MyButtonStyle}" HorizontalAlignment="Left" ToolTip="{Binding ArtistName}">
+                                        <Label Content="{Binding ArtistName}" FontWeight="Normal" FontFamily="Bahnschrift Light SemiCondensed" FontSize="16"/>
+                                    </Button>
+                                </Border>
+                            </StackPanel>
+
+                            <Border Width="75" Height="50" Margin="0,15,0,0" >
+                                <Label Content="{Binding Quantity}" FontWeight="Bold" FontFamily="Bahnschrift Light SemiCondensed" FontSize="20" ToolTip="Amount of songs in album/playlist"/>
+                            </Border>
 
 
-                            <Label Content="{Binding Name}"   FontWeight="Bold" FontFamily="Bahnschrift Light SemiCondensed" FontSize="20" ToolTip="{Binding Name}" HorizontalAlignment="Center"/>
+
+
+
+                            <ToggleButton x:Name="LikeButton" Width="40" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" OpacityMask="{x:Null}" Style="{StaticResource MyToggleButtonStyle}" ToolTip="Add this number to favorites" >
+                                <Image>
+                                    <Image.Style>
+                                        <Style TargetType="Image">
+                                            <Style.Triggers>
+                                                <DataTrigger
+                                                    Binding="{Binding ElementName=LikeButton, Path=IsChecked}"
+                                                    Value="True">
+                                                    <Setter Property="Source"
+                                                            Value="../Assets/Images/Like.png"/>
+                                                </DataTrigger>
+                                                <DataTrigger
+                                                    Binding="{Binding ElementName=LikeButton, Path=IsChecked}"
+                                                    Value="False">
+                                                    <Setter Property="Source"
+                                                            Value="../Assets/Images/LikeEmpty.png"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Image.Style>
+                                </Image>
+
+                            </ToggleButton>
+
+
+
+
                         </StackPanel>
-                        
+
                     </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </ScrollViewer>
     </Grid>
 </UserControl>

@@ -35,10 +35,11 @@ namespace View
         Register registerAccount = new Register();
         Login login = new Login();
         private string email = "";
+
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new SearchSongModel();
+            DataContext = new Homepage();
             MusicBar.DataContext = track.GetTrack(210);
             CurrentTrack = (Model.Track)MusicBar.DataContext;
             //icArtistList.ItemsSource = CurrentTrack.ArtistIDs;
@@ -329,6 +330,38 @@ namespace View
         private void btnRewind_Unchecked(object sender, RoutedEventArgs e)
         {
             rewind = false;
+        }
+
+        private void SearchBarTextChanged(object sender, TextChangedEventArgs e)
+        {
+            string searchBarValue = SearchBar.Text;
+
+            if (searchBarValue.Length > 2)
+            {
+                string dropDownValue = SearchDropdown.SelectedItem.ToString();
+
+                // If the searchvalue is 3 characters or more, search
+                switch (dropDownValue)
+                {
+                    case "Artist":
+                        DataContext = new SearchArtistViewModel(searchBarValue);
+                        break;
+                    case "Album":
+                        DataContext = new SearchAlbumViewModel(searchBarValue, false);
+                        break;
+                    case "Playlist":
+                        DataContext = new SearchAlbumViewModel(searchBarValue, true);
+                        break;
+                    default:
+                        // Track as default
+                        DataContext = new SearchSongModel(searchBarValue);
+                        break;
+                }
+            }
+            else
+            {
+                DataContext = new Homepage();
+            }
         }
     }
 }
