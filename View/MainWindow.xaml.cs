@@ -37,7 +37,7 @@ namespace View
         Login login = new Login();
         private string email = "";
         private int playlistID;
-        private int clickedTrackID = 0;
+        private bool rewFor;
 
         public MainWindow()
         {
@@ -228,15 +228,20 @@ namespace View
             {
                 CurrentTime.Content = mediaPlayer.Position.ToString(@"mm\:ss");
             }
-            if (clickedTrackID != TrackClicked.TrackID)
+            if (SingleTrackClicked.TrackClicked)
             {
-                clickedTrackID = TrackClicked.TrackID;
-                UpdateMusicBar(clickedTrackID);
-                tbPlayPause.IsChecked = true;
-                mediaPlayer.Play();
-
+                clickedTrackUpdate();
             }
         }
+
+        private void clickedTrackUpdate()
+        {
+            SingleTrackClicked.TrackClicked = false;
+            UpdateMusicBar(SingleTrackClicked.TrackID);
+            tbPlayPause.IsChecked = true;
+            mediaPlayer.Play();
+        }
+
         /// <summary>
         /// Loads the next track and plays it if play is toggled
         /// </summary>
@@ -244,11 +249,28 @@ namespace View
         /// <param name="e"></param>
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
-            UpdateMusicBar(TrackQueue.Dequeue());
-
-            if (mediaPlaying)
+            if (SingleTrackClicked.QueueTrackIDs.Count > 0)
             {
-                mediaPlayer.Play();
+                rewFor = true;
+
+                UpdateMusicBar(SingleTrackClicked.QueueTrackIDs.First());
+
+                if (mediaPlaying)
+                {
+                    mediaPlayer.Play();
+                }
+            }
+            else if (TrackQueue.trackQueue.Count() > 0) { 
+                UpdateMusicBar(TrackQueue.Dequeue());
+
+                if (mediaPlaying)
+                {
+                    mediaPlayer.Play();
+                }
+            }
+            else
+            {
+                mediaPlayer.Close();
             }
         }
         /// <summary>
@@ -258,10 +280,31 @@ namespace View
         /// <param name="e"></param>
         private void btnPrev_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            UpdateMusicBar(TrackHistory.trackHistory.Pop());
-
-            if (mediaPlaying)
+            if (TrackHistory.trackHistory.Count > 0)
             {
+                rewFor = false;
+
+                SingleTrackClicked.QueueTrackIDs.AddFirst(CurrentTrack.TrackID);
+
+                UpdateMusicBar(TrackHistory.trackHistory.Pop());
+
+                if (mediaPlaying)
+                {
+                    mediaPlayer.Play();
+                }
+            }
+            else if (TrackQueue.trackQueue.Count() > 0)
+            {
+                UpdateMusicBar(TrackHistory.trackHistory.Pop());
+
+                if (mediaPlaying)
+                {
+                    mediaPlayer.Play();
+                }
+            }
+            else
+            {
+                mediaPlayer.Stop();
                 mediaPlayer.Play();
             }
         }
@@ -301,11 +344,29 @@ namespace View
                 mediaPlayer.Stop();
                 mediaPlayer.Play();
             }
+            else if (SingleTrackClicked.QueueTrackIDs.Count > 0)
+            {
+                rewFor = true;
+
+                UpdateMusicBar(SingleTrackClicked.QueueTrackIDs.First());
+
+                if (mediaPlaying)
+                {
+                    mediaPlayer.Play();
+                }
+            }
+            else if (TrackQueue.trackQueue.Count() > 0)
+            {
+                UpdateMusicBar(TrackQueue.Dequeue());
+
+                if (mediaPlaying)
+                {
+                    mediaPlayer.Play();
+                }
+            }
             else
             {
-
-                UpdateMusicBar(TrackQueue.Dequeue());
-                mediaPlayer.Play();
+                mediaPlayer.Close();
             }
         }
 
@@ -388,31 +449,25 @@ namespace View
             //TrackQueue.ShuffleEnabled = false;
         }
 
-        private void Track_Click(object sender, RoutedEventArgs e)
-        {
-            
-            //Search_Track.TrackID
-            //PlaylistID = Search_Track.PlaylistID
-            //UpdateMusicBar(Search_TrackID);          
-        }
-
-
         /// <summary>
         /// Updates all music related data
         /// </summary>
         /// <param name="trackID"></param>
         private void UpdateMusicBar(int trackID)
         {
-            if (CurrentTrack != null)
+            if (CurrentTrack != null && rewFor)
             {
                 TrackHistory.trackHistory.Push(CurrentTrack.TrackID);
+                if (SingleTrackClicked.QueueTrackIDs.Count > 0)
+                {
+                    SingleTrackClicked.QueueTrackIDs.RemoveFirst();
+                }
             }
-            
+
             MusicBar.DataContext = track.GetTrack(trackID);
             CurrentTrack = (Model.Track)MusicBar.DataContext;
             icArtistList.ItemsSource = CurrentTrack.Artists;
             TrackImage.Source = new BitmapImage(new Uri(imagePath.GetImagePath(CurrentTrack.Image_path), UriKind.RelativeOrAbsolute));
-            //TrackQueue.SetQueue(Search_TrackID, PlaylistID)
             mediaPlayer.Open(new Uri(audioPath.GetAudioPath(CurrentTrack.File_path)));
         }
 

@@ -28,7 +28,7 @@ namespace Controller
                     {
                         track.Title = reader["title"].ToString();
                         track.Listens = (int)reader["listens"];
-                        track.LanguageID = (int)reader["languageID"];
+                        if (reader["languageID"].GetType().GetProperties().Length > 0) track.LanguageID = (int)reader["languageID"];
                         track.Duration = (int)reader["duration"];
                         track.Date_Created = (DateTime)reader["date_created"];
                         track.File_path = reader["file_path"].ToString();

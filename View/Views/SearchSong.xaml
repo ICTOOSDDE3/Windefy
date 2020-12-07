@@ -285,7 +285,7 @@
 
                             <StackPanel Orientation="Vertical" Width="300" >
                                 <Border Height="50">
-                                    <Button Height="50" Foreground="{x:Null}" BorderBrush="{x:Null}" Background="{x:Null}" Style="{StaticResource MyButtonStyle}" HorizontalAlignment="Left" Click="Track_Click" x:Name="test">
+                                    <Button Height="50" Foreground="{x:Null}" BorderBrush="{x:Null}" Background="{x:Null}" Style="{StaticResource MyButtonStyle}" HorizontalAlignment="Left" Click="Track_Click">
                                         <Label Content="{Binding Title}" FontWeight="Bold" FontFamily="Bahnschrift Light SemiCondensed" FontSize="20"/>
                                     </Button>
                                 </Border>
@@ -305,7 +305,7 @@
 
 
 
-                            <ToggleButton x:Name="LikeButton" Width="40" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" OpacityMask="{x:Null}" Style="{StaticResource MyToggleButtonStyle}" ToolTip="Add this number to favorites" >
+                            <ToggleButton x:Name="LikeButton" Width="40" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" OpacityMask="{x:Null}" Style="{StaticResource MyToggleButtonStyle}" ToolTip="Add this number to favorites">
                                 <Image>
                                     <Image.Style>
                                         <Style TargetType="Image">
