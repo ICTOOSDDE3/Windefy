@@ -14,6 +14,7 @@ namespace Controller
         private static Random _random = new Random();
         private Mail _verificationMail = new Mail();
         private Login _account = new Login();
+        private Playlist _favorites = new Playlist();
 
         //Method to register an account (validate and save to db)
         public void RegisterAccount(string email, string name, string pw1, string pw2)
@@ -71,6 +72,7 @@ namespace Controller
                         DBConnection.CloseConnection();
                         _verificationMail.SendValidationMail(email, verificationCode);
                         _account.IsLogin(email, pw1);
+                        _favorites.CreateUserPlaylist("Favorites", false);
                     }
                 }
             }

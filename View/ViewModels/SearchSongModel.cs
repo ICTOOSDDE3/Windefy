@@ -18,7 +18,7 @@ namespace View.ViewModels
             DBConnection.OpenConnection();
 
             SqlCommand cmd = new SqlCommand(null, DBConnection.Connection);
-            cmd.CommandText = "SELECT title, duration, image_path, name " +
+            cmd.CommandText = "SELECT track.trackID, title, duration, image_path, name " +
                 "FROM track_artist " +
                 "JOIN artist ON track_artist.artistID = artist.artistID " +
                 "JOIN track ON track_artist.trackID = track.trackID " +
@@ -37,7 +37,7 @@ namespace View.ViewModels
 
             while (dataReader.Read())
             {
-                TrackInfo trackInfo = new TrackInfo(Convert.ToString(dataReader["title"]), Convert.ToInt32(dataReader["duration"]), Convert.ToString(dataReader["image_path"]), Convert.ToString(dataReader["name"]));
+                TrackInfo trackInfo = new TrackInfo(Convert.ToInt32(dataReader["trackID"]), Convert.ToString(dataReader["title"]), Convert.ToInt32(dataReader["duration"]), Convert.ToString(dataReader["image_path"]), Convert.ToString(dataReader["name"]));
 
                 items.Add(trackInfo);
             }
@@ -48,12 +48,13 @@ namespace View.ViewModels
     }
     public class TrackInfo
     {
+        public int trackID { get; set; }
         public string Title { get; set; }
         public string Duration { get; set; }
         public string ImagePath { get; set; }
         public string ArtistName { get; set; }
 
-        public TrackInfo(string T, int D, string I, string A)
+        public TrackInfo(int ID, string T, int D, string I, string A)
         {
             string seconds = (D % 60).ToString();
             if (seconds.Length == 1)
@@ -61,6 +62,7 @@ namespace View.ViewModels
                 seconds = "0" + seconds;
             }
 
+            trackID = ID;
             Title = T;
             Duration = $"{ Math.Floor(Convert.ToDouble(D) / 60)}:{seconds}";
             ImagePath = $"{ApacheConnection.GetImageFullPath(I)}";

@@ -15,6 +15,8 @@
     <None Remove="kruisje.png" />
     <None Remove="loginbutton.png" />
     <None Remove="Plus.png" />
+    <None Remove="Views\Like.png" />
+    <None Remove="Views\LikeEmpty.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,6 +46,8 @@
     <Resource Include="kruisje.png" />
     <Resource Include="loginbutton.png" />
     <Resource Include="Styles\Texts.xaml" />
+    <Resource Include="Views\Like.png" />
+    <Resource Include="Views\LikeEmpty.png" />
   </ItemGroup>
 
   <ItemGroup>
