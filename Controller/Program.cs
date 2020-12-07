@@ -1,12 +1,22 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
+using System.IO;
 
 namespace Controller
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            DBConnection.Initialize();
+            DBConnection.OpenConnection();
+            Playlist playlist = new Playlist();
+
+            Model.User.UserID = 1;
+
+            SideBarList.SetAllPlaylistsFromUser();
+
+            Console.WriteLine(SideBarList.sideBarList);
         }
     }
 }
