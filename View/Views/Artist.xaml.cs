@@ -30,7 +30,8 @@ namespace View.Views
 
         private void Label_MouseDown(object sender, MouseButtonEventArgs e)
         {
-           
+            var label = (Label)sender;
+            DataContext = new ViewModels.Artist((int)label.Tag);
         }
     }
 }
