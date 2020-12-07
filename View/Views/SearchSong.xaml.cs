@@ -47,7 +47,7 @@ namespace View.Views
         {
             var addToPlaylist = (ToggleButton)e.OriginalSource;
             var data = addToPlaylist.DataContext as ViewModels.TrackInfo;
-            int trackid = data.trackID;
+            int trackid = data.TrackID;
             if (addTrackToPlaylist.FavoritesContainsTrack(trackid))
             {
                 addTrackToPlaylist.InsertToFavorites(trackid);

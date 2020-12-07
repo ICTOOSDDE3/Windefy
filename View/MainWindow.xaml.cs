@@ -450,6 +450,11 @@ namespace View
             rewind = false;
         }
 
+        private void Label_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DataContext = new ViewModels.Artist(2);
+        }
+
         private void favoriteBtn_Checked(object sender, RoutedEventArgs e)
         {
             //controller aanroepen om track toe te voegen aan fav afspeellijst
