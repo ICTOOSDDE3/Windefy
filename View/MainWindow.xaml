@@ -128,7 +128,8 @@
         <DataTemplate x:Name="SearchAlbumViewModel" DataType="{x:Type viewmodels:SearchAlbumViewModel}">
             <views:SearchAlbum DataContext="{Binding}" />
         </DataTemplate>
-                <Style x:Key="SliderRepeatButton" TargetType="RepeatButton">
+        
+        <Style x:Key="SliderRepeatButton" TargetType="RepeatButton">
             <Setter Property="SnapsToDevicePixels" Value="true" />
             <Setter Property="OverridesDefaultStyle" Value="true" />
             <Setter Property="IsTabStop" Value="false" />
@@ -244,6 +245,13 @@
                         </Setter.Value>
                     </Setter>
                 </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <ImageBrush ImageSource="/Pause.png"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
             </Style.Triggers>
         </Style>
 
@@ -277,10 +285,17 @@
                         </Setter.Value>
                     </Setter>
                 </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <ImageBrush ImageSource="/RepeatChecked.png"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
             </Style.Triggers>
         </Style>
 
-        <Style TargetType="{x:Type ToggleButton}" x:Key="Heart">
+        <Style TargetType="{x:Type ToggleButton}" x:Key="Heart" x:Name="Heart">
             <Setter Property="Content" Value="{DynamicResource HeartUnchecked_icon}" />
             <Setter Property="Template">
                 <Setter.Value>
@@ -305,6 +320,13 @@
                 <Trigger Property="IsChecked" Value="True">
                     <Setter Property="Content" Value="{DynamicResource HeartChecked_icon}" />
 
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <ImageBrush ImageSource="/HeartChecked.png"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background">
                         <Setter.Value>
                             <ImageBrush ImageSource="/HeartChecked.png"/>
@@ -339,6 +361,13 @@
                 <Trigger Property="IsChecked" Value="True">
                     <Setter Property="Content" Value="{DynamicResource ShuffleChecked_icon}"/>
 
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <ImageBrush ImageSource="/ShuffleChecked.png"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background">
                         <Setter.Value>
                             <ImageBrush ImageSource="/ShuffleChecked.png"/>
@@ -483,7 +512,7 @@
                 </WrapPanel>
                 <WrapPanel VerticalAlignment="Center">
                     <Image Source="/Volume.png" Width="30" Height="30" Margin="25,0,0,0"/>
-                    <Slider Style="{StaticResource Horizontal_Slider}" Value="50" Maximum="100" Minimum="0" ValueChanged="Volume_ValueChanged" x:Name="Volume" Width="142" Height="9" Margin="5"/>
+                    <Slider Style="{StaticResource Horizontal_Slider}" Value="25" Maximum="100" Minimum="0" ValueChanged="Volume_ValueChanged" x:Name="Volume" Width="142" Height="9" Margin="5"/>
                 </WrapPanel>
             </WrapPanel>
 
