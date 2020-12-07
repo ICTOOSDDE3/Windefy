@@ -283,7 +283,7 @@
                                 </Button.Resources>
                             </Button>
 
-                            <StackPanel Orientation="Vertical" Width="300" >
+                            <StackPanel Orientation="Vertical" Width="300">
                                 <Border  Height="50">
                                     <Button Height="50" Foreground="{x:Null}" BorderBrush="{x:Null}" Background="{x:Null}" Style="{StaticResource MyButtonStyle}" HorizontalAlignment="Left" ToolTip="{Binding Title}">
                                         <Label Content="{Binding Title}" FontWeight="Bold" FontFamily="Bahnschrift Light SemiCondensed" FontSize="20"/>

@@ -16,6 +16,7 @@ namespace View.Views
         public SearchSong()
         {
             InitializeComponent();
+            
         }
 
         private void LikeButton_Click(object sender, RoutedEventArgs e)
