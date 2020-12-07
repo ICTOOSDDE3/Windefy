@@ -7,11 +7,6 @@ namespace Controller
 {
     public class Artist
     {
-        public Artist()
-        {
-            DBConnection.Initialize();
-        }
-
         /// <summary>
         /// Calls methods to create artist object
         /// </summary>
@@ -51,6 +46,11 @@ namespace Controller
 
             return artist;
         }
+        /// <summary>
+        /// Fetches all tracks of an Artist
+        /// </summary>
+        /// <param name="artistID"></param>
+        /// <returns></returns>
         public List<Model.Track> GetArtistTracks(int artistID)
         {
             DBConnection.OpenConnection();

@@ -7,11 +7,6 @@ namespace Controller
 {
     public class Track
     {
-        public Track()
-        {
-            
-
-        }
         /// <summary>
         /// Calls methods to create track object
         /// </summary>
@@ -122,6 +117,11 @@ namespace Controller
 
             return genreList;
         }
+        /// <summary>
+        /// Gets all tracks who matches with query and pushes everything in Queue
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
         public Queue<int> GetTracksToQueue(string query)
         {
             Queue<int> returnQueue = new Queue<int>();

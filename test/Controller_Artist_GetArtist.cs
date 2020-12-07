@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Controller;
+using NUnit.Framework;
 namespace Test
 {
     [TestFixture]
@@ -9,6 +10,7 @@ namespace Test
         public void Init()
         {
             controller = new Controller.Artist();
+            DBConnection.Initialize();
         }
         /// <summary>
         /// This test checks whether the function returns a Artist object when you use an existing Artist ID as parameter

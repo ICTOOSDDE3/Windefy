@@ -1,15 +1,17 @@
-﻿using NUnit.Framework;
+﻿using Controller;
+using NUnit.Framework;
 
 namespace Test
 {
     [TestFixture]
     class Controller_Track_GetTrack
     {
-        Controller.Track controller;
+        Track controller;
         [SetUp]
         public void Init()
         {
             controller = new Controller.Track();
+            DBConnection.Initialize();
         }
         /// <summary>
         /// This test checks whether the function returns a track object when you use an existing trackID as parameter
