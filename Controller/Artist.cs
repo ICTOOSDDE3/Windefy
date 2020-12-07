@@ -68,9 +68,10 @@ namespace Controller
                     {
                         tracks.Add(new Model.Track()
                         {
+                            TrackID = (int)reader["trackID"],
                             Title = reader["title"].ToString(),
                             Listens = (int)reader["listens"]
-                        });;          
+                        });          
                     }
                 }
                 else
@@ -80,6 +81,11 @@ namespace Controller
                 }
             }
             DBConnection.CloseConnection();
+
+            tracks.ForEach(track =>
+            {
+                track.Artists = getTrackArtists(track.TrackID);
+            });
             return tracks;
         }
 
@@ -106,39 +112,6 @@ namespace Controller
             DBConnection.CloseConnection();
 
             return artists;
-        }
-
-        private List<Model.Track> GetArtistTracksFromDB(int artistID)
-        {
-            DBConnection.OpenConnection();
-            string query = $"SELECT * FROM track where trackID IN (SELECT trackID from track_artist where artistID = {artistID})";
-
-            SqlCommand oCmd = new SqlCommand(query, DBConnection.Connection);
-
-            List<Model.Track> tracks = new List<Model.Track>();
-
-            using (SqlDataReader reader = oCmd.ExecuteReader())
-            {
-                while (reader.Read())
-                {
-                    Model.Track track = new Model.Track()
-                    {
-                        Title = reader["title"].ToString(),
-                        Listens = (int)reader["listens"],
-                        NumberID = (int)reader["trackID"]
-                    };
-                    
-                    tracks.Add(track);
-                }
-            }
-            DBConnection.CloseConnection();
-
-            tracks.ForEach(track =>
-            {
-                track.Artists = getTrackArtists(track.NumberID);
-            });
-
-            return tracks;
         }
 
         /// <summary>
