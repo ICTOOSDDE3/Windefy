@@ -29,11 +29,14 @@ namespace View.Views
         {
             var x = (Button)e.OriginalSource;
             var data = x.DataContext as ViewModels.TrackInfo;
+
             TrackQueue.SetQueue(data.TrackID, data.PlaylistID);
-            TrackClicked.TrackID = data.TrackID;
+            
+            SingleTrackClicked.TrackID = data.TrackID;
+            SingleTrackClicked.TrackClicked = true;
             bool itemData = false;
 
-            TrackClicked.QueueTrackIDs.Clear();
+            SingleTrackClicked.QueueTrackIDs.Clear();
             foreach (var item in items.Items)
             {
                 if (item == data)
@@ -43,7 +46,7 @@ namespace View.Views
                 if (item != data && itemData)
                 {
                     var test = item as ViewModels.TrackInfo;
-                    TrackClicked.QueueTrackIDs.AddLast(test.TrackID);
+                    SingleTrackClicked.QueueTrackIDs.AddLast(test.TrackID);
                 }
             }
 

@@ -30,6 +30,7 @@ namespace Controller
             Model.Playlist p = new Model.Playlist(playlistID,"test",DateTime.Now,100000,0,"test",true,1);
             Track TrackController = new Track();
             var genres = TrackController.GetGenres(trackID);
+            
 
             string query = "";
             if (p.playlist_type == Model.PlaylistType.Album || p.playlist_type == Model.PlaylistType.UserPlaylists)
@@ -41,10 +42,6 @@ namespace Controller
                 query = $"SELECT TOP 10 T.trackID FROM track as T JOIN track_genre as TG ON T.trackID = TG.trackID WHERE TG.genreID IN (SELECT genreID  FROM genre WHERE genre.name = '{genres[0]}')  ORDER BY NEWID()";
             }
             trackQueue = TrackController.GetTracksToQueue(query);
-            foreach(int item in trackQueue)
-            {
-                Trace.WriteLine(item);
-            }
         }
     }
 }

@@ -37,7 +37,6 @@ namespace View
         Login login = new Login();
         private string email = "";
         private int playlistID;
-        private int clickedTrackID = 0;
         private bool rewFor;
 
         public MainWindow()
@@ -229,7 +228,7 @@ namespace View
             {
                 CurrentTime.Content = mediaPlayer.Position.ToString(@"mm\:ss");
             }
-            if (clickedTrackID != TrackClicked.TrackID)
+            if (SingleTrackClicked.TrackClicked)
             {
                 clickedTrackUpdate();
             }
@@ -237,8 +236,8 @@ namespace View
 
         private void clickedTrackUpdate()
         {
-            clickedTrackID = TrackClicked.TrackID;
-            UpdateMusicBar(clickedTrackID);
+            SingleTrackClicked.TrackClicked = false;
+            UpdateMusicBar(SingleTrackClicked.TrackID);
             tbPlayPause.IsChecked = true;
             mediaPlayer.Play();
         }
@@ -250,11 +249,19 @@ namespace View
         /// <param name="e"></param>
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
-            if (TrackClicked.QueueTrackIDs.Count > 0)
+            if (SingleTrackClicked.QueueTrackIDs.Count > 0)
             {
                 rewFor = true;
 
-                UpdateMusicBar(TrackClicked.QueueTrackIDs.First());
+                UpdateMusicBar(SingleTrackClicked.QueueTrackIDs.First());
+
+                if (mediaPlaying)
+                {
+                    mediaPlayer.Play();
+                }
+            }
+            else if (TrackQueue.trackQueue.Count() > 0) { 
+                UpdateMusicBar(TrackQueue.Dequeue());
 
                 if (mediaPlaying)
                 {
@@ -265,7 +272,6 @@ namespace View
             {
                 mediaPlayer.Close();
             }
-
         }
         /// <summary>
         /// Loads previous track and plays it if play is toggled
@@ -278,8 +284,17 @@ namespace View
             {
                 rewFor = false;
 
-                TrackClicked.QueueTrackIDs.AddFirst(CurrentTrack.TrackID);
+                SingleTrackClicked.QueueTrackIDs.AddFirst(CurrentTrack.TrackID);
 
+                UpdateMusicBar(TrackHistory.trackHistory.Pop());
+
+                if (mediaPlaying)
+                {
+                    mediaPlayer.Play();
+                }
+            }
+            else if (TrackQueue.trackQueue.Count() > 0)
+            {
                 UpdateMusicBar(TrackHistory.trackHistory.Pop());
 
                 if (mediaPlaying)
@@ -292,7 +307,6 @@ namespace View
                 mediaPlayer.Stop();
                 mediaPlayer.Play();
             }
-
         }
         /// <summary>
         /// Stops the current track
@@ -330,11 +344,20 @@ namespace View
                 mediaPlayer.Stop();
                 mediaPlayer.Play();
             }
-            else if (TrackClicked.QueueTrackIDs.Count > 0)
+            else if (SingleTrackClicked.QueueTrackIDs.Count > 0)
             {
                 rewFor = true;
 
-                UpdateMusicBar(TrackClicked.QueueTrackIDs.First());
+                UpdateMusicBar(SingleTrackClicked.QueueTrackIDs.First());
+
+                if (mediaPlaying)
+                {
+                    mediaPlayer.Play();
+                }
+            }
+            else if (TrackQueue.trackQueue.Count() > 0)
+            {
+                UpdateMusicBar(TrackQueue.Dequeue());
 
                 if (mediaPlaying)
                 {
@@ -344,10 +367,6 @@ namespace View
             else
             {
                 mediaPlayer.Close();
-            }
-        }
-                UpdateMusicBar(TrackQueue.Dequeue());
-                mediaPlayer.Play();
             }
         }
 
@@ -439,18 +458,16 @@ namespace View
             if (CurrentTrack != null && rewFor)
             {
                 TrackHistory.trackHistory.Push(CurrentTrack.TrackID);
-                TrackClicked.QueueTrackIDs.RemoveFirst();
+                if (SingleTrackClicked.QueueTrackIDs.Count > 0)
+                {
+                    SingleTrackClicked.QueueTrackIDs.RemoveFirst();
+                }
             }
-/*            if (!rewFor && CurrentTrack != null)
-            {
-                TrackClicked.QueueTrackIDs.RemoveFirst();
-            }*/
 
             MusicBar.DataContext = track.GetTrack(trackID);
             CurrentTrack = (Model.Track)MusicBar.DataContext;
             icArtistList.ItemsSource = CurrentTrack.Artists;
             TrackImage.Source = new BitmapImage(new Uri(imagePath.GetImagePath(CurrentTrack.Image_path), UriKind.RelativeOrAbsolute));
-            //TrackQueue.SetQueue(Search_TrackID, PlaylistID)
             mediaPlayer.Open(new Uri(audioPath.GetAudioPath(CurrentTrack.File_path)));
         }
 
