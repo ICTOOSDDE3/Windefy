@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -12,12 +12,30 @@
     <None Remove="Assets\Images\Like.png" />
     <None Remove="Assets\Images\LikeEmpty.png" />
     <None Remove="Assets\Images\mockSongImage.jpg" />
+    <None Remove="Forward.png" />
+    <None Remove="HeartChecked.png" />
     <None Remove="kruisje.png" />
-    <None Remove="logint button.png" />
+    <None Remove="Pause.png" />
+    <None Remove="Play.png" />
+    <None Remove="Rectangle.png" />
+    <None Remove="Repeat.png" />
+    <None Remove="RepeatChecked.png" />
+    <None Remove="Rewind.png" />
+    <None Remove="Shuffle.png" />
+    <None Remove="ShuffleChecked.png" />
+    <None Remove="Volume.png" />
+    <None Remove="loginbutton.png" />
+    <None Remove="Plus.png" />
+    <None Remove="Views\Like.png" />
+    <None Remove="Views\LikeEmpty.png" />
+  </ItemGroup>
+   
+  <ItemGroup>
+    <Page Remove="Styles\Texts.xaml" />
   </ItemGroup>
 
   <ItemGroup>
-    <Page Remove="Styles\Texts.xaml" />
+    <PackageReference Include="Caliburn.Micro.Core" Version="3.2.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,9 +54,28 @@
     <Resource Include="Assets\Images\mockSongImage.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Forward.png" />
+    <Resource Include="HeartChecked.png" />
     <Resource Include="kruisje.png" />
-    <Resource Include="logint button.png" />
+
+    <Resource Include="Pause.png" />
+    <Resource Include="Play.png" />
+    <Resource Include="Rectangle.png" />
+    <Resource Include="Repeat.png" />
+    <Resource Include="RepeatChecked.png" />
+    <Resource Include="Rewind.png" />
+    <Resource Include="Shuffle.png" />
+    <Resource Include="ShuffleChecked.png" />
+    <Resource Include="loginbutton.png" />
     <Resource Include="Styles\Texts.xaml" />
+    <Resource Include="Volume.png" />
+    <Resource Include="Views\Like.png" />
+    <Resource Include="Views\LikeEmpty.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="Plus.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>

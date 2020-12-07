@@ -8,9 +8,11 @@ namespace Controller
 {
     public static class DBConnection
     {
+        private static bool isOpen = false;
         private static bool isInitialized = false;
         private static ForwardedPortLocal PortFwld = new ForwardedPortLocal("127.0.0.1", 1433, "127.0.0.1", 1433);
         private static PasswordConnectionInfo ConnectionInfo = new PasswordConnectionInfo("145.44.235.109", "student", Passwords.GetPassword("DB"));
+
         public static SqlConnection Connection
         {
             get;
@@ -78,50 +80,60 @@ namespace Controller
         //open connection to database
         public static bool OpenConnection()
         {
-            try
+            if (!isOpen)
             {
-                Connection.Open();
-                Console.WriteLine("MySQL connected.");
-                return true;
-            }
-            catch (MySqlException ex)
-            {
-                //When handling errors, you can your application's response based on the error number.
-                //The two most common error numbers when connecting are as follows:
-                //0: Cannot connect to server.
-                //1045: Invalid user name and/or password.
-                switch (ex.Number)
+                try
                 {
-                    case 0:
-                        Console.WriteLine("Cannot connect to server.  Contact administrator");
-                        break;
-
-                    case 1045:
-                        Console.WriteLine("Invalid username/password, please try again");
-                        break;
-
-                    default:
-                        Console.WriteLine("Unhandled exception: {0}.", ex.Message);
-                        break;
-
+                    Connection.Open();
+                    Console.WriteLine("MySQL connected.");
+                    isOpen = true;
+                    return true;
                 }
-                return false;
+                catch (MySqlException ex)
+                {
+                    //When handling errors, you can your application's response based on the error number.
+                    //The two most common error numbers when connecting are as follows:
+                    //0: Cannot connect to server.
+                    //1045: Invalid user name and/or password.
+                    switch (ex.Number)
+                    {
+                        case 0:
+                            Console.WriteLine("Cannot connect to server.  Contact administrator");
+                            break;
+
+                        case 1045:
+                            Console.WriteLine("Invalid username/password, please try again");
+                            break;
+
+                        default:
+                            Console.WriteLine("Unhandled exception: {0}.", ex.Message);
+                            break;
+
+                    }
+                    return false;
+                }
             }
+            return true;
         }
 
         //Close connection
         public static bool CloseConnection()
         {
-            try
+            if (isOpen)
             {
-                Connection.Close();
-                return true;
+                try
+                {
+                    Connection.Close();
+                    isOpen = false;
+                    return true;
+                }
+                catch (MySqlException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return false;
+                }
             }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine(ex.Message);
-                return false;
-            }
+            return true;
         }
 
 

@@ -67,8 +67,7 @@ namespace Controller
         //Check if mail is already in the database
         public static bool IsUniqueMail(string mail, int userID)
         {
-            //Initialize and open a db connection
-            DBConnection.Initialize();
+            //Initialize and open a db connection           
             DBConnection.OpenConnection();
 
             //Build the query
