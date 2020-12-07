@@ -222,7 +222,7 @@
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" Margin="25,30,0,0" VerticalAlignment="Center">
-                                        <Button x:Name="Playlist_Plus_Button" Content="" Width="42" Height="42" Click="" Style="{StaticResource RoundedButton}">
+                                        <Button x:Name="Playlist_Plus_Button" Content="" Width="42" Height="42" Style="{StaticResource RoundedButton}">
                                             <Button.Background>
                                                 <ImageBrush ImageSource="/Assets/Images/mockSongImage.jpg"/>
                                             </Button.Background>
