@@ -7,7 +7,6 @@ namespace Controller
     public static class TrackClicked
     {
         public static int TrackID { get; set; }
-        //public int MyProperty { get; set; }
-
+        public static LinkedList<int> QueueTrackIDs = new LinkedList<int>();
     }
 }

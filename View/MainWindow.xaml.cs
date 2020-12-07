@@ -38,6 +38,7 @@ namespace View
         private string email = "";
         private int playlistID;
         private int clickedTrackID = 0;
+        private bool rewFor;
 
         public MainWindow()
         {
@@ -230,13 +231,18 @@ namespace View
             }
             if (clickedTrackID != TrackClicked.TrackID)
             {
-                clickedTrackID = TrackClicked.TrackID;
-                UpdateMusicBar(clickedTrackID);
-                tbPlayPause.IsChecked = true;
-                mediaPlayer.Play();
-
+                clickedTrackUpdate();
             }
         }
+
+        private void clickedTrackUpdate()
+        {
+            clickedTrackID = TrackClicked.TrackID;
+            UpdateMusicBar(clickedTrackID);
+            tbPlayPause.IsChecked = true;
+            mediaPlayer.Play();
+        }
+
         /// <summary>
         /// Loads the next track and plays it if play is toggled
         /// </summary>
@@ -244,12 +250,22 @@ namespace View
         /// <param name="e"></param>
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
-            UpdateMusicBar(CurrentTrack.TrackID + 1 /*TrackQueue.Dequeue() */);
-
-            if (mediaPlaying)
+            if (TrackClicked.QueueTrackIDs.Count > 0)
             {
-                mediaPlayer.Play();
+                rewFor = true;
+
+                UpdateMusicBar(TrackClicked.QueueTrackIDs.First());
+
+                if (mediaPlaying)
+                {
+                    mediaPlayer.Play();
+                }
             }
+            else
+            {
+                mediaPlayer.Close();
+            }
+
         }
         /// <summary>
         /// Loads previous track and plays it if play is toggled
@@ -258,12 +274,25 @@ namespace View
         /// <param name="e"></param>
         private void btnPrev_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            UpdateMusicBar(TrackHistory.trackHistory.Pop());
-
-            if (mediaPlaying)
+            if (TrackHistory.trackHistory.Count > 0)
             {
+                rewFor = false;
+
+                TrackClicked.QueueTrackIDs.AddFirst(CurrentTrack.TrackID);
+
+                UpdateMusicBar(TrackHistory.trackHistory.Pop());
+
+                if (mediaPlaying)
+                {
+                    mediaPlayer.Play();
+                }
+            }
+            else
+            {
+                mediaPlayer.Stop();
                 mediaPlayer.Play();
             }
+
         }
         /// <summary>
         /// Stops the current track
@@ -301,11 +330,20 @@ namespace View
                 mediaPlayer.Stop();
                 mediaPlayer.Play();
             }
+            else if (TrackClicked.QueueTrackIDs.Count > 0)
+            {
+                rewFor = true;
+
+                UpdateMusicBar(TrackClicked.QueueTrackIDs.First());
+
+                if (mediaPlaying)
+                {
+                    mediaPlayer.Play();
+                }
+            }
             else
             {
-                UpdateMusicBar(CurrentTrack.TrackID+1 /*TrackQueue.Dequeue() */);
-
-                mediaPlayer.Play();
+                mediaPlayer.Close();
             }
         }
 
@@ -388,26 +426,22 @@ namespace View
             //TrackQueue.ShuffleEnabled = false;
         }
 
-        private void Track_Click(object sender, RoutedEventArgs e)
-        {
-            
-            //Search_Track.TrackID
-            //PlaylistID = Search_Track.PlaylistID
-            //UpdateMusicBar(Search_TrackID);          
-        }
-
-
         /// <summary>
         /// Updates all music related data
         /// </summary>
         /// <param name="trackID"></param>
         private void UpdateMusicBar(int trackID)
         {
-            if (CurrentTrack != null)
+            if (CurrentTrack != null && rewFor)
             {
                 TrackHistory.trackHistory.Push(CurrentTrack.TrackID);
+                TrackClicked.QueueTrackIDs.RemoveFirst();
             }
-            
+/*            if (!rewFor && CurrentTrack != null)
+            {
+                TrackClicked.QueueTrackIDs.RemoveFirst();
+            }*/
+
             MusicBar.DataContext = track.GetTrack(trackID);
             CurrentTrack = (Model.Track)MusicBar.DataContext;
             icArtistList.ItemsSource = CurrentTrack.Artists;

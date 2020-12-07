@@ -29,8 +29,25 @@ namespace View.Views
         {
             var x = (Button)e.OriginalSource;
             var data = x.DataContext as ViewModels.TrackInfo;
-            
+           
             TrackClicked.TrackID = data.TrackID;
+            bool itemData = false;
+
+            TrackClicked.QueueTrackIDs.Clear();
+            foreach (var item in items.Items)
+            {
+                if (item == data)
+                {
+                    itemData = true;
+                }
+                if (item != data && itemData)
+                {
+                    var test = item as ViewModels.TrackInfo;
+                    TrackClicked.QueueTrackIDs.AddLast(test.TrackID);
+                }
+            }
+
+
         }
     }
 }
