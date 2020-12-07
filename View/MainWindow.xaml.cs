@@ -346,6 +346,10 @@ namespace View
                 mediaPlayer.Close();
             }
         }
+                UpdateMusicBar(TrackQueue.Dequeue());
+                mediaPlayer.Play();
+            }
+        }
 
         /// <summary>
         /// Sets new position of track and set the drag boolean to completed

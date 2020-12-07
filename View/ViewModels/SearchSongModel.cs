@@ -18,11 +18,14 @@ namespace View.ViewModels
             DBConnection.OpenConnection();
 
             SqlCommand cmd = new SqlCommand(null, DBConnection.Connection);
-            cmd.CommandText = "SELECT title, duration, image_path, name, track.trackID trackID " +
-                "FROM track_artist " +
+            cmd.CommandText ="SELECT track.title, duration, image_path, name, track.trackID trackID, playlist_track.playlistID FROM track_artist " +
                 "JOIN artist ON track_artist.artistID = artist.artistID " +
                 "JOIN track ON track_artist.trackID = track.trackID " +
-                "WHERE title LIKE '%' + @que + '%' " +
+
+                "JOIN playlist_track ON track.trackID = playlist_track.trackID " + 
+
+                "JOIN playlist ON playlist_track.playlistID = playlist.playlistID " +
+                "WHERE track.title LIKE '%' + @que + '%' AND(playlist.playlist_typeID = 0 OR playlist.playlist_typeID = 1) " +
                 "ORDER BY track.trackID " +
                 "OFFSET 0 ROWS " +
                 "FETCH NEXT 50 ROWS ONLY";
@@ -41,8 +44,8 @@ namespace View.ViewModels
                     Convert.ToInt32(dataReader["duration"]),
                     Convert.ToString(dataReader["image_path"]),
                     Convert.ToString(dataReader["name"]),
-                    Convert.ToInt32(dataReader["trackID"]));
-
+                    Convert.ToInt32(dataReader["trackID"]),
+                    Convert.ToInt32(dataReader["playlistID"]));
                 items.Add(trackInfo);
             }
 
@@ -57,10 +60,11 @@ namespace View.ViewModels
         public string Duration { get; set; }
         public string ImagePath { get; set; }
         public string ArtistName { get; set; }
+        public int PlaylistID { get; set; }
 
-        public TrackInfo(string T, int D, string I, string A, int ID)
+        public TrackInfo(string T, int D, string I, string A, int T_ID, int P_ID)
         {
-            TrackID = ID;
+            TrackID = T_ID;
             string seconds = (D % 60).ToString();
             if (seconds.Length == 1)
             {
@@ -71,6 +75,7 @@ namespace View.ViewModels
             Duration = $"{ Math.Floor(Convert.ToDouble(D) / 60)}:{seconds}";
             ImagePath = $"{ApacheConnection.GetImageFullPath(I)}";
             ArtistName = A;
+            PlaylistID = P_ID;
         }
     }
 }
