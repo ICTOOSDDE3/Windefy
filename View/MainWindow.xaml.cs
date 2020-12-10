@@ -140,6 +140,7 @@ namespace View
         {
             LoginBackground.Visibility = Visibility.Hidden;
             AccountDetailsGrid.Visibility = Visibility.Hidden;
+            Updated_Text.Visibility = Visibility.Visible;
         }
         private void AccountDetails_Button_Click(object sender, RoutedEventArgs e)
         {
@@ -152,7 +153,7 @@ namespace View
                 Controller.User.UpdateEmail(newEmail);
             }
             //Update username if different from current name
-            if (newEmail != Model.User.Name)
+            if (newName != Model.User.Name)
             {
                 Controller.User.UpdateName(newName);
             }
