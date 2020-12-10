@@ -450,11 +450,6 @@ namespace View
             rewind = false;
         }
 
-        private void Label_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            DataContext = new ViewModels.Artist(2);
-        }
-
         private void favoriteBtn_Checked(object sender, RoutedEventArgs e)
         {
             //controller aanroepen om track toe te voegen aan fav afspeellijst
@@ -496,6 +491,13 @@ namespace View
             icArtistList.ItemsSource = CurrentTrack.Artists;
             TrackImage.Source = new BitmapImage(new Uri(ApacheConnection.GetImageFullPath(CurrentTrack.Image_path), UriKind.RelativeOrAbsolute));
             mediaPlayer.Open(new Uri(ApacheConnection.GetAudioFullPath(CurrentTrack.File_path)));
+        }
+
+        private void On_Artist_Click(object sender, MouseButtonEventArgs e)
+        {
+            var textBlock = (TextBlock)sender;
+            int artistId = (int)textBlock.Tag;
+            DataContext = new ViewModels.Artist(artistId);
         }
 
         private void SearchBarTextChanged(object sender, TextChangedEventArgs e)
