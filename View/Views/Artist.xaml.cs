@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Controller;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -23,9 +24,17 @@ namespace View.Views
             InitializeComponent();
         }
 
-        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        private void Track_Click(object sender, RoutedEventArgs e)
         {
-           
+            var x = (Label)sender;
+
+            TrackQueue.SetQueue((int)x.Tag, 1);
+
+            SingleTrackClicked.TrackID = (int)x.Tag;
+            SingleTrackClicked.TrackClicked = true;
+
+            SingleTrackClicked.QueueTrackIDs.Clear();
+            SingleTrackClicked.QueueTrackIDs.AddLast((int)x.Tag);
         }
 
         private void Label_MouseDown(object sender, MouseButtonEventArgs e)
