@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:View.Views"
+             xmlns:local="clr-namespace:View.Views" xmlns:System="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="1024" d:DesignWidth="1140">
 
@@ -323,6 +323,22 @@
                                     </Image.Style>
                                 </Image>
                             </ToggleButton>
+
+                            <StackPanel Orientation="Vertical">
+                                <Label Margin="10, 0, 0, 0">Add to playlist:</Label>
+                                <ComboBox ItemsSource="{Binding items}" x:Name="PlaylistDropdown" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Height="35" BorderBrush="#FF4F83CC" Foreground="White" Background="#FF4F83CC" FontSize="20" FontStyle="Normal" Margin="10,0,0,0">
+                                    <!--<System:String> 1</System:String>
+                                <System:String>Album</System:String>
+                                <System:String>Playlist</System:String>
+                                <System:String>Track</System:String>-->
+
+                                            <ComboBoxItem Content="{Binding Title}"/>
+
+                                        
+                                    
+                                    
+                                </ComboBox>
+                            </StackPanel>
 
                         </StackPanel>
                     </DataTemplate>

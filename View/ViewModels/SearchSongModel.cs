@@ -10,6 +10,7 @@ namespace View.ViewModels
     public class SearchSongModel
     {
         public List<TrackInfo> items { get; set; }
+        public List<string> random { get; set; } = new List<string>() { "titel 1", "titel 2", "titel 3" };
 
         public SearchSongModel(string q)
         {
