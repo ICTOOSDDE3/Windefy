@@ -493,7 +493,7 @@
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" Margin="25,30,0,0" VerticalAlignment="Center">
-                                        <Button x:Name="Playlist_Plus_Button" Content="" Width="42" Height="42" Style="{StaticResource RoundedButton}">
+                                        <Button x:Name="Playlist_Plus_Button" Content="" Width="42" Height="42" Style="{StaticResource RoundedButton}" Click="NewMethod">
                                             <Button.Background>
                                                 <ImageBrush ImageSource="/Assets/Images/mockSongImage.jpg"/>
                                             </Button.Background>
@@ -523,6 +523,7 @@
                 <System:String>Playlist</System:String>
                 <System:String>Track</System:String>
             </ComboBox>
+            <DataGrid Name="Test123" Margin="10,560,10,10" IsReadOnly="True" />
         </Grid>
         <Grid Grid.ColumnSpan="5">
             <WrapPanel x:Name="MusicBar" Background="Transparent" Height="96" VerticalAlignment="Bottom" Margin="-6,0,6,-97" >
@@ -576,6 +577,7 @@
                     <Label x:Name="TotalTime" Content="00:00" Margin="0,0,0,0"/>
                 </WrapPanel>
                 <WrapPanel VerticalAlignment="Center">
+                    
                     <Image Source="/Volume.png" Width="30" Height="30" Margin="25,0,0,0"/>
                     <Slider Style="{StaticResource Horizontal_Slider}" Value="25" Maximum="100" Minimum="0" ValueChanged="Volume_ValueChanged" x:Name="Volume" Width="142" Height="9" Margin="5"/>
                 </WrapPanel>

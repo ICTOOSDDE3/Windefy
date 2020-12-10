@@ -34,7 +34,6 @@ namespace View
         Register registerAccount = new Register();
         Login login = new Login();
         private string email = "";
-        private int playlistID;
         private bool rewFor;
 
         public MainWindow()
@@ -47,13 +46,18 @@ namespace View
             DataContext = new ViewModels.Artist(1);
             mediaPlayer.MediaEnded += MediaPlayer_MediaEnded;
 
-
-
             // initialize and setup of timer
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(0);
             timer.Tick += timer_Tick;
             timer.Start();
+        }
+
+        private void NewMethod(object sender, RoutedEventArgs e)
+        {
+            var x = (Button)e.OriginalSource;
+            var data = x.DataContext as Model.Playlist;
+            Test123.ItemsSource = TrackHistory.test(data.playlistID);
         }
 
         private void Add_PlayLists_To_Left_Sidebar()
@@ -259,6 +263,7 @@ namespace View
         private void clickedTrackUpdate()
         {
             SingleTrackClicked.TrackClicked = false;
+            TrackHistory.trackHistory.Clear();
             UpdateMusicBar(SingleTrackClicked.TrackID);
             tbPlayPause.IsChecked = true;
             mediaPlayer.Play();
@@ -315,7 +320,7 @@ namespace View
                     mediaPlayer.Play();
                 }
             }
-            else if (TrackQueue.trackQueue.Count() > 0)
+            else if (TrackQueue.trackQueue.Count() > 0 && TrackHistory.trackHistory.Count > 0)
             {
                 UpdateMusicBar(TrackHistory.trackHistory.Pop());
 
@@ -483,12 +488,9 @@ namespace View
         private void UpdateMusicBar(int trackID)
         {
             if (CurrentTrack != null && rewFor)
-            {
+            {                
                 TrackHistory.trackHistory.Push(CurrentTrack.TrackID);
-                if (SingleTrackClicked.QueueTrackIDs.Count > 0)
-                {
-                    SingleTrackClicked.QueueTrackIDs.RemoveFirst();
-                }
+                TrackHistory.InsertToHistory(CurrentTrack.TrackID);
             }
 
             MusicBar.DataContext = track.GetTrack(trackID);
@@ -496,6 +498,11 @@ namespace View
             icArtistList.ItemsSource = CurrentTrack.Artists;
             TrackImage.Source = new BitmapImage(new Uri(ApacheConnection.GetImageFullPath(CurrentTrack.Image_path), UriKind.RelativeOrAbsolute));
             mediaPlayer.Open(new Uri(ApacheConnection.GetAudioFullPath(CurrentTrack.File_path)));
+
+            if (SingleTrackClicked.QueueTrackIDs.Count > 0 && rewFor)
+            {
+                SingleTrackClicked.QueueTrackIDs.RemoveFirst();
+            }
         }
 
         private void SearchBarTextChanged(object sender, TextChangedEventArgs e)
