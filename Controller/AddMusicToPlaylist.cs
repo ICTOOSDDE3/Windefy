@@ -9,7 +9,8 @@ namespace Controller
     {
         //this is the logged in user ID
         private int _userID = Model.User.UserID;
-        public List<PlaylistPreview> _playlists = new List<PlaylistPreview>();
+        //public List<PlaylistPreview> _playlists = new List<PlaylistPreview>();
+        public List<PlaylistPreview> _playlists { get; set; } = new List<PlaylistPreview>();
         private bool _isPlaylistMade = false;
         //checks if there are any playlists of the user
         public bool CheckIfUserHasPlaylists()
@@ -42,8 +43,7 @@ namespace Controller
                 _playlists.Add(new PlaylistPreview(playlistId, playlistTitle));
 
             }
-            DBConnection.CloseConnection();
-
+            //DBConnection.CloseConnection();
         }
 
         public void InsertToPlaylist(int playlistID, int trackID)

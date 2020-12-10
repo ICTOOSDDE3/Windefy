@@ -1,4 +1,5 @@
 ﻿using Controller;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,15 +11,16 @@ namespace View.ViewModels
     public class SearchSongModel
     {
         public List<TrackInfo> items { get; set; }
-        public List<string> random { get; set; } = new List<string>() { "titel 1", "titel 2", "titel 3" };
 
         public SearchSongModel(string q)
         {
+
             ApacheConnection.Initialize();
             DBConnection.OpenConnection();
 
             // Initialize or empty the items
             items = new List<TrackInfo>();
+
 
 
             // Fetch all tracks
@@ -68,16 +70,28 @@ namespace View.ViewModels
     // Data template for tracksinfo for the search screen
     public class TrackInfo
     {
+        public AddMusicToPlaylist a1 = new AddMusicToPlaylist();
+        private int userID = Model.User.UserID;
         public int TrackID { get; set; }
         public string Title { get; set; }
         public string Duration { get; set; }
         public string ImagePath { get; set; }
         public string ArtistName { get; set; }
         public int PlaylistID { get; set; }
+        public List<PlaylistPreview> playlistPreview { get; set; }
+        public List<string> playlist { get; set; }
 
 
         public TrackInfo(string T, int D, string I, int ID, int P_ID)
         {
+            playlist = new List<string>();
+            a1.ShowPlaylists(Model.User.UserID);
+            foreach (var item in a1._playlists)
+            {
+                playlist.Add(item.PlaylistTitle);
+            }
+
+
             TrackID = ID;
             string seconds = (D % 60).ToString();
             if (seconds.Length == 1)
@@ -121,9 +135,10 @@ namespace View.ViewModels
             // Remove last 2 characters (', ') from the string
             ArtistName = ArtistName[0..^2];
 
-            dataReader.Close();
-            con.Close();
-            con.Dispose();
+            //dataReader.Close();
+            //con.Close();
+            //con.Dispose();
         }
+
     }
 }

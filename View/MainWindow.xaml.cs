@@ -47,8 +47,6 @@ namespace View
             DataContext = new ViewModels.Artist(1);
             mediaPlayer.MediaEnded += MediaPlayer_MediaEnded;
 
-
-
             // initialize and setup of timer
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(0);

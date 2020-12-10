@@ -67,7 +67,7 @@ namespace Controller
                 }
 
                 string connectionString;
-                connectionString = $"Server = 127.0.0.1; Database = WindefyDB; User Id = SA; Password = {Passwords.GetPassword("DB")};";
+                connectionString = $"Server = 127.0.0.1; Database = WindefyDB; User Id = SA; Password = {Passwords.GetPassword("DB")}; MultipleActiveResultSets=true;";
 
                 Connection = new SqlConnection(connectionString);
 

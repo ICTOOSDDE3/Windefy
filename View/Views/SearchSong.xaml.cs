@@ -23,7 +23,7 @@ namespace View.Views
             var data = x.DataContext as ViewModels.TrackInfo;
 
             TrackQueue.SetQueue(data.TrackID, data.PlaylistID);
-            
+
             SingleTrackClicked.TrackID = data.TrackID;
             SingleTrackClicked.TrackClicked = true;
             bool itemData = false;
@@ -41,7 +41,7 @@ namespace View.Views
                     SingleTrackClicked.QueueTrackIDs.AddLast(test.TrackID);
                 }
             }
-         }
+        }
 
         private void LikeButton_Click(object sender, RoutedEventArgs e)
         {
@@ -52,10 +52,12 @@ namespace View.Views
             {
                 addTrackToPlaylist.InsertToFavorites(trackid);
                 Trace.WriteLine("added to playlist");
-            } else
+            }
+            else
             {
                 Trace.WriteLine("already added to favorites");
-            }       
+            }
         }
+
     }
 }

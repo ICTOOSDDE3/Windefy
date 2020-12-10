@@ -179,7 +179,7 @@
         <DataTemplate x:Name="SearchAlbumViewModel" DataType="{x:Type viewmodels:SearchAlbumViewModel}">
             <views:SearchAlbum DataContext="{Binding}" />
         </DataTemplate>
-        
+
         <Style x:Key="SliderRepeatButton" TargetType="RepeatButton">
             <Setter Property="SnapsToDevicePixels" Value="true" />
             <Setter Property="OverridesDefaultStyle" Value="true" />
@@ -255,7 +255,7 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-        
+
         <Image x:Key="Play_icon" Source="Play.png"/>
         <Image x:Key="Pause_icon" Source="Pause.png"/>
         <Image x:Key="ShuffleUnChecked_icon" Source="Shuffle.png"/>
@@ -445,7 +445,7 @@
             </Setter>
         </Style>
     </Window.Resources>
-    
+
 
     <Grid Background="Transparent">
         <Grid.RowDefinitions>
@@ -524,6 +524,7 @@
                 <System:String>Track</System:String>
             </ComboBox>
         </Grid>
+        
         <Grid Grid.ColumnSpan="5">
             <WrapPanel x:Name="MusicBar" Background="Transparent" Height="96" VerticalAlignment="Bottom" Margin="-6,0,6,-97" >
                 <WrapPanel x:Name="Track_ImageTitleArtist" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">
