@@ -78,17 +78,15 @@ namespace View.ViewModels
         public string ImagePath { get; set; }
         public string ArtistName { get; set; }
         public int PlaylistID { get; set; }
-        public List<PlaylistPreview> playlistPreview { get; set; }
-        public List<string> playlist { get; set; }
+        public Dictionary<int, string> playlists { get; set; } = new Dictionary<int, string>();
 
 
         public TrackInfo(string T, int D, string I, int ID, int P_ID)
         {
-            playlist = new List<string>();
             a1.ShowPlaylists(Model.User.UserID);
-            foreach (var item in a1._playlists)
+            foreach (var item in a1.Playlists)
             {
-                playlist.Add(item.PlaylistTitle);
+                if(!item.PlaylistTitle.Equals("Favorites")) playlists.Add(item.PlaylistId,item.PlaylistTitle);
             }
 
 
@@ -134,10 +132,6 @@ namespace View.ViewModels
 
             // Remove last 2 characters (', ') from the string
             ArtistName = ArtistName[0..^2];
-
-            //dataReader.Close();
-            //con.Close();
-            //con.Dispose();
         }
 
     }

@@ -59,5 +59,12 @@ namespace View.Views
             }
         }
 
+
+        private void LoadedEvent_Combobox(object sender, SelectionChangedEventArgs e)
+        {
+            var itemCombobox = (ComboBox)e.OriginalSource;
+            var title = itemCombobox.SelectedItem;
+            Trace.WriteLine(title);
+        }
     }
 }
