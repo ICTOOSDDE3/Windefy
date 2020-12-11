@@ -52,6 +52,7 @@ namespace View.Views
             int trackid = data.TrackID;
             if (addToPlaylist.IsChecked == true)
             {
+
                 if (addTrackToPlaylist.FavoritesContainsTrack(trackid))
                 {
                     addTrackToPlaylist.InsertToFavorites(trackid);
@@ -65,6 +66,9 @@ namespace View.Views
             {
                 addTrackToPlaylist.DeleteFromFavorites(trackid);
                 Trace.WriteLine("Deleted");
+
+                addTrackToPlaylist.InsertToFavorites(trackid);
+
             }
         }
 
