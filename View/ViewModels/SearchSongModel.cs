@@ -48,6 +48,8 @@ namespace View.ViewModels
             cmd.Parameters.Add(que);
             cmd.Prepare();
 
+            AddMusicToPlaylist addMusicToPlaylist = new AddMusicToPlaylist();
+
             // Fetch all rows based on the search query and put them in items
             SqlDataReader dataReader = cmd.ExecuteReader();
             while (dataReader.Read())
@@ -57,7 +59,8 @@ namespace View.ViewModels
                     Convert.ToString(dataReader["image_path"]),
                     
                     Convert.ToInt32(dataReader["trackID"]),
-                    Convert.ToInt32(dataReader["playlistID"]));
+                    Convert.ToInt32(dataReader["playlistID"]),
+                    addMusicToPlaylist.FavoritesContainsTrack(Convert.ToInt32(dataReader["trackID"])));
 
                 items.Add(trackInfo);
             }
@@ -79,9 +82,10 @@ namespace View.ViewModels
         public string ArtistName { get; set; }
         public int PlaylistID { get; set; }
         public Dictionary<int, string> playlists { get; set; } = new Dictionary<int, string>();
+        public bool Liked { get; set; }
 
 
-        public TrackInfo(string T, int D, string I, int ID, int P_ID)
+        public TrackInfo(string T, int D, string I, int ID, int P_ID, bool liked)
         {
             a1.ShowPlaylists(Model.User.UserID);
             foreach (var item in a1.Playlists)
@@ -106,6 +110,8 @@ namespace View.ViewModels
             // TODO: Make artistName an array instead of a string so that it can be
             // linked to artist pages in the XAML
             ArtistName = "";
+
+            Liked = liked;
 
             
             SqlConnection con = new SqlConnection($"Server = 127.0.0.1; Database = WindefyDB; User Id = SA; Password = {Passwords.GetPassword("DB")};");

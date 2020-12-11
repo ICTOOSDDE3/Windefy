@@ -106,15 +106,34 @@ namespace Controller
             {
                 if (Convert.ToInt32(dataReader["trackID"]) == trackID)
                 {
-                    DBConnection.CloseConnection();
+                    //DBConnection.CloseConnection();
                     return false;
                 }
             }
-            DBConnection.CloseConnection();
+            //DBConnection.CloseConnection();
             return true;
         }
         //on click playlist name insert song
         //notify if inserted or not
+
+        public void DeleteFromFavorites(int trackID)
+        {
+            DBConnection.Initialize();
+            DBConnection.OpenConnection();
+
+            //Build the query
+            string favoritesQuery = $"SELECT playlistID FROM playlist where title = 'Favorites' AND ownerID = {_userID}";
+            SqlCommand cmdFavorites = new SqlCommand(favoritesQuery, DBConnection.Connection);
+            int playlistID = Convert.ToInt32(cmdFavorites.ExecuteScalar().ToString());
+
+            //Build the query
+            string DeleteQuery = $"DELETE FROM playlist_track WHERE playlistID = {playlistID} AND trackID = {trackID}";
+            SqlCommand cmdDelete = new SqlCommand(favoritesQuery, DBConnection.Connection);
+
+
+            cmdDelete.ExecuteNonQuery();
+            DBConnection.CloseConnection();
+        }
 
     }
 }

@@ -300,7 +300,7 @@
                             <Border Width="75" Height="50" Margin="0,15,0,0" >
                                 <Label Content="{Binding Duration}"   FontWeight="Bold" FontFamily="Bahnschrift Light SemiCondensed" FontSize="20"/>
                             </Border>
-                            <ToggleButton x:Name="LikeButton" Width="40" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" OpacityMask="{x:Null}" Style="{StaticResource MyToggleButtonStyle}" ToolTip="Add this number to favorites" Click="LikeButton_Click">
+                            <ToggleButton x:Name="LikeButton" Width="40" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" OpacityMask="{x:Null}" Style="{StaticResource MyToggleButtonStyle}" ToolTip="Add this number to favorites" Loaded="LikeButton_Loaded" Click="LikeButton_Click">
                                 <Image>
                                     <Image.Style>
                                         <Style TargetType="Image">

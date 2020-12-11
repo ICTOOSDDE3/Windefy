@@ -50,14 +50,21 @@ namespace View.Views
             var addToPlaylist = (ToggleButton)e.OriginalSource;
             var data = addToPlaylist.DataContext as ViewModels.TrackInfo;
             int trackid = data.TrackID;
-            if (addTrackToPlaylist.FavoritesContainsTrack(trackid))
+            if (addToPlaylist.IsChecked == true)
             {
-                addTrackToPlaylist.InsertToFavorites(trackid);
-                Trace.WriteLine("added to playlist");
-            }
-            else
+                if (addTrackToPlaylist.FavoritesContainsTrack(trackid))
+                {
+                    addTrackToPlaylist.InsertToFavorites(trackid);
+                    Trace.WriteLine("added to playlist");
+                }
+                else
+                {
+                    Trace.WriteLine("already added to favorites");
+                }
+            } else if (addToPlaylist.IsChecked == false)
             {
-                Trace.WriteLine("already added to favorites");
+                addTrackToPlaylist.DeleteFromFavorites(trackid);
+                Trace.WriteLine("Deleted");
             }
         }
 
@@ -74,6 +81,15 @@ namespace View.Views
                     addTrackToPlaylist.InsertToPlaylist(item.Key, trackInfo.TrackID);
                 }
             }
+        }
+
+        private void LikeButton_Loaded(object sender, RoutedEventArgs e)
+        {
+            var toggleButton = (ToggleButton)e.OriginalSource;
+            var data = toggleButton.DataContext as ViewModels.TrackInfo;
+
+            toggleButton.IsChecked = data.Liked;
+
         }
     }
 }
