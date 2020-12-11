@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Controller;
 
 namespace View.Views
 {
@@ -21,6 +22,37 @@ namespace View.Views
         public Homepage()
         {
             InitializeComponent();
+        }
+
+        private void Track_Click(object sender, RoutedEventArgs e)
+        {
+            var x = (Button)e.OriginalSource;
+            var data = x.DataContext as ViewModels.TrackInfo;
+
+            TrackQueue.SetQueue(data.TrackID, data.PlaylistID);
+
+            SingleTrackClicked.TrackID = data.TrackID;
+            SingleTrackClicked.TrackClicked = true;
+            SingleTrackClicked.QueueTrackIDs.Clear();
+
+            bool clickedTrack = false;
+
+            foreach (var item in tracks.Items)
+            {
+                var test = item as ViewModels.TrackInfo;
+                if (item == data)
+                {
+                    clickedTrack = true;
+                }
+                if (item != data && clickedTrack)
+                {
+                    SingleTrackClicked.QueueTrackIDs.AddLast(test.TrackID);
+                }
+                else if (!clickedTrack)
+                {
+                    SingleTrackClicked.HistoryTrackIDs.Push(test.TrackID);
+                }
+            }
         }
     }
 }

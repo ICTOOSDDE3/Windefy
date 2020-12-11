@@ -1,35 +1,43 @@
-﻿using Controller;
-using System.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using Controller;
 
 namespace View.Views
 {
     /// <summary>
-    /// Interaction logic for SearchSong.xaml
+    /// Interaction logic for History.xaml
     /// </summary>
-    public partial class SearchSong : UserControl
+    public partial class History : UserControl
     {
-        AddMusicToPlaylist addTrackToPlaylist = new AddMusicToPlaylist();
-        public SearchSong()
+        public History()
         {
             InitializeComponent();
-            
         }
+
         private void Track_Click(object sender, RoutedEventArgs e)
         {
             var x = (Button)e.OriginalSource;
             var data = x.DataContext as ViewModels.TrackInfo;
 
             TrackQueue.SetQueue(data.TrackID, data.PlaylistID);
-            
+
             SingleTrackClicked.TrackID = data.TrackID;
             SingleTrackClicked.TrackClicked = true;
+            SingleTrackClicked.QueueTrackIDs.Clear();
+
             bool clickedTrack = false;
 
-            SingleTrackClicked.QueueTrackIDs.Clear();
-            foreach (var item in items.Items)
+            foreach (var item in tracks.Items)
             {
                 var test = item as ViewModels.TrackInfo;
                 if (item == data)
@@ -45,21 +53,7 @@ namespace View.Views
                     SingleTrackClicked.HistoryTrackIDs.Push(test.TrackID);
                 }
             }
-         }
 
-        private void LikeButton_Click(object sender, RoutedEventArgs e)
-        {
-            var addToPlaylist = (ToggleButton)e.OriginalSource;
-            var data = addToPlaylist.DataContext as ViewModels.TrackInfo;
-            int trackid = data.TrackID;
-            if (addTrackToPlaylist.FavoritesContainsTrack(trackid))
-            {
-                addTrackToPlaylist.InsertToFavorites(trackid);
-                Trace.WriteLine("added to playlist");
-            } else
-            {
-                Trace.WriteLine("already added to favorites");
-            }       
         }
     }
 }

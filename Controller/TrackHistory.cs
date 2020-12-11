@@ -16,13 +16,10 @@ namespace Controller
         /// <param name="trackID">is the id from a track that has to be added</param>
         public static void InsertToHistory(int trackID)
         {
+            int playlistID = getHistoryPlaylistID();
+
             //DBConnection.Initialize();
             DBConnection.OpenConnection();
-
-            //Build the query
-            string historyQuery = $"SELECT playlistID FROM playlist where title = 'History' AND ownerID = {_userID}";
-            SqlCommand cmdHistory = new SqlCommand(historyQuery, DBConnection.Connection);
-            int playlistID = Convert.ToInt32(cmdHistory.ExecuteScalar().ToString());
 
             //Build the query
             string query = $"INSERT INTO playlist_track (trackID, playlistID, number) VALUES({trackID}, {playlistID}, -1)";
@@ -34,8 +31,24 @@ namespace Controller
             DBConnection.CloseConnection();
         }
 
-        public static List<Model.Track> test(int playlistID)
+        public static int getHistoryPlaylistID()
         {
+            DBConnection.OpenConnection();
+
+            //Build the query
+            string historyQuery = $"SELECT playlistID FROM playlist where title = 'History' AND ownerID = {_userID}";
+            SqlCommand cmdHistory = new SqlCommand(historyQuery, DBConnection.Connection);
+
+            int playlistID = Convert.ToInt32(cmdHistory.ExecuteScalar().ToString());
+
+            DBConnection.CloseConnection();
+
+            return playlistID;
+        }
+
+        public static List<Model.Track> PlaylistTracks()
+        {
+            int playlistID = getHistoryPlaylistID();
             List<Model.Track> tracks = new List<Model.Track>();
             List<int> trackIDs = new List<int>();
 
@@ -73,10 +86,7 @@ namespace Controller
                 tracks.Add(contrTrack.GetTrack(2));
             }
 
-
             return tracks;
         }
-
-
     }
 }

@@ -35,6 +35,8 @@ namespace View
         Login login = new Login();
         private string email = "";
         private bool rewFor;
+        private int playlistID;
+        private bool isLogin = false;
 
         public MainWindow()
         {
@@ -42,8 +44,7 @@ namespace View
 
             ApacheConnection.Initialize();
             InitializeComponent();
-            //DataContext = new Homepage();
-            DataContext = new ViewModels.Artist(1);
+
             mediaPlayer.MediaEnded += MediaPlayer_MediaEnded;
 
             // initialize and setup of timer
@@ -51,13 +52,6 @@ namespace View
             timer.Interval = TimeSpan.FromSeconds(0);
             timer.Tick += timer_Tick;
             timer.Start();
-        }
-
-        private void NewMethod(object sender, RoutedEventArgs e)
-        {
-            var x = (Button)e.OriginalSource;
-            var data = x.DataContext as Model.Playlist;
-            Test123.ItemsSource = TrackHistory.test(data.playlistID);
         }
 
         private void Add_PlayLists_To_Left_Sidebar()
@@ -218,7 +212,8 @@ namespace View
                     LoginBackground.Visibility = Visibility.Hidden;
                     //Get all the playlists from the current users into a playlistlistobject
                     SideBarList.SetAllPlaylistsFromUser();
-
+                    isLogin = true;
+                    DataContext = new Homepage();
                     Add_PlayLists_To_Left_Sidebar();
                 } else
                 {
@@ -263,7 +258,8 @@ namespace View
         private void clickedTrackUpdate()
         {
             SingleTrackClicked.TrackClicked = false;
-            TrackHistory.trackHistory.Clear();
+            rewFor = false;
+            TrackHistory.trackHistory = SingleTrackClicked.HistoryTrackIDs;
             UpdateMusicBar(SingleTrackClicked.TrackID);
             tbPlayPause.IsChecked = true;
             mediaPlayer.Play();
@@ -287,7 +283,8 @@ namespace View
                     mediaPlayer.Play();
                 }
             }
-            else if (TrackQueue.trackQueue.Count() > 0) { 
+            else if (TrackQueue.trackQueue.Count() > 0) {
+                rewFor = true;
                 UpdateMusicBar(TrackQueue.Dequeue());
 
                 if (mediaPlaying)
@@ -322,6 +319,7 @@ namespace View
             }
             else if (TrackQueue.trackQueue.Count() > 0 && TrackHistory.trackHistory.Count > 0)
             {
+                rewFor = false;
                 UpdateMusicBar(TrackHistory.trackHistory.Pop());
 
                 if (mediaPlaying)
@@ -384,6 +382,7 @@ namespace View
             }
             else if (TrackQueue.trackQueue.Count() > 0)
             {
+                rewFor = true;
                 UpdateMusicBar(TrackQueue.Dequeue());
 
                 if (mediaPlaying)
@@ -481,6 +480,30 @@ namespace View
             //TrackQueue.ShuffleEnabled = false;
         }
 
+        private void PlaylistClick(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)e.OriginalSource;
+            Model.Playlist playlistData = button.DataContext as Model.Playlist;
+            playlistID = playlistData.playlistID;
+
+            if (playlistID == TrackHistory.getHistoryPlaylistID())
+            {
+                DataContext = new HistoryViewModel();
+            }
+
+        }
+
+/*        private void PlaylistTrackClick(object sender, MouseButtonEventArgs e)
+        {
+            var x = (TextBlock)e.OriginalSource;
+            var data = x.DataContext as Model.Track;
+
+            TrackQueue.SetQueue(data.TrackID, playlistID);
+            SingleTrackClicked.QueueTrackIDs.Clear();
+            UpdateMusicBar(data.TrackID);
+            mediaPlayer.Play();
+        }*/
+
         /// <summary>
         /// Updates all music related data
         /// </summary>
@@ -490,14 +513,14 @@ namespace View
             if (CurrentTrack != null && rewFor)
             {                
                 TrackHistory.trackHistory.Push(CurrentTrack.TrackID);
-                TrackHistory.InsertToHistory(CurrentTrack.TrackID);
+                //TrackHistory.InsertToHistory(CurrentTrack.TrackID);
             }
 
             MusicBar.DataContext = track.GetTrack(trackID);
             CurrentTrack = (Model.Track)MusicBar.DataContext;
+            mediaPlayer.Open(new Uri(ApacheConnection.GetAudioFullPath(CurrentTrack.File_path)));
             icArtistList.ItemsSource = CurrentTrack.Artists;
             TrackImage.Source = new BitmapImage(new Uri(ApacheConnection.GetImageFullPath(CurrentTrack.Image_path), UriKind.RelativeOrAbsolute));
-            mediaPlayer.Open(new Uri(ApacheConnection.GetAudioFullPath(CurrentTrack.File_path)));
 
             if (SingleTrackClicked.QueueTrackIDs.Count > 0 && rewFor)
             {
@@ -531,10 +554,11 @@ namespace View
                         break;
                 }
             }
-            else
+            else if (isLogin)
             {
                 DataContext = new Homepage();
             }
         }
+
     }
 }

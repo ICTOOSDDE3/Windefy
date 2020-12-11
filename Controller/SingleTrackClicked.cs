@@ -8,6 +8,7 @@ namespace Controller
     {
         public static int TrackID { get; set; }
         public static LinkedList<int> QueueTrackIDs = new LinkedList<int>();
+        public static Stack<int> HistoryTrackIDs = new Stack<int>();
         public static bool TrackClicked { get; set; }
     }
 }
