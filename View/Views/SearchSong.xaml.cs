@@ -53,11 +53,6 @@ namespace View.Views
             if (addTrackToPlaylist.FavoritesContainsTrack(trackid))
             {
                 addTrackToPlaylist.InsertToFavorites(trackid);
-                Trace.WriteLine("added to playlist");
-            }
-            else
-            {
-                Trace.WriteLine("already added to favorites");
             }
         }
 

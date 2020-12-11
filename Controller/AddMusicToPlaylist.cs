@@ -11,16 +11,6 @@ namespace Controller
         private int _userID = Model.User.UserID;
         //public List<PlaylistPreview> _playlists = new List<PlaylistPreview>();
         public List<PlaylistPreview> Playlists { get; set; } = new List<PlaylistPreview>();
-        private bool _isPlaylistMade = false;
-        //checks if there are any playlists of the user
-        public bool CheckIfUserHasPlaylists()
-        {
-            if (Playlists.Count > 0)
-            {
-                return _isPlaylistMade = true;
-            }
-            return _isPlaylistMade;
-        }
 
         // shows playlist that the user has made
         public void ShowPlaylists(int userID)
@@ -43,7 +33,6 @@ namespace Controller
                 Playlists.Add(new PlaylistPreview(playlistId, playlistTitle));
 
             }
-            //DBConnection.CloseConnection();
         }
 
         public void InsertToPlaylist(int playlistID, int trackID)
@@ -51,14 +40,26 @@ namespace Controller
             DBConnection.Initialize();
             DBConnection.OpenConnection();
 
-            //Build the query
-            string query = $"INSERT INTO playlist_track (trackID, playlistID, number) VALUES({trackID}, {playlistID}, -1)";
+            // checks if track is already in selected playlist
+            string favoritesQuery = $"SELECT * FROM playlist_track where playlistID = {playlistID} AND trackID = {trackID}";
+            SqlCommand cmdInPlaylist = new SqlCommand(favoritesQuery, DBConnection.Connection);
+            var contains = cmdInPlaylist.ExecuteScalar();
 
-            //Prepare the query
-            SqlCommand cmd = new SqlCommand(query, DBConnection.Connection);
+            if (contains == null)
+            {
+                //Build the query
+                string query = $"INSERT INTO playlist_track (trackID, playlistID, number) VALUES({trackID}, {playlistID}, -1)";
 
-            cmd.ExecuteScalar();
-            DBConnection.CloseConnection();
+                //Prepare the query
+                SqlCommand cmd = new SqlCommand(query, DBConnection.Connection);
+
+                cmd.ExecuteScalar();
+                DBConnection.CloseConnection();
+            } else
+            {
+                Console.WriteLine("already contains track");
+                DBConnection.CloseConnection();
+            }
         }
 
         /// <summary>
