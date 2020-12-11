@@ -43,11 +43,8 @@ namespace View
 
             ApacheConnection.Initialize();
             InitializeComponent();
-            //DataContext = new Homepage();
-            DataContext = new ViewModels.Artist(1);
+            DataContext = new Homepage();
             mediaPlayer.MediaEnded += MediaPlayer_MediaEnded;
-
-
 
             // initialize and setup of timer
             DispatcherTimer timer = new DispatcherTimer();
@@ -498,6 +495,11 @@ namespace View
             mediaPlayer.Open(new Uri(ApacheConnection.GetAudioFullPath(CurrentTrack.File_path)));
         }
 
+        public void OnArtistClick(object sender, int artistId)
+        {
+            DataContext = new ViewModels.Artist(artistId);
+        }
+
         private void SearchBarTextChanged(object sender, TextChangedEventArgs e)
         {
             string searchBarValue = SearchBar.Text;
@@ -510,7 +512,10 @@ namespace View
                 switch (dropDownValue)
                 {
                     case "Artist":
-                        DataContext = new SearchArtistViewModel(searchBarValue);
+                        SearchArtistViewModel searchArtistViewModel = new SearchArtistViewModel(searchBarValue);
+                        searchArtistViewModel.ArtistClickEvent += OnArtistClick;
+
+                        DataContext = searchArtistViewModel;
                         break;
                     case "Album":
                         DataContext = new SearchAlbumViewModel(searchBarValue, false);
@@ -520,7 +525,9 @@ namespace View
                         break;
                     default:
                         // Track as default
-                        DataContext = new SearchSongModel(searchBarValue);
+                        SearchSongModel searchSongModel = new SearchSongModel(searchBarValue);
+                        searchSongModel.ArtistClickEvent += OnArtistClick;
+                        DataContext = searchSongModel;
                         break;
                 }
             }

@@ -231,7 +231,7 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                         <StackPanel Orientation="Vertical" Margin="25,100,0,0" VerticalAlignment="Top">
-                            <Button x:Name="btnLight" Width="200" Height="200" Style="{StaticResource MyButtonStyleImage}" >
+                            <Button Tag="{Binding ArtistID}" x:Name="btnLight" Width="200" Height="200" Style="{StaticResource MyButtonStyleImage}" Click="btnLight_Click">
 
                                 <!--<Button.Template>
                                     <ControlTemplate>
@@ -248,7 +248,7 @@
 
 
 
-                            <Label Content="{Binding Name}"   FontWeight="Bold" FontFamily="Bahnschrift Light SemiCondensed" FontSize="20" ToolTip="{Binding Name}" HorizontalAlignment="Center"/>
+                            <Label Content="{Binding Name}"   FontWeight="Bold" FontFamily="Bahnschrift Light SemiCondensed" FontSize="20" ToolTip="{Binding Name}" HorizontalAlignment="Center" />
                         </StackPanel>
                         
                     </DataTemplate>

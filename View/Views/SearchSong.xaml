@@ -292,7 +292,7 @@
 
                                 <Border Width="300" Height="50">
                                     <Button Height="50" Foreground="{x:Null}" BorderBrush="{x:Null}" Background="{x:Null}" Style="{StaticResource MyButtonStyle}" HorizontalAlignment="Left" ToolTip="{Binding ArtistName}">
-                                        <Label Content="{Binding ArtistName}"   FontWeight="Normal" FontFamily="Bahnschrift Light SemiCondensed" FontSize="16"/>
+                                        <Label Content="{Binding ArtistName}"   FontWeight="Normal" FontFamily="Bahnschrift Light SemiCondensed" FontSize="16" MouseDown="Label_MouseDown"/>
                                     </Button>
                                 </Border>
                             </StackPanel>
