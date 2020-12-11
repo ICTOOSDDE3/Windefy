@@ -329,7 +329,7 @@
                                 <ComboBox x:Name="SearchDropdown" ItemsSource="{Binding playlists}" IsEditable="True" HorizontalAlignment="Left" VerticalAlignment="Top" Width="20" Height="35" SelectedIndex="-1" BorderBrush="#FF4F83CC" Foreground="White" Background="#FF4F83CC" FontSize="20" FontStyle="Normal" SelectionChanged="LoadedEvent_Combobox" Margin="40,0,0,0">
                                     <ComboBox.ItemTemplate>
                                         <DataTemplate>
-                                            <TextBlock Text="{Binding}"/>
+                                            <TextBlock Text="{Binding Value}"/>
                                         </DataTemplate>
                                     </ComboBox.ItemTemplate>
                                 </ComboBox>

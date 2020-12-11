@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using View.ViewModels;
 
 namespace View.Views
 {
@@ -12,6 +13,7 @@ namespace View.Views
     public partial class SearchSong : UserControl
     {
         AddMusicToPlaylist addTrackToPlaylist = new AddMusicToPlaylist();
+        
         public SearchSong()
         {
             InitializeComponent();
@@ -20,7 +22,7 @@ namespace View.Views
         private void Track_Click(object sender, RoutedEventArgs e)
         {
             var x = (Button)e.OriginalSource;
-            var data = x.DataContext as ViewModels.TrackInfo;
+            var data = x.DataContext as TrackInfo;
 
             TrackQueue.SetQueue(data.TrackID, data.PlaylistID);
 
@@ -63,8 +65,15 @@ namespace View.Views
         private void LoadedEvent_Combobox(object sender, SelectionChangedEventArgs e)
         {
             var itemCombobox = (ComboBox)e.OriginalSource;
-            var title = itemCombobox.SelectedItem;
-            Trace.WriteLine(title);
+            var trackInfo = itemCombobox.DataContext as TrackInfo;
+            var info = itemCombobox.SelectedItem;
+            foreach (var item in trackInfo.playlists)
+            {
+                if (item.Equals(info))
+                {
+                    addTrackToPlaylist.InsertToPlaylist(item.Key, trackInfo.TrackID);
+                }
+            }
         }
     }
 }
