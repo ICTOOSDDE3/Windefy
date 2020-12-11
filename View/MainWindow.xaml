@@ -532,8 +532,10 @@
             <WrapPanel x:Name="Track_ImageTitleArtist" VerticalAlignment="Center" HorizontalAlignment="Left">
                 <Image x:Name="TrackImage" Height="70" Width="70" Stretch="Uniform"/>
                 <StackPanel Margin="5,0,0,0" VerticalAlignment="Center">
-                    <Label x:Name="Track_Name" Content="{Binding Title}"/>
-                    <ItemsControl x:Name="icArtistList">
+                    <Label x:Name="Track_Name" MaxWidth="150" HorizontalAlignment="Left">
+                        <TextBlock TextTrimming="WordEllipsis" Text="{Binding Title}" ToolTip="{Binding Title}"/>
+                    </Label>
+                    <ItemsControl x:Name="icArtistList" HorizontalAlignment="Left" MaxWidth="150">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <StackPanel Orientation="Horizontal"/>
@@ -554,7 +556,7 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </StackPanel>
-                <ToggleButton x:Name="favoriteBtn" Width="30" Height="30" Margin="0,0,25,0" BorderThickness="0" Style="{StaticResource Heart}" Checked="favoriteBtn_Checked" Unchecked="favoriteBtn_Unchecked"/>
+                <ToggleButton x:Name="favoriteBtn" Width="30" Height="30" BorderThickness="0" Style="{StaticResource Heart}" Checked="favoriteBtn_Checked" Unchecked="favoriteBtn_Unchecked"/>
             </WrapPanel>
             <WrapPanel VerticalAlignment="Center" Margin="301,0,651,0" >
                 <ToggleButton x:Name="shuffleBtn" Height="32" Width="32" Margin="49,0,0,0" BorderThickness="0" Style="{StaticResource Shuffle}" Checked="shuffleBtn_Checked" Unchecked="shuffleBtn_Unchecked"/>
@@ -575,8 +577,8 @@
             </WrapPanel>
             <WrapPanel VerticalAlignment="Top" Margin="718,35,239,0">
                 <Label x:Name="CurrentTime" Content="00:00" Margin="100,0,0,0" VerticalAlignment="Center"/>
-                <Label x:Name="TotalTime" Content="00:00" Margin="0,0,0,0"/>
                 <Slider Style="{StaticResource Horizontal_Slider}" Minimum="0" Maximum="100" Value="0" x:Name="TimeStatus" Thumb.DragStarted="TimeStatus_DragStarted" Thumb.DragCompleted="TimeStatus_DragCompleted" Width="300" Height="15" />
+                <Label x:Name="TotalTime" Content="00:00" Margin="0,0,0,0"/>
             </WrapPanel>
             <WrapPanel VerticalAlignment="Center" Margin="1207,0,10,0">
 

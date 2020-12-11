@@ -554,10 +554,10 @@ namespace View
                         break;
                 }
             }
-            else if (isLogin)
+/*            else if (isLogin)
             {
                 DataContext = new Homepage();
-            }
+            }*/
         }
 
     }
