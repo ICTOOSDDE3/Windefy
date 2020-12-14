@@ -179,7 +179,10 @@
         <DataTemplate x:Name="SearchAlbumViewModel" DataType="{x:Type viewmodels:SearchAlbumViewModel}">
             <views:SearchAlbum DataContext="{Binding}" />
         </DataTemplate>
-        
+        <DataTemplate x:Name="TrackQueue" DataType="{x:Type viewmodels:TrackQueueViewModel}">
+        <views:TrackQueue DataContext="{Binding}" />
+        </DataTemplate>
+
         <Style x:Key="SliderRepeatButton" TargetType="RepeatButton">
             <Setter Property="SnapsToDevicePixels" Value="true" />
             <Setter Property="OverridesDefaultStyle" Value="true" />
@@ -578,6 +581,12 @@
                 <WrapPanel VerticalAlignment="Center">
                     <Image Source="/Volume.png" Width="30" Height="30" Margin="25,0,0,0"/>
                     <Slider Style="{StaticResource Horizontal_Slider}" Value="25" Maximum="100" Minimum="0" ValueChanged="Volume_ValueChanged" x:Name="Volume" Width="142" Height="9" Margin="5"/>
+                    <Button x:Name="btnQueue" Width="32" Height="24" Margin="60,0,5,0" BorderThickness="0" Style="{StaticResource PrevNext}" Click="btnQueue_Click">
+                        <Button.Background>
+                            <ImageBrush ImageSource="/Forward.png"/>
+                        </Button.Background>
+                        <Image Source="/Forward.png"/>
+                    </Button>
                 </WrapPanel>
             </WrapPanel>
         </Grid>

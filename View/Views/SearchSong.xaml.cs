@@ -22,7 +22,7 @@ namespace View.Views
             var x = (Button)e.OriginalSource;
             var data = x.DataContext as ViewModels.TrackInfo;
 
-            TrackQueue.SetQueue(data.TrackID, data.PlaylistID);
+            Controller.TrackQueue.SetQueue(data.TrackID, data.PlaylistID);
             
             SingleTrackClicked.TrackID = data.TrackID;
             SingleTrackClicked.TrackClicked = true;

@@ -1,22 +1,14 @@
 using Controller;
-using System.Diagnostics;
-using View.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
+using View.ViewModels;
 namespace View
 {
 
@@ -43,8 +35,7 @@ namespace View
 
             ApacheConnection.Initialize();
             InitializeComponent();
-            //DataContext = new Homepage();
-            DataContext = new ViewModels.Artist(1);
+            DataContext = new Homepage();
             mediaPlayer.MediaEnded += MediaPlayer_MediaEnded;
 
 
@@ -77,7 +68,7 @@ namespace View
             string title = Details_Title_Input.Text;
             bool isprivate = (bool)AddPlaylist_Private.IsChecked;
             //Check if title is filled out
-            if(title != null)
+            if (title != null)
             {
                 Controller.Playlist newPlaylist = new Controller.Playlist();
 
@@ -101,7 +92,7 @@ namespace View
             else
             {
                 AddPlaylist_Comment.Visibility = Visibility.Visible;
-            }                        
+            }
         }
         private void Close_AddPlaylist_Button_Click(object sender, RoutedEventArgs e)
         {
@@ -206,7 +197,7 @@ namespace View
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-            if(login.IsLogin(Email_TextBox.Text, Wachtwoord_TextBox.Password))
+            if (login.IsLogin(Email_TextBox.Text, Wachtwoord_TextBox.Password))
             {
                 bool verified = Model.User.Verified;
                 if (verified)
@@ -216,7 +207,8 @@ namespace View
                     SideBarList.SetAllPlaylistsFromUser();
 
                     Add_PlayLists_To_Left_Sidebar();
-                } else
+                }
+                else
                 {
                     email = Model.User.Email.ToString();
                     LoginGrid.Visibility = Visibility.Hidden;
@@ -226,7 +218,8 @@ namespace View
 
                     Add_PlayLists_To_Left_Sidebar();
                 }
-            } else
+            }
+            else
             {
                 Login_HeadsUp.Content = "Email or password invalid!";
             }
@@ -260,6 +253,10 @@ namespace View
         {
             SingleTrackClicked.TrackClicked = false;
             UpdateMusicBar(SingleTrackClicked.TrackID);
+            if (DataContext is TrackQueueViewModel)
+            {
+                DataContext = new TrackQueueViewModel();
+            }
             tbPlayPause.IsChecked = true;
             mediaPlayer.Play();
         }
@@ -282,12 +279,24 @@ namespace View
                     mediaPlayer.Play();
                 }
             }
-            else if (TrackQueue.trackQueue.Count() > 0) { 
-                UpdateMusicBar(TrackQueue.Dequeue());
-
-                if (mediaPlaying)
+            else if (TrackQueue.trackQueue.Count() > 0)
+            {
+                int dequeue_item = TrackQueue.Dequeue();
+                if (dequeue_item != -1)
                 {
-                    mediaPlayer.Play();
+                    UpdateMusicBar(dequeue_item);
+                    if (DataContext is TrackQueueViewModel)
+                    {
+                        DataContext = new TrackQueueViewModel();
+                    }
+                    if (mediaPlaying)
+                    {
+                        mediaPlayer.Play();
+                    }
+                }
+                else
+                {
+                    MusicBar.DataContext = null;
                 }
             }
             else
@@ -315,7 +324,7 @@ namespace View
                     mediaPlayer.Play();
                 }
             }
-            else if (TrackQueue.trackQueue.Count() > 0)
+            else if (Controller.TrackQueue.trackQueue.Count() > 0)
             {
                 UpdateMusicBar(TrackHistory.trackHistory.Pop());
 
@@ -372,6 +381,7 @@ namespace View
 
                 UpdateMusicBar(SingleTrackClicked.QueueTrackIDs.First());
 
+
                 if (mediaPlaying)
                 {
                     mediaPlayer.Play();
@@ -379,11 +389,22 @@ namespace View
             }
             else if (TrackQueue.trackQueue.Count() > 0)
             {
-                UpdateMusicBar(TrackQueue.Dequeue());
-
-                if (mediaPlaying)
+                int dequeue_item = TrackQueue.Dequeue();
+                if (dequeue_item != -1)
                 {
-                    mediaPlayer.Play();
+                    UpdateMusicBar(dequeue_item);
+                    if (DataContext is TrackQueueViewModel)
+                    {
+                        DataContext = new TrackQueueViewModel();
+                    }
+                    if (mediaPlaying)
+                    {
+                        mediaPlayer.Play();
+                    }
+                }
+                else
+                {
+                    MusicBar.DataContext = null;
                 }
             }
             else
@@ -475,6 +496,10 @@ namespace View
         {
             //TrackQueue.ShuffleEnabled = false;
         }
+        private void btnQueue_Click(object sender, RoutedEventArgs e)
+        {
+            DataContext = new TrackQueueViewModel();
+        }
 
         /// <summary>
         /// Updates all music related data
@@ -529,5 +554,6 @@ namespace View
                 DataContext = new Homepage();
             }
         }
+
     }
 }
