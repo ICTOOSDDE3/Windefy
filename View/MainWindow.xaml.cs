@@ -539,5 +539,10 @@ namespace View
                 DataContext = new Homepage();
             }
         }
+
+        private void Button_Click(object sender, MouseButtonEventArgs e)
+        {
+            DataContext = new Homepage();
+        }
     }
 }
