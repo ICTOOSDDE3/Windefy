@@ -179,6 +179,9 @@
         <DataTemplate x:Name="SearchAlbumViewModel" DataType="{x:Type viewmodels:SearchAlbumViewModel}">
             <views:SearchAlbum DataContext="{Binding}" />
         </DataTemplate>
+        <DataTemplate x:Name="Playlist" DataType="{x:Type viewmodels:PlaylistViewModel}">
+            <views:Playlist DataContext="{Binding}" />
+        </DataTemplate>
         
         <Style x:Key="SliderRepeatButton" TargetType="RepeatButton">
             <Setter Property="SnapsToDevicePixels" Value="true" />
@@ -493,7 +496,7 @@
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" Margin="25,30,0,0" VerticalAlignment="Center">
-                                        <Button x:Name="Playlist_Plus_Button" Content="" Width="42" Height="42" Style="{StaticResource RoundedButton}">
+                                        <Button x:Name="Playlist_Plus_Button" Content="" Width="42" Height="42" Style="{StaticResource RoundedButton}" Click="OpenPlaylist">
                                             <Button.Background>
                                                 <ImageBrush ImageSource="/Assets/Images/mockSongImage.jpg"/>
                                             </Button.Background>

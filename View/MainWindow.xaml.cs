@@ -103,6 +103,15 @@ namespace View
                 AddPlaylist_Comment.Visibility = Visibility.Visible;
             }                        
         }
+        private void OpenPlaylist(object sender, RoutedEventArgs e)
+        {
+
+            Button button = (Button)e.OriginalSource;
+            Model.Playlist playlistData = button.DataContext as Model.Playlist;
+
+            DataContext = new PlaylistViewModel(playlistData.playlistID);
+        }
+
         private void Close_AddPlaylist_Button_Click(object sender, RoutedEventArgs e)
         {
             LoginBackground.Visibility = Visibility.Hidden;
