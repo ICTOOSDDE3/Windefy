@@ -13,11 +13,11 @@ namespace View.Views
     public partial class SearchSong : UserControl
     {
         AddMusicToPlaylist addTrackToPlaylist = new AddMusicToPlaylist();
-        
+
         public SearchSong()
         {
             InitializeComponent();
-            
+
         }
         private void Track_Click(object sender, RoutedEventArgs e)
         {
@@ -45,6 +45,7 @@ namespace View.Views
             }
         }
 
+        
         private void LikeButton_Click(object sender, RoutedEventArgs e)
         {
             var addToPlaylist = (ToggleButton)e.OriginalSource;
@@ -53,7 +54,7 @@ namespace View.Views
             if (addToPlaylist.IsChecked == true)
             {
 
-                if (addTrackToPlaylist.FavoritesContainsTrack(trackid))
+                if (!addTrackToPlaylist.IsTrackInFavorites(trackid))
                 {
                     addTrackToPlaylist.InsertToFavorites(trackid);
                     Trace.WriteLine("added to playlist");
@@ -62,13 +63,11 @@ namespace View.Views
                 {
                     Trace.WriteLine("already added to favorites");
                 }
-            } else if (addToPlaylist.IsChecked == false)
+            }
+            else if (addToPlaylist.IsChecked == false)
             {
                 addTrackToPlaylist.DeleteFromFavorites(trackid);
                 Trace.WriteLine("Deleted");
-
-                addTrackToPlaylist.InsertToFavorites(trackid);
-
             }
         }
 
