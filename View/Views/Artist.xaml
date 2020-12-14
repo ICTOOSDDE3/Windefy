@@ -20,9 +20,9 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Grid Width="500" Height="100" MouseDown="Grid_MouseDown">
+                    <Grid Width="500" Height="100">
                         <Image Source="../Assets/Images/mockSongImage.jpg" Width="70" Height="70" HorizontalAlignment="Left" Margin="0,0,0,25" VerticalAlignment="Bottom" />
-                        <Label Content="{Binding Title}" Margin="94,10,94,0" Width="312" Height="24" VerticalAlignment="Top" />
+                        <Label Tag="{Binding TrackID}" Content="{Binding Title}" Margin="94,10,94,0" Width="312" Height="24" VerticalAlignment="Top" MouseDown="Track_Click" />
                         <Grid Margin="94,30,0,0">
                             <WrapPanel>
                                 <ItemsControl ItemsSource="{Binding Artists}">
