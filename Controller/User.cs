@@ -101,6 +101,9 @@ namespace Controller
             isLoggedIn = true;
         }
 
+        /// <summary>
+        /// Empties the user model
+        /// </summary>
         public static void EmptyUserModel()
         {
             Model.User.UserID = 0;

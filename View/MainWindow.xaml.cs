@@ -26,7 +26,6 @@ namespace View
         Register registerAccount = new Register();
         Login login = new Login();
         private string email = "";
-        private int playlistID;
         private bool rewFor;
 
         public MainWindow()
@@ -524,6 +523,11 @@ namespace View
             }
         }
 
+        /// <summary>
+        /// event for logging out
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Logout_Button_Click(object sender, RoutedEventArgs e)
         {
             User.EmptyUserModel();
