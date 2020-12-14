@@ -8,6 +8,7 @@ namespace Controller
 {
     public static class User
     {
+        public static bool isLoggedIn = false;
 
         public static void UpdateEmail(string newEmail)
         {
@@ -97,6 +98,18 @@ namespace Controller
             Model.User.Name = name;
             Model.User.Language = language;
             Model.User.Verified = verified;
+            isLoggedIn = true;
+        }
+
+        public static void EmptyUserModel()
+        {
+            Model.User.UserID = 0;
+            Model.User.Email = null;
+            Model.User.Name = null;
+            Model.User.Language = 0;
+            Model.User.Verified = false;
+
+            isLoggedIn = false;
         }
     }
 }
