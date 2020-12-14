@@ -12,6 +12,14 @@ namespace View.ViewModels
         public event EventHandler<int> ArtistClickEvent;
         public List<TrackInfo> items { get; set; }
 
+        private string _NoResultsVisibility;
+
+        public string NoResultsVisibility
+        {
+            get { return _NoResultsVisibility; }
+            set { _NoResultsVisibility = value; }
+        }
+
         public void OnArtistClick(int artistId)
         {
             ArtistClickEvent?.Invoke(this, artistId);
@@ -19,6 +27,7 @@ namespace View.ViewModels
 
         public SearchSongModel(string q)
         {
+            NoResultsVisibility = "Hidden";
             ApacheConnection.Initialize();
             DBConnection.OpenConnection();
 
@@ -67,6 +76,14 @@ namespace View.ViewModels
 
             dataReader.Close();
             DBConnection.CloseConnection();
+
+            if(items.Count > 0)
+            {
+                NoResultsVisibility = "Hidden";
+            } else
+            {
+                NoResultsVisibility = "Visible";
+            }
         }
     }
 

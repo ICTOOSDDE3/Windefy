@@ -2,7 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:components="clr-namespace:View.Components"
              xmlns:local="clr-namespace:View.Views"
              mc:Ignorable="d" 
              d:DesignHeight="1024" d:DesignWidth="1140">
@@ -329,5 +330,6 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
+        <components:NoResults Visibility="{Binding NoResultsVisibility}" />
     </Grid>
 </UserControl>

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:View.Views" xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:components="clr-namespace:View.Components"
              mc:Ignorable="d" 
              d:DesignHeight="1024" d:DesignWidth="1140">
 
@@ -255,5 +256,6 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
         </ScrollViewer>
+        <components:NoResults Visibility="{Binding NoResultsVisibility}" />
     </Grid>
 </UserControl>
