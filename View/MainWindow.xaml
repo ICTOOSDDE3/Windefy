@@ -472,7 +472,7 @@
                     <Label FontSize="20" Content="Recommended" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,90,0,0"/>
 
                     <Label FontSize="25" Content="Favorites" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-1,144,0,0"/>
-                    <Label FontSize="20" Content="Artists" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="44,192,0,0" MouseDown="Label_MouseDown"/>
+                    <Label FontSize="20" Content="Artists" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="44,192,0,0"/>
                     <Label FontSize="20" Content="Albums" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="44,234,0,0"/>
                     <Label FontSize="20" Content="Songs" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,276,0,0" RenderTransformOrigin="0.587,-0.614"/>
 
@@ -540,7 +540,7 @@
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock x:Name="commaTextBlock" Text=", "/>
-                                        <TextBlock Text="{Binding Name}"/>
+                                        <TextBlock Tag="{Binding ArtistID}" MouseDown="On_Artist_Click" Text="{Binding Name}"/>
                                     </StackPanel>
                                     <DataTemplate.Triggers>
                                         <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
