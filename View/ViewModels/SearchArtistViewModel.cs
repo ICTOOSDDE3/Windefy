@@ -10,7 +10,13 @@ namespace View.ViewModels
 {
     public class SearchArtistViewModel
     {
+        public event EventHandler<int> ArtistClickEvent;
         public List<ArtistInfo> items { get; set; }
+
+        public void OnArtistClick(int artistId)
+        {
+            ArtistClickEvent?.Invoke(this, artistId);
+        }
 
         public SearchArtistViewModel(string q)
         {
