@@ -24,7 +24,7 @@ namespace Controller
         public static void UpdateName(string newName)
         {
             //Update the name in the object & on the server
-            Model.User.Email = newName;
+            Model.User.Name = newName;
             //Update name in db
             UpdateNameInDB(newName, Model.User.UserID);
         }

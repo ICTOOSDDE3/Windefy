@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:View.Views" xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:components="clr-namespace:View.Components"
              mc:Ignorable="d" 
              d:DesignHeight="1024" d:DesignWidth="1140">
 
@@ -231,7 +232,7 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                         <StackPanel Orientation="Vertical" Margin="25,100,0,0" VerticalAlignment="Top">
-                            <Button x:Name="btnLight" Width="200" Height="200" Style="{StaticResource MyButtonStyleImage}" >
+                            <Button Tag="{Binding ArtistID}" x:Name="btnLight" Width="200" Height="200" Style="{StaticResource MyButtonStyleImage}" Click="btnLight_Click">
 
                                 <!--<Button.Template>
                                     <ControlTemplate>
@@ -248,12 +249,13 @@
 
 
 
-                            <Label Content="{Binding Name}"   FontWeight="Bold" FontFamily="Bahnschrift Light SemiCondensed" FontSize="20" ToolTip="{Binding Name}" HorizontalAlignment="Center"/>
+                            <Label Content="{Binding Name}"   FontWeight="Bold" FontFamily="Bahnschrift Light SemiCondensed" FontSize="20" ToolTip="{Binding Name}" HorizontalAlignment="Center" />
                         </StackPanel>
                         
                     </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
         </ScrollViewer>
+        <components:NoResults Visibility="{Binding NoResultsVisibility}" />
     </Grid>
 </UserControl>
