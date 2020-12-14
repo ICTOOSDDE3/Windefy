@@ -137,6 +137,7 @@ namespace View
         {
             LoginBackground.Visibility = Visibility.Hidden;
             AccountDetailsGrid.Visibility = Visibility.Hidden;
+            Updated_Text.Visibility = Visibility.Visible;
         }
         private void AccountDetails_Button_Click(object sender, RoutedEventArgs e)
         {
@@ -149,7 +150,7 @@ namespace View
                 Controller.User.UpdateEmail(newEmail);
             }
             //Update username if different from current name
-            if (newEmail != Model.User.Name)
+            if (newName != Model.User.Name)
             {
                 Controller.User.UpdateName(newName);
             }
@@ -447,11 +448,6 @@ namespace View
             rewind = false;
         }
 
-        private void Label_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            DataContext = new ViewModels.Artist(2);
-        }
-
         private void favoriteBtn_Checked(object sender, RoutedEventArgs e)
         {
             //controller aanroepen om track toe te voegen aan fav afspeellijst
@@ -496,7 +492,6 @@ namespace View
         }
 
         public void OnArtistClick(object sender, int artistId)
-        {
             DataContext = new ViewModels.Artist(artistId);
         }
 
