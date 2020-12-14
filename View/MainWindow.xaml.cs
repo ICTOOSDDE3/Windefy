@@ -491,7 +491,15 @@ namespace View
             mediaPlayer.Open(new Uri(ApacheConnection.GetAudioFullPath(CurrentTrack.File_path)));
         }
 
+        private void On_Artist_Click(object sender, MouseButtonEventArgs e)
+        {
+            var textBlock = (TextBlock)sender;
+            int artistId = (int)textBlock.Tag;
+            DataContext = new ViewModels.Artist(artistId);
+        }
+
         public void OnArtistClick(object sender, int artistId)
+        {
             DataContext = new ViewModels.Artist(artistId);
         }
 
