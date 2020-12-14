@@ -147,14 +147,28 @@ namespace View
             //update email if different from current email
             if (newEmail != Model.User.Email)
             {
-                Controller.User.UpdateEmail(newEmail);
+                if(registerAccount.IsValidEmail(newEmail))
+                {
+                    if(registerAccount.IsEmailUnique(newEmail))
+                    {
+                        Controller.User.UpdateEmail(newEmail);
+                    } else
+                    {
+                        Update_Headsup.Content = "Email already exists";
+                        return;
+                    }
+                } else
+                {
+                    Update_Headsup.Content = "Email adres is invalid";
+                    return;
+                }
             }
             //Update username if different from current name
             if (newName != Model.User.Name)
             {
                 Controller.User.UpdateName(newName);
             }
-
+            Update_Headsup.Content = "";
             Updated_Text.Visibility = Visibility.Visible;
         }
 
@@ -166,15 +180,21 @@ namespace View
             string repeatedPassword = PasswordRepeat_Input.Password;
             if (registerAccount.IsValidEmail(email))
             {
-                if (registerAccount.IsPasswordEqual(password, repeatedPassword))
-                {
-                    registerAccount.RegisterAccount(email, userName, password, repeatedPassword);
-                    RegisterGrid.Visibility = Visibility.Hidden;
-                    VerifyGrid.Visibility = Visibility.Visible;
+                if(registerAccount.IsEmailUnique(email)) {
+                    if (registerAccount.IsPasswordEqual(password, repeatedPassword))
+                    {
+                        registerAccount.RegisterAccount(email, userName, password, repeatedPassword);
+                        RegisterGrid.Visibility = Visibility.Hidden;
+                        VerifyGrid.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        Register_Headsup.Content = "Passwords do not match!";
+                    }
                 }
                 else
                 {
-                    Register_Headsup.Content = "Passwords do not match!";
+                    Register_Headsup.Content = "Email already exists";
                 }
             }
             else
