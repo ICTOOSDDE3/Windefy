@@ -24,7 +24,7 @@
                 </Rectangle>
                 <StackPanel Grid.Column="1" Orientation="Vertical" Margin="25,0,0,0" HorizontalAlignment="Left">
                     <Label Content="{Binding title}" FontSize="36" FontWeight="Bold" Margin="0,0,0,0" />
-                    <TextBlock TextWrapping="Wrap" Text="{Binding information}" Margin="8,0,0,0"/>
+                    <TextBlock  FontFamily="Segoe" FontSize="20" TextWrapping="Wrap" Text="{Binding information}" Margin="8,0,0,0"/>
                 </StackPanel>
             </Grid>
             <Grid Height="525px" Margin="25, 10, 25, 0">
@@ -41,7 +41,7 @@
                     </Grid.RowDefinitions>
                     <Label FontWeight="Bold" Grid.Column="0" Content="Title:" FontFamily="Segoe" FontSize="20"></Label>
                     <Label FontWeight="Bold" Grid.Column="1" Content="Artist:" FontFamily="Segoe" FontSize="20"></Label>
-                    <Label FontWeight="Bold" Grid.Column="2" Content="Liked:" FontFamily="Segoe" FontSize="20"></Label>
+                    <Label FontWeight="Bold" Grid.Column="2" Content="Loved:" FontFamily="Segoe" FontSize="20"></Label>
                     <Label FontWeight="Bold" Grid.Column="3" Content="Length:" FontFamily="Segoe" FontSize="20"></Label>
                     
                     <Line Grid.Row="1" Grid.Column="0" Stroke="Black" StrokeThickness="2" X1="0" X2="20000px" VerticalAlignment="Top"></Line>
@@ -74,13 +74,27 @@
                                         <TextBlock Text="{Binding Title}" FontWeight="Bold" FontFamily="Segoe" FontSize="20" TextTrimming="CharacterEllipsis" MaxWidth="250px"></TextBlock>
                                     </Label>
 
-                                    <ItemsControl Margin="4,0,0,0" Grid.Column="1" x:Name="Artist" ItemsSource="{Binding Artists}" >
+                                    <ItemsControl Margin="4,0,0,0" Grid.Column="1" x:Name="Artist" ItemsSource="{Binding Artists}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel Orientation="Horizontal"/>
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
-                                                <Label Content="{Binding Name}" FontFamily="Segoe" FontSize="20"></Label>
+                                                <StackPanel Orientation="Horizontal" MaxWidth="150px">
+                                                    <TextBlock FontFamily="Segoe" FontSize="20" x:Name="commaTextBlock" Text=", "/>
+                                                    <TextBlock FontFamily="Segoe" FontSize="20" Tag="{Binding ArtistID}" Text="{Binding Name}" TextTrimming="CharacterEllipsis"/>
+                                                </StackPanel>
+                                                <DataTemplate.Triggers>
+                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
+                                                        <Setter Property="Visibility" TargetName="commaTextBlock" Value="Collapsed"/>
+                                                    </DataTrigger>
+                                                </DataTemplate.Triggers>
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
                                     </ItemsControl>
+
 
                                     <Label Margin="9,0,0,0" Grid.Column="2" Content="Liked:" FontFamily="Segoe" FontSize="20"></Label>
                                     <Label Margin="14,0,0,0" Grid.Column="3" Content="{Binding DurationView}" FontFamily="Segoe" FontSize="20"></Label>
