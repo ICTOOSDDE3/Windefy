@@ -629,8 +629,8 @@
                 <TextBlock HorizontalAlignment="Left"  Margin="106,261,0,0" Text="Name:" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="110" FontSize="24"/>
                 <TextBlock HorizontalAlignment="Left"  Margin="106,359,0,0" Text="Language:" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="110" FontSize="24"/>
                 <TextBlock x:Name="Updated_Text" HorizontalAlignment="Left"  Margin="112,519,0,0" Text="*Updated account" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="224" FontSize="20" Visibility="Hidden" Opacity="0.8"/>
+                <Label x:Name="Update_Headsup" Content="" HorizontalAlignment="Center" Height="28" Margin="0,541,0,0" VerticalAlignment="Top" Width="312" Foreground="Red"/>
                 <Button x:Name="Logout_Button" Margin="282,501,0,0" FontSize="20" Width="94" Height="35" Background="{x:Null}" VerticalAlignment="Center" HorizontalAlignment="Center" BorderBrush="{x:Null}" Click="Logout_Button_Click">Logout</Button>
-
                 <Button x:Name="Close_Account_Details" Content="X" HorizontalAlignment="Left" Margin="534,23,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.48,0.377" Width="22" Foreground="Red" Background="{x:Null}" BorderBrush="{x:Null}" Click="Close_Account_Details_Button_Click" FontWeight="Bold"/>
                 <Border CornerRadius="30" Margin="112,480,112,0" VerticalAlignment="Top" Width="363" Height="34" Background="#FF4F83CC" RenderTransformOrigin="0.5,0.5">
                     <Button x:Name="AccountDetailsButton" Content="Update" HorizontalAlignment="Center" VerticalAlignment="Center" Width="384" Height="48" Background="#00DDDDDD" BorderBrush="#00707070" Foreground="White" Click="AccountDetails_Button_Click"/>
