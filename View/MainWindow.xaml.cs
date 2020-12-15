@@ -35,8 +35,6 @@ namespace View
         Login login = new Login();
         private string email = "";
         private bool rewFor;
-        private int playlistID;
-        private bool isLogin = false;
 
         public MainWindow()
         {
@@ -107,7 +105,7 @@ namespace View
             Button button = (Button)e.OriginalSource;
             Model.Playlist playlistData = button.DataContext as Model.Playlist;
 
-                DataContext = new PlaylistViewModel(playlistData.playlistID);
+            DataContext = new PlaylistViewModel(playlistData.playlistID);
         }
 
         private void Close_AddPlaylist_Button_Click(object sender, RoutedEventArgs e)
@@ -222,7 +220,7 @@ namespace View
                     LoginBackground.Visibility = Visibility.Hidden;
                     //Get all the playlists from the current users into a playlistlistobject
                     SideBarList.SetAllPlaylistsFromUser();
-                    isLogin = true;
+                    TrackHistory.PlaylistID = TrackHistory.getHistoryPlaylistID();
                     DataContext = new Homepage();
                     Add_PlayLists_To_Left_Sidebar();
                 } else
@@ -540,10 +538,6 @@ namespace View
                         break;
                 }
             }
-/*            else if (isLogin)
-            {
-                DataContext = new Homepage();
-            }*/
         }
 
     }

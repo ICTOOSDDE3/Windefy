@@ -7,14 +7,12 @@ namespace View.ViewModels
 {
     public class Homepage
     {
-        public List<TrackInfo> tracks{ get; set; }
-        private int playlistID { get; set; }
+        public List<TrackInfo> Tracks{ get; set; }
 
         public Homepage()
         {
-            tracks = new List<TrackInfo>();
+            Tracks = new List<TrackInfo>();
             List<Model.Track> modelTracks = TrackHistory.PlaylistTracks();
-            playlistID = TrackHistory.getHistoryPlaylistID();
             TrackToTrackInfo(modelTracks);
         }
 
@@ -24,16 +22,15 @@ namespace View.ViewModels
 
             foreach (var item in modelTracks)
             {
-                if (count < 8)
+                if (count < 10)
                 {
                     count++;
-                    tracks.Add(new TrackInfo(item.Title, item.Duration, item.Image_path, item.TrackID, playlistID));
+                    Tracks.Add(new TrackInfo(item.Title, item.Duration, item.Image_path, item.TrackID, TrackHistory.PlaylistID));
                 }
                 else
                 {
                     return;
                 }
-
             }
         }
     }

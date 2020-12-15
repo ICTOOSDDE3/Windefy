@@ -9,6 +9,7 @@ namespace Controller
     { 
         public static Stack<int> trackHistory = new Stack<int>();
         private static int _userID = Model.User.UserID;
+        public static int PlaylistID;
 
         /// <summary>
         /// inserts a track in the history playlist of an user
@@ -16,13 +17,12 @@ namespace Controller
         /// <param name="trackID">is the id from a track that has to be added</param>
         public static void InsertToHistory(int trackID)
         {
-            int playlistID = getHistoryPlaylistID();
 
             //DBConnection.Initialize();
             DBConnection.OpenConnection();
 
             //Build the query
-            string query = $"INSERT INTO playlist_track (trackID, playlistID, number) VALUES({trackID}, {playlistID}, -1)";
+            string query = $"INSERT INTO playlist_track (trackID, playlistID, number) VALUES({trackID}, {PlaylistID}, -1)";
 
             //Prepare the query
             SqlCommand cmd = new SqlCommand(query, DBConnection.Connection);
@@ -48,14 +48,13 @@ namespace Controller
 
         public static List<Model.Track> PlaylistTracks()
         {
-            int playlistID = getHistoryPlaylistID();
             List<Model.Track> tracks = new List<Model.Track>();
             List<int> trackIDs = new List<int>();
 
             Track contrTrack = new Track();
 
             DBConnection.OpenConnection();
-            var query = $"SELECT trackID FROM playlist_track WHERE playlistID = {playlistID}";
+            var query = $"SELECT trackID FROM playlist_track WHERE playlistID = {PlaylistID}";
             SqlCommand cmd = new SqlCommand(query, DBConnection.Connection);
 
             using (SqlDataReader reader = cmd.ExecuteReader())
