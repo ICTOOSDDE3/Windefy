@@ -9,7 +9,7 @@
         xmlns:System="clr-namespace:System;assembly=System.Runtime" x:Name="Index" x:Class="View.MainWindow"
         mc:Ignorable="d"
         Icon="/Assets/favicon.ico"
-        Title="MainWindow" Height="1024" Width="1440">
+        Title="MainWindow" Height="1024" Width="1680">
     <Window.Resources>
         <LinearGradientBrush x:Key="NormalBrush" StartPoint="0,0" EndPoint="0,1">
             <GradientBrush.GradientStops>
@@ -180,7 +180,7 @@
         <DataTemplate x:Name="SearchAlbumViewModel" DataType="{x:Type viewmodels:SearchAlbumViewModel}">
             <views:SearchAlbum DataContext="{Binding}" />
         </DataTemplate>
-        
+
         <Style x:Key="SliderRepeatButton" TargetType="RepeatButton">
             <Setter Property="SnapsToDevicePixels" Value="true" />
             <Setter Property="OverridesDefaultStyle" Value="true" />
@@ -256,7 +256,7 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-        
+
         <Image x:Key="Play_icon" Source="Play.png"/>
         <Image x:Key="Pause_icon" Source="Pause.png"/>
         <Image x:Key="ShuffleUnChecked_icon" Source="Shuffle.png"/>
@@ -446,7 +446,7 @@
             </Setter>
         </Style>
     </Window.Resources>
-    
+
 
     <Grid Background="Transparent">
         <Grid.RowDefinitions>
@@ -525,6 +525,7 @@
                 <System:String>Track</System:String>
             </ComboBox>
         </Grid>
+        
         <Grid Grid.ColumnSpan="5">
             <WrapPanel x:Name="MusicBar" Background="Transparent" Height="96" VerticalAlignment="Bottom" Margin="-6,0,6,-97" >
                 <WrapPanel x:Name="Track_ImageTitleArtist" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">

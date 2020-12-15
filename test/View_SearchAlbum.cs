@@ -15,7 +15,7 @@ namespace Test
         public void is_Correct_playlistID()
         {
             DBConnection.Initialize();
-            SearchAlbumViewModel searchAlbum = new SearchAlbumViewModel("blue piano", true);
+            SearchAlbumViewModel searchAlbum = new SearchAlbumViewModel("blue piano", false);
 
             Assert.AreEqual(84, searchAlbum.items[0].PlaylistID);
         }

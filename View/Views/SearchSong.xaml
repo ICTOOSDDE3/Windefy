@@ -6,7 +6,7 @@
              xmlns:components="clr-namespace:View.Components"
              xmlns:local="clr-namespace:View.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="1024" d:DesignWidth="1140">
+             d:DesignHeight="1024" d:DesignWidth="1140" Height="1024">
 
     <UserControl.Resources>
 
@@ -318,7 +318,7 @@
                             <Border Width="75" Height="50" Margin="0,15,0,0" >
                                 <Label Content="{Binding Duration}"   FontWeight="Bold" FontFamily="Bahnschrift Light SemiCondensed" FontSize="20"/>
                             </Border>
-                            <ToggleButton x:Name="LikeButton" Width="40" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" OpacityMask="{x:Null}" Style="{StaticResource MyToggleButtonStyle}" ToolTip="Add this number to favorites" Click="LikeButton_Click">
+                            <ToggleButton x:Name="LikeButton" Width="40" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" OpacityMask="{x:Null}" Style="{StaticResource MyToggleButtonStyle}" ToolTip="Add this number to favorites" Loaded="LikeButton_Loaded" Click="LikeButton_Click">
                                 <Image>
                                     <Image.Style>
                                         <Style TargetType="Image">
@@ -341,6 +341,18 @@
                                     </Image.Style>
                                 </Image>
                             </ToggleButton>
+
+                            <StackPanel Orientation="Vertical">
+                                <Label Margin="10, 0, 0, 0">Add to playlist:</Label>
+                                <ComboBox x:Name="PlaylistDropdown" ItemsSource="{Binding playlists}" IsEditable="True" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Height="35" SelectedIndex="-1" BorderBrush="#FF4F83CC" Foreground="White" Background="#FF4F83CC" FontSize="20" FontStyle="Normal" SelectionChanged="LoadedEvent_Combobox" Margin="10,0,0,0">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Value}"/>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                            </StackPanel>
+
 
                         </StackPanel>
                     </DataTemplate>
