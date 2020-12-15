@@ -7,6 +7,29 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
+        <Style x:Key="MyButtonStyle" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" 
+                        BorderThickness="1"
+                        Padding="4,2" 
+                        BorderBrush="White" 
+                        CornerRadius="3" 
+                        Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="white" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
    
     </UserControl.Resources>
     
@@ -66,6 +89,7 @@
                                         <ColumnDefinition Width="1*" />
                                         <ColumnDefinition Width="1*" />
                                         <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="0.05*"/>
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="50" />
@@ -97,6 +121,9 @@
 
 
                                     <Label Margin="9,0,0,0" Grid.Column="2" Content="Liked:" FontFamily="Segoe" FontSize="20"></Label>
+                                    <Label Margin="14,0,0,0" Grid.Column="3" Content="Length:" FontFamily="Segoe" FontSize="20"></Label>
+                                    <Button x:Name="Remove_Button" Style="{StaticResource MyButtonStyle}" Grid.Column="4" Foreground="Red" BorderBrush="{x:Null}" HorizontalAlignment="Left" ToolTip="Remove from playlist" Click="Remove_Button_Click">X
+                                    </Button>
                                     <Label Margin="14,0,0,0" Grid.Column="3" Content="{Binding DurationView}" FontFamily="Segoe" FontSize="20"></Label>
                                 </Grid>
                             </DataTemplate>
