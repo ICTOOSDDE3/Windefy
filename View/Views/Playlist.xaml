@@ -7,26 +7,27 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-
+   
     </UserControl.Resources>
+    
     <Grid Background="White" DataContext="{Binding Playlist}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,100,0,0">
         <StackPanel Orientation="Vertical">
-            <Grid Height="300" VerticalAlignment="Top" Margin="5, 0, 100, 0">
+            <Grid Height="300" VerticalAlignment="Top" Margin="25, 0, 25, 0">
                 <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="3*" />
-                    </Grid.ColumnDefinitions>
-                   
-                    <Image Grid.Column="0" Source="../Assets/Images/mockSongImage.jpg" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="3*" />
+                </Grid.ColumnDefinitions>
+                <Rectangle Grid.Column="0" RadiusX="20" RadiusY="20"   HorizontalAlignment="Stretch">
+                    <Rectangle.Fill>
+                        <ImageBrush x:Name="myImage" ImageSource="../Assets/Images/mockSongImage.jpg" Stretch="Fill"/>
+                    </Rectangle.Fill>
+                </Rectangle>
                 <StackPanel Grid.Column="1" Orientation="Vertical" Margin="25,0,0,0" HorizontalAlignment="Left">
-                    <Label Content="{Binding title}" FontSize="36" FontWeight="Bold" />
-                    <TextBlock TextWrapping="Wrap" Text="{Binding information}"/>
+                    <Label Content="{Binding title}" FontSize="36" FontWeight="Bold" Margin="0,0,0,0" />
+                    <TextBlock TextWrapping="Wrap" Text="{Binding information}" Margin="8,0,0,0"/>
                 </StackPanel>
             </Grid>
-
-
-
-            <Grid Height="525px" Margin="0, 10, 0, 0">
+            <Grid Height="525px" Margin="25, 10, 25, 0">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" />
@@ -38,10 +39,10 @@
                         <RowDefinition Height="50" />
                         <RowDefinition Height="1"/>
                     </Grid.RowDefinitions>
-                    <Label Grid.Column="0" Content="Title:" FontFamily="Segoe" FontSize="20"></Label>
-                    <Label Grid.Column="1" Content="Artist:" FontFamily="Segoe" FontSize="20"></Label>
-                    <Label Grid.Column="2" Content="Liked:" FontFamily="Segoe" FontSize="20"></Label>
-                    <Label Grid.Column="3" Content="Length:" FontFamily="Segoe" FontSize="20"></Label>
+                    <Label FontWeight="Bold" Grid.Column="0" Content="Title:" FontFamily="Segoe" FontSize="20"></Label>
+                    <Label FontWeight="Bold" Grid.Column="1" Content="Artist:" FontFamily="Segoe" FontSize="20"></Label>
+                    <Label FontWeight="Bold" Grid.Column="2" Content="Liked:" FontFamily="Segoe" FontSize="20"></Label>
+                    <Label FontWeight="Bold" Grid.Column="3" Content="Length:" FontFamily="Segoe" FontSize="20"></Label>
                     
                     <Line Grid.Row="1" Grid.Column="0" Stroke="Black" StrokeThickness="2" X1="0" X2="20000px" VerticalAlignment="Top"></Line>
                     <Line Grid.Row="1" Grid.Column="1" Stroke="Black" StrokeThickness="2" X1="0" X2="20000px" VerticalAlignment="Top"></Line>
@@ -72,9 +73,17 @@
                                     <Label Grid.Column="0" >
                                         <TextBlock Text="{Binding Title}" FontWeight="Bold" FontFamily="Segoe" FontSize="20" TextTrimming="CharacterEllipsis" MaxWidth="250px"></TextBlock>
                                     </Label>
-                                    <Label Margin="4,0,0,0" Grid.Column="1" Content="Artist:" FontFamily="Segoe" FontSize="20"></Label>
+
+                                    <ItemsControl Margin="4,0,0,0" Grid.Column="1" x:Name="Artist" ItemsSource="{Binding Artists}" >
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Label Content="{Binding Name}" FontFamily="Segoe" FontSize="20"></Label>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+
                                     <Label Margin="9,0,0,0" Grid.Column="2" Content="Liked:" FontFamily="Segoe" FontSize="20"></Label>
-                                    <Label Margin="14,0,0,0" Grid.Column="3" Content="Length:" FontFamily="Segoe" FontSize="20"></Label>
+                                    <Label Margin="14,0,0,0" Grid.Column="3" Content="{Binding DurationView}" FontFamily="Segoe" FontSize="20"></Label>
                                 </Grid>
                             </DataTemplate>
                     </ItemsControl.ItemTemplate>
