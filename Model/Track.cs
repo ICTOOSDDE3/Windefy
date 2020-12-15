@@ -18,8 +18,10 @@ namespace Model
         public List<string> Genres { get; set; }
         public string File_path { get; set; }
         public string Image_path { get; set; }
+        public bool Liked { get; set; }
 
-        public Track(int trackID, string title, int durationInSec)
+
+        public Track(int trackID, string title, int durationInSec, bool liked)
         {
             TrackID = trackID;
             Title = title;
@@ -27,6 +29,8 @@ namespace Model
             var tempDur = Math.Round((double)durationInSec / 60, 2, MidpointRounding.AwayFromZero);
             DurationView = string.Format("{0:00.00}", tempDur).Replace(".", ":");
             Artists = new List<Artist>();
+
+            this.Liked = liked;
         }
 
         public Track()
