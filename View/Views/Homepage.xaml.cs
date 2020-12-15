@@ -37,6 +37,7 @@ namespace View.Views
 
         private void SingleTrackFill(TrackInfo trackInfo)
         {
+            TrackQueue.trackQueue.Clear();
             SingleTrackClicked.TrackID = trackInfo.TrackID;
             SingleTrackClicked.TrackClicked = true;
             SingleTrackClicked.QueueTrackIDs.Clear();

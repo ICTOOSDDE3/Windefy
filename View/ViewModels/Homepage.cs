@@ -8,9 +8,11 @@ namespace View.ViewModels
     public class Homepage
     {
         public List<TrackInfo> Tracks{ get; set; }
+        private int PlaylistID { get; set; }
 
-        public Homepage()
+        public Homepage(int playlistID)
         {
+            PlaylistID = playlistID;
             Tracks = new List<TrackInfo>();
             List<Model.Track> modelTracks = TrackHistory.PlaylistTracks();
             TrackToTrackInfo(modelTracks);
@@ -25,7 +27,7 @@ namespace View.ViewModels
                 if (count < 10)
                 {
                     count++;
-                    Tracks.Add(new TrackInfo(item.Title, item.Duration, item.Image_path, item.TrackID, TrackHistory.PlaylistID));
+                    Tracks.Add(new TrackInfo(item.Title, item.Duration, item.Image_path, item.TrackID, PlaylistID));
                 }
                 else
                 {

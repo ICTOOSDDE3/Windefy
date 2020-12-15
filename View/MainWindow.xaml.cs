@@ -105,7 +105,14 @@ namespace View
             Button button = (Button)e.OriginalSource;
             Model.Playlist playlistData = button.DataContext as Model.Playlist;
 
-            DataContext = new PlaylistViewModel(playlistData.playlistID);
+            if (playlistData.playlistID == TrackHistory.PlaylistID)
+            {
+                DataContext = new HistoryViewModel();
+            }
+            else
+            {
+                DataContext = new PlaylistViewModel(playlistData.playlistID);
+            }
         }
 
         private void Close_AddPlaylist_Button_Click(object sender, RoutedEventArgs e)
@@ -221,7 +228,7 @@ namespace View
                     //Get all the playlists from the current users into a playlistlistobject
                     SideBarList.SetAllPlaylistsFromUser();
                     TrackHistory.PlaylistID = TrackHistory.getHistoryPlaylistID();
-                    DataContext = new Homepage();
+                    DataContext = new Homepage(TrackHistory.PlaylistID);
                     Add_PlayLists_To_Left_Sidebar();
                 } else
                 {
@@ -497,7 +504,7 @@ namespace View
             if (CurrentTrack != null && rewFor)
             {                
                 TrackHistory.trackHistory.Push(CurrentTrack.TrackID);
-                //TrackHistory.InsertToHistory(CurrentTrack.TrackID);
+                TrackHistory.InsertToHistory(CurrentTrack.TrackID);
             }
 
             MusicBar.DataContext = track.GetTrack(trackID);
