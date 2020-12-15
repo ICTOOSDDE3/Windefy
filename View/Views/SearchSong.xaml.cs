@@ -54,9 +54,9 @@ namespace View.Views
             if (addToPlaylist.IsChecked == true)
             {
 
-                if (!addTrackToPlaylist.IsTrackInFavorites(trackid))
+                if (!addTrackToPlaylist.IsTrackInFavorites(trackid, Model.User.UserID))
                 {
-                    addTrackToPlaylist.InsertToFavorites(trackid);
+                    addTrackToPlaylist.InsertToFavorites(trackid, Model.User.UserID);
                     Trace.WriteLine("added to playlist");
                 }
                 else
@@ -66,7 +66,7 @@ namespace View.Views
             }
             else if (addToPlaylist.IsChecked == false)
             {
-                addTrackToPlaylist.DeleteFromFavorites(trackid);
+                addTrackToPlaylist.DeleteFromFavorites(trackid, Model.User.UserID);
                 Trace.WriteLine("Deleted");
             }
         }

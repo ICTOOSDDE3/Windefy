@@ -60,7 +60,7 @@ namespace View.ViewModels
                     
                     Convert.ToInt32(dataReader["trackID"]),
                     Convert.ToInt32(dataReader["playlistID"]),
-                    addMusicToPlaylist.IsTrackInFavorites(Convert.ToInt32(dataReader["trackID"])));
+                    addMusicToPlaylist.IsTrackInFavorites(Convert.ToInt32(dataReader["trackID"]), Model.User.UserID));
 
                 items.Add(trackInfo);
             }

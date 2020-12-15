@@ -8,7 +8,7 @@
         xmlns:views="clr-namespace:View.Views"
         xmlns:System="clr-namespace:System;assembly=System.Runtime" x:Name="Index" x:Class="View.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1024" Width="1440">
+        Title="MainWindow" Height="1024" Width="1680">
     <Window.Resources>
         <LinearGradientBrush x:Key="NormalBrush" StartPoint="0,0" EndPoint="0,1">
             <GradientBrush.GradientStops>

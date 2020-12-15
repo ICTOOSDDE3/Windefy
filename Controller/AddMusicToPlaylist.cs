@@ -8,7 +8,6 @@ namespace Controller
     public class AddMusicToPlaylist
     {
         //this is the logged in user ID
-        private int _userID = Model.User.UserID;
         //public List<PlaylistPreview> _playlists = new List<PlaylistPreview>();
         public List<PlaylistPreview> Playlists { get; set; } = new List<PlaylistPreview>();
 
@@ -23,7 +22,7 @@ namespace Controller
 
 
             //Build the query
-            string query = $"SELECT playlistID, title FROM playlist Where ownerID = {_userID}";
+            string query = $"SELECT playlistID, title FROM playlist Where ownerID = {userID}";
 
             //Prepare the query
             SqlCommand cmd = new SqlCommand(query, DBConnection.Connection);
@@ -74,13 +73,13 @@ namespace Controller
         /// inserts a track in the favorites playlist of an user
         /// </summary>
         /// <param name="trackID">id from track</param>
-        public void InsertToFavorites(int trackID)
+        public void InsertToFavorites(int trackID, int userID)
         {
             DBConnection.Initialize();
             DBConnection.OpenConnection();
 
             //Build the query to get playlistID from favorites
-            string favoritesQuery = $"SELECT playlistID FROM playlist where title = 'Favorites' AND ownerID = {_userID}";
+            string favoritesQuery = $"SELECT playlistID FROM playlist where title = 'Favorites' AND ownerID = {userID}";
             SqlCommand cmdFavorites = new SqlCommand(favoritesQuery, DBConnection.Connection);
             int playlistID = Convert.ToInt32(cmdFavorites.ExecuteScalar().ToString());
 
@@ -100,13 +99,13 @@ namespace Controller
         /// </summary>
         /// <param name="trackID"></param>
         /// <returns>true or false</returns>
-        public bool IsTrackInFavorites(int trackID)
+        public bool IsTrackInFavorites(int trackID, int userID)
         {
             DBConnection.Initialize();
             DBConnection.OpenConnection();
 
             //Build the query
-            string favoritesQuery = $"SELECT playlistID FROM playlist where title = 'Favorites' AND ownerID = {_userID}";
+            string favoritesQuery = $"SELECT playlistID FROM playlist where title = 'Favorites' AND ownerID = {userID}";
             SqlCommand cmdFavorites = new SqlCommand(favoritesQuery, DBConnection.Connection);
             int playlistID = Convert.ToInt32(cmdFavorites.ExecuteScalar().ToString());
 
@@ -128,18 +127,35 @@ namespace Controller
             return false;
         }
 
-
         /// <summary>
-        /// Deletes a track from the favorites playlist
+        /// Deletes a track from the selected playlist
         /// </summary>
         /// <param name="trackID">id from track</param>
-        public void DeleteFromFavorites(int trackID)
+        public void DeleteFromPlaylist(int playlistID, int trackID)
         {
             DBConnection.Initialize();
             DBConnection.OpenConnection();
 
             //Build the query
-            string favoritesQuery = $"SELECT playlistID FROM playlist where title = 'Favorites' AND ownerID = {_userID}";
+            string DeleteQuery = $"DELETE FROM playlist_track WHERE playlistID = {playlistID} AND trackID = {trackID}";
+            SqlCommand cmdDelete = new SqlCommand(DeleteQuery, DBConnection.Connection);
+
+
+            cmdDelete.ExecuteNonQuery();
+            DBConnection.CloseConnection();
+        }
+
+        /// <summary>
+        /// Deletes a track from the favorites playlist
+        /// </summary>
+        /// <param name="trackID">id from track</param>
+        public void DeleteFromFavorites(int trackID, int userID)
+        {
+            DBConnection.Initialize();
+            DBConnection.OpenConnection();
+
+            //Build the query
+            string favoritesQuery = $"SELECT playlistID FROM playlist where title = 'Favorites' AND ownerID = {userID}";
             SqlCommand cmdFavorites = new SqlCommand(favoritesQuery, DBConnection.Connection);
             int playlistID = Convert.ToInt32(cmdFavorites.ExecuteScalar().ToString());
 
