@@ -68,11 +68,22 @@ namespace Controller
 
             SqlDataReader dataReader = cmd.ExecuteReader();
 
-            while (dataReader.Read())
+            if (dataReader.HasRows)
             {
-                PlaylistModel = new Model.Playlist(Convert.ToInt32(dataReader["playlistID"]), Convert.ToString(dataReader["title"]), Convert.ToDateTime(dataReader["release_date"]), Convert.ToInt32(dataReader["listens"]), Convert.ToInt32(dataReader["playlist_typeID"]), Convert.ToString(dataReader["information"]), Convert.ToBoolean(dataReader["is_public"]), Convert.ToInt32(dataReader["ownerID"]));
+                while (dataReader.Read())
+                {
+                    PlaylistModel = new Model.Playlist();
+                    PlaylistModel.playlistID = Convert.ToInt32(dataReader["playlistID"]);
+                    PlaylistModel.title = Convert.ToString(dataReader["title"]);
+                    if (!(dataReader["release_date"] is DBNull)) PlaylistModel.release_date = Convert.ToDateTime(dataReader["release_date"]);
+                    PlaylistModel.listens = Convert.ToInt32(dataReader["listens"]);
+                    PlaylistModel.playlist_type = (Model.PlaylistType)Convert.ToInt32(dataReader["playlist_typeID"]);
+                    if (!(dataReader["information"] is DBNull)) PlaylistModel.information = Convert.ToString(dataReader["information"]);
+                    PlaylistModel.is_Public = Convert.ToBoolean(dataReader["is_public"]);
+                    if(!(dataReader["ownerID"] is DBNull)) PlaylistModel.ownerID = Convert.ToInt32(dataReader["ownerID"]);
+                }
             }
-
+          
             dataReader.Close();
 
             DBConnection.CloseConnection();

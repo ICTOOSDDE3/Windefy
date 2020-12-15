@@ -24,13 +24,10 @@ namespace Controller
         /// <param name="playlistID"></param>
         public static void SetQueue(int trackID, int playlistID)
         {
-            //Playlist PlaylistController = new Playlist();
-            //Model.Playlist p = PlaylistController.GetPlaylist(playlistID); 
-            Model.Playlist p = new Model.Playlist(playlistID, "test", DateTime.Now, 100000, 0, "test", true, 1);
-            Trace.WriteLine("Test");
+            Playlist PlaylistController = new Playlist();
+            Model.Playlist p = PlaylistController.GetPlaylistData(playlistID);
             if (p != null)
             {
-                Trace.WriteLine("p != null");
                 Track TrackController = new Track();
                 if (p.playlist_type == Model.PlaylistType.Album || p.playlist_type == Model.PlaylistType.UserPlaylists)
                 {
