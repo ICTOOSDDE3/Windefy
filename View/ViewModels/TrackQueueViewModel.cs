@@ -10,8 +10,16 @@ namespace View.ViewModels
     public class TrackQueueViewModel 
     {
         public Queue<Model.Track> TrackQueue { get; set; }
+
+        private string _EmptyQueueVisibility;
+        public string EmptyQueueVisibility
+        {
+            get { return _EmptyQueueVisibility; }
+            set { _EmptyQueueVisibility = value; }
+        }
         public TrackQueueViewModel()
         {
+            EmptyQueueVisibility = "Hidden";
             TrackQueue = new Queue<Model.Track>();
             Trace.WriteLine(Controller.TrackQueue.trackQueue.Count);
             if (Controller.TrackQueue.trackQueue.Count > 0)
@@ -26,6 +34,14 @@ namespace View.ViewModels
                         TrackQueue.Enqueue(t);
                     }
                 }
+            }
+            if (TrackQueue.Count > 0)
+            {
+                EmptyQueueVisibility = "Hidden";
+            }
+            else
+            {
+                EmptyQueueVisibility = "Visible";
             }
         }
         

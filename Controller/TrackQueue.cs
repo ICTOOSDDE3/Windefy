@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-
+using System.Diagnostics; 
 namespace Controller
 {
     public static class TrackQueue
@@ -26,7 +25,7 @@ namespace Controller
         public static void SetQueue(int trackID, int playlistID)
         {
             //Playlist PlaylistController = new Playlist();
-            //Model.Playlist p = PlaylistController.GetPlaylist(playlistID);
+            //Model.Playlist p = PlaylistController.GetPlaylist(playlistID); 
             Model.Playlist p = new Model.Playlist(playlistID, "test", DateTime.Now, 100000, 0, "test", true, 1);
             Trace.WriteLine("Test");
             if (p != null)

@@ -17,5 +17,16 @@ namespace Model
         public List<string> Genres { get; set; }
         public string File_path { get; set; }
         public string Image_path { get; set; }
+
+        public Track(int trackID, string title)
+        {
+            TrackID = trackID;
+            Title = title;
+        }
+
+        public Track()
+        {
+
+        }
     }
 }
