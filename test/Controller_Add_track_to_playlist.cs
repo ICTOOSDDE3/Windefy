@@ -8,7 +8,6 @@ namespace Test
     class Controller_Add_track_to_playlist
     {
         AddMusicToPlaylist controller = new AddMusicToPlaylist();
-        Playlist controllerPlaylist = new Playlist();
         int playlistId = 0;
 
         [SetUp]
