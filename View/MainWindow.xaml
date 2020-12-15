@@ -593,7 +593,7 @@
                 </Border>
                 <Button Content="Register" HorizontalAlignment="Center" Margin="0,227,0,0" VerticalAlignment="Top" Width="80" Height="30" Background="#00DDDDDD" BorderBrush="#00707070" Foreground="#FF4F83CC" Click="Register_Click"/>
                 <TextBox x:Name="Email_TextBox" HorizontalAlignment="Center" Margin="0,70,0,0" Style="{StaticResource LoginInputs}" Tag="email@voorbeeld.nl&#xD;&#xA;" TextWrapping="Wrap" VerticalAlignment="Top" Width="364" Height="35" TextAlignment="Center" FontSize="24" Background="#7F4F83CC" Foreground="#7F000000" BorderBrush="#00ABADB3"/>
-                <PasswordBox x:Name="Wachtwoord_TextBox" HorizontalAlignment="Center" VerticalAlignment="Center" Width="364" Height="31" FontSize="24" Foreground="Black" Background="#7F4F83CC" BorderBrush="#00ABADB3"/>
+                <PasswordBox x:Name="Password_TextBox" HorizontalAlignment="Center" VerticalAlignment="Center" Width="364" Height="31" FontSize="24" Foreground="Black" Background="#7F4F83CC" BorderBrush="#00ABADB3"/>
                 <Label x:Name="Login_HeadsUp" Content="" HorizontalAlignment="Center" Height="23" Margin="0,153,0,0" VerticalAlignment="Top" Width="363" Foreground="Red"/>
                 <Label x:Name="Password_Label_Copy" Content="Password:" HorizontalAlignment="Left" Height="21" Margin="94,105,0,0" VerticalAlignment="Top" Width="272" FontSize="10" FontWeight="Bold"/>
                 <Label x:Name="Email_Label_Copy" Content="Email:" HorizontalAlignment="Left" Height="21" Margin="95,49,0,0" VerticalAlignment="Top" Width="272" FontSize="10" FontWeight="Bold"/>
@@ -628,6 +628,7 @@
                 <TextBlock HorizontalAlignment="Left"  Margin="106,261,0,0" Text="Name:" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="110" FontSize="24"/>
                 <TextBlock HorizontalAlignment="Left"  Margin="106,359,0,0" Text="Language:" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="110" FontSize="24"/>
                 <TextBlock x:Name="Updated_Text" HorizontalAlignment="Left"  Margin="112,519,0,0" Text="*Updated account" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="224" FontSize="20" Visibility="Hidden" Opacity="0.8"/>
+                <Button x:Name="Logout_Button" Margin="282,501,0,0" FontSize="20" Width="94" Height="35" Background="{x:Null}" VerticalAlignment="Center" HorizontalAlignment="Center" BorderBrush="{x:Null}" Click="Logout_Button_Click">Logout</Button>
 
                 <Button x:Name="Close_Account_Details" Content="X" HorizontalAlignment="Left" Margin="534,23,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.48,0.377" Width="22" Foreground="Red" Background="{x:Null}" BorderBrush="{x:Null}" Click="Close_Account_Details_Button_Click" FontWeight="Bold"/>
                 <Border CornerRadius="30" Margin="112,480,112,0" VerticalAlignment="Top" Width="363" Height="34" Background="#FF4F83CC" RenderTransformOrigin="0.5,0.5">
