@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using View.ViewModels;
 
 namespace View.Views
 {
@@ -13,18 +14,19 @@ namespace View.Views
     public partial class SearchSong : UserControl
     {
         AddMusicToPlaylist addTrackToPlaylist = new AddMusicToPlaylist();
+
         public SearchSong()
         {
             InitializeComponent();
-            
+
         }
         private void Track_Click(object sender, RoutedEventArgs e)
         {
             var x = (Button)e.OriginalSource;
-            var data = x.DataContext as ViewModels.TrackInfo;
+            var data = x.DataContext as TrackInfo;
 
             TrackQueue.SetQueue(data.TrackID, data.PlaylistID);
-            
+
             SingleTrackClicked.TrackID = data.TrackID;
             SingleTrackClicked.TrackClicked = true;
             bool itemData = false;
@@ -42,50 +44,63 @@ namespace View.Views
                     SingleTrackClicked.QueueTrackIDs.AddLast(test.TrackID);
                 }
             }
-         }
+        }
 
+        
         private void LikeButton_Click(object sender, RoutedEventArgs e)
         {
             var addToPlaylist = (ToggleButton)e.OriginalSource;
             var data = addToPlaylist.DataContext as ViewModels.TrackInfo;
             int trackid = data.TrackID;
-            if (addTrackToPlaylist.FavoritesContainsTrack(trackid))
+            if (addToPlaylist.IsChecked == true)
             {
-                addTrackToPlaylist.InsertToFavorites(trackid);
-                Trace.WriteLine("added to playlist");
-            } else
+
+                if (!addTrackToPlaylist.IsTrackInFavorites(trackid, Model.User.UserID))
+                {
+                    addTrackToPlaylist.InsertToFavorites(trackid, Model.User.UserID);
+                    Trace.WriteLine("added to playlist");
+                }
+                else
+                {
+                    Trace.WriteLine("already added to favorites");
+                }
+            }
+            else if (addToPlaylist.IsChecked == false)
             {
-                Trace.WriteLine("already added to favorites");
-            }       
+                addTrackToPlaylist.DeleteFromFavorites(trackid, Model.User.UserID);
+                Trace.WriteLine("Deleted");
+            }
+        }
+
+
+        private void LoadedEvent_Combobox(object sender, SelectionChangedEventArgs e)
+        {
+            var itemCombobox = (ComboBox)e.OriginalSource;
+            var trackInfo = itemCombobox.DataContext as TrackInfo;
+            var info = itemCombobox.SelectedItem;
+            foreach (var item in trackInfo.playlists)
+            {
+                if (item.Equals(info))
+                {
+                    addTrackToPlaylist.InsertToPlaylist(item.Key, trackInfo.TrackID);
+                }
+            }
+        }
+
+        private void LikeButton_Loaded(object sender, RoutedEventArgs e)
+        {
+            var toggleButton = (ToggleButton)e.OriginalSource;
+            var data = toggleButton.DataContext as ViewModels.TrackInfo;
+
+            toggleButton.IsChecked = data.Liked;
+
         }
 
         private void Label_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            var label = (Label)sender;
+            var textBlock = (TextBlock)sender;
 
-            string artistName = (string)label.Content;
-
-
-            SqlConnection con = new SqlConnection($"Server = 127.0.0.1; Database = WindefyDB; User Id = SA; Password = {Passwords.GetPassword("DB")};");
-            con.Open();
-
-            // Fetch all artists that worked on a track based on the ID of the track
-            SqlCommand cmd = new SqlCommand(null, con)
-            {
-                CommandText = "SELECT artistID " +
-                "FROM artist " +
-                $"WHERE name = '{artistName}'"
-            };
-
-            SqlDataReader dataReader = cmd.ExecuteReader();
-            int artistId = 0;
-            while (dataReader.Read())
-            {
-                artistId = (int)dataReader["artistID"];
-            }
-
-            dataReader.Close();
-            DBConnection.CloseConnection();
+            int artistId = (int)textBlock.Tag;
 
             if(artistId != 0)
             {
