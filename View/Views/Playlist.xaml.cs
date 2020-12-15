@@ -26,16 +26,25 @@ namespace View.Views
             InitializeComponent();
         }
 
+        /// <summary>
+        /// removes track from the playlist you are on
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Remove_Button_Click(object sender, RoutedEventArgs e)
         {
+            // gets the current playlistID
             var context = (ViewModels.PlaylistViewModel)DataContext;
             var playlistid = context.PlaylistID;
+
+            //gets the track id that should be removed
             var button = (Button)e.OriginalSource;
             var trackInfo = button.DataContext as Model.Track;
             var trackId = trackInfo.TrackID;
-            Trace.WriteLine(playlistid);
-            Trace.WriteLine(trackId);
+
             playlist.DeleteFromPlaylist(playlistid, trackId);
+
+            //refreshes view
             DataContext = new ViewModels.PlaylistViewModel(playlistid);
         }
     }
