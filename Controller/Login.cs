@@ -36,7 +36,7 @@ namespace Controller
                     {
                         int id = Convert.ToInt32(dataReader["user_Id"]);
                         string name = dataReader["name"].ToString();
-                        int language = 1;
+                        int language = (int)dataReader["lang"];
                         bool verified = Convert.ToBoolean(dataReader["verified"]);
                         User.UpdateUserModel(id, email, name, language, verified);
                         passed = true;

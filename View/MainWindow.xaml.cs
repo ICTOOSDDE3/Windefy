@@ -101,6 +101,15 @@ namespace View
                 AddPlaylist_Comment.Visibility = Visibility.Visible;
             }                        
         }
+        private void OpenPlaylist(object sender, RoutedEventArgs e)
+        {
+
+            Button button = (Button)e.OriginalSource;
+            Model.Playlist playlistData = button.DataContext as Model.Playlist;
+
+            DataContext = new PlaylistViewModel(playlistData.playlistID);
+        }
+
         private void Close_AddPlaylist_Button_Click(object sender, RoutedEventArgs e)
         {
             LoginBackground.Visibility = Visibility.Hidden;
@@ -138,6 +147,7 @@ namespace View
         {
             LoginBackground.Visibility = Visibility.Hidden;
             AccountDetailsGrid.Visibility = Visibility.Hidden;
+            Updated_Text.Visibility = Visibility.Visible;
         }
         private void AccountDetails_Button_Click(object sender, RoutedEventArgs e)
         {
@@ -150,7 +160,7 @@ namespace View
                 Controller.User.UpdateEmail(newEmail);
             }
             //Update username if different from current name
-            if (newEmail != Model.User.Name)
+            if (newName != Model.User.Name)
             {
                 Controller.User.UpdateName(newName);
             }
