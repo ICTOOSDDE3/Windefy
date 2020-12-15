@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Org.BouncyCastle.Utilities;
+using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Data.SqlClient;
 using System.Text;
 
@@ -27,6 +29,7 @@ namespace Model
         public string information { get; set; }
         public bool is_Public { get; set; }
         public int ownerID { get; set; }
+        public List<Track> tracks { get; set; } = new List<Track>();
 
         
     }
