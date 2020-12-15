@@ -182,10 +182,6 @@
         <DataTemplate x:Name="Playlist" DataType="{x:Type viewmodels:PlaylistViewModel}">
             <views:Playlist DataContext="{Binding}" />
         </DataTemplate>
-        
-        <DataTemplate x:Name="HistoryViewModel" DataType="{x:Type viewmodels:HistoryViewModel}">
-            <views:History DataContext="{Binding}" />
-        </DataTemplate>
 
         <Style x:Key="SliderRepeatButton" TargetType="RepeatButton">
             <Setter Property="SnapsToDevicePixels" Value="true" />

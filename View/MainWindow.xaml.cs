@@ -107,7 +107,7 @@ namespace View
             Button button = (Button)e.OriginalSource;
             Model.Playlist playlistData = button.DataContext as Model.Playlist;
 
-            DataContext = new PlaylistViewModel(playlistData.playlistID);
+                DataContext = new PlaylistViewModel(playlistData.playlistID);
         }
 
         private void Close_AddPlaylist_Button_Click(object sender, RoutedEventArgs e)
@@ -489,30 +489,6 @@ namespace View
         {
             //TrackQueue.ShuffleEnabled = false;
         }
-
-        private void PlaylistClick(object sender, RoutedEventArgs e)
-        {
-            Button button = (Button)e.OriginalSource;
-            Model.Playlist playlistData = button.DataContext as Model.Playlist;
-            playlistID = playlistData.playlistID;
-
-            if (playlistID == TrackHistory.getHistoryPlaylistID())
-            {
-                DataContext = new HistoryViewModel();
-            }
-
-        }
-
-/*        private void PlaylistTrackClick(object sender, MouseButtonEventArgs e)
-        {
-            var x = (TextBlock)e.OriginalSource;
-            var data = x.DataContext as Model.Track;
-
-            TrackQueue.SetQueue(data.TrackID, playlistID);
-            SingleTrackClicked.QueueTrackIDs.Clear();
-            UpdateMusicBar(data.TrackID);
-            mediaPlayer.Play();
-        }*/
 
         /// <summary>
         /// Updates all music related data
