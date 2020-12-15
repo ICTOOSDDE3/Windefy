@@ -463,11 +463,10 @@
             </Grid.Effect>
         </Grid>
         <Grid Grid.Row="0" Grid.Column="0" Background="#FFFF72">
-            <Label Content="Windefy" FontSize="35" Margin="10,30,0,0" />
 
-            <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,70,0,0">
 
-                <Grid  Background="Transparent" Margin="10,50,5,0" Height="749" >
+                <Grid  Background="Transparent" Margin="10,0,5,0" Height="1238" >
                     <Label FontSize="25" Content="Browse" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                     <Label FontSize="20" Content="Explore" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,48,0,0"/>
                     <Label FontSize="20" Content="Recommended" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,90,0,0"/>
@@ -582,7 +581,9 @@
                     <Slider Style="{StaticResource Horizontal_Slider}" Value="25" Maximum="100" Minimum="0" ValueChanged="Volume_ValueChanged" x:Name="Volume" Width="142" Height="9" Margin="5"/>
                 </WrapPanel>
             </WrapPanel>
+
         </Grid>
+        <Label Content="Windefy" FontSize="35" HorizontalAlignment="Right" VerticalAlignment="Top" MouseDown="Button_Click" Width="272" Margin="0,0,18,0" />
 
         <!-- the loginBackGround has to be visible if you want to change the loginGrid, RegisterGrid and the verify grid (put those grids on visible aswell) -->
         <Grid x:Name="LoginBackground" Background="#7F4F83CC" Grid.ColumnSpan="2" Grid.RowSpan="2" Visibility="Visible" Margin="1,0,-1,-16" d:IsHidden="True">
