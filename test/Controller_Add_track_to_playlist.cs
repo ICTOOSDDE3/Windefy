@@ -19,7 +19,7 @@ namespace Test
         }
 
         [Test]
-        public void add_tracks_to_playplist()
+        public void add_tracks_to_playlist()
         {
             controller.InsertToPlaylist(playlistId, 10);
             controller.InsertToPlaylist(playlistId, 140);
@@ -35,6 +35,27 @@ namespace Test
             DBConnection.CloseConnection();
 
             Assert.AreEqual(total, 2);
+        }
+
+        [Test]
+        public void delete_tracks_from_playlist()
+        {
+            controller.InsertToPlaylist(playlistId, 10);
+            controller.InsertToPlaylist(playlistId, 140);
+
+            controller.DeleteFromPlaylist(playlistId, 10);
+
+            DBConnection.OpenConnection();
+
+            string query = $"SELECT count(*) FROM playlist_track WHERE playlistID = {playlistId}";
+
+            SqlCommand cmd = new SqlCommand(query, DBConnection.Connection);
+
+            int total = (int)cmd.ExecuteScalar();
+
+            DBConnection.CloseConnection();
+
+            Assert.AreEqual(total, 1);
         }
 
         [TearDown]
