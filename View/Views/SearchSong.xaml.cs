@@ -1,4 +1,5 @@
 ﻿using Controller;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
@@ -92,6 +93,19 @@ namespace View.Views
             var data = toggleButton.DataContext as ViewModels.TrackInfo;
 
             toggleButton.IsChecked = data.Liked;
+
+        }
+
+        private void Label_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var textBlock = (TextBlock)sender;
+
+            int artistId = (int)textBlock.Tag;
+
+            if(artistId != 0)
+            {
+                ((ViewModels.SearchSongModel)DataContext).OnArtistClick(artistId);
+            }
 
         }
     }

@@ -10,11 +10,25 @@ namespace View.ViewModels
 {
     public class SearchSongModel
     {
+        public event EventHandler<int> ArtistClickEvent;
         public List<TrackInfo> items { get; set; }
+
+        private string _NoResultsVisibility;
+
+        public string NoResultsVisibility
+        {
+            get { return _NoResultsVisibility; }
+            set { _NoResultsVisibility = value; }
+        }
+
+        public void OnArtistClick(int artistId)
+        {
+            ArtistClickEvent?.Invoke(this, artistId);
+        }
 
         public SearchSongModel(string q)
         {
-
+            NoResultsVisibility = "Hidden";
             ApacheConnection.Initialize();
             DBConnection.OpenConnection();
 
@@ -67,6 +81,14 @@ namespace View.ViewModels
 
             dataReader.Close();
             DBConnection.CloseConnection();
+
+            if(items.Count > 0)
+            {
+                NoResultsVisibility = "Hidden";
+            } else
+            {
+                NoResultsVisibility = "Visible";
+            }
         }
     }
 
@@ -79,11 +101,10 @@ namespace View.ViewModels
         public string Title { get; set; }
         public string Duration { get; set; }
         public string ImagePath { get; set; }
-        public string ArtistName { get; set; }
+        public List<Model.Artist> Artists { get; set; } = new List<Model.Artist>();
         public int PlaylistID { get; set; }
         public Dictionary<int, string> playlists { get; set; } = new Dictionary<int, string>();
         public bool Liked { get; set; }
-
 
         public TrackInfo(string T, int D, string I, int ID, int P_ID, bool liked)
         {
@@ -105,14 +126,7 @@ namespace View.ViewModels
             Duration = $"{ Math.Floor(Convert.ToDouble(D) / 60)}:{seconds}";
             ImagePath = $"{ApacheConnection.GetImageFullPath(I)}";
             PlaylistID = P_ID;
-
-
-            // TODO: Make artistName an array instead of a string so that it can be
-            // linked to artist pages in the XAML
-            ArtistName = "";
-
             Liked = liked;
-
             
             SqlConnection con = new SqlConnection($"Server = 127.0.0.1; Database = WindefyDB; User Id = SA; Password = {Passwords.GetPassword("DB")};");
             con.Open();
@@ -120,7 +134,7 @@ namespace View.ViewModels
             // Fetch all artists that worked on a track based on the ID of the track
             SqlCommand cmd = new SqlCommand(null, con)
             {
-                CommandText = "SELECT name " +
+                CommandText = "SELECT name, artistID " +
                 "FROM artist " +
                 "WHERE artistID IN (" +
                 "   SELECT artistID " +
@@ -133,11 +147,15 @@ namespace View.ViewModels
             SqlDataReader dataReader = cmd.ExecuteReader();
             while (dataReader.Read())
             {
-                ArtistName += Convert.ToString(dataReader["name"]) + ", ";
+                Model.Artist artist = new Model.Artist();
+                artist.Name = dataReader["name"].ToString();
+                artist.ArtistID = (int)dataReader["artistID"];
+                Artists.Add(artist);
             }
 
-            // Remove last 2 characters (', ') from the string
-            ArtistName = ArtistName[0..^2];
+            dataReader.Close();
+            con.Close();
+            con.Dispose();
         }
 
     }
