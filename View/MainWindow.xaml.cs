@@ -579,8 +579,9 @@ namespace View
 
         private void FavouriteAlbum_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            SearchAlbumViewModel DataContext = new SearchAlbumViewModel();
-            DataContext.GetFavourites(Model.User.UserID);
+            DataContext = null;
+            DataContext = new SearchAlbumViewModel();
+            ((SearchAlbumViewModel)DataContext).GetFavourites(Model.User.UserID);
         }
 
         private void FavouriteSong_MouseDown(object sender, MouseButtonEventArgs e)
@@ -590,8 +591,10 @@ namespace View
 
         private void FavouriteArtist_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            SearchArtistViewModel DataContext = new SearchArtistViewModel();
-            DataContext.GetFavourites(Model.User.UserID);
+            DataContext = null;
+            DataContext = new SearchArtistViewModel();
+            ((SearchArtistViewModel)DataContext).ArtistClickEvent += OnArtistClick;
+            ((SearchArtistViewModel)DataContext).GetFavourites(Model.User.UserID);
         }
     }
 }

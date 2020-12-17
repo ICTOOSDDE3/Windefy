@@ -130,7 +130,7 @@ namespace View.ViewModels
             {
                 CommandText = "SELECT playlistID, title " +
                 "FROM playlist " +
-                "AND playlistID IN (" +
+                "WHERE playlistID IN (" +
                 "   SELECT playlistID " +
                 "   FROM user_favourite_playlist " +
                 "   WHERE userID = @ID " +

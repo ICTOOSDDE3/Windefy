@@ -14,17 +14,16 @@ namespace View.ViewModels
         public List<ArtistInfo> items { get; set; }
 
         private string _NoResultsVisibility;
+        public string NoResultsVisibility
+        {
+            get { return _NoResultsVisibility; }
+            set { _NoResultsVisibility = value; }
+        }
 
         public SearchArtistViewModel()
         {
             items = new List<ArtistInfo>();
             NoResultsVisibility = "Hidden";
-        }
-
-        public string NoResultsVisibility
-        {
-            get { return _NoResultsVisibility; }
-            set { _NoResultsVisibility = value; }
         }
 
         public void OnArtistClick(int artistId)

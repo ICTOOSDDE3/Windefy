@@ -10,6 +10,29 @@
     <Grid Background="White">
         <Grid Background="#FFFF72" Height="300" VerticalAlignment="Top">
             <TextBlock Text="{Binding CurrentArtist.Name}" FontWeight="Bold" FontSize="50" HorizontalAlignment="Left" Margin="35,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="577"/>
+            <ToggleButton x:Name="LikeButton" Width="40" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" OpacityMask="{x:Null}" ToolTip="Add this number to favorites" Click="LikeButton_Click" Margin="744,244,16,16">
+                <Image>
+                    <Image.Style>
+                        <Style TargetType="Image">
+                            <Style.Triggers>
+                                <DataTrigger
+                                                    Binding="{Binding ElementName=LikeButton, Path=IsChecked}"
+                                                    Value="True">
+                                    <Setter Property="Source"
+                                                            Value="../Assets/Images/Like.png">
+                                    </Setter>
+                                </DataTrigger>
+                                <DataTrigger
+                                                    Binding="{Binding ElementName=LikeButton, Path=IsChecked}"
+                                                    Value="False">
+                                    <Setter Property="Source"
+                                                            Value="../Assets/Images/LikeEmpty.png"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+            </ToggleButton>
             <TextBlock Text="{Binding CurrentArtist.Bio}" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left" Margin="35,233,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="482"/>
             <Image Source="../Assets/Images/banner.png" Margin="581,52,52,52" />
         </Grid>
@@ -36,29 +59,6 @@
                                 </ItemsControl>
                             </WrapPanel>
                         </Grid>
-                        <ToggleButton x:Name="LikeButton" Width="40" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" OpacityMask="{x:Null}" ToolTip="Add this number to favorites" Click="LikeButton_Click">
-                            <Image>
-                                <Image.Style>
-                                    <Style TargetType="Image">
-                                        <Style.Triggers>
-                                            <DataTrigger
-                                                    Binding="{Binding ElementName=LikeButton, Path=IsChecked}"
-                                                    Value="True">
-                                                <Setter Property="Source"
-                                                            Value="../Assets/Images/Like.png">
-                                                </Setter>
-                                            </DataTrigger>
-                                            <DataTrigger
-                                                    Binding="{Binding ElementName=LikeButton, Path=IsChecked}"
-                                                    Value="False">
-                                                <Setter Property="Source"
-                                                            Value="../Assets/Images/LikeEmpty.png"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Image.Style>
-                            </Image>
-                        </ToggleButton>
                     </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
