@@ -106,7 +106,7 @@ namespace View
             Button button = (Button)e.OriginalSource;
             Model.Playlist playlistData = button.DataContext as Model.Playlist;
 
-            if (playlistData.playlistID == TrackHistory.PlaylistID)
+            if (playlistData.playlistID == Model.TrackHistory.PlaylistID)
             {
                 DataContext = new HistoryViewModel();
             }
@@ -229,8 +229,8 @@ namespace View
                     LoginBackground.Visibility = Visibility.Hidden;
                     //Get all the playlists from the current users into a playlistlistobject
                     SideBarList.SetAllPlaylistsFromUser();
-                    TrackHistory.PlaylistID = TrackHistory.getHistoryPlaylistID();
-                    DataContext = new Homepage(TrackHistory.PlaylistID);
+                    Model.TrackHistory.PlaylistID = TrackHistory.getHistoryPlaylistID();
+                    DataContext = new Homepage(Model.TrackHistory.PlaylistID);
                     Add_PlayLists_To_Left_Sidebar();
                 }
                 else
@@ -280,7 +280,7 @@ namespace View
         {
             Model.SingleTrackClicked.TrackClicked = false;
             rewFor = false;
-            TrackHistory.trackHistory = Model.SingleTrackClicked.HistoryTrackIDs;
+            Model.TrackHistory.trackHistory = Model.SingleTrackClicked.HistoryTrackIDs;
             UpdateMusicBar(Model.SingleTrackClicked.TrackID);
             tbPlayPause.IsChecked = true;
             mediaPlayer.Play();
@@ -293,6 +293,14 @@ namespace View
         /// <param name="e"></param>
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
+            nextTrack();
+        }
+
+        /// <summary>
+        /// Call updatemusicbar with the next track in queue
+        /// </summary>
+        private void nextTrack()
+        {
             if (Model.SingleTrackClicked.QueueTrackIDs.Count > 0)
             {
                 rewFor = true;
@@ -304,18 +312,14 @@ namespace View
                     mediaPlayer.Play();
                 }
             }
-            else if (TrackQueue.trackQueue.Count() > 0) {
-                int dequeue_item = TrackQueue.Dequeue();
+            else if (TrackQueue.trackQueue.Count() > 0)
+            {
+                rewFor = true;
+                UpdateMusicBar(TrackQueue.trackQueue.Dequeue());
 
-                if (dequeue_item != -1)
+                if (mediaPlaying)
                 {
-                    rewFor = true;
-                    UpdateMusicBar(dequeue_item);
-
-                    if (mediaPlaying)
-                    {
-                        mediaPlayer.Play();
-                    }
+                    mediaPlayer.Play();
                 }
             }
             else
@@ -324,6 +328,7 @@ namespace View
                 mediaPlayer.Close();
             }
         }
+
         /// <summary>
         /// Loads previous track and plays it if play is toggled
         /// </summary>
@@ -331,23 +336,23 @@ namespace View
         /// <param name="e"></param>
         private void btnPrev_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (TrackHistory.trackHistory.Count > 0)
+            if (Model.TrackHistory.trackHistory.Count > 0)
             {
                 rewFor = false;
 
                 Model.SingleTrackClicked.QueueTrackIDs.AddFirst(CurrentTrack.TrackID);
 
-                UpdateMusicBar(TrackHistory.trackHistory.Pop());
+                UpdateMusicBar(Model.TrackHistory.trackHistory.Pop());
 
                 if (mediaPlaying)
                 {
                     mediaPlayer.Play();
                 }
             }
-            else if (TrackQueue.trackQueue.Count() > 0 && TrackHistory.trackHistory.Count > 0)
+            else if (TrackQueue.trackQueue.Count() > 0 && Model.TrackHistory.trackHistory.Count > 0)
             {
                 rewFor = false;
-                UpdateMusicBar(TrackHistory.trackHistory.Pop());
+                UpdateMusicBar(Model.TrackHistory.trackHistory.Pop());
 
                 if (mediaPlaying)
                 {
@@ -396,36 +401,9 @@ namespace View
                 mediaPlayer.Stop();
                 mediaPlayer.Play();
             }
-            else if (Model.SingleTrackClicked.QueueTrackIDs.Count > 0)
-            {
-                rewFor = true;
-
-                UpdateMusicBar(Model.SingleTrackClicked.QueueTrackIDs.First());
-
-
-                if (mediaPlaying)
-                {
-                    mediaPlayer.Play();
-                }
-            }
-            else if (TrackQueue.trackQueue.Count() > 0)
-            {
-                int dequeue_item = TrackQueue.Dequeue();
-                if (dequeue_item != -1)
-                {
-                    rewFor = true;
-                    UpdateMusicBar(dequeue_item);
-
-                    if (mediaPlaying)
-                    {
-                        mediaPlayer.Play();
-                    }
-                }
-            }
             else
             {
-                tbPlayPause.IsChecked = false;
-                mediaPlayer.Close();
+                nextTrack();
             }
         }
 
@@ -509,7 +487,63 @@ namespace View
         }
         private void btnQueue_Click(object sender, RoutedEventArgs e)
         {
-            DataContext = new TrackQueueViewModel();
+            Queue<int> queue = FillViewQueue();
+            DataContext = new TrackQueueViewModel(queue);
+        }
+
+        private Queue<int> FillViewQueue()
+        {
+            Queue<int> trackQueueView = new Queue<int>();
+            int[] singleTrackIDs = SingleTrackQueueToArray();
+
+            Queue<int> trackQueue = trackQueuetoQueue();
+            int count = 0;
+
+            while (count < singleTrackIDs.Length || trackQueue.Count > 0)
+            {
+                if (count < singleTrackIDs.Length)
+                {
+                    trackQueueView.Enqueue(singleTrackIDs[count]);
+                    count++;
+                }
+                else if (trackQueue.Count > 0)
+                {
+                    trackQueueView.Enqueue(trackQueue.Dequeue());
+                }
+            }
+
+            return trackQueueView;
+        }
+
+        private static int[] SingleTrackQueueToArray()
+        {
+            int[] singleTrackIDs;
+
+            if (Model.SingleTrackClicked.QueueTrackIDs != null && Model.SingleTrackClicked.QueueTrackIDs.Count > 0)
+            {
+                singleTrackIDs = new int[Model.SingleTrackClicked.QueueTrackIDs.Count];
+                Model.SingleTrackClicked.QueueTrackIDs.CopyTo(singleTrackIDs, 0);
+            }
+            else
+            {
+                singleTrackIDs = new int[0];
+            }
+            return singleTrackIDs;
+        }
+
+        private Queue<int> trackQueuetoQueue()
+        {
+            Queue<int> trackQueue;
+
+            if (TrackQueue.trackQueue != null && TrackQueue.trackQueue.Count > 0)
+            {
+               trackQueue = new Queue<int>(TrackQueue.trackQueue);
+            }
+            else
+            {
+                trackQueue = new Queue<int>();
+            }
+            return trackQueue;
         }
 
         /// <summary>
@@ -519,8 +553,8 @@ namespace View
         private void UpdateMusicBar(int trackID)
         {
             if (CurrentTrack != null && rewFor)
-            {                
-                TrackHistory.trackHistory.Push(CurrentTrack.TrackID);
+            {
+                Model.TrackHistory.trackHistory.Push(CurrentTrack.TrackID);
                 TrackHistory.InsertToHistory(CurrentTrack.TrackID);
             }
 
@@ -543,7 +577,7 @@ namespace View
         {
             if (DataContext is Homepage)
             {
-                DataContext = new Homepage(TrackHistory.PlaylistID);
+                DataContext = new Homepage(Model.TrackHistory.PlaylistID);
             }
             else if (DataContext is HistoryViewModel)
             {
@@ -551,7 +585,8 @@ namespace View
             }
             else if (DataContext is TrackQueueViewModel)
             {
-                DataContext = new TrackQueueViewModel();
+                Queue<int> queue = FillViewQueue();
+                DataContext = new TrackQueueViewModel(queue);
             }
         }
 

@@ -7,10 +7,7 @@ namespace Controller
 {
     public static class TrackHistory
     { 
-        public static Stack<int> trackHistory = new Stack<int>();
-        private static int _userID = Model.User.UserID;
-        public static int PlaylistID { get; set; }
-
+        private static int UserID = Model.TrackHistory.UserID;
         /// <summary>
         /// inserts a track in the history playlist of an user
         /// </summary>
@@ -22,7 +19,7 @@ namespace Controller
             DBConnection.OpenConnection();
 
             //Build the query
-            string query = $"INSERT INTO track_history (userID, trackID) VALUES({_userID}, {trackID})";
+            string query = $"INSERT INTO track_history (userID, trackID) VALUES({UserID}, {trackID})";
 
             //Prepare the query
             SqlCommand cmd = new SqlCommand(query, DBConnection.Connection);
@@ -39,7 +36,7 @@ namespace Controller
             DBConnection.OpenConnection();
 
             //Build the query
-            string historyQuery = $"SELECT playlistID FROM playlist where title = 'History' AND ownerID = {_userID}";
+            string historyQuery = $"SELECT playlistID FROM playlist where title = 'History' AND ownerID = {UserID}";
             SqlCommand cmdHistory = new SqlCommand(historyQuery, DBConnection.Connection);
 
             int playlistID = Convert.ToInt32(cmdHistory.ExecuteScalar().ToString());
@@ -53,7 +50,7 @@ namespace Controller
         /// Gets tracks from track_history using userID. Tracks are orderd by latest datetime.
         /// </summary>
         /// <returns>List of Model.track</returns>
-        public static List<Model.Track> PlaylistTracks()
+        public static List<Model.Track> HistoryTracks()
         {
             List<Model.Track> tracks = new List<Model.Track>();
             List<int> trackIDs = new List<int>();
@@ -61,7 +58,7 @@ namespace Controller
             Track contrTrack = new Track();
 
             DBConnection.OpenConnection();
-            var query = $"SELECT trackID FROM track_history WHERE userID = {_userID} ORDER BY date_time DESC";
+            var query = $"SELECT trackID FROM track_history WHERE userID = {UserID} ORDER BY date_time DESC";
             SqlCommand cmd = new SqlCommand(query, DBConnection.Connection);
 
             using (SqlDataReader reader = cmd.ExecuteReader())

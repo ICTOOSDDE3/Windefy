@@ -34,14 +34,14 @@ namespace View.Views
             Button button = (Button)e.OriginalSource;
             TrackInfo trackInfo = button.DataContext as TrackInfo;
 
-            Controller.TrackQueue.SetQueue(trackInfo.TrackID, trackInfo.PlaylistID);
+            Controller.TrackQueue.trackQueue.Clear();
 
             SingleTrackFill(trackInfo);
         }
         /// <summary>
-        /// Updates the SingleToggleClick model
+        /// fills single track queue in case of homepage history track click
         /// </summary>
-        /// <param name="trackInfo"></param>
+        /// <param name="data"></param>
         private void SingleTrackFill(TrackInfo trackInfo)
         {
             Controller.TrackQueue.trackQueue.Clear();

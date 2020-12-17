@@ -14,7 +14,7 @@ namespace View.ViewModels
         {
             PlaylistID = playlistID;
             Tracks = new List<TrackInfo>();
-            List<Model.Track> modelTracks = TrackHistory.PlaylistTracks();
+            List<Model.Track> modelTracks = TrackHistory.HistoryTracks();
             TrackToTrackInfo(modelTracks);
         }
 

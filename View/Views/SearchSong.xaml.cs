@@ -32,7 +32,10 @@ namespace View.Views
 
             SingleTrackFill(data);
         }
-
+        /// <summary>
+        /// fills single track queue in case of single track click after search
+        /// </summary>
+        /// <param name="data"></param>
         private void SingleTrackFill(ViewModels.TrackInfo data)
         {
             Model.SingleTrackClicked.TrackID = data.TrackID;

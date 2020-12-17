@@ -40,6 +40,10 @@ namespace View.Views
 
         }
 
+        /// <summary>
+        /// fills single track queue in case of history view track click
+        /// </summary>
+        /// <param name="data"></param>
         private void SingleTrackFill(ViewModels.TrackInfo data)
         {
             Model.SingleTrackClicked.TrackID = data.TrackID;

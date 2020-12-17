@@ -14,7 +14,7 @@ namespace View.ViewModels
         public HistoryViewModel()
         {
             tracks = new List<TrackInfo>();
-            List<Model.Track> modelTracks = TrackHistory.PlaylistTracks();
+            List<Model.Track> modelTracks = TrackHistory.HistoryTracks();
             playlistID = TrackHistory.getHistoryPlaylistID();
             TrackToTrackInfo(modelTracks);
         }
