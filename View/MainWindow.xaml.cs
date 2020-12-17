@@ -35,6 +35,7 @@ namespace View
         Login login = new Login();
         private string email = "";
         private bool rewFor;
+        private int playlistID;
 
         public MainWindow()
         {
@@ -111,6 +112,7 @@ namespace View
             }
             else
             {
+                playlistID = playlistData.playlistID;
                 DataContext = new PlaylistViewModel(playlistData.playlistID);
             }
         }
@@ -311,6 +313,7 @@ namespace View
             }
             else
             {
+                tbPlayPause.IsChecked = false;
                 mediaPlayer.Close();
             }
         }
@@ -409,6 +412,7 @@ namespace View
             }
             else
             {
+                tbPlayPause.IsChecked = false;
                 mediaPlayer.Close();
             }
         }
@@ -514,10 +518,29 @@ namespace View
             mediaPlayer.Open(new Uri(ApacheConnection.GetAudioFullPath(CurrentTrack.File_path)));
             icArtistList.ItemsSource = CurrentTrack.Artists;
             TrackImage.Source = new BitmapImage(new Uri(ApacheConnection.GetImageFullPath(CurrentTrack.Image_path), UriKind.RelativeOrAbsolute));
+            UpdatePage();
 
             if (Model.SingleTrackClicked.QueueTrackIDs.Count > 0 && rewFor)
             {
                 Model.SingleTrackClicked.QueueTrackIDs.RemoveFirst();
+            }
+        }
+        /// <summary>
+        /// Updates page after music update
+        /// </summary>
+        private void UpdatePage()
+        {
+            if (DataContext is Homepage)
+            {
+                new Homepage(TrackHistory.PlaylistID);
+            }
+            else if (DataContext is HistoryViewModel)
+            {
+                new HistoryViewModel();
+            }
+            else if (DataContext is PlaylistViewModel)
+            {
+                new PlaylistViewModel(playlistID);
             }
         }
 
