@@ -92,7 +92,7 @@
                     <Label FontWeight="Bold" Grid.Column="1" Content="Artist:" FontFamily="Segoe" FontSize="20"></Label>
                     <Label FontWeight="Bold" Grid.Column="2" Content="Loved:" FontFamily="Segoe" FontSize="20"></Label>
                     <Label FontWeight="Bold" Grid.Column="3" Content="Length:" FontFamily="Segoe" FontSize="20"></Label>
-                    <Label FontWeight="Bold" Grid.Column="4" FontFamily="Segoe" FontSize="20"></Label>
+                    <Label FontWeight="Bold" Grid.Column="4" Content="Remove:" FontFamily="Segoe" FontSize="20"></Label>
                     
                     <Line Grid.Row="1" Grid.Column="0" Stroke="Black" StrokeThickness="2" X1="0" X2="20000px" VerticalAlignment="Top"></Line>
                     <Line Grid.Row="1" Grid.Column="1" Stroke="Black" StrokeThickness="2" X1="0" X2="20000px" VerticalAlignment="Top"></Line>
@@ -103,7 +103,7 @@
 
 
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0,60,0,0">
-                    <ItemsControl x:Name="Tracks" ItemsSource="{Binding tracks}" >
+                    <ItemsControl x:Name="Tracks" ItemsSource="{Binding tracks}" VerticalAlignment="Top">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid Columns="1" />
@@ -126,7 +126,7 @@
                                         <TextBlock Text="{Binding Title}" FontWeight="Bold" FontFamily="Segoe" FontSize="20" TextTrimming="CharacterEllipsis" MaxWidth="250px"></TextBlock>
                                     </Label>
 
-                                    <ItemsControl Margin="4,0,0,0" Grid.Column="1" x:Name="Artist" ItemsSource="{Binding Artists}">
+                                    <ItemsControl Margin="10,0,0,0" Grid.Column="1" x:Name="Artist" ItemsSource="{Binding Artists}">
                                         <ItemsControl.ItemsPanel>
                                             <ItemsPanelTemplate>
                                                 <StackPanel Orientation="Horizontal"/>
@@ -147,7 +147,7 @@
                                         </ItemsControl.ItemTemplate>
                                     </ItemsControl>
 
-                                    <ToggleButton Margin="0,0,0,0" Grid.Column="2" HorizontalAlignment="Left" Tag="{Binding trackID}" x:Name="LikeButton" Width="40" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" OpacityMask="{x:Null}" Style="{StaticResource MyToggleButtonStyle}" ToolTip="Add this number to favorites" Loaded="LikeButton_Loaded" Click="LikeButton_Click">
+                                    <ToggleButton Margin="20,0,0,0" Grid.Column="2" HorizontalAlignment="Left" Tag="{Binding trackID}" x:Name="LikeButton" Width="40" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" OpacityMask="{x:Null}" Style="{StaticResource MyToggleButtonStyle}" ToolTip="Add this number to favorites" Loaded="LikeButton_Loaded" Click="LikeButton_Click">
                                         <Image>
                                             <Image.Style>
                                                 <Style TargetType="Image">
@@ -172,7 +172,7 @@
                                     </ToggleButton>
 
                                     <Label Margin="14,0,0,0" Grid.Column="3" Content="{Binding DurationView}" FontFamily="Segoe" FontSize="20"></Label>
-                                    <Button Grid.Column="4" x:Name="Remove_Button" Style="{StaticResource MyButtonStyle}"  Foreground="Red" BorderBrush="{x:Null}" HorizontalAlignment="Left" ToolTip="Remove from playlist" Click="Remove_Button_Click">X
+                                    <Button Margin="50,0,0,0" Grid.Column="4" x:Name="Remove_Button" Style="{StaticResource MyButtonStyle}"  Foreground="Red" BorderBrush="{x:Null}" HorizontalAlignment="Left" ToolTip="Remove from playlist" Click="Remove_Button_Click">X
                                     </Button>
                                     
                                 </Grid>

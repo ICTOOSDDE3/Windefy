@@ -492,7 +492,7 @@
                             </Button.Background>
                         </Button>
 
-                        <ItemsControl x:Name="LeftSideBarPlayLists" Margin="0,0,0,-48">
+                        <ItemsControl x:Name="LeftSideBarPlayLists" Margin="0,50,0,0" VerticalAlignment="Top">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <UniformGrid Columns="1" />
@@ -500,7 +500,7 @@
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Horizontal" Margin="25,30,0,0" VerticalAlignment="Center">
+                                    <StackPanel Orientation="Horizontal" Margin="25,0,0,0" VerticalAlignment="Center">
                                         <Button x:Name="Playlist_Plus_Button" Content="" Width="42" Height="42" Style="{StaticResource RoundedButton}" Click="OpenPlaylist">
                                             <Button.Background>
                                                 <ImageBrush ImageSource="/Assets/Images/mockSongImage.jpg"/>

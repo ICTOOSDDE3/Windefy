@@ -113,7 +113,6 @@ namespace Controller
             SqlDataReader dataReader = cmd.ExecuteReader();
             while (dataReader.Read())
             {
-
                 tracks.Add(new Model.Track(Convert.ToInt32(dataReader["trackID"]), Convert.ToString(dataReader["title"]), Convert.ToInt32(dataReader["duration"]), AddMusicToPlaylistInstance.IsTrackInFavorites(Convert.ToInt32(dataReader["trackID"]), Model.User.UserID)));
             }
 
