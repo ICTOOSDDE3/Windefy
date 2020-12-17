@@ -40,7 +40,7 @@ namespace View.Views
         {
             var x = (Label)sender;
 
-            TrackQueue.SetQueue((int)x.Tag, 1);
+            Controller.TrackQueue.SetQueue((int)x.Tag, 1);
 
             SingleTrackClicked.TrackID = (int)x.Tag;
             SingleTrackClicked.TrackClicked = true;
