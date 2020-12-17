@@ -532,15 +532,11 @@ namespace View
         {
             if (DataContext is Homepage)
             {
-                new Homepage(TrackHistory.PlaylistID);
+                DataContext = new Homepage(TrackHistory.PlaylistID);
             }
             else if (DataContext is HistoryViewModel)
             {
-                new HistoryViewModel();
-            }
-            else if (DataContext is PlaylistViewModel)
-            {
-                new PlaylistViewModel(playlistID);
+                DataContext = new HistoryViewModel();
             }
         }
 
