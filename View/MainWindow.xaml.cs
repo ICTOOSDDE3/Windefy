@@ -26,7 +26,6 @@ namespace View
         Register registerAccount = new Register();
         Login login = new Login();
         private string email = "";
-        private int playlistID;
         private bool rewFor;
 
         public MainWindow()

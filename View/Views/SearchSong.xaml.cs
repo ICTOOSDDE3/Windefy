@@ -40,7 +40,7 @@ namespace View.Views
                 }
                 if (item != data && itemData)
                 {
-                    var test = item as ViewModels.TrackInfo;
+                    var test = item as TrackInfo;
                     SingleTrackClicked.QueueTrackIDs.AddLast(test.TrackID);
                 }
             }
@@ -50,9 +50,9 @@ namespace View.Views
         private void LikeButton_Click(object sender, RoutedEventArgs e)
         {
             var addToPlaylist = (ToggleButton)e.OriginalSource;
-            var data = addToPlaylist.DataContext as ViewModels.TrackInfo;
+            var data = addToPlaylist.DataContext as TrackInfo;
             int trackid = data.TrackID;
-            if (addToPlaylist.IsChecked == true)
+            if ((bool)addToPlaylist.IsChecked)
             {
 
                 if (!addTrackToPlaylist.IsTrackInFavorites(trackid, Model.User.UserID))
@@ -90,7 +90,7 @@ namespace View.Views
         private void LikeButton_Loaded(object sender, RoutedEventArgs e)
         {
             var toggleButton = (ToggleButton)e.OriginalSource;
-            var data = toggleButton.DataContext as ViewModels.TrackInfo;
+            var data = toggleButton.DataContext as TrackInfo;
 
             toggleButton.IsChecked = data.Liked;
 
@@ -104,7 +104,7 @@ namespace View.Views
 
             if(artistId != 0)
             {
-                ((ViewModels.SearchSongModel)DataContext).OnArtistClick(artistId);
+                ((SearchSongModel)DataContext).OnArtistClick(artistId);
             }
 
         }
