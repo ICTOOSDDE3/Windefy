@@ -16,7 +16,7 @@ namespace View.Views
         public SearchSong()
         {
             InitializeComponent();
-            
+
         }
         /// <summary>
         /// Click on title to play track
@@ -69,10 +69,11 @@ namespace View.Views
             {
                 addTrackToPlaylist.InsertToFavorites(trackid);
                 Trace.WriteLine("added to playlist");
-            } else
+            }
+            else
             {
                 Trace.WriteLine("already added to favorites");
-            }       
+            }
         }
 
         private void Label_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -103,7 +104,7 @@ namespace View.Views
             dataReader.Close();
             DBConnection.CloseConnection();
 
-            if(artistId != 0)
+            if (artistId != 0)
             {
                 ((ViewModels.SearchSongModel)DataContext).OnArtistClick(artistId);
             }

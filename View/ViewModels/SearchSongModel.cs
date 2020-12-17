@@ -1,9 +1,7 @@
 ﻿using Controller;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
-using System.Text;
 
 namespace View.ViewModels
 {
@@ -67,7 +65,7 @@ namespace View.ViewModels
                 TrackInfo trackInfo = new TrackInfo(Convert.ToString(dataReader["title"]),
                     Convert.ToInt32(dataReader["duration"]),
                     Convert.ToString(dataReader["image_path"]),
-                    
+
                     Convert.ToInt32(dataReader["trackID"]),
                     Convert.ToInt32(dataReader["playlistID"]));
 
@@ -77,10 +75,11 @@ namespace View.ViewModels
             dataReader.Close();
             DBConnection.CloseConnection();
 
-            if(items.Count > 0)
+            if (items.Count > 0)
             {
                 NoResultsVisibility = "Hidden";
-            } else
+            }
+            else
             {
                 NoResultsVisibility = "Visible";
             }
@@ -117,7 +116,7 @@ namespace View.ViewModels
             // linked to artist pages in the XAML
             ArtistName = "";
 
-            
+
             SqlConnection con = new SqlConnection($"Server = 127.0.0.1; Database = WindefyDB; User Id = SA; Password = {Passwords.GetPassword("DB")};");
             con.Open();
 

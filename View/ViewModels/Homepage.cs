@@ -1,13 +1,11 @@
-﻿using System;
-using Controller;
+﻿using Controller;
 using System.Collections.Generic;
-using System.Text;
 
 namespace View.ViewModels
 {
     public class Homepage
     {
-        public List<TrackInfo> Tracks{ get; set; }
+        public List<TrackInfo> Tracks { get; set; }
         private int PlaylistID { get; set; }
 
         public Homepage(int playlistID)

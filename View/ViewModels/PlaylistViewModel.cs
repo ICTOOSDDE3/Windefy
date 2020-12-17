@@ -1,8 +1,4 @@
 ﻿using Controller;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Text;
 
 namespace View.ViewModels
 {
