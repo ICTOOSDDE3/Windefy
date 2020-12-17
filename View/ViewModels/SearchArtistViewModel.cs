@@ -10,11 +10,26 @@ namespace View.ViewModels
 {
     public class SearchArtistViewModel
     {
+        public event EventHandler<int> ArtistClickEvent;
         public List<ArtistInfo> items { get; set; }
+
+        private string _NoResultsVisibility;
 
         public SearchArtistViewModel()
         {
             items = new List<ArtistInfo>();
+            NoResultsVisibility = "Hidden";
+        }
+
+        public string NoResultsVisibility
+        {
+            get { return _NoResultsVisibility; }
+            set { _NoResultsVisibility = value; }
+        }
+
+        public void OnArtistClick(int artistId)
+        {
+            ArtistClickEvent?.Invoke(this, artistId);
         }
 
         public SearchArtistViewModel(string q)
@@ -50,6 +65,15 @@ namespace View.ViewModels
             dataReader.Close();
 
             DBConnection.CloseConnection();
+
+            if (items.Count > 0)
+            {
+                NoResultsVisibility = "Hidden";
+            }
+            else
+            {
+                NoResultsVisibility = "Visible";
+            }
         }
 
         internal void GetFavourites(int userID)

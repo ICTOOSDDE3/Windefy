@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\favicon.ico" />
     <None Remove="Assets\Images\banner.png" />
     <None Remove="Assets\Images\banner.svg" />
     <None Remove="Assets\Images\Like.png" />
@@ -44,6 +45,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\favicon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\Images\banner.png" />
     <Resource Include="Assets\Images\Like.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

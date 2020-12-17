@@ -7,7 +7,7 @@ namespace Controller
 {
     public class Playlist
     {
-        public void CreateUserPlaylist(string playlistTitle, bool playlist_is_Public)
+        public int CreateUserPlaylist(string playlistTitle, bool playlist_is_Public)
         {
 
             //Initialize and open a db connection
@@ -19,7 +19,7 @@ namespace Controller
 
             //SQL injection prepared query builder
             SqlCommand cmd = new SqlCommand(null, DBConnection.Connection);
-            cmd.CommandText = $"INSERT INTO playlist (title, listens, playlist_typeID, is_public, ownerID) " +
+            cmd.CommandText = $"INSERT INTO playlist (title, listens, playlist_typeID, is_public, ownerID) output INSERTED.playlistID " +
                 $"VALUES(@title, @listens, @playlist_typeID, @is_public, @ownerID)";
 
 
@@ -42,9 +42,16 @@ namespace Controller
             cmd.Parameters.Add(paramOwnerID);
 
             cmd.Prepare();
-            cmd.ExecuteNonQuery();
+            SqlDataReader dataReader = cmd.ExecuteReader();
+            int modified = 0;
+            while (dataReader.Read())
+            {
+                modified = Convert.ToInt32(dataReader["playlistID"]);
+            }
 
             DBConnection.CloseConnection();
+
+            return modified;
         }
     }
 }

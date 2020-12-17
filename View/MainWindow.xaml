@@ -8,7 +8,8 @@
         xmlns:views="clr-namespace:View.Views"
         xmlns:System="clr-namespace:System;assembly=System.Runtime" x:Name="Index" x:Class="View.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1024" Width="1440">
+        Icon="/Assets/favicon.ico"
+        Title="MainWindow" Height="1024" Width="1680">
     <Window.Resources>
         <LinearGradientBrush x:Key="NormalBrush" StartPoint="0,0" EndPoint="0,1">
             <GradientBrush.GradientStops>
@@ -179,7 +180,7 @@
         <DataTemplate x:Name="SearchAlbumViewModel" DataType="{x:Type viewmodels:SearchAlbumViewModel}">
             <views:SearchAlbum DataContext="{Binding}" />
         </DataTemplate>
-        
+
         <Style x:Key="SliderRepeatButton" TargetType="RepeatButton">
             <Setter Property="SnapsToDevicePixels" Value="true" />
             <Setter Property="OverridesDefaultStyle" Value="true" />
@@ -255,7 +256,7 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-        
+
         <Image x:Key="Play_icon" Source="Play.png"/>
         <Image x:Key="Pause_icon" Source="Pause.png"/>
         <Image x:Key="ShuffleUnChecked_icon" Source="Shuffle.png"/>
@@ -445,7 +446,7 @@
             </Setter>
         </Style>
     </Window.Resources>
-    
+
 
     <Grid Background="Transparent">
         <Grid.RowDefinitions>
@@ -458,11 +459,10 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Row="1" Grid.ColumnSpan="2" Background="#E54F83CC" Opacity="0.9"/>
         <Grid Grid.Row="0" Grid.Column="0" Background="#FFFF72">
-            <Label Content="Windefy" FontSize="35" Margin="10,30,0,0" />
 
-            <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,70,0,0">
 
-                <Grid  Background="Transparent" Margin="10,50,5,0" Height="749" >
+                <Grid  Background="Transparent" Margin="10,0,5,0" Height="1238" >
                     <Label FontSize="25" Content="Browse" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                     <Label FontSize="20" Content="Explore" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,48,0,0"/>
                     <Label FontSize="20" Content="Recommended" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,90,0,0"/>
@@ -520,6 +520,7 @@
                 <System:String>Track</System:String>
             </ComboBox>
         </Grid>
+        
         <Grid Grid.ColumnSpan="5">
             <WrapPanel x:Name="MusicBar" Background="Transparent" Height="96" VerticalAlignment="Bottom" Margin="-6,0,6,-97" >
                 <WrapPanel x:Name="Track_ImageTitleArtist" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">
@@ -536,7 +537,7 @@
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock x:Name="commaTextBlock" Text=", "/>
-                                        <TextBlock Text="{Binding Name}"/>
+                                        <TextBlock Tag="{Binding ArtistID}" MouseDown="On_Artist_Click" Text="{Binding Name}"/>
                                     </StackPanel>
                                     <DataTemplate.Triggers>
                                         <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
@@ -576,7 +577,9 @@
                     <Slider Style="{StaticResource Horizontal_Slider}" Value="25" Maximum="100" Minimum="0" ValueChanged="Volume_ValueChanged" x:Name="Volume" Width="142" Height="9" Margin="5"/>
                 </WrapPanel>
             </WrapPanel>
+
         </Grid>
+        <Label Content="Windefy" FontSize="35" HorizontalAlignment="Right" VerticalAlignment="Top" MouseDown="Button_Click" Width="272" Margin="0,0,18,0" />
 
         <!-- the loginBackGround has to be visible if you want to change the loginGrid, RegisterGrid and the verify grid (put those grids on visible aswell) -->
         <Grid x:Name="LoginBackground" Background="#7F4F83CC" Grid.ColumnSpan="2" Grid.RowSpan="2" Visibility="Visible" Margin="1,0,-1,-16" d:IsHidden="True">
@@ -587,7 +590,7 @@
                 </Border>
                 <Button Content="Register" HorizontalAlignment="Center" Margin="0,227,0,0" VerticalAlignment="Top" Width="80" Height="30" Background="#00DDDDDD" BorderBrush="#00707070" Foreground="#FF4F83CC" Click="Register_Click"/>
                 <TextBox x:Name="Email_TextBox" HorizontalAlignment="Center" Margin="0,70,0,0" Style="{StaticResource LoginInputs}" Tag="email@voorbeeld.nl&#xD;&#xA;" TextWrapping="Wrap" VerticalAlignment="Top" Width="364" Height="35" TextAlignment="Center" FontSize="24" Background="#7F4F83CC" Foreground="#7F000000" BorderBrush="#00ABADB3"/>
-                <PasswordBox x:Name="Wachtwoord_TextBox" HorizontalAlignment="Center" VerticalAlignment="Center" Width="364" Height="31" FontSize="24" Foreground="Black" Background="#7F4F83CC" BorderBrush="#00ABADB3"/>
+                <PasswordBox x:Name="Password_TextBox" HorizontalAlignment="Center" VerticalAlignment="Center" Width="364" Height="31" FontSize="24" Foreground="Black" Background="#7F4F83CC" BorderBrush="#00ABADB3"/>
                 <Label x:Name="Login_HeadsUp" Content="" HorizontalAlignment="Center" Height="23" Margin="0,153,0,0" VerticalAlignment="Top" Width="363" Foreground="Red"/>
                 <Label x:Name="Password_Label_Copy" Content="Password:" HorizontalAlignment="Left" Height="21" Margin="94,105,0,0" VerticalAlignment="Top" Width="272" FontSize="10" FontWeight="Bold"/>
                 <Label x:Name="Email_Label_Copy" Content="Email:" HorizontalAlignment="Left" Height="21" Margin="95,49,0,0" VerticalAlignment="Top" Width="272" FontSize="10" FontWeight="Bold"/>
@@ -622,8 +625,9 @@
                 <TextBlock HorizontalAlignment="Left"  Margin="106,261,0,0" Text="Name:" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="110" FontSize="24"/>
                 <TextBlock HorizontalAlignment="Left"  Margin="106,359,0,0" Text="Language:" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="110" FontSize="24"/>
                 <TextBlock x:Name="Updated_Text" HorizontalAlignment="Left"  Margin="112,519,0,0" Text="*Updated account" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="224" FontSize="20" Visibility="Hidden" Opacity="0.8"/>
-
-                <Button x:Name="Close_Account_Details" Content="X" HorizontalAlignment="Left" Margin="534,23,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.48,0.377" Width="22" Foreground="Red" Background="{x:Null}" BorderBrush="{x:Null}" Click="Close_Login_Button_Click" FontWeight="Bold"/>
+                <Label x:Name="Update_Headsup" Content="" HorizontalAlignment="Center" Height="28" Margin="0,541,0,0" VerticalAlignment="Top" Width="312" Foreground="Red"/>
+                <Button x:Name="Logout_Button" Margin="282,501,0,0" FontSize="20" Width="94" Height="35" Background="{x:Null}" VerticalAlignment="Center" HorizontalAlignment="Center" BorderBrush="{x:Null}" Click="Logout_Button_Click">Logout</Button>
+                <Button x:Name="Close_Account_Details" Content="X" HorizontalAlignment="Left" Margin="534,23,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.48,0.377" Width="22" Foreground="Red" Background="{x:Null}" BorderBrush="{x:Null}" Click="Close_Account_Details_Button_Click" FontWeight="Bold"/>
                 <Border CornerRadius="30" Margin="112,480,112,0" VerticalAlignment="Top" Width="363" Height="34" Background="#FF4F83CC" RenderTransformOrigin="0.5,0.5">
                     <Button x:Name="AccountDetailsButton" Content="Update" HorizontalAlignment="Center" VerticalAlignment="Center" Width="384" Height="48" Background="#00DDDDDD" BorderBrush="#00707070" Foreground="White" Click="AccountDetails_Button_Click"/>
                 </Border>

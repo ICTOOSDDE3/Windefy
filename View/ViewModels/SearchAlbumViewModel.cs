@@ -11,6 +11,14 @@ namespace View.ViewModels
     {
         public List<PlaylistInfo> items { get; set; }
 
+        private string _NoResultsVisibility;
+
+        public string NoResultsVisibility
+        {
+            get { return _NoResultsVisibility; }
+            set { _NoResultsVisibility = value; }
+        }
+
         public SearchAlbumViewModel()
         {
             items = new List<PlaylistInfo>();
@@ -18,6 +26,7 @@ namespace View.ViewModels
 
         public SearchAlbumViewModel(string q, bool playlist)
         {
+            NoResultsVisibility = "Hidden";
             // Get playlists or albums depening on the boolean given
             if (!playlist)
             {
@@ -97,6 +106,15 @@ namespace View.ViewModels
                 dataReader.Close();
 
                 DBConnection.CloseConnection();
+            }
+
+            if (items.Count > 0)
+            {
+                NoResultsVisibility = "Hidden";
+            }
+            else
+            {
+                NoResultsVisibility = "Visible";
             }
         }
 

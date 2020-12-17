@@ -1,22 +1,14 @@
 using Controller;
-using System.Diagnostics;
-using View.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
+using View.ViewModels;
 namespace View
 {
 
@@ -34,7 +26,6 @@ namespace View
         Register registerAccount = new Register();
         Login login = new Login();
         private string email = "";
-        private int playlistID;
         private bool rewFor;
 
         public MainWindow()
@@ -43,11 +34,8 @@ namespace View
 
             ApacheConnection.Initialize();
             InitializeComponent();
-            //DataContext = new Homepage();
-            DataContext = new ViewModels.Artist(1);
+            DataContext = new Homepage();
             mediaPlayer.MediaEnded += MediaPlayer_MediaEnded;
-
-
 
             // initialize and setup of timer
             DispatcherTimer timer = new DispatcherTimer();
@@ -77,7 +65,7 @@ namespace View
             string title = Details_Title_Input.Text;
             bool isprivate = (bool)AddPlaylist_Private.IsChecked;
             //Check if title is filled out
-            if(title != null)
+            if (title != null)
             {
                 Controller.Playlist newPlaylist = new Controller.Playlist();
 
@@ -101,7 +89,7 @@ namespace View
             else
             {
                 AddPlaylist_Comment.Visibility = Visibility.Visible;
-            }                        
+            }
         }
         private void Close_AddPlaylist_Button_Click(object sender, RoutedEventArgs e)
         {
@@ -140,6 +128,7 @@ namespace View
         {
             LoginBackground.Visibility = Visibility.Hidden;
             AccountDetailsGrid.Visibility = Visibility.Hidden;
+            Updated_Text.Visibility = Visibility.Visible;
         }
         private void AccountDetails_Button_Click(object sender, RoutedEventArgs e)
         {
@@ -149,14 +138,28 @@ namespace View
             //update email if different from current email
             if (newEmail != Model.User.Email)
             {
-                Controller.User.UpdateEmail(newEmail);
+                if(registerAccount.IsValidEmail(newEmail))
+                {
+                    if(registerAccount.IsEmailUnique(newEmail))
+                    {
+                        Controller.User.UpdateEmail(newEmail);
+                    } else
+                    {
+                        Update_Headsup.Content = "Email already exists";
+                        return;
+                    }
+                } else
+                {
+                    Update_Headsup.Content = "Email adres is invalid";
+                    return;
+                }
             }
             //Update username if different from current name
-            if (newEmail != Model.User.Name)
+            if (newName != Model.User.Name)
             {
                 Controller.User.UpdateName(newName);
             }
-
+            Update_Headsup.Content = "";
             Updated_Text.Visibility = Visibility.Visible;
         }
 
@@ -168,15 +171,21 @@ namespace View
             string repeatedPassword = PasswordRepeat_Input.Password;
             if (registerAccount.IsValidEmail(email))
             {
-                if (registerAccount.IsPasswordEqual(password, repeatedPassword))
-                {
-                    registerAccount.RegisterAccount(email, userName, password, repeatedPassword);
-                    RegisterGrid.Visibility = Visibility.Hidden;
-                    VerifyGrid.Visibility = Visibility.Visible;
+                if(registerAccount.IsEmailUnique(email)) {
+                    if (registerAccount.IsPasswordEqual(password, repeatedPassword))
+                    {
+                        registerAccount.RegisterAccount(email, userName, password, repeatedPassword);
+                        RegisterGrid.Visibility = Visibility.Hidden;
+                        VerifyGrid.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        Register_Headsup.Content = "Passwords do not match!";
+                    }
                 }
                 else
                 {
-                    Register_Headsup.Content = "Passwords do not match!";
+                    Register_Headsup.Content = "Email already exists";
                 }
             }
             else
@@ -206,7 +215,7 @@ namespace View
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-            if(login.IsLogin(Email_TextBox.Text, Wachtwoord_TextBox.Password))
+            if (login.IsLogin(Email_TextBox.Text, Password_TextBox.Password))
             {
                 bool verified = Model.User.Verified;
                 if (verified)
@@ -216,7 +225,8 @@ namespace View
                     SideBarList.SetAllPlaylistsFromUser();
 
                     Add_PlayLists_To_Left_Sidebar();
-                } else
+                }
+                else
                 {
                     email = Model.User.Email.ToString();
                     LoginGrid.Visibility = Visibility.Hidden;
@@ -226,7 +236,9 @@ namespace View
 
                     Add_PlayLists_To_Left_Sidebar();
                 }
-            } else
+                Login_HeadsUp.Content = "";
+            }
+            else
             {
                 Login_HeadsUp.Content = "Email or password invalid!";
             }
@@ -282,7 +294,8 @@ namespace View
                     mediaPlayer.Play();
                 }
             }
-            else if (TrackQueue.trackQueue.Count() > 0) { 
+            else if (TrackQueue.trackQueue.Count() > 0)
+            {
                 UpdateMusicBar(TrackQueue.Dequeue());
 
                 if (mediaPlaying)
@@ -450,12 +463,6 @@ namespace View
             rewind = false;
         }
 
-        /* TODO: Check this thing
-        private void Label_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            DataContext = new ViewModels.Artist(2);
-        }*/
-
         private void favoriteBtn_Checked(object sender, RoutedEventArgs e)
         {
             //controller aanroepen om track toe te voegen aan fav afspeellijst
@@ -499,6 +506,18 @@ namespace View
             mediaPlayer.Open(new Uri(ApacheConnection.GetAudioFullPath(CurrentTrack.File_path)));
         }
 
+        private void On_Artist_Click(object sender, MouseButtonEventArgs e)
+        {
+            var textBlock = (TextBlock)sender;
+            int artistId = (int)textBlock.Tag;
+            DataContext = new ViewModels.Artist(artistId);
+        }
+
+        public void OnArtistClick(object sender, int artistId)
+        {
+            DataContext = new ViewModels.Artist(artistId);
+        }
+
         private void SearchBarTextChanged(object sender, TextChangedEventArgs e)
         {
             string searchBarValue = SearchBar.Text;
@@ -511,7 +530,10 @@ namespace View
                 switch (dropDownValue)
                 {
                     case "Artist":
-                        DataContext = new SearchArtistViewModel(searchBarValue);
+                        SearchArtistViewModel searchArtistViewModel = new SearchArtistViewModel(searchBarValue);
+                        searchArtistViewModel.ArtistClickEvent += OnArtistClick;
+
+                        DataContext = searchArtistViewModel;
                         break;
                     case "Album":
                         DataContext = new SearchAlbumViewModel(searchBarValue, false);
@@ -521,13 +543,37 @@ namespace View
                         break;
                     default:
                         // Track as default
-                        DataContext = new SearchSongModel(searchBarValue);
+                        SearchSongModel searchSongModel = new SearchSongModel(searchBarValue);
+                        searchSongModel.ArtistClickEvent += OnArtistClick;
+                        DataContext = searchSongModel;
                         break;
                 }
             }
             else
             {
                 DataContext = new Homepage();
+            }
+        }
+        
+        private void Button_Click(object sender, MouseButtonEventArgs e)
+        {
+            DataContext = new Homepage();
+        }
+        /// <summary>
+        /// event for logging out
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Logout_Button_Click(object sender, RoutedEventArgs e)
+        {
+            User.EmptyUserModel();
+            if (User.isLoggedIn == false)
+            {
+                LoginBackground.Visibility = Visibility.Visible;
+                LoginGrid.Visibility = Visibility.Visible;
+                AccountDetailsGrid.Visibility = Visibility.Hidden;
+                Email_TextBox.Clear();
+                Password_TextBox.Clear();
             }
         }
 

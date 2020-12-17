@@ -8,6 +8,7 @@ namespace Controller
 {
     public static class User
     {
+        public static bool isLoggedIn = false;
 
         public static void UpdateEmail(string newEmail)
         {
@@ -24,7 +25,7 @@ namespace Controller
         public static void UpdateName(string newName)
         {
             //Update the name in the object & on the server
-            Model.User.Email = newName;
+            Model.User.Name = newName;
             //Update name in db
             UpdateNameInDB(newName, Model.User.UserID);
         }
@@ -97,6 +98,21 @@ namespace Controller
             Model.User.Name = name;
             Model.User.Language = language;
             Model.User.Verified = verified;
+            isLoggedIn = true;
+        }
+
+        /// <summary>
+        /// Empties the user model
+        /// </summary>
+        public static void EmptyUserModel()
+        {
+            Model.User.UserID = 0;
+            Model.User.Email = null;
+            Model.User.Name = null;
+            Model.User.Language = 0;
+            Model.User.Verified = false;
+
+            isLoggedIn = false;
         }
     }
 }
