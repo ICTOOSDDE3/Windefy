@@ -26,7 +26,6 @@ namespace View
         Register registerAccount = new Register();
         Login login = new Login();
         private string email = "";
-        private int playlistID;
         private bool rewFor;
 
         public MainWindow()
@@ -148,14 +147,28 @@ namespace View
             //update email if different from current email
             if (newEmail != Model.User.Email)
             {
-                Controller.User.UpdateEmail(newEmail);
+                if(registerAccount.IsValidEmail(newEmail))
+                {
+                    if(registerAccount.IsEmailUnique(newEmail))
+                    {
+                        Controller.User.UpdateEmail(newEmail);
+                    } else
+                    {
+                        Update_Headsup.Content = "Email already exists";
+                        return;
+                    }
+                } else
+                {
+                    Update_Headsup.Content = "Email adres is invalid";
+                    return;
+                }
             }
             //Update username if different from current name
             if (newName != Model.User.Name)
             {
                 Controller.User.UpdateName(newName);
             }
-
+            Update_Headsup.Content = "";
             Updated_Text.Visibility = Visibility.Visible;
         }
 
@@ -167,15 +180,21 @@ namespace View
             string repeatedPassword = PasswordRepeat_Input.Password;
             if (registerAccount.IsValidEmail(email))
             {
-                if (registerAccount.IsPasswordEqual(password, repeatedPassword))
-                {
-                    registerAccount.RegisterAccount(email, userName, password, repeatedPassword);
-                    RegisterGrid.Visibility = Visibility.Hidden;
-                    VerifyGrid.Visibility = Visibility.Visible;
+                if(registerAccount.IsEmailUnique(email)) {
+                    if (registerAccount.IsPasswordEqual(password, repeatedPassword))
+                    {
+                        registerAccount.RegisterAccount(email, userName, password, repeatedPassword);
+                        RegisterGrid.Visibility = Visibility.Hidden;
+                        VerifyGrid.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        Register_Headsup.Content = "Passwords do not match!";
+                    }
                 }
                 else
                 {
-                    Register_Headsup.Content = "Passwords do not match!";
+                    Register_Headsup.Content = "Email already exists";
                 }
             }
             else
@@ -205,7 +224,7 @@ namespace View
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-            if (login.IsLogin(Email_TextBox.Text, Wachtwoord_TextBox.Password))
+            if (login.IsLogin(Email_TextBox.Text, Password_TextBox.Password))
             {
                 bool verified = Model.User.Verified;
                 if (verified)
@@ -226,6 +245,7 @@ namespace View
 
                     Add_PlayLists_To_Left_Sidebar();
                 }
+                Login_HeadsUp.Content = "";
             }
             else
             {
@@ -573,7 +593,27 @@ namespace View
             {
                 DataContext = new Homepage();
             }
+        }        
+        private void Button_Click(object sender, MouseButtonEventArgs e)
+        {
+            DataContext = new Homepage();
         }
-
+        /// <summary>
+        /// event for logging out
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Logout_Button_Click(object sender, RoutedEventArgs e)
+        {
+            User.EmptyUserModel();
+            if (User.isLoggedIn == false)
+            {
+                LoginBackground.Visibility = Visibility.Visible;
+                LoginGrid.Visibility = Visibility.Visible;
+                AccountDetailsGrid.Visibility = Visibility.Hidden;
+                Email_TextBox.Clear();
+                Password_TextBox.Clear();
+            }
+        }
     }
 }
