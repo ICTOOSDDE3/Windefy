@@ -74,7 +74,7 @@ namespace View
             string title = Details_Title_Input.Text;
             bool isprivate = (bool)AddPlaylist_Private.IsChecked;
             //Check if title is filled out
-            if(title != null)
+            if (title != null)
             {
                 Controller.Playlist newPlaylist = new Controller.Playlist();
 
@@ -98,7 +98,7 @@ namespace View
             else
             {
                 AddPlaylist_Comment.Visibility = Visibility.Visible;
-            }                        
+            }
         }
         private void OpenPlaylist(object sender, RoutedEventArgs e)
         {
@@ -221,7 +221,7 @@ namespace View
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-            if(login.IsLogin(Email_TextBox.Text, Wachtwoord_TextBox.Password))
+            if (login.IsLogin(Email_TextBox.Text, Wachtwoord_TextBox.Password))
             {
                 bool verified = Model.User.Verified;
                 if (verified)
@@ -232,7 +232,8 @@ namespace View
                     TrackHistory.PlaylistID = TrackHistory.getHistoryPlaylistID();
                     DataContext = new Homepage(TrackHistory.PlaylistID);
                     Add_PlayLists_To_Left_Sidebar();
-                } else
+                }
+                else
                 {
                     email = Model.User.Email.ToString();
                     LoginGrid.Visibility = Visibility.Hidden;
@@ -242,7 +243,8 @@ namespace View
 
                     Add_PlayLists_To_Left_Sidebar();
                 }
-            } else
+            }
+            else
             {
                 Login_HeadsUp.Content = "Email or password invalid!";
             }
@@ -395,6 +397,7 @@ namespace View
 
                 UpdateMusicBar(Model.SingleTrackClicked.QueueTrackIDs.First());
 
+
                 if (mediaPlaying)
                 {
                     mediaPlayer.Play();
@@ -475,11 +478,6 @@ namespace View
             rewind = false;
         }
 
-        private void Label_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            DataContext = new ViewModels.Artist(2);
-        }
-
         private void favoriteBtn_Checked(object sender, RoutedEventArgs e)
         {
             //controller aanroepen om track toe te voegen aan fav afspeellijst
@@ -499,6 +497,10 @@ namespace View
         private void shuffleBtn_Unchecked(object sender, RoutedEventArgs e)
         {
             //TrackQueue.ShuffleEnabled = false;
+        }
+        private void btnQueue_Click(object sender, RoutedEventArgs e)
+        {
+            DataContext = new TrackQueueViewModel();
         }
 
         /// <summary>
@@ -540,6 +542,18 @@ namespace View
             }
         }
 
+        private void On_Artist_Click(object sender, MouseButtonEventArgs e)
+        {
+            var textBlock = (TextBlock)sender;
+            int artistId = (int)textBlock.Tag;
+            DataContext = new ViewModels.Artist(artistId);
+        }
+
+        public void OnArtistClick(object sender, int artistId)
+        {
+            DataContext = new ViewModels.Artist(artistId);
+        }
+
         private void SearchBarTextChanged(object sender, TextChangedEventArgs e)
         {
             string searchBarValue = SearchBar.Text;
@@ -552,7 +566,10 @@ namespace View
                 switch (dropDownValue)
                 {
                     case "Artist":
-                        DataContext = new SearchArtistViewModel(searchBarValue);
+                        SearchArtistViewModel searchArtistViewModel = new SearchArtistViewModel(searchBarValue);
+                        searchArtistViewModel.ArtistClickEvent += OnArtistClick;
+
+                        DataContext = searchArtistViewModel;
                         break;
                     case "Album":
                         DataContext = new SearchAlbumViewModel(searchBarValue, false);
@@ -562,7 +579,9 @@ namespace View
                         break;
                     default:
                         // Track as default
-                        DataContext = new SearchSongModel(searchBarValue);
+                        SearchSongModel searchSongModel = new SearchSongModel(searchBarValue);
+                        searchSongModel.ArtistClickEvent += OnArtistClick;
+                        DataContext = searchSongModel;
                         break;
                 }
             }

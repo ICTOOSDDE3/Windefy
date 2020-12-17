@@ -1,4 +1,5 @@
 ﻿using Controller;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
@@ -70,6 +71,41 @@ namespace View.Views
             {
                 Trace.WriteLine("already added to favorites");
             }       
+        }
+
+        private void Label_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var label = (Label)sender;
+
+            string artistName = (string)label.Content;
+
+
+            SqlConnection con = new SqlConnection($"Server = 127.0.0.1; Database = WindefyDB; User Id = SA; Password = {Passwords.GetPassword("DB")};");
+            con.Open();
+
+            // Fetch all artists that worked on a track based on the ID of the track
+            SqlCommand cmd = new SqlCommand(null, con)
+            {
+                CommandText = "SELECT artistID " +
+                "FROM artist " +
+                $"WHERE name = '{artistName}'"
+            };
+
+            SqlDataReader dataReader = cmd.ExecuteReader();
+            int artistId = 0;
+            while (dataReader.Read())
+            {
+                artistId = (int)dataReader["artistID"];
+            }
+
+            dataReader.Close();
+            DBConnection.CloseConnection();
+
+            if(artistId != 0)
+            {
+                ((ViewModels.SearchSongModel)DataContext).OnArtistClick(artistId);
+            }
+
         }
     }
 }

@@ -24,5 +24,14 @@ namespace View.Views
         {
             InitializeComponent();
         }
+
+        private void btnLight_Click(object sender, RoutedEventArgs e)
+        {
+            var button = (Button)sender;
+
+            int artistId = (int)button.Tag;
+
+            ((ViewModels.SearchArtistViewModel)DataContext).OnArtistClick(artistId);
+        }
     }
 }

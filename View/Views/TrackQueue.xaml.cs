@@ -1,6 +1,7 @@
 ﻿using Controller;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,32 +16,21 @@ using System.Windows.Shapes;
 namespace View.Views
 {
     /// <summary>
-    /// Interaction logic for Artist.xaml
+    /// Interaction logic for TrackQueue.xaml
     /// </summary>
-    public partial class Artist : UserControl
+    public partial class TrackQueue : UserControl
     {
-        public Artist()
+        public TrackQueue()
         {
             InitializeComponent();
         }
-
         private void Track_Click(object sender, RoutedEventArgs e)
         {
-            var x = (Label)sender;
-
-            Controller.TrackQueue.SetQueue((int)x.Tag, 1);
-
-            SingleTrackClicked.TrackID = (int)x.Tag;
+            var x = (Button)e.OriginalSource;
+            var data = x.DataContext as Model.Track;
+            Controller.TrackQueue.SetQueue(data.TrackID);
+            SingleTrackClicked.TrackID = data.TrackID;
             SingleTrackClicked.TrackClicked = true;
-
-            SingleTrackClicked.QueueTrackIDs.Clear();
-            SingleTrackClicked.QueueTrackIDs.AddLast((int)x.Tag);
-        }
-
-        private void Label_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            var label = (Label)sender;
-            DataContext = new ViewModels.Artist((int)label.Tag);
         }
     }
 }

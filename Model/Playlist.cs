@@ -9,6 +9,10 @@ namespace Model
 {
     public class Playlist
     {
+        public Playlist()
+        {
+
+        }
         public Playlist(int playlistID, string title, DateTime release_date, int listens, int playlist_type, string information, bool is_Public, int ownerID)
         {
             this.playlistID = playlistID;
