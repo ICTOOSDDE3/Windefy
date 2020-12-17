@@ -91,6 +91,15 @@ namespace View
                 AddPlaylist_Comment.Visibility = Visibility.Visible;
             }
         }
+        private void OpenPlaylist(object sender, RoutedEventArgs e)
+        {
+
+            Button button = (Button)e.OriginalSource;
+            Model.Playlist playlistData = button.DataContext as Model.Playlist;
+
+            DataContext = new PlaylistViewModel(playlistData.playlistID);
+        }
+
         private void Close_AddPlaylist_Button_Click(object sender, RoutedEventArgs e)
         {
             LoginBackground.Visibility = Visibility.Hidden;
@@ -272,6 +281,10 @@ namespace View
         {
             SingleTrackClicked.TrackClicked = false;
             UpdateMusicBar(SingleTrackClicked.TrackID);
+            if (DataContext is TrackQueueViewModel)
+            {
+                DataContext = new TrackQueueViewModel();
+            }
             tbPlayPause.IsChecked = true;
             mediaPlayer.Play();
         }
@@ -296,11 +309,22 @@ namespace View
             }
             else if (TrackQueue.trackQueue.Count() > 0)
             {
-                UpdateMusicBar(TrackQueue.Dequeue());
-
-                if (mediaPlaying)
+                int dequeue_item = TrackQueue.Dequeue();
+                if (dequeue_item != -1)
                 {
-                    mediaPlayer.Play();
+                    UpdateMusicBar(dequeue_item);
+                    if (DataContext is TrackQueueViewModel)
+                    {
+                        DataContext = new TrackQueueViewModel();
+                    }
+                    if (mediaPlaying)
+                    {
+                        mediaPlayer.Play();
+                    }
+                }
+                else
+                {
+                    MusicBar.DataContext = null;
                 }
             }
             else
@@ -328,7 +352,7 @@ namespace View
                     mediaPlayer.Play();
                 }
             }
-            else if (TrackQueue.trackQueue.Count() > 0)
+            else if (Controller.TrackQueue.trackQueue.Count() > 0)
             {
                 UpdateMusicBar(TrackHistory.trackHistory.Pop());
 
@@ -385,6 +409,7 @@ namespace View
 
                 UpdateMusicBar(SingleTrackClicked.QueueTrackIDs.First());
 
+
                 if (mediaPlaying)
                 {
                     mediaPlayer.Play();
@@ -392,11 +417,22 @@ namespace View
             }
             else if (TrackQueue.trackQueue.Count() > 0)
             {
-                UpdateMusicBar(TrackQueue.Dequeue());
-
-                if (mediaPlaying)
+                int dequeue_item = TrackQueue.Dequeue();
+                if (dequeue_item != -1)
                 {
-                    mediaPlayer.Play();
+                    UpdateMusicBar(dequeue_item);
+                    if (DataContext is TrackQueueViewModel)
+                    {
+                        DataContext = new TrackQueueViewModel();
+                    }
+                    if (mediaPlaying)
+                    {
+                        mediaPlayer.Play();
+                    }
+                }
+                else
+                {
+                    MusicBar.DataContext = null;
                 }
             }
             else
@@ -483,6 +519,10 @@ namespace View
         {
             //TrackQueue.ShuffleEnabled = false;
         }
+        private void btnQueue_Click(object sender, RoutedEventArgs e)
+        {
+            DataContext = new TrackQueueViewModel();
+        }
 
         /// <summary>
         /// Updates all music related data
@@ -553,8 +593,7 @@ namespace View
             {
                 DataContext = new Homepage();
             }
-        }
-        
+        }        
         private void Button_Click(object sender, MouseButtonEventArgs e)
         {
             DataContext = new Homepage();

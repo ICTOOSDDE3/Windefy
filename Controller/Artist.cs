@@ -92,7 +92,7 @@ namespace Controller
         private List<Model.Artist> getTrackArtists(int trackID)
         {
             DBConnection.OpenConnection();
-            string query2 = $"SELECT * from artist where artistID IN (select artistID from track_artist where trackID = {trackID})";
+            string query2 = $"SELECT * FROM artist WHERE artistID IN (SELECT artistID FROM track_artist WHERE trackID = {trackID})";
 
             SqlCommand oCmd2 = new SqlCommand(query2, DBConnection.Connection);
             List<Model.Artist> artists = new List<Model.Artist>();
