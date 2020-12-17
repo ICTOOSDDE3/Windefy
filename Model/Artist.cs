@@ -14,5 +14,14 @@ namespace Model
         public string Location { get; set; }
         public DateTime active_year_begin { get; set; }
         public DateTime active_year_end { get; set; }
+
+        public Artist(int artistID, string name)
+        {
+            ArtistID = artistID;
+            Name = name;
+        }
+        public Artist()
+        {
+        }
     }
 }

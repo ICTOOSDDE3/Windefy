@@ -73,7 +73,7 @@ namespace Controller
             cmd.Parameters.Add(id);
             cmd.Prepare();
 
-            SqlDataReader dataReader = cmd.ExecuteReader();
+            SqlDataReader dataReader = cmd.ExecuteReader();            
 
             while (dataReader.Read())
             {
@@ -95,7 +95,7 @@ namespace Controller
             // Get playlists based on query
             SqlCommand cmd = new SqlCommand(null, DBConnection.Connection)
             {
-                CommandText = "SELECT t.trackID, t.title " +
+                CommandText = "SELECT t.trackID, t.title, t.duration " +
                 "FROM track t " +
                 "LEFT JOIN playlist_track pt ON t.trackID = pt.trackID " +
                 "WHERE pt.playlistID = @id"
@@ -108,14 +108,46 @@ namespace Controller
             cmd.Parameters.Add(id);
             cmd.Prepare();
 
+            AddMusicToPlaylist AddMusicToPlaylistInstance = new AddMusicToPlaylist();
+
             SqlDataReader dataReader = cmd.ExecuteReader();
             while (dataReader.Read())
             {
-
-                tracks.Add(new Model.Track(Convert.ToInt32(dataReader["trackID"]), Convert.ToString(dataReader["title"])));
+                tracks.Add(new Model.Track(Convert.ToInt32(dataReader["trackID"]), Convert.ToString(dataReader["title"]), Convert.ToInt32(dataReader["duration"]), AddMusicToPlaylistInstance.IsTrackInFavorites(Convert.ToInt32(dataReader["trackID"]), Model.User.UserID)));
             }
 
             dataReader.Close();
+
+
+            foreach (Model.Track track in tracks)
+            {             
+            // Get artists based on trackID
+                SqlCommand cmd1 = new SqlCommand(null, DBConnection.Connection)
+            {
+                CommandText = "SELECT a.name " +
+                "FROM track_artist ta " +
+                "LEFT JOIN artist a ON ta.artistID = a.artistID " +
+                "WHERE ta.trackID = @id1"
+            };
+
+                SqlParameter id1 = new SqlParameter("@id1", System.Data.SqlDbType.Int, 4)
+                {
+                    Value = track.TrackID
+                };
+                cmd1.Parameters.Add(id1);
+                cmd1.Prepare();
+
+                SqlDataReader dataReader1 = cmd1.ExecuteReader();
+
+                while (dataReader1.Read())
+                {
+                    track.Artists.Add(new Model.Artist(track.TrackID, Convert.ToString(dataReader1["name"])));
+                }
+                dataReader1.Close();
+            }
+            
+
+
             DBConnection.CloseConnection();
 
             return tracks;

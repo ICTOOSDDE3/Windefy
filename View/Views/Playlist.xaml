@@ -7,6 +7,31 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
+        <Style x:Key="MyToggleButtonStyle" TargetType="ToggleButton">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border Name="border" 
+                        BorderThickness="0"
+                        Padding="4,2" 
+                        BorderBrush="White" 
+                        CornerRadius="3" 
+                        Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="Black" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
         <Style x:Key="MyButtonStyle" TargetType="Button">
             <Setter Property="OverridesDefaultStyle" Value="True"/>
             <Setter Property="Margin" Value="5"/>
@@ -30,50 +55,55 @@
                 </Setter.Value>
             </Setter>
         </Style>
+   
     </UserControl.Resources>
+    
     <Grid Background="White" DataContext="{Binding Playlist}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,100,0,0">
         <StackPanel Orientation="Vertical">
-            <Grid Height="300" VerticalAlignment="Top" Margin="5, 0, 100, 0">
+            <Grid Height="300" VerticalAlignment="Top" Margin="25, 0, 25, 0">
                 <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="3*" />
-                    </Grid.ColumnDefinitions>
-                   
-                    <Image Grid.Column="0" Source="../Assets/Images/mockSongImage.jpg" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="3*" />
+                </Grid.ColumnDefinitions>
+                <Rectangle Grid.Column="0" RadiusX="20" RadiusY="20"   HorizontalAlignment="Stretch">
+                    <Rectangle.Fill>
+                        <ImageBrush x:Name="myImage" ImageSource="../Assets/Images/mockSongImage.jpg" Stretch="Fill"/>
+                    </Rectangle.Fill>
+                </Rectangle>
                 <StackPanel Grid.Column="1" Orientation="Vertical" Margin="25,0,0,0" HorizontalAlignment="Left">
-                    <Label Content="{Binding title}" FontSize="36" FontWeight="Bold" />
-                    <TextBlock TextWrapping="Wrap" Text="{Binding information}"/>
+                    <Label Content="{Binding title}" FontSize="36" FontWeight="Bold" Margin="0,0,0,0" />
+                    <TextBlock  FontFamily="Segoe" FontSize="20" TextWrapping="Wrap" Text="{Binding information}" Margin="8,0,0,0"/>
                 </StackPanel>
             </Grid>
-
-
-
-            <Grid Height="525px" Margin="0, 10, 0, 0">
+            <Grid Height="525px" Margin="25, 10, 25, 0">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="0.5*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50" />
                         <RowDefinition Height="1"/>
                     </Grid.RowDefinitions>
-                    <Label Grid.Column="0" Content="Title:" FontFamily="Segoe" FontSize="20"></Label>
-                    <Label Grid.Column="1" Content="Artist:" FontFamily="Segoe" FontSize="20"></Label>
-                    <Label Grid.Column="2" Content="Liked:" FontFamily="Segoe" FontSize="20"></Label>
-                    <Label Grid.Column="3" Content="Length:" FontFamily="Segoe" FontSize="20"></Label>
+                    <Label FontWeight="Bold" Grid.Column="0" Content="Title:" FontFamily="Segoe" FontSize="20"></Label>
+                    <Label FontWeight="Bold" Grid.Column="1" Content="Artist:" FontFamily="Segoe" FontSize="20"></Label>
+                    <Label FontWeight="Bold" Grid.Column="2" Content="Loved:" FontFamily="Segoe" FontSize="20"></Label>
+                    <Label FontWeight="Bold" Grid.Column="3" Content="Length:" FontFamily="Segoe" FontSize="20"></Label>
+                    <Label FontWeight="Bold" Grid.Column="4" Content="Remove:" FontFamily="Segoe" FontSize="20"></Label>
                     
                     <Line Grid.Row="1" Grid.Column="0" Stroke="Black" StrokeThickness="2" X1="0" X2="20000px" VerticalAlignment="Top"></Line>
                     <Line Grid.Row="1" Grid.Column="1" Stroke="Black" StrokeThickness="2" X1="0" X2="20000px" VerticalAlignment="Top"></Line>
                     <Line Grid.Row="1" Grid.Column="2" Stroke="Black" StrokeThickness="2" X1="0" X2="20000px" VerticalAlignment="Top"></Line>
                     <Line Grid.Row="1" Grid.Column="3" Stroke="Black" StrokeThickness="2" X1="0" X2="20000px" VerticalAlignment="Top"></Line>
+                    <Line Grid.Row="1" Grid.Column="4" Stroke="Black" StrokeThickness="2" X1="0" X2="20000px" VerticalAlignment="Top"></Line>
                 </Grid>
 
 
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0,60,0,0">
-                    <ItemsControl x:Name="Tracks" ItemsSource="{Binding tracks}" >
+                    <ItemsControl x:Name="Tracks" ItemsSource="{Binding tracks}" VerticalAlignment="Top">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid Columns="1" />
@@ -87,7 +117,7 @@
                                         <ColumnDefinition Width="1*" />
                                         <ColumnDefinition Width="1*" />
                                         <ColumnDefinition Width="1*" />
-                                        <ColumnDefinition Width="0.05*"/>
+                                        <ColumnDefinition Width="0.5*"/>
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="50" />
@@ -95,11 +125,56 @@
                                     <Label Grid.Column="0" >
                                         <TextBlock Text="{Binding Title}" FontWeight="Bold" FontFamily="Segoe" FontSize="20" TextTrimming="CharacterEllipsis" MaxWidth="250px"></TextBlock>
                                     </Label>
-                                    <Label Margin="4,0,0,0" Grid.Column="1" Content="Artist:" FontFamily="Segoe" FontSize="20"></Label>
-                                    <Label Margin="9,0,0,0" Grid.Column="2" Content="Liked:" FontFamily="Segoe" FontSize="20"></Label>
-                                    <Label Margin="14,0,0,0" Grid.Column="3" Content="Length:" FontFamily="Segoe" FontSize="20"></Label>
-                                    <Button x:Name="Remove_Button" Style="{StaticResource MyButtonStyle}" Grid.Column="4" Foreground="Red" BorderBrush="{x:Null}" HorizontalAlignment="Left" ToolTip="Remove from playlist" Click="Remove_Button_Click">X
+
+                                    <ItemsControl Margin="10,0,0,0" Grid.Column="1" x:Name="Artist" ItemsSource="{Binding Artists}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel Orientation="Horizontal"/>
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal" MaxWidth="150px">
+                                                    <TextBlock FontFamily="Segoe" FontSize="20" x:Name="commaTextBlock" Text=", "/>
+                                                    <TextBlock FontFamily="Segoe" FontSize="20" Tag="{Binding ArtistID}" Text="{Binding Name}" TextTrimming="CharacterEllipsis"/>
+                                                </StackPanel>
+                                                <DataTemplate.Triggers>
+                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
+                                                        <Setter Property="Visibility" TargetName="commaTextBlock" Value="Collapsed"/>
+                                                    </DataTrigger>
+                                                </DataTemplate.Triggers>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+
+                                    <ToggleButton Margin="20,0,0,0" Grid.Column="2" HorizontalAlignment="Left" Tag="{Binding trackID}" x:Name="LikeButton" Width="40" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" OpacityMask="{x:Null}" Style="{StaticResource MyToggleButtonStyle}" ToolTip="Add this number to favorites" Loaded="LikeButton_Loaded" Click="LikeButton_Click">
+                                        <Image>
+                                            <Image.Style>
+                                                <Style TargetType="Image">
+                                                    <Style.Triggers>
+                                                        <DataTrigger
+                                                    Binding="{Binding ElementName=LikeButton, Path=IsChecked}"
+                                                    Value="True">
+                                                            <Setter Property="Source"
+                                                            Value="../Assets/Images/Like.png">
+                                                            </Setter>
+                                                        </DataTrigger>
+                                                        <DataTrigger
+                                                    Binding="{Binding ElementName=LikeButton, Path=IsChecked}"
+                                                    Value="False">
+                                                            <Setter Property="Source"
+                                                            Value="../Assets/Images/LikeEmpty.png"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Image.Style>
+                                        </Image>
+                                    </ToggleButton>
+
+                                    <Label Margin="14,0,0,0" Grid.Column="3" Content="{Binding DurationView}" FontFamily="Segoe" FontSize="20"></Label>
+                                    <Button Margin="50,0,0,0" Grid.Column="4" x:Name="Remove_Button" Style="{StaticResource MyButtonStyle}"  Foreground="Red" BorderBrush="{x:Null}" HorizontalAlignment="Left" ToolTip="Remove from playlist" Click="Remove_Button_Click">X
                                     </Button>
+                                    
                                 </Grid>
                             </DataTemplate>
                     </ItemsControl.ItemTemplate>
