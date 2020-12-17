@@ -29,8 +29,8 @@ namespace View.Views
             var x = (Button)e.OriginalSource;
             var data = x.DataContext as Model.Track;
             Controller.TrackQueue.SetQueue(data.TrackID);
-            SingleTrackClicked.TrackID = data.TrackID;
-            SingleTrackClicked.TrackClicked = true;
+            Model.SingleTrackClicked.TrackID = data.TrackID;
+            Model.SingleTrackClicked.TrackClicked = true;
         }
     }
 }

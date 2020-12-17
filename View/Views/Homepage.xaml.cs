@@ -34,7 +34,7 @@ namespace View.Views
             Button button = (Button)e.OriginalSource;
             TrackInfo trackInfo = button.DataContext as TrackInfo;
 
-            TrackQueue.SetQueue(trackInfo.TrackID, trackInfo.PlaylistID);
+            Controller.TrackQueue.SetQueue(trackInfo.TrackID, trackInfo.PlaylistID);
 
             SingleTrackFill(trackInfo);
         }
@@ -44,7 +44,7 @@ namespace View.Views
         /// <param name="trackInfo"></param>
         private void SingleTrackFill(TrackInfo trackInfo)
         {
-            TrackQueue.trackQueue.Clear();
+            Controller.TrackQueue.trackQueue.Clear();
             Model.SingleTrackClicked.TrackID = trackInfo.TrackID;
             Model.SingleTrackClicked.TrackClicked = true;
             Model.SingleTrackClicked.QueueTrackIDs.Clear();

@@ -305,12 +305,17 @@ namespace View
                 }
             }
             else if (TrackQueue.trackQueue.Count() > 0) {
-                rewFor = true;
-                UpdateMusicBar(TrackQueue.Dequeue());
+                int dequeue_item = TrackQueue.Dequeue();
 
-                if (mediaPlaying)
+                if (dequeue_item != -1)
                 {
-                    mediaPlayer.Play();
+                    rewFor = true;
+                    UpdateMusicBar(dequeue_item);
+
+                    if (mediaPlaying)
+                    {
+                        mediaPlayer.Play();
+                    }
                 }
             }
             else
@@ -405,12 +410,16 @@ namespace View
             }
             else if (TrackQueue.trackQueue.Count() > 0)
             {
-                rewFor = true;
-                UpdateMusicBar(TrackQueue.Dequeue());
-
-                if (mediaPlaying)
+                int dequeue_item = TrackQueue.Dequeue();
+                if (dequeue_item != -1)
                 {
-                    mediaPlayer.Play();
+                    rewFor = true;
+                    UpdateMusicBar(dequeue_item);
+
+                    if (mediaPlaying)
+                    {
+                        mediaPlayer.Play();
+                    }
                 }
             }
             else
@@ -539,6 +548,10 @@ namespace View
             else if (DataContext is HistoryViewModel)
             {
                 DataContext = new HistoryViewModel();
+            }
+            else if (DataContext is TrackQueueViewModel)
+            {
+                DataContext = new TrackQueueViewModel();
             }
         }
 

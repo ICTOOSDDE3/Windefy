@@ -34,7 +34,7 @@ namespace View.Views
             var x = (TextBlock)e.OriginalSource;
             var data = x.DataContext as ViewModels.TrackInfo;
 
-            TrackQueue.SetQueue(data.TrackID, data.PlaylistID);
+            Controller.TrackQueue.trackQueue.Clear();
 
             SingleTrackFill(data);
 

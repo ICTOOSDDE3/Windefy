@@ -28,7 +28,7 @@ namespace View.Views
             var x = (Button)e.OriginalSource;
             var data = x.DataContext as ViewModels.TrackInfo;
 
-            TrackQueue.SetQueue(data.TrackID, data.PlaylistID);
+            Controller.TrackQueue.SetQueue(data.TrackID, data.PlaylistID);
 
             SingleTrackFill(data);
         }
@@ -40,20 +40,19 @@ namespace View.Views
             bool clickedTrack = false;
             Model.SingleTrackClicked.QueueTrackIDs.Clear();
 
-            foreach (var item in items.Items)
+            foreach (ViewModels.TrackInfo item in items.Items)
             {
-                var test = item as ViewModels.TrackInfo;
                 if (item == data)
                 {
                     clickedTrack = true;
                 }
                 if (item != data && clickedTrack)
                 {
-                    Model.SingleTrackClicked.QueueTrackIDs.AddLast(test.TrackID);
+                    Model.SingleTrackClicked.QueueTrackIDs.AddLast(item.TrackID);
                 }
                 else if (!clickedTrack)
                 {
-                    Model.SingleTrackClicked.HistoryTrackIDs.Push(test.TrackID);
+                    Model.SingleTrackClicked.HistoryTrackIDs.Push(item.TrackID);
                 }
             }
         }

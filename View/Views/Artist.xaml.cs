@@ -30,11 +30,11 @@ namespace View.Views
 
             Controller.TrackQueue.SetQueue((int)x.Tag, 1);
 
-            SingleTrackClicked.TrackID = (int)x.Tag;
-            SingleTrackClicked.TrackClicked = true;
+            Model.SingleTrackClicked.TrackID = (int)x.Tag;
+            Model.SingleTrackClicked.TrackClicked = true;
 
-            SingleTrackClicked.QueueTrackIDs.Clear();
-            SingleTrackClicked.QueueTrackIDs.AddLast((int)x.Tag);
+            Model.SingleTrackClicked.QueueTrackIDs.Clear();
+            Model.SingleTrackClicked.QueueTrackIDs.AddLast((int)x.Tag);
         }
 
         private void Label_MouseDown(object sender, MouseButtonEventArgs e)
