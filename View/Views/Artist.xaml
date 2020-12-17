@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:View.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    
     <Grid Background="White">
         <TextBlock Text="{Binding CurrentArtist.Name}" Margin="35,69,658,351"/>
         <TextBlock Text="{Binding CurrentArtist.Bio}" Margin="25,104,668,316"/>
@@ -32,7 +33,29 @@
                                 </ItemsControl>
                             </WrapPanel>
                         </Grid>
-                        <Image Source="../Assets/Images/like.png" Width="30" Height="30" HorizontalAlignment="Right" Margin="0,0,50,40" VerticalAlignment="Bottom" />
+                        <ToggleButton x:Name="LikeButton" Width="40" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" OpacityMask="{x:Null}" ToolTip="Add this number to favorites" Click="LikeButton_Click">
+                            <Image>
+                                <Image.Style>
+                                    <Style TargetType="Image">
+                                        <Style.Triggers>
+                                            <DataTrigger
+                                                    Binding="{Binding ElementName=LikeButton, Path=IsChecked}"
+                                                    Value="True">
+                                                <Setter Property="Source"
+                                                            Value="../Assets/Images/Like.png">
+                                                </Setter>
+                                            </DataTrigger>
+                                            <DataTrigger
+                                                    Binding="{Binding ElementName=LikeButton, Path=IsChecked}"
+                                                    Value="False">
+                                                <Setter Property="Source"
+                                                            Value="../Assets/Images/LikeEmpty.png"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
+                        </ToggleButton>
                     </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>

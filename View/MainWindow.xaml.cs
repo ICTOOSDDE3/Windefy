@@ -450,10 +450,11 @@ namespace View
             rewind = false;
         }
 
+        /* TODO: Check this thing
         private void Label_MouseDown(object sender, MouseButtonEventArgs e)
         {
             DataContext = new ViewModels.Artist(2);
-        }
+        }*/
 
         private void favoriteBtn_Checked(object sender, RoutedEventArgs e)
         {
@@ -528,6 +529,23 @@ namespace View
             {
                 DataContext = new Homepage();
             }
+        }
+
+        private void FavouriteAlbum_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            SearchAlbumViewModel DataContext = new SearchAlbumViewModel();
+            DataContext.GetFavourites(Model.User.UserID);
+        }
+
+        private void FavouriteSong_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            // TODO: Remove or add favourites playlist here
+        }
+
+        private void FavouriteArtist_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            SearchArtistViewModel DataContext = new SearchArtistViewModel();
+            DataContext.GetFavourites(Model.User.UserID);
         }
     }
 }

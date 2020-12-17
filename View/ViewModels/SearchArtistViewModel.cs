@@ -12,6 +12,11 @@ namespace View.ViewModels
     {
         public List<ArtistInfo> items { get; set; }
 
+        public SearchArtistViewModel()
+        {
+            items = new List<ArtistInfo>();
+        }
+
         public SearchArtistViewModel(string q)
         {
             items = new List<ArtistInfo>();
@@ -33,6 +38,45 @@ namespace View.ViewModels
             };
 
             cmd.Parameters.Add(que);
+            cmd.Prepare();
+
+            SqlDataReader dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+            {
+                items.Add(new ArtistInfo(Convert.ToString(dataReader["name"]),
+                    Convert.ToInt32(dataReader["artistID"])));
+            }
+
+            dataReader.Close();
+
+            DBConnection.CloseConnection();
+        }
+
+        internal void GetFavourites(int userID)
+        {
+            items = new List<ArtistInfo>();
+            DBConnection.OpenConnection();
+
+            // Fetch all artists based on the search query
+            SqlCommand cmd = new SqlCommand(null, DBConnection.Connection)
+            {
+                CommandText = "SELECT name, artistID FROM artist " +
+                "WHERE artistID IN (" +
+                "   SELECT artistID " +
+                "   FROM user_favourite_artist " +
+                "   WHERE userID = @ID " +
+                ") " +
+                "ORDER BY artistID " +
+                "OFFSET 0 ROWS " +
+                "FETCH NEXT 50 ROWS ONLY"
+            };
+
+            SqlParameter id = new SqlParameter("@ID", System.Data.SqlDbType.VarChar, 255)
+            {
+                Value = userID
+            };
+
+            cmd.Parameters.Add(id);
             cmd.Prepare();
 
             SqlDataReader dataReader = cmd.ExecuteReader();

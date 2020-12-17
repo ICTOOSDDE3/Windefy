@@ -11,6 +11,11 @@ namespace View.ViewModels
     {
         public List<PlaylistInfo> items { get; set; }
 
+        public SearchAlbumViewModel()
+        {
+            items = new List<PlaylistInfo>();
+        }
+
         public SearchAlbumViewModel(string q, bool playlist)
         {
             // Get playlists or albums depening on the boolean given
@@ -93,6 +98,49 @@ namespace View.ViewModels
 
                 DBConnection.CloseConnection();
             }
+        }
+
+        public void GetFavourites(int userID)
+        {
+            ApacheConnection.Initialize();
+
+            items = new List<PlaylistInfo>();
+            DBConnection.OpenConnection();
+
+
+            SqlCommand cmd = new SqlCommand(null, DBConnection.Connection)
+            {
+                CommandText = "SELECT playlistID, title " +
+                "FROM playlist " +
+                "AND playlistID IN (" +
+                "   SELECT playlistID " +
+                "   FROM user_favourite_playlist " +
+                "   WHERE userID = @ID " +
+                ") " +
+                "ORDER BY playlistID " +
+                "OFFSET 0 ROWS " +
+                "FETCH NEXT 50 ROWS ONLY"
+            };
+
+            SqlParameter id = new SqlParameter("@ID", System.Data.SqlDbType.VarChar, 255)
+            {
+                Value = userID
+            };
+            cmd.Parameters.Add(id);
+            cmd.Prepare();
+
+            SqlDataReader dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+            {
+                PlaylistInfo playlistInfo = new PlaylistInfo(Convert.ToString(dataReader["title"]),
+                    Convert.ToInt32(dataReader["playlistID"]), true);
+
+                items.Add(playlistInfo);
+            }
+
+            dataReader.Close();
+
+            DBConnection.CloseConnection();
         }
     }
 
