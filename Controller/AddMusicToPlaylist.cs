@@ -7,8 +7,6 @@ namespace Controller
 {
     public class AddMusicToPlaylist
     {
-        //this is the logged in user ID
-        //public List<PlaylistPreview> _playlists = new List<PlaylistPreview>();
         public List<PlaylistPreview> Playlists { get; set; } = new List<PlaylistPreview>();
 
         /// <summary>
@@ -119,11 +117,9 @@ namespace Controller
             {
                 if (Convert.ToInt32(dataReader["trackID"]) == trackID)
                 {
-                    //DBConnection.CloseConnection();
                     return true;
                 }
             }
-            //DBConnection.CloseConnection();
             return false;
         }
 
