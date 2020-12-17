@@ -65,7 +65,7 @@
                                         <RowDefinition Height="50" />
                                     </Grid.RowDefinitions>
                                     <Label Grid.Column="0" >
-                                        <TextBlock Text="{Binding Title}" FontWeight="Bold" FontFamily="Segoe" FontSize="20" TextTrimming="CharacterEllipsis" MaxWidth="250px"></TextBlock>
+                                        <TextBlock Text="{Binding Title}" FontWeight="Bold" FontFamily="Segoe" FontSize="20" TextTrimming="CharacterEllipsis" MaxWidth="250px" MouseDown="Track_Click"></TextBlock>
                                     </Label>
                                     <Label Margin="4,0,0,0" Grid.Column="1" Content="Artist:" FontFamily="Segoe" FontSize="20"></Label>
                                     <Label Margin="9,0,0,0" Grid.Column="2" Content="Liked:" FontFamily="Segoe" FontSize="20"></Label>

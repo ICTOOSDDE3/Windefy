@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Controller
+namespace Model
 {
     public static class SingleTrackClicked
     {

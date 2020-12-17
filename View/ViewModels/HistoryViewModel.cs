@@ -18,7 +18,10 @@ namespace View.ViewModels
             playlistID = TrackHistory.getHistoryPlaylistID();
             TrackToTrackInfo(modelTracks);
         }
-
+        /// <summary>
+        /// Makes an object TrackInfo of Model.Track
+        /// </summary>
+        /// <param name="modelTracks"></param>
         public void TrackToTrackInfo(List<Model.Track> modelTracks)
         {
             foreach (var item in modelTracks)

@@ -504,8 +504,7 @@
                                                 <ImageBrush ImageSource="/Assets/Images/mockSongImage.jpg"/>
                                             </Button.Background>
                                         </Button>
-                                        <Label Content="{Binding title}" FontFamily="Segoe" FontSize="20" Style="{StaticResource HoverOverPlaylistText}" ToolTip="{Binding title}"></Label>
-
+                                        <Label Content="{Binding title}" FontFamily="Segoe" FontSize="20" Style="{StaticResource HoverOverPlaylistText}" ToolTip="{Binding title}"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>

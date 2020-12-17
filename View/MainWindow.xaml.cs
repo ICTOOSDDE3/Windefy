@@ -264,18 +264,20 @@ namespace View
             {
                 CurrentTime.Content = mediaPlayer.Position.ToString(@"mm\:ss");
             }
-            if (SingleTrackClicked.TrackClicked)
+            if (Model.SingleTrackClicked.TrackClicked)
             {
                 clickedTrackUpdate();
             }
         }
-
+        /// <summary>
+        /// Updates and plays music when clicked on track
+        /// </summary>
         private void clickedTrackUpdate()
         {
-            SingleTrackClicked.TrackClicked = false;
+            Model.SingleTrackClicked.TrackClicked = false;
             rewFor = false;
-            TrackHistory.trackHistory = SingleTrackClicked.HistoryTrackIDs;
-            UpdateMusicBar(SingleTrackClicked.TrackID);
+            TrackHistory.trackHistory = Model.SingleTrackClicked.HistoryTrackIDs;
+            UpdateMusicBar(Model.SingleTrackClicked.TrackID);
             tbPlayPause.IsChecked = true;
             mediaPlayer.Play();
         }
@@ -287,11 +289,11 @@ namespace View
         /// <param name="e"></param>
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
-            if (SingleTrackClicked.QueueTrackIDs.Count > 0)
+            if (Model.SingleTrackClicked.QueueTrackIDs.Count > 0)
             {
                 rewFor = true;
 
-                UpdateMusicBar(SingleTrackClicked.QueueTrackIDs.First());
+                UpdateMusicBar(Model.SingleTrackClicked.QueueTrackIDs.First());
 
                 if (mediaPlaying)
                 {
@@ -323,7 +325,7 @@ namespace View
             {
                 rewFor = false;
 
-                SingleTrackClicked.QueueTrackIDs.AddFirst(CurrentTrack.TrackID);
+                Model.SingleTrackClicked.QueueTrackIDs.AddFirst(CurrentTrack.TrackID);
 
                 UpdateMusicBar(TrackHistory.trackHistory.Pop());
 
@@ -384,11 +386,11 @@ namespace View
                 mediaPlayer.Stop();
                 mediaPlayer.Play();
             }
-            else if (SingleTrackClicked.QueueTrackIDs.Count > 0)
+            else if (Model.SingleTrackClicked.QueueTrackIDs.Count > 0)
             {
                 rewFor = true;
 
-                UpdateMusicBar(SingleTrackClicked.QueueTrackIDs.First());
+                UpdateMusicBar(Model.SingleTrackClicked.QueueTrackIDs.First());
 
                 if (mediaPlaying)
                 {
@@ -513,9 +515,9 @@ namespace View
             icArtistList.ItemsSource = CurrentTrack.Artists;
             TrackImage.Source = new BitmapImage(new Uri(ApacheConnection.GetImageFullPath(CurrentTrack.Image_path), UriKind.RelativeOrAbsolute));
 
-            if (SingleTrackClicked.QueueTrackIDs.Count > 0 && rewFor)
+            if (Model.SingleTrackClicked.QueueTrackIDs.Count > 0 && rewFor)
             {
-                SingleTrackClicked.QueueTrackIDs.RemoveFirst();
+                Model.SingleTrackClicked.QueueTrackIDs.RemoveFirst();
             }
         }
 

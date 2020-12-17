@@ -24,7 +24,11 @@ namespace View.Views
         {
             InitializeComponent();
         }
-
+        /// <summary>
+        /// Click on title or image to play track
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Track_Click(object sender, RoutedEventArgs e)
         {
             Button button = (Button)e.OriginalSource;
@@ -34,13 +38,16 @@ namespace View.Views
 
             SingleTrackFill(trackInfo);
         }
-
+        /// <summary>
+        /// Updates the SingleToggleClick model
+        /// </summary>
+        /// <param name="trackInfo"></param>
         private void SingleTrackFill(TrackInfo trackInfo)
         {
             TrackQueue.trackQueue.Clear();
-            SingleTrackClicked.TrackID = trackInfo.TrackID;
-            SingleTrackClicked.TrackClicked = true;
-            SingleTrackClicked.QueueTrackIDs.Clear();
+            Model.SingleTrackClicked.TrackID = trackInfo.TrackID;
+            Model.SingleTrackClicked.TrackClicked = true;
+            Model.SingleTrackClicked.QueueTrackIDs.Clear();
 
             bool clickedTrack = false;
 
@@ -52,11 +59,11 @@ namespace View.Views
                 }
                 if (item != trackInfo && clickedTrack)
                 {
-                    SingleTrackClicked.QueueTrackIDs.AddLast(item.TrackID);
+                    Model.SingleTrackClicked.QueueTrackIDs.AddLast(item.TrackID);
                 }
                 else if (!clickedTrack)
                 {
-                    SingleTrackClicked.HistoryTrackIDs.Push(item.TrackID);
+                    Model.SingleTrackClicked.HistoryTrackIDs.Push(item.TrackID);
                 }
             }
         }

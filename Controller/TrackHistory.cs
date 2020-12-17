@@ -10,6 +10,7 @@ namespace Controller
         public static Stack<int> trackHistory = new Stack<int>();
         private static int _userID = Model.User.UserID;
         public static int PlaylistID { get; set; }
+
         /// <summary>
         /// inserts a track in the history playlist of an user
         /// </summary>
@@ -29,7 +30,10 @@ namespace Controller
             cmd.ExecuteScalar();
             DBConnection.CloseConnection();
         }
-
+        /// <summary>
+        /// Gets history playlistID
+        /// </summary>
+        /// <returns></returns>
         public static int getHistoryPlaylistID()
         {
             DBConnection.OpenConnection();
@@ -45,6 +49,10 @@ namespace Controller
             return playlistID;
         }
 
+        /// <summary>
+        /// Gets tracks from track_history using userID. Tracks are orderd by latest datetime.
+        /// </summary>
+        /// <returns>List of Model.track</returns>
         public static List<Model.Track> PlaylistTracks()
         {
             List<Model.Track> tracks = new List<Model.Track>();

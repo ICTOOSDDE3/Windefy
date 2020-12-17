@@ -17,18 +17,28 @@ namespace View.Views
             InitializeComponent();
             
         }
+        /// <summary>
+        /// Click on title to play track
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Track_Click(object sender, RoutedEventArgs e)
         {
             var x = (Button)e.OriginalSource;
             var data = x.DataContext as ViewModels.TrackInfo;
 
             TrackQueue.SetQueue(data.TrackID, data.PlaylistID);
-            
-            SingleTrackClicked.TrackID = data.TrackID;
-            SingleTrackClicked.TrackClicked = true;
-            bool clickedTrack = false;
 
-            SingleTrackClicked.QueueTrackIDs.Clear();
+            SingleTrackFill(data);
+        }
+
+        private void SingleTrackFill(ViewModels.TrackInfo data)
+        {
+            Model.SingleTrackClicked.TrackID = data.TrackID;
+            Model.SingleTrackClicked.TrackClicked = true;
+            bool clickedTrack = false;
+            Model.SingleTrackClicked.QueueTrackIDs.Clear();
+
             foreach (var item in items.Items)
             {
                 var test = item as ViewModels.TrackInfo;
@@ -38,14 +48,14 @@ namespace View.Views
                 }
                 if (item != data && clickedTrack)
                 {
-                    SingleTrackClicked.QueueTrackIDs.AddLast(test.TrackID);
+                    Model.SingleTrackClicked.QueueTrackIDs.AddLast(test.TrackID);
                 }
                 else if (!clickedTrack)
                 {
-                    SingleTrackClicked.HistoryTrackIDs.Push(test.TrackID);
+                    Model.SingleTrackClicked.HistoryTrackIDs.Push(test.TrackID);
                 }
             }
-         }
+        }
 
         private void LikeButton_Click(object sender, RoutedEventArgs e)
         {
