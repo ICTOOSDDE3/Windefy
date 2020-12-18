@@ -670,6 +670,7 @@ namespace View
 
         private void ShuffleBtn_Click(object sender, RoutedEventArgs e)
         {
+            TrackQueue.trackQueue = FillViewQueue();
             TrackQueue.Shuffle();
             UpdatePage();
         }
@@ -683,6 +684,8 @@ namespace View
         {
             User.EmptyUserModel();
             mediaPlayer.Close();
+            DataContext = null;
+
             if (User.isLoggedIn == false)
             {
                 LoginBackground.Visibility = Visibility.Visible;
