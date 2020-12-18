@@ -21,7 +21,6 @@ namespace View.Views
     /// </summary>
     public partial class Playlist : UserControl
     {
-
         AddMusicToPlaylist playlist = new AddMusicToPlaylist();
         public Playlist()
         {
@@ -56,7 +55,9 @@ namespace View.Views
             playlist.DeleteFromPlaylist(playlistid, trackId);
 
             //refreshes view
-            DataContext = new ViewModels.PlaylistViewModel(playlistid);
+            App.Current.MainWindow.DataContext = new ViewModels.PlaylistViewModel(playlistid);
+
+
         }
         private void LikeButton_Click(object sender, RoutedEventArgs e)
         {

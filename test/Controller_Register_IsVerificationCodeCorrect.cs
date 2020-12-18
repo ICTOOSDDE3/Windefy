@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace Test
 {
     [TestFixture]
-    class IsVerificationCodeCorrect
+    class Controller_Register_IsVerificationCodeCorrect
     {
         Register register = new Register();
 
