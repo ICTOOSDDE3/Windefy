@@ -467,11 +467,7 @@
             <ColumnDefinition Width="300" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <Grid Grid.Row="1" Grid.ColumnSpan="2" Background="#E54F83CC">
-            <Grid.Effect>
-                <BlurEffect/>
-            </Grid.Effect>
-        </Grid>
+        <Grid Grid.Row="1" Grid.ColumnSpan="2" Background="#4F83CC" Opacity="0.9"/>
         <Grid Grid.Row="0" Grid.Column="0" Background="#FFFF72">
 
             <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,70,0,0">
@@ -482,9 +478,9 @@
                     <Label FontSize="20" Content="Recommended" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,90,0,0"/>
 
                     <Label FontSize="25" Content="Favorites" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-1,144,0,0"/>
-                    <Label FontSize="20" Content="Artists" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="44,192,0,0"/>
-                    <Label FontSize="20" Content="Albums" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="44,234,0,0"/>
-                    <Label FontSize="20" Content="Songs" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,276,0,0" RenderTransformOrigin="0.587,-0.614"/>
+                    <Label x:Name="FavouriteArtist" FontSize="20" Content="Artists" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="44,192,0,0" MouseDown="FavouriteArtist_MouseDown"/>
+                    <Label x:Name="FavouriteAlbum" FontSize="20" Content="Albums" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="44,234,0,0" MouseDown="FavouriteAlbum_MouseDown"/>
+                    <Label x:Name="FavouriteSong" FontSize="20" Content="Songs" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,276,0,0" RenderTransformOrigin="0.587,-0.614" MouseDown="FavouriteSong_MouseDown"/>
 
                     <Grid Margin="0,331,0,0">
                         <Label FontSize="25" Content="Playlists" HorizontalAlignment="Left" VerticalAlignment="Top" />
@@ -508,7 +504,9 @@
                                                 <ImageBrush ImageSource="/Assets/Images/mockSongImage.jpg"/>
                                             </Button.Background>
                                         </Button>
-                                        <Label Content="{Binding title}" FontFamily="Segoe" FontSize="20" Style="{StaticResource HoverOverPlaylistText}" ToolTip="{Binding title}"/>
+                                        <Button x:Name="Playlist_Name" Click="OpenPlaylist" Style="{StaticResource RoundedButton}">
+                                            <Label Content="{Binding title}" FontFamily="Segoe" FontSize="20"  ToolTip="{Binding title}"></Label>
+                                        </Button>
                                     </StackPanel>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
@@ -525,8 +523,8 @@
                     <ImageBrush ImageSource="/loginButton.png"/>
                 </Button.Background>
             </Button>
-            <TextBox x:Name="SearchBar" Style="{DynamicResource TextBoxStyle1}" Tag="Search for your next favorite thing" Width="490" Height="35" FontSize="18" Margin="38,33,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" TextChanged="SearchBarTextChanged" Background="#FF4F83CC" BorderBrush="#FF4F83CC" Foreground="White" CaretBrush="#FF4F83CC" OpacityMask="#FF4F83CC" TextAlignment="Justify" SelectionBrush="#FFFFFF72" SelectionTextBrush="Black" BorderThickness="0,0,0,0" />
-            <ComboBox x:Name="SearchDropdown" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Height="35" SelectedIndex="0" BorderBrush="#FF4F83CC" Foreground="White" Background="#FF4F83CC" FontSize="20" FontStyle="Normal" Margin="528,33,0,0">
+            <TextBox x:Name="SearchBar" Style="{DynamicResource TextBoxStyle1}" Tag="Search for your next favorite thing" Width="490" Height="35" FontSize="18" Margin="38,33,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" TextChanged="SearchBarTextChanged" Background="#FF4F83CC" BorderBrush="#FF4F83CC" Foreground="White" CaretBrush="#FF4F83CC" OpacityMask="#FF4F83CC" TextAlignment="Justify" SelectionBrush="#FFFFFF72" SelectionTextBrush="Black" BorderThickness="0,0,0,0" Opacity="0.9" />
+            <ComboBox x:Name="SearchDropdown" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Height="35" SelectedIndex="0" BorderBrush="#FF4F83CC" Foreground="White" Background="#FF4F83CC" FontSize="20" FontStyle="Normal" Margin="528,33,0,0" Opacity="0.9">
                 <System:String>Artist</System:String>
                 <System:String>Album</System:String>
                 <System:String>Playlist</System:String>

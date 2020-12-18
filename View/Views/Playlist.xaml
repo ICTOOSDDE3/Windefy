@@ -75,6 +75,28 @@
                     <Label Content="{Binding title}" FontSize="36" FontWeight="Bold" Margin="0,0,0,0" />
                     <TextBlock  FontFamily="Segoe" FontSize="20" TextWrapping="Wrap" Text="{Binding information}" Margin="8,0,0,0"/>
                 </StackPanel>
+                <ToggleButton x:Name="LikeButton" Width="40" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" OpacityMask="{x:Null}" ToolTip="Add this number to favorites" Click="LikeButtonPlaylist_Click" Margin="522,254,0,6" Grid.Column="1">
+                    <Image>
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Style.Triggers>
+                                    <DataTrigger
+                                                    Binding="{Binding IsChecked, ElementName=LikeButton}"
+                                                    Value="True">
+                                        <Setter Property="Source"
+                                                            Value="../Assets/Images/Like.png"/>
+                                    </DataTrigger>
+                                    <DataTrigger
+                                                    Binding="{Binding IsChecked, ElementName=LikeButton}"
+                                                    Value="False">
+                                        <Setter Property="Source"
+                                                            Value="../Assets/Images/LikeEmpty.png"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                </ToggleButton>
             </Grid>
             <Grid Height="525px" Margin="25, 10, 25, 0">
                 <Grid>

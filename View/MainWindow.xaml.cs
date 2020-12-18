@@ -97,6 +97,7 @@ namespace View
         {
 
             Button button = (Button)e.OriginalSource;
+
             Model.Playlist playlistData = button.DataContext as Model.Playlist;
 
             if (playlistData.playlistID == Model.TrackHistory.PlaylistID)
@@ -109,6 +110,7 @@ namespace View
                 DataContext = new PlaylistViewModel(playlistData.playlistID);
             }
         }
+
 
         private void Close_AddPlaylist_Button_Click(object sender, RoutedEventArgs e)
         {
@@ -596,6 +598,11 @@ namespace View
             DataContext = new ViewModels.Artist(artistId);
         }
 
+        public void OnAlbumClick(object sender, int AlbumID)
+        {
+            DataContext = new ViewModels.PlaylistViewModel(AlbumID);
+        }
+
         private void SearchBarTextChanged(object sender, TextChangedEventArgs e)
         {
             string searchBarValue = SearchBar.Text;
@@ -614,10 +621,16 @@ namespace View
                         DataContext = searchArtistViewModel;
                         break;
                     case "Album":
-                        DataContext = new SearchAlbumViewModel(searchBarValue, false);
+                        SearchAlbumViewModel searchAlbumViewModel = new SearchAlbumViewModel(searchBarValue, false);
+                        searchAlbumViewModel.AlbumClickEvent += OnAlbumClick;
+
+                        DataContext = searchAlbumViewModel;
                         break;
                     case "Playlist":
-                        DataContext = new SearchAlbumViewModel(searchBarValue, true);
+                        SearchAlbumViewModel searchPlaylistViewModel = new SearchAlbumViewModel(searchBarValue, true);
+                        searchPlaylistViewModel.AlbumClickEvent += OnAlbumClick;
+
+                        DataContext = searchPlaylistViewModel;
                         break;
                     default:
                         // Track as default
@@ -648,6 +661,29 @@ namespace View
                 Email_TextBox.Clear();
                 Password_TextBox.Clear();
             }
+        }
+
+        private void FavouriteAlbum_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DataContext = null;
+
+            SearchAlbumViewModel searchPlaylistViewModel = new SearchAlbumViewModel();
+            searchPlaylistViewModel.AlbumClickEvent += OnAlbumClick;
+            DataContext = searchPlaylistViewModel;
+            ((SearchAlbumViewModel)DataContext).GetFavourites(Model.User.UserID);
+        }
+
+        private void FavouriteSong_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            // TODO: Remove or add favourites playlist here
+        }
+
+        private void FavouriteArtist_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DataContext = null;
+            DataContext = new SearchArtistViewModel();
+            ((SearchArtistViewModel)DataContext).ArtistClickEvent += OnArtistClick;
+            ((SearchArtistViewModel)DataContext).GetFavourites(Model.User.UserID);
         }
     }
 }
