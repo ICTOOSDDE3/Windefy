@@ -23,7 +23,8 @@ namespace View.ViewModels
         {
             foreach (var item in modelTracks)
             {
-                tracks.Add(new TrackInfo(item.Title, item.Duration, item.Image_path, item.TrackID, playlistID));
+                bool liked = new AddMusicToPlaylist().IsTrackInFavorites(item.TrackID, Model.User.UserID);
+                tracks.Add(new TrackInfo(item.Title, item.Duration, item.Image_path, item.TrackID, playlistID, liked));
             }
         }
     }

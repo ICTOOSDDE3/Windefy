@@ -22,14 +22,11 @@ namespace View.ViewModels
 
             foreach (var item in modelTracks)
             {
+                bool liked = new AddMusicToPlaylist().IsTrackInFavorites(item.TrackID, Model.User.UserID);
                 if (count < 10)
                 {
                     count++;
-                    Tracks.Add(new TrackInfo(item.Title, item.Duration, item.Image_path, item.TrackID, PlaylistID));
-                }
-                else
-                {
-                    return;
+                    Tracks.Add(new TrackInfo(item.Title, item.Duration, item.Image_path, item.TrackID, PlaylistID, liked));
                 }
             }
         }

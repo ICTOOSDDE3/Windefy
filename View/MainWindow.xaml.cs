@@ -650,7 +650,7 @@ namespace View
         }        
         private void Button_Click(object sender, MouseButtonEventArgs e)
         {
-            DataContext = new Homepage();
+            DataContext = new Homepage(Model.TrackHistory.PlaylistID);
         }
         /// <summary>
         /// event for logging out
