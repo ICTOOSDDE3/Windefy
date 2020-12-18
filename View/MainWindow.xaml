@@ -182,12 +182,15 @@
         </DataTemplate>
 
         <DataTemplate x:Name="TrackQueue" DataType="{x:Type viewmodels:TrackQueueViewModel}">
-        <views:TrackQueue DataContext="{Binding}" />
+            <views:TrackQueue DataContext="{Binding}" />
         </DataTemplate>
         <DataTemplate x:Name="Playlist" DataType="{x:Type viewmodels:PlaylistViewModel}">
             <views:Playlist DataContext="{Binding}" />
         </DataTemplate>
-        
+        <DataTemplate x:Name="History" DataType="{x:Type viewmodels:HistoryViewModel}">
+            <views:History DataContext="{Binding}" />
+        </DataTemplate>
+
         <Style x:Key="SliderRepeatButton" TargetType="RepeatButton">
             <Setter Property="SnapsToDevicePixels" Value="true" />
             <Setter Property="OverridesDefaultStyle" Value="true" />
@@ -505,8 +508,7 @@
                                                 <ImageBrush ImageSource="/Assets/Images/mockSongImage.jpg"/>
                                             </Button.Background>
                                         </Button>
-                                        <Label Content="{Binding title}" FontFamily="Segoe" FontSize="20" Style="{StaticResource HoverOverPlaylistText}" ToolTip="{Binding title}"></Label>
-
+                                        <Label Content="{Binding title}" FontFamily="Segoe" FontSize="20" Style="{StaticResource HoverOverPlaylistText}" ToolTip="{Binding title}"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
@@ -531,68 +533,67 @@
                 <System:String>Track</System:String>
             </ComboBox>
         </Grid>
-        
-        <Grid Grid.ColumnSpan="5">
-            <WrapPanel x:Name="MusicBar" Background="Transparent" Height="96" VerticalAlignment="Bottom" Margin="-6,0,6,-97" >
-                <WrapPanel x:Name="Track_ImageTitleArtist" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">
-                    <Image x:Name="TrackImage" Height="70" Width="70" Stretch="Uniform"/>
-                    <StackPanel Margin="5,0,0,0" VerticalAlignment="Center">
-                        <Label x:Name="Track_Name" Content="{Binding Title}"/>
-                        <ItemsControl x:Name="icArtistList">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Horizontal"/>
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
+        <Grid Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="90" Margin="1,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="1440" x:Name="MusicBar">
+            <WrapPanel x:Name="Track_ImageTitleArtist" VerticalAlignment="Center" HorizontalAlignment="Left">
+                <Image x:Name="TrackImage" Height="70" Width="70" Stretch="Uniform"/>
+                <StackPanel Margin="5,0,0,0" VerticalAlignment="Center">
+                    <Label x:Name="Track_Name" MaxWidth="150" HorizontalAlignment="Left">
+                        <TextBlock TextTrimming="WordEllipsis" Text="{Binding Title}" ToolTip="{Binding Title}"/>
+                    </Label>
+                    <ItemsControl x:Name="icArtistList" HorizontalAlignment="Left" MaxWidth="150">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
                                         <TextBlock x:Name="commaTextBlock" Text=", "/>
                                         <TextBlock Tag="{Binding ArtistID}" MouseDown="On_Artist_Click" Text="{Binding Name}"/>
                                     </StackPanel>
-                                    <DataTemplate.Triggers>
-                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
-                                            <Setter Property="Visibility" TargetName="commaTextBlock" Value="Collapsed"/>
-                                        </DataTrigger>
-                                    </DataTemplate.Triggers>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </StackPanel>
-                    <ToggleButton x:Name="favoriteBtn" Width="30" Height="30" Margin="0,0,25,0" BorderThickness="0" Style="{StaticResource Heart}" Checked="favoriteBtn_Checked" Unchecked="favoriteBtn_Unchecked"/>
-                </WrapPanel>
-                <WrapPanel VerticalAlignment="Center" >
-                    <ToggleButton x:Name="shuffleBtn" Height="32" Width="32" Margin="49,0,0,0" BorderThickness="0" Style="{StaticResource Shuffle}" Checked="shuffleBtn_Checked" Unchecked="shuffleBtn_Unchecked"/>
-                    <Button x:Name="btnPrev" MouseDoubleClick="btnPrev_MouseDoubleClick" Click="btnPrev_Click" Width="32" Height="24" Margin="60,0,0,0" BorderThickness="0" Style="{StaticResource PrevNext}">
-                        <Button.Background>
-                            <ImageBrush ImageSource="/Rewind.png"/>
-                        </Button.Background>
-                        <Image Source="/Rewind.png"/>
-                    </Button>
-                    <ToggleButton x:Name="tbPlayPause" Checked = "TogglePlay" Unchecked = "TogglePause" Margin="60,0,0,0" Width="40" Height="40" BorderThickness="0" Style="{StaticResource PausePlay}" />
-                    <Button x:Name="btnNext" Click="btnNext_Click" Width="32" Height="24" Margin="60,0,5,0" BorderThickness="0" Style="{StaticResource PrevNext}">
-                        <Button.Background>
-                            <ImageBrush ImageSource="/Forward.png"/>
-                        </Button.Background>
-                        <Image Source="/Forward.png"/>
-                    </Button>
-                    <ToggleButton x:Name="tbBtnRewind" Checked="btnRewind_Checked" Unchecked="btnRewind_Unchecked" Margin="60,0,5,0" Width="32" Height="32" BorderThickness="0" Style="{StaticResource Repeat}"/>
-                </WrapPanel>
-                <WrapPanel VerticalAlignment="Center">
-                    <Label x:Name="CurrentTime" Content="00:00" Margin="100,0,0,0" VerticalAlignment="Center"/>
-                    <Slider Style="{StaticResource Horizontal_Slider}" Minimum="0" Maximum="100" Value="0" x:Name="TimeStatus" Thumb.DragStarted="TimeStatus_DragStarted" Thumb.DragCompleted="TimeStatus_DragCompleted" Margin="0,3,0,0" Width="300" Height="15" />
-                    <Label x:Name="TotalTime" Content="00:00" Margin="0,0,0,0"/>
-                </WrapPanel>
-                <WrapPanel VerticalAlignment="Center">
-                    <Image Source="/Volume.png" Width="30" Height="30" Margin="25,0,0,0"/>
-                    <Slider Style="{StaticResource Horizontal_Slider}" Value="25" Maximum="100" Minimum="0" ValueChanged="Volume_ValueChanged" x:Name="Volume" Width="142" Height="9" Margin="5"/>
-                    <Button x:Name="btnQueue" Width="32" Height="24" Margin="60,0,5,0" BorderThickness="0" Style="{StaticResource PrevNext}" Click="btnQueue_Click">
-                        <Button.Background>
-                            <ImageBrush ImageSource="/Forward.png"/>
-                        </Button.Background>
-                        <Image Source="/Forward.png"/>
-                    </Button>
-                </WrapPanel>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
+                                        <Setter Property="Visibility" TargetName="commaTextBlock" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+                <ToggleButton x:Name="favoriteBtn" Width="30" Height="30" BorderThickness="0" Style="{StaticResource Heart}" Checked="favoriteBtn_Checked" Unchecked="favoriteBtn_Unchecked"/>
+            </WrapPanel>
+            <WrapPanel VerticalAlignment="Center" Margin="301,0,651,0" >
+                <ToggleButton x:Name="shuffleBtn" Height="32" Width="32" Margin="49,0,0,0" BorderThickness="0" Style="{StaticResource Shuffle}" Checked="shuffleBtn_Checked" Unchecked="shuffleBtn_Unchecked"/>
+                <Button x:Name="btnPrev" MouseDoubleClick="btnPrev_MouseDoubleClick" Click="btnPrev_Click" Width="32" Height="24" Margin="60,0,0,0" BorderThickness="0" Style="{StaticResource PrevNext}">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/Rewind.png"/>
+                    </Button.Background>
+                    <Image Source="/Rewind.png"/>
+                </Button>
+                <ToggleButton x:Name="tbPlayPause" Checked = "TogglePlay" Unchecked = "TogglePause" Margin="60,0,0,0" Width="40" Height="40" BorderThickness="0" Style="{StaticResource PausePlay}" />
+                <Button x:Name="btnNext" Click="btnNext_Click" Width="32" Height="24" Margin="60,0,5,0" BorderThickness="0" Style="{StaticResource PrevNext}">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/Forward.png"/>
+                    </Button.Background>
+                    <Image Source="/Forward.png"/>
+                </Button>
+                <ToggleButton x:Name="tbBtnRewind" Checked="btnRewind_Checked" Unchecked="btnRewind_Unchecked" Margin="60,0,5,0" Width="32" Height="32" BorderThickness="0" Style="{StaticResource Repeat}"/>
+            </WrapPanel>
+            <WrapPanel VerticalAlignment="Center" Margin="680,0,279,0">
+                <Label x:Name="CurrentTime" Content="00:00" Margin="100,0,0,0" VerticalAlignment="Center"/>
+                <Slider Style="{StaticResource Horizontal_Slider}" Minimum="0" Maximum="100" Value="0" x:Name="TimeStatus" Thumb.DragStarted="TimeStatus_DragStarted" Thumb.DragCompleted="TimeStatus_DragCompleted" Width="300" Height="15" />
+                <Label x:Name="TotalTime" Content="00:00" Margin="0,0,0,0"/>
+            </WrapPanel>
+            <WrapPanel VerticalAlignment="Center" Margin="1166,0,10,0">
+                <Button x:Name="btnQueue" Width="32" Height="24" BorderThickness="0" Style="{StaticResource PrevNext}" Click="btnQueue_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/Forward.png"/>
+                    </Button.Background>
+                    <Image Source="/Forward.png"/>
+                </Button>
+                <Image Source="/Volume.png" Width="30" Height="30" Margin="25,0,0,0"/>
+                <Slider Style="{StaticResource Horizontal_Slider}" Value="25" Maximum="100" Minimum="0" ValueChanged="Volume_ValueChanged" x:Name="Volume" Width="142" Height="9" Margin="5"/>
             </WrapPanel>
 
         </Grid>
@@ -666,8 +667,8 @@
                 </CheckBox>
 
                 <TextBlock HorizontalAlignment="Center" Margin="0,23,0,0" Text="Create Playlist" TextWrapping="Wrap" VerticalAlignment="Top" Height="42" Width="376" TextAlignment="Center" FontSize="32" FontWeight="Bold"/>
-                <TextBlock HorizontalAlignment="Left"  Margin="106,90,0,0" Text="Title:" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="110" FontSize="24"></TextBlock>
-                <TextBlock x:Name="AddPlaylist_Comment" HorizontalAlignment="Left"  Margin="106,286,0,0" Text="*Please add a title" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="289" FontSize="24" Opacity="0.6" Visibility="Hidden"></TextBlock>
+                <TextBlock HorizontalAlignment="Left"  Margin="106,90,0,0" Text="Title:" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="110" FontSize="24"/>
+                <TextBlock x:Name="AddPlaylist_Comment" HorizontalAlignment="Left"  Margin="106,286,0,0" Text="*Please add a title" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="289" FontSize="24" Opacity="0.6" Visibility="Hidden"/>
 
                 <Button x:Name="Close_AddPlaylist_Details" Content="X" HorizontalAlignment="Left" Margin="534,23,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.48,0.377" Width="22" Foreground="Red" Background="{x:Null}" BorderBrush="{x:Null}" Click="Close_AddPlaylist_Button_Click" FontWeight="Bold"/>
                 <Border CornerRadius="30" Margin="97,247,110,0" VerticalAlignment="Top" Width="363" Height="34" Background="#FF4F83CC" RenderTransformOrigin="0.5,0.5">
