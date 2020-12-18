@@ -7,7 +7,7 @@ namespace Controller
 {
     public class Playlist
     {
-        public void CreateUserPlaylist(string playlistTitle, bool playlist_is_Public)
+        public int CreateUserPlaylist(string playlistTitle, bool playlist_is_Public)
         {
             //Initialize and open a db connection
             DBConnection.OpenConnection();
@@ -18,7 +18,7 @@ namespace Controller
 
             //SQL injection prepared query builder
             SqlCommand cmd = new SqlCommand(null, DBConnection.Connection);
-            cmd.CommandText = $"INSERT INTO playlist (title, listens, playlist_typeID, is_public, ownerID) " +
+            cmd.CommandText = $"INSERT INTO playlist (title, listens, playlist_typeID, is_public, ownerID) output INSERTED.playlistID " +
                 $"VALUES(@title, @listens, @playlist_typeID, @is_public, @ownerID)";
 
 
@@ -41,9 +41,16 @@ namespace Controller
             cmd.Parameters.Add(paramOwnerID);
 
             cmd.Prepare();
-            cmd.ExecuteNonQuery();
+            SqlDataReader dataReader = cmd.ExecuteReader();
+            int modified = 0;
+            while (dataReader.Read())
+            {
+                modified = Convert.ToInt32(dataReader["playlistID"]);
+            }
 
             DBConnection.CloseConnection();
+
+            return modified;
         }
         public Model.Playlist GetPlaylistData(int playlistID)
         {
@@ -66,7 +73,7 @@ namespace Controller
             cmd.Parameters.Add(id);
             cmd.Prepare();
 
-            SqlDataReader dataReader = cmd.ExecuteReader();
+            SqlDataReader dataReader = cmd.ExecuteReader();            
 
             if (dataReader.HasRows)
             {
@@ -99,7 +106,7 @@ namespace Controller
             // Get playlists based on query
             SqlCommand cmd = new SqlCommand(null, DBConnection.Connection)
             {
-                CommandText = "SELECT t.trackID, t.title " +
+                CommandText = "SELECT t.trackID, t.title, t.duration " +
                 "FROM track t " +
                 "LEFT JOIN playlist_track pt ON t.trackID = pt.trackID " +
                 "WHERE pt.playlistID = @id"
@@ -112,14 +119,46 @@ namespace Controller
             cmd.Parameters.Add(id);
             cmd.Prepare();
 
+            AddMusicToPlaylist AddMusicToPlaylistInstance = new AddMusicToPlaylist();
+
             SqlDataReader dataReader = cmd.ExecuteReader();
             while (dataReader.Read())
             {
-
-                tracks.Add(new Model.Track(Convert.ToInt32(dataReader["trackID"]), Convert.ToString(dataReader["title"])));
+                tracks.Add(new Model.Track(Convert.ToInt32(dataReader["trackID"]), Convert.ToString(dataReader["title"]), Convert.ToInt32(dataReader["duration"]), AddMusicToPlaylistInstance.IsTrackInFavorites(Convert.ToInt32(dataReader["trackID"]), Model.User.UserID)));
             }
 
             dataReader.Close();
+
+
+            foreach (Model.Track track in tracks)
+            {             
+            // Get artists based on trackID
+                SqlCommand cmd1 = new SqlCommand(null, DBConnection.Connection)
+            {
+                CommandText = "SELECT a.name " +
+                "FROM track_artist ta " +
+                "LEFT JOIN artist a ON ta.artistID = a.artistID " +
+                "WHERE ta.trackID = @id1"
+            };
+
+                SqlParameter id1 = new SqlParameter("@id1", System.Data.SqlDbType.Int, 4)
+                {
+                    Value = track.TrackID
+                };
+                cmd1.Parameters.Add(id1);
+                cmd1.Prepare();
+
+                SqlDataReader dataReader1 = cmd1.ExecuteReader();
+
+                while (dataReader1.Read())
+                {
+                    track.Artists.Add(new Model.Artist(track.TrackID, Convert.ToString(dataReader1["name"])));
+                }
+                dataReader1.Close();
+            }
+            
+
+
             DBConnection.CloseConnection();
 
             return tracks;
