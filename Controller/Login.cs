@@ -9,13 +9,6 @@ namespace Controller
     {
         public bool IsLogin(string email, string password)
         {
-            // check if there is an email similar to the given email in the database
-            //password to byte
-            // check if passwords are equal
-            // return true if so
-
-
-            //
             //DBConnection.Initialize();
             DBConnection.OpenConnection();
                 bool passed = false;
@@ -54,6 +47,12 @@ namespace Controller
             return passed;
         }
 
+        /// <summary>
+        /// generates a hash from inputted password en generated salt
+        /// </summary>
+        /// <param name="password"></param>
+        /// <param name="salt"></param>
+        /// <returns></returns>
         public string GenerateHash(string password, string salt)
         {
             byte[] bytes = Encoding.UTF8.GetBytes(password + salt);
@@ -62,6 +61,13 @@ namespace Controller
             return Convert.ToBase64String(hash);
         }
 
+        /// <summary>
+        /// checks if hashed password is equal to the password in database
+        /// </summary>
+        /// <param name="plainTextInput"></param>
+        /// <param name="hashedInput"></param>
+        /// <param name="salt"></param>
+        /// <returns></returns>
         public bool IsEqual(string plainTextInput, string hashedInput, string salt)
         {
             string newHashedPin = GenerateHash(plainTextInput, salt);

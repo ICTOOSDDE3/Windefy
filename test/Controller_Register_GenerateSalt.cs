@@ -7,7 +7,7 @@ using Controller;
 namespace Test
 {
     [TestFixture]
-    class GenerateSalt
+    class Controller_Register_GenerateSalt
     {
         Register register = new Register();
 
