@@ -7,7 +7,7 @@ using Controller;
 namespace Test
 {
     [TestFixture]
-    class IsLogin
+    class Controller_Login_IsLogin
     {
         Login login = new Login();
         [Test]

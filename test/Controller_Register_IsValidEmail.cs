@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace Test
 {
     [TestFixture]
-    class IsValidEmail
+    class Controller_Register_IsValidEmail
     {
         Register register = new Register();
         [Test]

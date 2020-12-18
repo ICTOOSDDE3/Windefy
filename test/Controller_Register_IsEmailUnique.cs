@@ -7,7 +7,7 @@ using Controller;
 namespace Test
 {
     [TestFixture]
-    class IsEmailUnique
+    class Controller_Register_IsEmailUnique
     {
         Register register = new Controller.Register();
 

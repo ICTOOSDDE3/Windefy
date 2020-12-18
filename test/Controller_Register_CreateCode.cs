@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace Test
 {
     [TestFixture]
-    class CreateCode
+    class Controller_Register_CreateCode
     {
         Register register = new Register();
 

@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace Test
 {
     [TestFixture]
-    class GenerateHash
+    class Controller_Register_GenerateHash
     {
         Register register = new Register();
 

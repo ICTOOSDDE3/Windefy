@@ -53,16 +53,11 @@ namespace View.Views
                 }
                 if (item != data && clickedTrack)
                 {
-<<<<<<< HEAD
-                    var test = item as TrackInfo;
-                    SingleTrackClicked.QueueTrackIDs.AddLast(test.TrackID);
-=======
                     Model.SingleTrackClicked.QueueTrackIDs.AddLast(item.TrackID);
                 }
                 else if (!clickedTrack)
                 {
                     Model.SingleTrackClicked.HistoryTrackIDs.Push(item.TrackID);
->>>>>>> develop
                 }
             }
         }
