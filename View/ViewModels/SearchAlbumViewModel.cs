@@ -1,9 +1,7 @@
-﻿using Caliburn.Micro;
-using Controller;
+﻿using Controller;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Text;
 
 namespace View.ViewModels
 {
@@ -12,11 +10,17 @@ namespace View.ViewModels
         public List<PlaylistInfo> items { get; set; }
 
         private string _NoResultsVisibility;
+        internal Action<object, int> AlbumClickEvent;
 
         public string NoResultsVisibility
         {
             get { return _NoResultsVisibility; }
             set { _NoResultsVisibility = value; }
+        }
+
+        public SearchAlbumViewModel()
+        {
+            items = new List<PlaylistInfo>();
         }
 
         public SearchAlbumViewModel(string q, bool playlist)
@@ -112,6 +116,64 @@ namespace View.ViewModels
                 NoResultsVisibility = "Visible";
             }
         }
+
+        public void OnAlbumClick(int artistId)
+        {
+            AlbumClickEvent?.Invoke(this, artistId);
+        }
+
+        public void GetFavourites(int userID)
+        {
+            NoResultsVisibility = "Hidden";
+            ApacheConnection.Initialize();
+
+            items = new List<PlaylistInfo>();
+            DBConnection.OpenConnection();
+
+
+            SqlCommand cmd = new SqlCommand(null, DBConnection.Connection)
+            {
+                CommandText = "SELECT playlistID, title " +
+                "FROM playlist " +
+                "WHERE playlistID IN (" +
+                "   SELECT playlistID " +
+                "   FROM user_favourite_playlist " +
+                "   WHERE userID = @ID " +
+                ") " +
+                "ORDER BY playlistID " +
+                "OFFSET 0 ROWS " +
+                "FETCH NEXT 50 ROWS ONLY"
+            };
+
+            SqlParameter id = new SqlParameter("@ID", System.Data.SqlDbType.VarChar, 255)
+            {
+                Value = userID
+            };
+            cmd.Parameters.Add(id);
+            cmd.Prepare();
+
+            SqlDataReader dataReader = cmd.ExecuteReader();
+            while (dataReader.Read())
+            {
+                PlaylistInfo playlistInfo = new PlaylistInfo(Convert.ToString(dataReader["title"]),
+                    Convert.ToInt32(dataReader["playlistID"]), true);
+
+                items.Add(playlistInfo);
+            }
+
+            dataReader.Close();
+
+            DBConnection.CloseConnection();
+
+            if (items.Count > 0)
+            {
+                NoResultsVisibility = "Hidden";
+            }
+            else
+            {
+                NoResultsVisibility = "Visible";
+            }
+        }
     }
 
 
@@ -123,6 +185,7 @@ namespace View.ViewModels
         public string ArtistName { get; set; }
         public int PlaylistID { get; set; }
         public bool IsUserPlaylist { get; set; }
+        public bool Liked { get; set; }
 
         public PlaylistInfo(string T, int ID, bool userPlaylist)
         {
@@ -160,8 +223,8 @@ namespace View.ViewModels
                 command = new SqlCommand(null, con)
                 {
                     CommandText = "SELECT name FROM users " +
-                    "WHERE userID IN (" +
-                    "  SELECT userID" +
+                    "WHERE user_ID IN (" +
+                    "  SELECT ownerID" +
                     "  FROM playlist" +
                     $"  WHERE playlistID = {ID})"
                 };
@@ -185,11 +248,20 @@ namespace View.ViewModels
             }
 
             // Remove last 2 characters (', ') from the string
-            ArtistName = ArtistName[0..^2];
+            if (ArtistName.Length > 2)
+            {
+                ArtistName = ArtistName[0..^2];
+            }
+            else
+            {
+                ArtistName = "Anonymous";
+            }
 
             dr.Close();
             con.Close();
             con.Dispose();
+
+            Liked = Favourite.IsFavouritePlaylist(PlaylistID);
         }
     }
 }

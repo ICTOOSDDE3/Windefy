@@ -10,7 +10,7 @@ namespace Model
         public string Title { get; set; }
         public int Listens { get; set; }
         public int LanguageID { get; set; }
-        public double Duration { get; set; }
+        public int Duration { get; set; }
         public string DurationView { get; set; }
         public DateTime Date_Created { get; set; }
         public int NumberID { get; set; }

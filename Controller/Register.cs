@@ -15,6 +15,7 @@ namespace Controller
         private Mail _verificationMail = new Mail();
         private Login _account = new Login();
         private Playlist _favorites = new Playlist();
+        private Playlist _history = new Playlist();
 
         /// <summary>
         /// puts an new account in the database
@@ -76,6 +77,7 @@ namespace Controller
                         _verificationMail.SendValidationMail(email, verificationCode);
                         _account.IsLogin(email, pw1);
                         _favorites.CreateUserPlaylist("Favorites", false);
+                        _history.CreateUserPlaylist("History", false);
                     }
                 }
             }
