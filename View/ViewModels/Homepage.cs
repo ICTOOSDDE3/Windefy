@@ -13,7 +13,10 @@ namespace View.ViewModels
             PlaylistID = playlistID;
             Tracks = new List<TrackInfo>();
             List<Model.Track> modelTracks = TrackHistory.HistoryTracks();
-            TrackToTrackInfo(modelTracks);
+            if(modelTracks != null)
+            {
+                TrackToTrackInfo(modelTracks);
+            }
         }
 
         public void TrackToTrackInfo(List<Model.Track> modelTracks)
