@@ -20,28 +20,44 @@ namespace View.Views
             InitializeComponent();
 
         }
+        /// <summary>
+        /// Click on title to play track
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Track_Click(object sender, RoutedEventArgs e)
         {
             var x = (Button)e.OriginalSource;
             var data = x.DataContext as TrackInfo;
 
             Controller.TrackQueue.SetQueue(data.TrackID, data.PlaylistID);
-            
-            SingleTrackClicked.TrackID = data.TrackID;
-            SingleTrackClicked.TrackClicked = true;
-            bool itemData = false;
 
-            SingleTrackClicked.QueueTrackIDs.Clear();
-            foreach (var item in items.Items)
+            SingleTrackFill(data);
+        }
+        /// <summary>
+        /// fills single track queue in case of single track click after search
+        /// </summary>
+        /// <param name="data"></param>
+        private void SingleTrackFill(ViewModels.TrackInfo data)
+        {
+            Model.SingleTrackClicked.TrackID = data.TrackID;
+            Model.SingleTrackClicked.TrackClicked = true;
+            bool clickedTrack = false;
+            Model.SingleTrackClicked.QueueTrackIDs.Clear();
+
+            foreach (ViewModels.TrackInfo item in items.Items)
             {
                 if (item == data)
                 {
-                    itemData = true;
+                    clickedTrack = true;
                 }
-                if (item != data && itemData)
+                if (item != data && clickedTrack)
                 {
-                    var test = item as ViewModels.TrackInfo;
-                    SingleTrackClicked.QueueTrackIDs.AddLast(test.TrackID);
+                    Model.SingleTrackClicked.QueueTrackIDs.AddLast(item.TrackID);
+                }
+                else if (!clickedTrack)
+                {
+                    Model.SingleTrackClicked.HistoryTrackIDs.Push(item.TrackID);
                 }
             }
         }
@@ -54,7 +70,6 @@ namespace View.Views
             int trackid = data.TrackID;
             if (addToPlaylist.IsChecked == true)
             {
-
                 if (!addTrackToPlaylist.IsTrackInFavorites(trackid, Model.User.UserID))
                 {
                     addTrackToPlaylist.InsertToFavorites(trackid, Model.User.UserID);
@@ -101,7 +116,7 @@ namespace View.Views
 
             int artistId = (int)textBlock.Tag;
 
-            if(artistId != 0)
+            if (artistId != 0)
             {
                 ((ViewModels.SearchSongModel)DataContext).OnArtistClick(artistId);
             }

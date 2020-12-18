@@ -1,8 +1,4 @@
 ﻿using Controller;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Text;
 
 namespace View.ViewModels
 {
@@ -18,7 +14,5 @@ namespace View.ViewModels
             Playlist = PlaylistController.GetPlaylistData(playlistID);
             Playlist.tracks = PlaylistController.FillPlaylist(playlistID);
         }
-
-        
     }
 }

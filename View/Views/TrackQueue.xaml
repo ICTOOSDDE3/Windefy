@@ -261,7 +261,7 @@
     </UserControl.Resources>
     <Grid Background="White">
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" >
-            <ItemsControl ItemsSource="{Binding TrackQueue}">
+            <ItemsControl ItemsSource="{Binding TrackQueue}" Name="trackQueue">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Columns="1" />

@@ -1,10 +1,7 @@
 ﻿using Controller;
-using Model;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Text;
-using View.Views;
 
 namespace View.ViewModels
 {
@@ -35,7 +32,7 @@ namespace View.ViewModels
         {
             items = new List<ArtistInfo>();
             DBConnection.OpenConnection();
-            
+
             // Fetch all artists based on the search query
             SqlCommand cmd = new SqlCommand(null, DBConnection.Connection)
             {
