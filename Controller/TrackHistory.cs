@@ -58,7 +58,7 @@ namespace Controller
             Track contrTrack = new Track();
 
             DBConnection.OpenConnection();
-            var query = $"SELECT trackID FROM track_history WHERE userID = {UserID} ORDER BY date_time DESC";
+            var query = $"SELECT TOP 20 trackID FROM track_history WHERE userID = {UserID} ORDER BY date_time DESC";
             SqlCommand cmd = new SqlCommand(query, DBConnection.Connection);
 
             using (SqlDataReader reader = cmd.ExecuteReader())
@@ -73,7 +73,7 @@ namespace Controller
                 else
                 {
                     DBConnection.CloseConnection();
-                    //return null;
+                    return null;
                 }
             }
             DBConnection.CloseConnection();
@@ -83,10 +83,6 @@ namespace Controller
                 {
                     tracks.Add(contrTrack.GetTrack(item));
                 }
-            }
-            else
-            {
-                tracks.Add(contrTrack.GetTrack(2));
             }
 
             return tracks;

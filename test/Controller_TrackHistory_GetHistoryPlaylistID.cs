@@ -12,11 +12,8 @@ namespace Test
             DBConnection.Initialize();
             Model.User.UserID = 15;
             int result = TrackHistory.getHistoryPlaylistID();
-            Model.User.UserID = 5;
-            int result2 = TrackHistory.getHistoryPlaylistID();
 
             Assert.AreEqual(22978, result);
-            Assert.AreEqual(23116, result2);
         }
     }
 }
