@@ -43,6 +43,10 @@ namespace Controller
                 }
             }
             DBConnection.CloseConnection();
+
+            var tempDur = Math.Round((double)track.Duration / 60, 2, MidpointRounding.AwayFromZero);
+            track.DurationView = string.Format("{0:00.00}", tempDur).Replace(".", ":");
+            track.Liked = new AddMusicToPlaylist().IsTrackInFavorites(trackID, Model.User.UserID);
             track.TrackID = trackID;
             track.Genres = GetGenres(trackID);
             track.Artists = GetArtists(trackID);
