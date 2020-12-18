@@ -93,13 +93,11 @@
                     <Label FontWeight="Bold" Grid.Column="1" Content="Artist:" FontFamily="Segoe" FontSize="20"></Label>
                     <Label FontWeight="Bold" Grid.Column="2" Content="Loved:" FontFamily="Segoe" FontSize="20"></Label>
                     <Label FontWeight="Bold" Grid.Column="3" Content="Length:" FontFamily="Segoe" FontSize="20"></Label>
-                    <Label FontWeight="Bold" Grid.Column="4" Content="Remove:" FontFamily="Segoe" FontSize="20"></Label>
 
                     <Line Grid.Row="1" Grid.Column="0" Stroke="Black" StrokeThickness="2" X1="0" X2="20000px" VerticalAlignment="Top"></Line>
                     <Line Grid.Row="1" Grid.Column="1" Stroke="Black" StrokeThickness="2" X1="0" X2="20000px" VerticalAlignment="Top"></Line>
                     <Line Grid.Row="1" Grid.Column="2" Stroke="Black" StrokeThickness="2" X1="0" X2="20000px" VerticalAlignment="Top"></Line>
                     <Line Grid.Row="1" Grid.Column="3" Stroke="Black" StrokeThickness="2" X1="0" X2="20000px" VerticalAlignment="Top"></Line>
-                    <Line Grid.Row="1" Grid.Column="4" Stroke="Black" StrokeThickness="2" X1="0" X2="20000px" VerticalAlignment="Top"></Line>
                 </Grid>
 
 
@@ -124,7 +122,7 @@
                                         <RowDefinition Height="50" />
                                     </Grid.RowDefinitions>
                                     <Label Grid.Column="0" >
-                                        <TextBlock Text="{Binding Title}" FontWeight="Bold" FontFamily="Segoe" FontSize="20" TextTrimming="CharacterEllipsis" MaxWidth="250px"></TextBlock>
+                                        <TextBlock Text="{Binding Title}" FontWeight="Bold" FontFamily="Segoe" FontSize="20" TextTrimming="CharacterEllipsis" MaxWidth="250px" MouseDown="Track_Click"></TextBlock>
                                     </Label>
 
                                     <ItemsControl Margin="10,0,0,0" Grid.Column="1" x:Name="Artist" ItemsSource="{Binding Artists}">
