@@ -1,5 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
 
 namespace View.Views
@@ -12,7 +15,18 @@ namespace View.Views
         public Artist()
         {
             InitializeComponent();
+
+            this.Loaded += new RoutedEventHandler(Artist_Loaded);            
         }
+
+        private void Artist_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (Favourite.IsFavouriteArtist(((ViewModels.Artist)DataContext).CurrentArtist.ArtistID))
+            {
+                LikeButton.IsChecked = true;
+            }
+        }
+
 
         private void Track_Click(object sender, RoutedEventArgs e)
         {
@@ -31,6 +45,24 @@ namespace View.Views
         {
             var label = (Label)sender;
             DataContext = new ViewModels.Artist((int)label.Tag);
+        }
+
+        private void LikeButton_Click(object sender, RoutedEventArgs e)
+        {
+            var addedToFavourites = (ToggleButton)e.OriginalSource;
+            int artistID = ((ViewModels.Artist)DataContext).CurrentArtist.ArtistID;
+
+            if ((bool)addedToFavourites.IsChecked)
+            {
+                if (!Favourite.IsFavouriteArtist(artistID))
+                {
+                    Favourite.AddFavouriteArtist(artistID);
+                }
+            }
+            else
+            {
+                Favourite.RemoveFavouriteArtist(artistID);
+            }
         }
     }
 }

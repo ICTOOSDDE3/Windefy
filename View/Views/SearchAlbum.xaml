@@ -272,7 +272,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal" Margin="25,100,0,0" VerticalAlignment="Top" >
-                            <Button Width="75" Height="75" Style="{StaticResource MyButtonStyleImage}">
+                            <Button Width="75" Height="75" Style="{StaticResource MyButtonStyleImage}" Click="AlbumClick">
                                 <Button.Background>
                                     <ImageBrush ImageSource="../Assets/Images/mockSongImage.jpg" Stretch="Fill"/>
                                 </Button.Background>
@@ -286,13 +286,13 @@
 
                             <StackPanel Orientation="Vertical" Width="300">
                                 <Border  Height="50">
-                                    <Button Height="50" Foreground="{x:Null}" BorderBrush="{x:Null}" Background="{x:Null}" Style="{StaticResource MyButtonStyle}" HorizontalAlignment="Left" ToolTip="{Binding Title}">
+                                    <Button Height="50" Foreground="{x:Null}" BorderBrush="{x:Null}" Background="{x:Null}" Style="{StaticResource MyButtonStyle}" HorizontalAlignment="Left" ToolTip="{Binding Title}" Click="AlbumClick">
                                         <Label Content="{Binding Title}" FontWeight="Bold" FontFamily="Bahnschrift Light SemiCondensed" FontSize="20"/>
                                     </Button>
                                 </Border>
 
                                 <Border Height="50">
-                                    <Button Height="50" Foreground="{x:Null}" BorderBrush="{x:Null}" Background="{x:Null}" Style="{StaticResource MyButtonStyle}" HorizontalAlignment="Left" ToolTip="{Binding ArtistName}">
+                                    <Button Height="50" Foreground="{x:Null}" BorderBrush="{x:Null}" Background="{x:Null}" Style="{StaticResource MyButtonStyle}" HorizontalAlignment="Left" ToolTip="{Binding ArtistName}" Click="AlbumClick">
                                         <Label Content="{Binding ArtistName}" FontWeight="Normal" FontFamily="Bahnschrift Light SemiCondensed" FontSize="16"/>
                                     </Button>
                                 </Border>
@@ -306,7 +306,7 @@
 
 
 
-                            <ToggleButton x:Name="LikeButton" Width="40" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" OpacityMask="{x:Null}" Style="{StaticResource MyToggleButtonStyle}" ToolTip="Add this number to playlist" >
+                            <ToggleButton x:Name="LikeButton" Width="40" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" OpacityMask="{x:Null}" Style="{StaticResource MyToggleButtonStyle}" ToolTip="Add this number to playlist" Click="LikeButton_Click" Loaded="LikeButton_Loaded">
                                 <Image>
                                     <Image.Style>
                                         <Style TargetType="Image">

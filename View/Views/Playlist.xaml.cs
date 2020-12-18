@@ -26,6 +26,15 @@ namespace View.Views
         public Playlist()
         {
             InitializeComponent();
+            this.Loaded += new RoutedEventHandler(Artist_Loaded);
+        }
+
+        private void Artist_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (Favourite.IsFavouritePlaylist(((ViewModels.PlaylistViewModel)DataContext).PlaylistID))
+            {
+                LikeButton.IsChecked = true;
+            }
         }
 
         /// <summary>
@@ -81,6 +90,24 @@ namespace View.Views
             //toggleButton.IsChecked = data.isSongLiked((int)toggleButton.Tag);
             toggleButton.IsChecked = data.Liked;
 
+        }
+
+        private void LikeButtonPlaylist_Click(object sender, RoutedEventArgs e)
+        {
+            var addedToFavourites = (ToggleButton)e.OriginalSource;
+            int playlistID = ((ViewModels.PlaylistViewModel)DataContext).PlaylistID;
+
+            if ((bool)addedToFavourites.IsChecked)
+            {
+                if (!Favourite.IsFavouritePlaylist(playlistID))
+                {
+                    Favourite.AddFavouritePlaylist(playlistID);
+                }
+            }
+            else
+            {
+                Favourite.RemoveFavouritePlaylist(playlistID);
+            }
         }
     }
 }
