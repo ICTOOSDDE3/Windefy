@@ -80,7 +80,6 @@ namespace View.Views
 
             //toggleButton.IsChecked = data.isSongLiked((int)toggleButton.Tag);
             toggleButton.IsChecked = data.Liked;
-
         }
     }
 }

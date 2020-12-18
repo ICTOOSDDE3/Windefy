@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:View.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    
     <UserControl.Resources>
         <Style x:Key="MyToggleButtonStyle" TargetType="ToggleButton">
             <Setter Property="OverridesDefaultStyle" Value="True"/>

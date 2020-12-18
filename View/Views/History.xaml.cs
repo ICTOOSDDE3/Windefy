@@ -1,4 +1,7 @@
-﻿using System.Windows.Controls;
+﻿using System.Diagnostics;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 
 namespace View.Views
@@ -8,6 +11,7 @@ namespace View.Views
     /// </summary>
     public partial class History : UserControl
     {
+        Controller.AddMusicToPlaylist playlist = new Controller.AddMusicToPlaylist();
         public History()
         {
             InitializeComponent();
@@ -57,6 +61,41 @@ namespace View.Views
                     Model.SingleTrackClicked.HistoryTrackIDs.Push(test.TrackID);
                 }
             }
+        }
+
+        private void LikeButton_Click(object sender, RoutedEventArgs e)
+        {
+            var addToPlaylist = (ToggleButton)e.OriginalSource;
+            var data = addToPlaylist.DataContext as Model.Track;
+            int trackid = data.TrackID;
+            if (addToPlaylist.IsChecked == true)
+            {
+
+                if (!playlist.IsTrackInFavorites(trackid, Model.User.UserID))
+                {
+                    playlist.InsertToFavorites(trackid, Model.User.UserID);
+                    Trace.WriteLine("added to playlist");
+                }
+                else
+                {
+                    Trace.WriteLine("already added to favorites");
+                }
+            }
+            else if (addToPlaylist.IsChecked == false)
+            {
+                playlist.DeleteFromFavorites(trackid, Model.User.UserID);
+                Trace.WriteLine("Deleted");
+            }
+        }
+
+        private void LikeButton_Loaded(object sender, RoutedEventArgs e)
+        {
+            var toggleButton = (ToggleButton)e.OriginalSource;
+            var data = toggleButton.DataContext as Model.Track;
+
+            //toggleButton.IsChecked = data.isSongLiked((int)toggleButton.Tag);
+            toggleButton.IsChecked = data.Liked;
+
         }
     }
 }

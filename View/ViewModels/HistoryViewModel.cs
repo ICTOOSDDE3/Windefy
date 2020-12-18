@@ -5,27 +5,15 @@ namespace View.ViewModels
 {
     public class HistoryViewModel
     {
-        public List<TrackInfo> tracks { get; set; }
+        public List<Model.Track> tracks { get; set; }
         private int playlistID { get; set; }
 
         public HistoryViewModel()
         {
-            tracks = new List<TrackInfo>();
-            List<Model.Track> modelTracks = TrackHistory.HistoryTracks();
+            tracks = new List<Model.Track>();
+            tracks = TrackHistory.HistoryTracks();
             playlistID = TrackHistory.getHistoryPlaylistID();
-            TrackToTrackInfo(modelTracks);
         }
-        /// <summary>
-        /// Makes an object TrackInfo of Model.Track
-        /// </summary>
-        /// <param name="modelTracks"></param>
-        public void TrackToTrackInfo(List<Model.Track> modelTracks)
-        {
-            foreach (var item in modelTracks)
-            {
-                bool liked = new AddMusicToPlaylist().IsTrackInFavorites(item.TrackID, Model.User.UserID);
-                tracks.Add(new TrackInfo(item.Title, item.Duration, item.Image_path, item.TrackID, playlistID, liked));
-            }
-        }
+       
     }
 }

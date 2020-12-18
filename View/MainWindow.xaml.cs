@@ -479,26 +479,6 @@ namespace View
             rewind = false;
         }
 
-        private void favoriteBtn_Checked(object sender, RoutedEventArgs e)
-        {
-            //controller aanroepen om track toe te voegen aan fav afspeellijst
-
-        }
-
-        private void favoriteBtn_Unchecked(object sender, RoutedEventArgs e)
-        {
-            //controller aanroepen om track te verwijderen van fav afspeellijst
-        }
-
-        private void shuffleBtn_Checked(object sender, RoutedEventArgs e)
-        {
-            //TrackQueue.ShuffleEnabled = true;
-        }
-
-        private void shuffleBtn_Unchecked(object sender, RoutedEventArgs e)
-        {
-            //TrackQueue.ShuffleEnabled = false;
-        }
         private void btnQueue_Click(object sender, RoutedEventArgs e)
         {
             Queue<int> queue = FillViewQueue();

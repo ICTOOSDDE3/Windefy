@@ -561,10 +561,9 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </StackPanel>
-                <ToggleButton x:Name="favoriteBtn" Width="30" Height="30" BorderThickness="0" Style="{StaticResource Heart}" Checked="favoriteBtn_Checked" Unchecked="favoriteBtn_Unchecked"/>
             </WrapPanel>
             <WrapPanel VerticalAlignment="Center" Margin="301,0,651,0" >
-                <ToggleButton x:Name="shuffleBtn" Height="32" Width="32" Margin="49,0,0,0" BorderThickness="0" Style="{StaticResource Shuffle}" Checked="shuffleBtn_Checked" Unchecked="shuffleBtn_Unchecked"/>
+                <ToggleButton x:Name="shuffleBtn" Height="32" Width="32" Margin="49,0,0,0" BorderThickness="0" Style="{StaticResource Shuffle}"/>
                 <Button x:Name="btnPrev" MouseDoubleClick="btnPrev_MouseDoubleClick" Click="btnPrev_Click" Width="32" Height="24" Margin="60,0,0,0" BorderThickness="0" Style="{StaticResource PrevNext}">
                     <Button.Background>
                         <ImageBrush ImageSource="/Rewind.png"/>
