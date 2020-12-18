@@ -28,6 +28,7 @@ namespace View.Views
 
         private void AlbumClick(object sender, RoutedEventArgs e)
         {
+            // Invoke an event to change the page to that of an album
             var button = (Button)sender;
             ((ViewModels.SearchAlbumViewModel)DataContext).OnAlbumClick(((ViewModels.PlaylistInfo)button.DataContext).PlaylistID);
         }
@@ -37,12 +38,10 @@ namespace View.Views
             var addedToFavourites = (ToggleButton)e.OriginalSource;
             int playlistID = ((ViewModels.PlaylistInfo)addedToFavourites.DataContext).PlaylistID;
 
+            // Add or remove a playlist depending on the current state of a button
             if ((bool)addedToFavourites.IsChecked)
             {
-                if (!Favourite.IsFavouritePlaylist(playlistID))
-                {
-                    Favourite.AddFavouritePlaylist(playlistID);
-                }
+                Favourite.AddFavouritePlaylist(playlistID);
             }
             else
             {
@@ -52,6 +51,7 @@ namespace View.Views
 
         private void LikeButton_Loaded(object sender, RoutedEventArgs e)
         {
+            // Decide the togglebutton state depending on whether the playlist was liked or not
             var toggleButton = (ToggleButton)e.OriginalSource;
             var data = toggleButton.DataContext as ViewModels.PlaylistInfo;
 
