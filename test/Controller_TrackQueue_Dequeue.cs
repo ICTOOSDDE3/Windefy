@@ -15,18 +15,13 @@ namespace Test
 
         }
         [Test]
-        public void Dequeue_ReturnsNegative()
-        {
-            Assert.Negative(TrackQueue.Dequeue());
-        }
-        [Test]
         public void Dequeue_ReturnsTrackID()
         {
             TrackQueue.trackQueue.Enqueue(211);
             TrackQueue.trackQueue.Enqueue(212);
             TrackQueue.trackQueue.Enqueue(213);
 
-            Assert.Positive(TrackQueue.Dequeue());
+            Assert.Positive(TrackQueue.trackQueue.Dequeue());
         }
     }
 }

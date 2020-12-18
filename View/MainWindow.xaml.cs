@@ -671,6 +671,7 @@ namespace View
         private void Logout_Button_Click(object sender, RoutedEventArgs e)
         {
             User.EmptyUserModel();
+            mediaPlayer.Close();
             if (User.isLoggedIn == false)
             {
                 LoginBackground.Visibility = Visibility.Visible;
