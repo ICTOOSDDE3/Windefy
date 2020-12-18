@@ -85,104 +85,116 @@ namespace Controller
 
         public static void RemoveFavouriteArtist(int ArtistID)
         {
-            DBConnection.OpenConnection();
-
-            SqlCommand cmd = new SqlCommand(null, DBConnection.Connection)
+            if (IsFavouriteArtist(ArtistID))
             {
-                CommandText = "DELETE FROM user_favourite_artist " +
-                "WHERE userID = @UID " +
-                "AND artistID = @AID "
-            };
+                DBConnection.OpenConnection();
 
-            SqlParameter aid = new SqlParameter("@AID", System.Data.SqlDbType.Int)
-            {
-                Value = ArtistID
-            };
+                SqlCommand cmd = new SqlCommand(null, DBConnection.Connection)
+                {
+                    CommandText = "DELETE FROM user_favourite_artist " +
+                    "WHERE userID = @UID " +
+                    "AND artistID = @AID "
+                };
 
-            SqlParameter uid = new SqlParameter("@UID", System.Data.SqlDbType.Int)
-            {
-                Value = Model.User.UserID
-            };
-            cmd.Parameters.Add(uid);
-            cmd.Parameters.Add(aid);
-            cmd.Prepare();
-            cmd.ExecuteNonQuery();
+                SqlParameter aid = new SqlParameter("@AID", System.Data.SqlDbType.Int)
+                {
+                    Value = ArtistID
+                };
+
+                SqlParameter uid = new SqlParameter("@UID", System.Data.SqlDbType.Int)
+                {
+                    Value = Model.User.UserID
+                };
+                cmd.Parameters.Add(uid);
+                cmd.Parameters.Add(aid);
+                cmd.Prepare();
+                cmd.ExecuteNonQuery();
+            }
         }
 
         public static void AddFavouriteArtist(int ArtistID)
         {
-            DBConnection.OpenConnection();
-
-            SqlCommand cmd = new SqlCommand(null, DBConnection.Connection)
+            if (!IsFavouriteArtist(ArtistID))
             {
-                CommandText = "INSERT INTO user_favourite_artist (userID, artistID)" +
-                "VALUES (@UID, @AID) "
-            };
+                DBConnection.OpenConnection();
 
-            SqlParameter aid = new SqlParameter("@AID", System.Data.SqlDbType.Int)
-            {
-                Value = ArtistID
-            };
+                SqlCommand cmd = new SqlCommand(null, DBConnection.Connection)
+                {
+                    CommandText = "INSERT INTO user_favourite_artist (userID, artistID)" +
+                    "VALUES (@UID, @AID) "
+                };
 
-            SqlParameter uid = new SqlParameter("@UID", System.Data.SqlDbType.Int)
-            {
-                Value = Model.User.UserID
-            };
-            cmd.Parameters.Add(uid);
-            cmd.Parameters.Add(aid);
-            cmd.Prepare();
-            cmd.ExecuteNonQuery();
+                SqlParameter aid = new SqlParameter("@AID", System.Data.SqlDbType.Int)
+                {
+                    Value = ArtistID
+                };
+
+                SqlParameter uid = new SqlParameter("@UID", System.Data.SqlDbType.Int)
+                {
+                    Value = Model.User.UserID
+                };
+                cmd.Parameters.Add(uid);
+                cmd.Parameters.Add(aid);
+                cmd.Prepare();
+                cmd.ExecuteNonQuery();
+            }
         }
 
         public static void RemoveFavouritePlaylist(int PlaylistID)
         {
-            DBConnection.OpenConnection();
-
-            SqlCommand cmd = new SqlCommand(null, DBConnection.Connection)
+            if (IsFavouritePlaylist(PlaylistID))
             {
-                CommandText = "DELETE FROM user_favourite_playlist " +
-                "WHERE userID = @UID " +
-                "AND playlistID = @PID "
-            };
+                DBConnection.OpenConnection();
 
-            SqlParameter pid = new SqlParameter("@PID", System.Data.SqlDbType.Int)
-            {
-                Value = PlaylistID
-            };
+                SqlCommand cmd = new SqlCommand(null, DBConnection.Connection)
+                {
+                    CommandText = "DELETE FROM user_favourite_playlist " +
+                    "WHERE userID = @UID " +
+                    "AND playlistID = @PID "
+                };
 
-            SqlParameter uid = new SqlParameter("@UID", System.Data.SqlDbType.Int)
-            {
-                Value = Model.User.UserID
-            };
-            cmd.Parameters.Add(uid);
-            cmd.Parameters.Add(pid);
-            cmd.Prepare();
-            cmd.ExecuteNonQuery();
+                SqlParameter pid = new SqlParameter("@PID", System.Data.SqlDbType.Int)
+                {
+                    Value = PlaylistID
+                };
+
+                SqlParameter uid = new SqlParameter("@UID", System.Data.SqlDbType.Int)
+                {
+                    Value = Model.User.UserID
+                };
+                cmd.Parameters.Add(uid);
+                cmd.Parameters.Add(pid);
+                cmd.Prepare();
+                cmd.ExecuteNonQuery();
+            }
         }
 
         public static void AddFavouritePlaylist(int PlaylistID)
         {
-            DBConnection.OpenConnection();
-
-            SqlCommand cmd = new SqlCommand(null, DBConnection.Connection)
+            if (!IsFavouritePlaylist(PlaylistID))
             {
-                CommandText = "INSERT INTO user_favourite_playlist (userID, playlistID)" +
-                "VALUES (@UID, @PID) "
-            };
+                DBConnection.OpenConnection();
 
-            SqlParameter pid = new SqlParameter("@PID", System.Data.SqlDbType.Int)
-            {
-                Value = PlaylistID
-            };
+                SqlCommand cmd = new SqlCommand(null, DBConnection.Connection)
+                {
+                    CommandText = "INSERT INTO user_favourite_playlist (userID, playlistID)" +
+                    "VALUES (@UID, @PID) "
+                };
 
-            SqlParameter uid = new SqlParameter("@UID", System.Data.SqlDbType.Int)
-            {
-                Value = Model.User.UserID
-            };
-            cmd.Parameters.Add(uid);
-            cmd.Parameters.Add(pid);
-            cmd.Prepare();
-            cmd.ExecuteNonQuery();
+                SqlParameter pid = new SqlParameter("@PID", System.Data.SqlDbType.Int)
+                {
+                    Value = PlaylistID
+                };
+
+                SqlParameter uid = new SqlParameter("@UID", System.Data.SqlDbType.Int)
+                {
+                    Value = Model.User.UserID
+                };
+                cmd.Parameters.Add(uid);
+                cmd.Parameters.Add(pid);
+                cmd.Prepare();
+                cmd.ExecuteNonQuery();
+            }
         }
     }
 }
