@@ -18,9 +18,12 @@
     <None Remove="kruisje.png" />
     <None Remove="Pause.png" />
     <None Remove="Play.png" />
+    <None Remove="Queue.png" />
+    <None Remove="QueueChecked.png" />
     <None Remove="Rectangle.png" />
     <None Remove="Repeat.png" />
     <None Remove="RepeatChecked.png" />
+    <None Remove="RepeatPlaylistChecked.png" />
     <None Remove="Rewind.png" />
     <None Remove="Shuffle.png" />
     <None Remove="ShuffleChecked.png" />
@@ -64,9 +67,12 @@
 
     <Resource Include="Pause.png" />
     <Resource Include="Play.png" />
+    <Resource Include="Queue.png" />
+    <Resource Include="QueueChecked.png" />
     <Resource Include="Rectangle.png" />
     <Resource Include="Repeat.png" />
     <Resource Include="RepeatChecked.png" />
+    <Resource Include="RepeatPlaylistChecked.png" />
     <Resource Include="Rewind.png" />
     <Resource Include="Shuffle.png" />
     <Resource Include="ShuffleChecked.png" />

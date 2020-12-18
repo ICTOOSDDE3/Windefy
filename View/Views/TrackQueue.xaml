@@ -259,7 +259,8 @@
         </Style>
 
     </UserControl.Resources>
-    <Grid Background="White">
+    <Grid Background="White" Margin="0,100,0,0">
+        <Label Content="Queue" FontSize="36" FontWeight="Bold" HorizontalAlignment="Center"/>
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" >
             <ItemsControl ItemsSource="{Binding TrackQueue}" Name="trackQueue">
                 <ItemsControl.ItemsPanel>

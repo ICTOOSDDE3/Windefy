@@ -14,7 +14,7 @@ namespace Test
             DBConnection.Initialize();
         }
         /// <summary>
-        /// This test checks whether the function returns a track object when you use an existing trackID as parameter
+        /// Tests GetTrack method with an ID of an existing Track
         /// </summary>
         [TestCase(210)]
         [TestCase(211)]
@@ -26,7 +26,7 @@ namespace Test
             Assert.IsNotNull(track);
         }
         /// <summary>
-        /// This test checks whether the function returns a track object when you use an non existing ArtistID as parameter
+        /// Tests  GetTrack method with an ID of NonExistingTrack
         /// </summary>
         [TestCase(-1)]
         [TestCase(-2)]

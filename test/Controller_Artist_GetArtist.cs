@@ -13,7 +13,7 @@ namespace Test
             DBConnection.Initialize();
         }
         /// <summary>
-        /// This test checks whether the function returns a Artist object when you use an existing Artist ID as parameter
+        /// Tests GetArtist method with an ID of an existing Artist
         /// </summary> 
         [TestCase(1)]
         [TestCase(2)]
@@ -25,7 +25,7 @@ namespace Test
             Assert.IsNotNull(artist);
         }
         /// <summary>
-        /// This test checks whether the function returns null when you use an non existing Artist ID as parameter
+        /// Tests  GetArtist method with an ID of NonExistingArtist
         /// </summary>
         [TestCase(-1)]
         [TestCase(-2)]

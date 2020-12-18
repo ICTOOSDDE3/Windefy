@@ -22,6 +22,7 @@ namespace View
         private bool userIsDraggingSlider = false;
         private bool mediaPlaying = false;
         private bool rewind = false;
+        private bool rewind_playlist = false;
         private Model.Track CurrentTrack;
         private Controller.Track track = new Controller.Track();
         Register registerAccount = new Register();
@@ -470,7 +471,10 @@ namespace View
         private void btnRewind_Checked(object sender, RoutedEventArgs e)
         {
             rewind = true;
+            rewind_playlist = false;
+
         }
+
         /// <summary>
         /// Disables rewind to stop listening to the same song.
         /// </summary>
@@ -479,6 +483,13 @@ namespace View
         private void btnRewind_Unchecked(object sender, RoutedEventArgs e)
         {
             rewind = false;
+            rewind_playlist = false;
+        }
+
+        private void btnRewind_Indeterminate(object sender, RoutedEventArgs e)
+        {
+            rewind = false;
+            rewind_playlist = true;
         }
 
         private void btnQueue_Click(object sender, RoutedEventArgs e)
@@ -640,7 +651,14 @@ namespace View
                         break;
                 }
             }  
-        }        
+        }
+
+        private void shuffleBtn_Click(object sender, RoutedEventArgs e)
+        {
+            TrackQueue.Shuffle();
+            UpdatePage();
+        }
+
         private void Button_Click(object sender, MouseButtonEventArgs e)
         {
             DataContext = new Homepage(Model.TrackHistory.PlaylistID);

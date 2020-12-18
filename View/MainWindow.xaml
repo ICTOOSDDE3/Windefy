@@ -275,6 +275,9 @@
         <Image x:Key="RepeatUnchecked_icon" Source="Repeat.png"/>
         <Image x:Key="HeartChecked_icon" Source="HeartChecked.png"/>
         <Image x:Key="HeartUnchecked_icon" Source="Rectangle.png"/>
+        <Image x:Key="RepeatPlaylistChecked_icon" Source="/RepeatPlaylistChecked.png"/>
+        <Image x:Key="Queue_icon" Source="/Queue.png"/>
+        <Image x:Key="QueueChecked_icon" Source="/QueueChecked.png"/>
 
         <Style TargetType="{x:Type ToggleButton}" x:Key="PausePlay">
             <Setter Property="Content" Value="{DynamicResource Play_icon}" />
@@ -286,6 +289,7 @@
                                 <VisualStateGroup x:Name="CommonStates">
                                     <VisualState x:Name="Normal"/>
                                     <VisualState x:Name="MouseOver"/>
+                                    <VisualState x:Name="RepeatPlaylist"/>
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
                         </Grid>
@@ -347,10 +351,18 @@
                         </Setter.Value>
                     </Setter>
                 </Trigger>
+                <Trigger Property="IsChecked" Value="{x:Null}">
+                    <Setter Property="Content" Value="{DynamicResource RepeatPlaylistChecked_icon}" />
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <ImageBrush ImageSource="/RepeatPlaylistChecked.png"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background">
                         <Setter.Value>
-                            <ImageBrush ImageSource="/RepeatChecked.png"/>
+                            <ImageBrush ImageSource="/Repeat.png"/>
                         </Setter.Value>
                     </Setter>
                 </Trigger>
@@ -398,11 +410,43 @@
             </Style.Triggers>
         </Style>
 
-        <Style TargetType="{x:Type ToggleButton}" x:Key="Shuffle">
+        <Style TargetType="{x:Type Button}" x:Key="Queue">
+            <Setter Property="Content" Value="{DynamicResource QueueChecked_icon}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Background="{TemplateBinding Background}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="MouseOver"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <ImageBrush ImageSource="/Queue.png"/>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <ImageBrush ImageSource="/QueueChecked.png"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="{x:Type Button}" x:Key="Shuffle">
             <Setter Property="Content" Value="{DynamicResource ShuffleUnChecked_icon}" />
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="ToggleButton">
+                    <ControlTemplate TargetType="Button">
                         <Grid Background="{TemplateBinding Background}">
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
@@ -420,15 +464,6 @@
                 </Setter.Value>
             </Setter>
             <Style.Triggers>
-                <Trigger Property="IsChecked" Value="True">
-                    <Setter Property="Content" Value="{DynamicResource ShuffleChecked_icon}"/>
-
-                    <Setter Property="Background">
-                        <Setter.Value>
-                            <ImageBrush ImageSource="/ShuffleChecked.png"/>
-                        </Setter.Value>
-                    </Setter>
-                </Trigger>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background">
                         <Setter.Value>
@@ -438,6 +473,7 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+
 
         <Style TargetType="{x:Type Button}" x:Key="PrevNext">
             <Setter Property="Template">
@@ -532,7 +568,7 @@
             </ComboBox>
         </Grid>
         <Grid Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="90" Margin="1,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="1440" x:Name="MusicBar">
-            <WrapPanel x:Name="Track_ImageTitleArtist" VerticalAlignment="Center" HorizontalAlignment="Left">
+            <WrapPanel x:Name="Track_ImageTitleArtist" VerticalAlignment="Center" HorizontalAlignment="Left" Width="301">
                 <Image x:Name="TrackImage" Height="70" Width="70" Stretch="Uniform"/>
                 <StackPanel Margin="5,0,0,0" VerticalAlignment="Center">
                     <Label x:Name="Track_Name" MaxWidth="150" HorizontalAlignment="Left">
@@ -561,7 +597,7 @@
                 </StackPanel>
             </WrapPanel>
             <WrapPanel VerticalAlignment="Center" Margin="301,0,651,0" >
-                <ToggleButton x:Name="shuffleBtn" Height="32" Width="32" Margin="49,0,0,0" BorderThickness="0" Style="{StaticResource Shuffle}"/>
+                <Button x:Name="shuffleBtn" Height="32" Width="32" Margin="49,0,0,0" BorderThickness="0" Style="{StaticResource Shuffle}" Click="shuffleBtn_Click" />
                 <Button x:Name="btnPrev" MouseDoubleClick="btnPrev_MouseDoubleClick" Click="btnPrev_Click" Width="32" Height="24" Margin="60,0,0,0" BorderThickness="0" Style="{StaticResource PrevNext}">
                     <Button.Background>
                         <ImageBrush ImageSource="/Rewind.png"/>
@@ -575,7 +611,8 @@
                     </Button.Background>
                     <Image Source="/Forward.png"/>
                 </Button>
-                <ToggleButton x:Name="tbBtnRewind" Checked="btnRewind_Checked" Unchecked="btnRewind_Unchecked" Margin="60,0,5,0" Width="32" Height="32" BorderThickness="0" Style="{StaticResource Repeat}"/>
+                <ToggleButton IsThreeState="True" x:Name="tbBtnRewind" Checked="btnRewind_Checked" Unchecked="btnRewind_Unchecked"  Margin="60,0,5,0" Width="32" Height="32" BorderThickness="0" Style="{StaticResource Repeat}" Indeterminate="btnRewind_Indeterminate"/>
+
             </WrapPanel>
             <WrapPanel VerticalAlignment="Center" Margin="680,0,279,0">
                 <Label x:Name="CurrentTime" Content="00:00" Margin="100,0,0,0" VerticalAlignment="Center"/>
@@ -583,12 +620,7 @@
                 <Label x:Name="TotalTime" Content="00:00" Margin="0,0,0,0"/>
             </WrapPanel>
             <WrapPanel VerticalAlignment="Center" Margin="1166,0,10,0">
-                <Button x:Name="btnQueue" Width="32" Height="24" BorderThickness="0" Style="{StaticResource PrevNext}" Click="btnQueue_Click">
-                    <Button.Background>
-                        <ImageBrush ImageSource="/Forward.png"/>
-                    </Button.Background>
-                    <Image Source="/Forward.png"/>
-                </Button>
+                <Button x:Name="btnQueue" Width="50" Height="50" BorderThickness="0" Style="{StaticResource Queue}" Click="btnQueue_Click"/>
                 <Image Source="/Volume.png" Width="30" Height="30" Margin="25,0,0,0"/>
                 <Slider Style="{StaticResource Horizontal_Slider}" Value="25" Maximum="100" Minimum="0" ValueChanged="Volume_ValueChanged" x:Name="Volume" Width="142" Height="9" Margin="5"/>
             </WrapPanel>
