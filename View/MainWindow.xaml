@@ -464,7 +464,7 @@
             <ColumnDefinition Width="300" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <Grid Grid.Row="1" Grid.ColumnSpan="2" Background="#E54F83CC" Opacity="0.9"/>
+        <Grid Grid.Row="1" Grid.ColumnSpan="2" Background="#4F83CC" Opacity="0.9"/>
         <Grid Grid.Row="0" Grid.Column="0" Background="#FFFF72">
 
             <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,70,0,0">
@@ -501,8 +501,9 @@
                                                 <ImageBrush ImageSource="/Assets/Images/mockSongImage.jpg"/>
                                             </Button.Background>
                                         </Button>
-                                        <Label Content="{Binding title}" FontFamily="Segoe" FontSize="20" Style="{StaticResource HoverOverPlaylistText}" ToolTip="{Binding title}"></Label>
-
+                                        <Button x:Name="Playlist_Name" Click="OpenPlaylist" Style="{StaticResource RoundedButton}">
+                                            <Label Content="{Binding title}" FontFamily="Segoe" FontSize="20"  ToolTip="{Binding title}"></Label>
+                                        </Button>
                                     </StackPanel>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>

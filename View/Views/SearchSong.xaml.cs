@@ -93,7 +93,6 @@ namespace View.Views
             var data = toggleButton.DataContext as ViewModels.TrackInfo;
 
             toggleButton.IsChecked = data.Liked;
-
         }
 
         private void Label_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)

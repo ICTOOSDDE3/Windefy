@@ -45,9 +45,10 @@ namespace Controller
 
         public static bool IsFavouritePlaylist(int PlaylistID)
         {
-            DBConnection.OpenConnection();
+            SqlConnection con = new SqlConnection($"Server = 127.0.0.1; Database = WindefyDB; User Id = SA; Password = {Passwords.GetPassword("DB")};");
+            con.Open();
 
-            SqlCommand cmd = new SqlCommand(null, DBConnection.Connection)
+            SqlCommand cmd = new SqlCommand(null, con)
             {
                 CommandText = "SELECT COUNT(*) AS count " +
                 "FROM user_favourite_playlist " +
@@ -75,6 +76,9 @@ namespace Controller
             {
                 amount = Convert.ToInt32(dataReader["count"]);
             }
+
+            con.Close();
+            con.Dispose();
 
             return amount > 0;
         }
@@ -136,7 +140,7 @@ namespace Controller
 
             SqlCommand cmd = new SqlCommand(null, DBConnection.Connection)
             {
-                CommandText = "DELETE FROM user_favourite_artist " +
+                CommandText = "DELETE FROM user_favourite_playlist " +
                 "WHERE userID = @UID " +
                 "AND playlistID = @PID "
             };
@@ -162,7 +166,7 @@ namespace Controller
 
             SqlCommand cmd = new SqlCommand(null, DBConnection.Connection)
             {
-                CommandText = "INSERT INTO user_favourite_artist (userID, playlistID)" +
+                CommandText = "INSERT INTO user_favourite_playlist (userID, playlistID)" +
                 "VALUES (@UID, @PID) "
             };
 

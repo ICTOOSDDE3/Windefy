@@ -12,6 +12,7 @@ namespace View.ViewModels
         public List<PlaylistInfo> items { get; set; }
 
         private string _NoResultsVisibility;
+        internal Action<object, int> AlbumClickEvent;
 
         public string NoResultsVisibility
         {
@@ -118,8 +119,14 @@ namespace View.ViewModels
             }
         }
 
+        public void OnAlbumClick(int artistId)
+        {
+            AlbumClickEvent?.Invoke(this, artistId);
+        }
+
         public void GetFavourites(int userID)
         {
+            NoResultsVisibility = "Hidden";
             ApacheConnection.Initialize();
 
             items = new List<PlaylistInfo>();
@@ -159,6 +166,15 @@ namespace View.ViewModels
             dataReader.Close();
 
             DBConnection.CloseConnection();
+
+            if (items.Count > 0)
+            {
+                NoResultsVisibility = "Hidden";
+            }
+            else
+            {
+                NoResultsVisibility = "Visible";
+            }
         }
     }
 
@@ -171,6 +187,7 @@ namespace View.ViewModels
         public string ArtistName { get; set; }
         public int PlaylistID { get; set; }
         public bool IsUserPlaylist { get; set; }
+        public bool Liked { get; set; }
 
         public PlaylistInfo(string T, int ID, bool userPlaylist)
         {
@@ -208,8 +225,8 @@ namespace View.ViewModels
                 command = new SqlCommand(null, con)
                 {
                     CommandText = "SELECT name FROM users " +
-                    "WHERE userID IN (" +
-                    "  SELECT userID" +
+                    "WHERE user_ID IN (" +
+                    "  SELECT ownerID" +
                     "  FROM playlist" +
                     $"  WHERE playlistID = {ID})"
                 };
@@ -233,11 +250,20 @@ namespace View.ViewModels
             }
 
             // Remove last 2 characters (', ') from the string
-            ArtistName = ArtistName[0..^2];
+            if (ArtistName.Length > 2)
+            {
+                ArtistName = ArtistName[0..^2];
+            }
+            else
+            {
+                ArtistName = "Anonymous";
+            }
 
             dr.Close();
             con.Close();
             con.Dispose();
+
+            Liked = Favourite.IsFavouritePlaylist(PlaylistID);
         }
     }
 }
