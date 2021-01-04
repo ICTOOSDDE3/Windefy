@@ -24,8 +24,8 @@ namespace View.Views
         /// <param name="e"></param>
         private void Track_Click(object sender, MouseButtonEventArgs e)
         {
-            var x = (TextBlock)e.OriginalSource;
-            var data = x.DataContext as ViewModels.TrackInfo;
+            var textBlock = (TextBlock)e.OriginalSource;
+            var data = textBlock.DataContext as Model.Track;
 
             Controller.TrackQueue.trackQueue.Clear();
 
@@ -37,7 +37,7 @@ namespace View.Views
         /// fills single track queue in case of history view track click
         /// </summary>
         /// <param name="data"></param>
-        private void SingleTrackFill(ViewModels.TrackInfo data)
+        private void SingleTrackFill(Model.Track data)
         {
             Model.SingleTrackClicked.TrackID = data.TrackID;
             Model.SingleTrackClicked.TrackClicked = true;
@@ -47,18 +47,18 @@ namespace View.Views
 
             foreach (var item in Tracks.Items)
             {
-                var test = item as ViewModels.TrackInfo;
+                var track = item as Model.Track;
                 if (item == data)
                 {
                     clickedTrack = true;
                 }
                 if (item != data && clickedTrack)
                 {
-                    Model.SingleTrackClicked.QueueTrackIDs.AddLast(test.TrackID);
+                    Model.SingleTrackClicked.QueueTrackIDs.AddLast(track.TrackID);
                 }
                 else if (!clickedTrack)
                 {
-                    Model.SingleTrackClicked.HistoryTrackIDs.Push(test.TrackID);
+                    Model.SingleTrackClicked.HistoryTrackIDs.Push(track.TrackID);
                 }
             }
         }
