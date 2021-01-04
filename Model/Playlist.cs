@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Org.BouncyCastle.Utilities;
+using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Data.SqlClient;
 using System.Text;
 
@@ -7,6 +9,10 @@ namespace Model
 {
     public class Playlist
     {
+        public Playlist()
+        {
+
+        }
         public Playlist(int playlistID, string title, DateTime release_date, int listens, int playlist_type, string information, bool is_Public, int ownerID)
         {
             this.playlistID = playlistID;
@@ -27,6 +33,7 @@ namespace Model
         public string information { get; set; }
         public bool is_Public { get; set; }
         public int ownerID { get; set; }
+        public List<Track> tracks { get; set; } = new List<Track>();
 
         
     }

@@ -7,21 +7,12 @@ namespace Controller
 {
     public class AddMusicToPlaylist
     {
-        //this is the logged in user ID
-        private int _userID = Model.User.UserID;
-        public List<PlaylistPreview> _playlists = new List<PlaylistPreview>();
-        private bool _isPlaylistMade = false;
-        //checks if there are any playlists of the user
-        public bool CheckIfUserHasPlaylists()
-        {
-            if (_playlists.Count > 0)
-            {
-                return _isPlaylistMade = true;
-            }
-            return _isPlaylistMade;
-        }
+        public List<PlaylistPreview> Playlists { get; set; } = new List<PlaylistPreview>();
 
-        // shows playlist that the user has made
+        /// <summary>
+        /// puts the users playlist in a list
+        /// </summary>
+        /// <param name="userID"></param>
         public void ShowPlaylists(int userID)
         {
             DBConnection.Initialize();
@@ -29,7 +20,7 @@ namespace Controller
 
 
             //Build the query
-            string query = $"SELECT playlistID, title FROM playlist Where ownerID = {_userID}";
+            string query = $"SELECT playlistID, title FROM playlist Where ownerID = {userID}";
 
             //Prepare the query
             SqlCommand cmd = new SqlCommand(query, DBConnection.Connection);
@@ -39,39 +30,54 @@ namespace Controller
             {
                 int playlistId = Convert.ToInt32(dataReader["playlistID"]);
                 string playlistTitle = dataReader["title"].ToString();
-                _playlists.Add(new PlaylistPreview(playlistId, playlistTitle));
+                Playlists.Add(new PlaylistPreview(playlistId, playlistTitle));
 
             }
-            DBConnection.CloseConnection();
-
         }
 
+        /// <summary>
+        /// Inserts a track to the selected playlist
+        /// </summary>
+        /// <param name="playlistID">id from playlist</param>
+        /// <param name="trackID">id from track</param>
         public void InsertToPlaylist(int playlistID, int trackID)
         {
             DBConnection.Initialize();
             DBConnection.OpenConnection();
 
-            //Build the query
-            string query = $"INSERT INTO playlist_track (trackID, playlistID, number) VALUES({trackID}, {playlistID}, -1)";
+            // checks if track is already in selected playlist
+            string favoritesQuery = $"SELECT * FROM playlist_track where playlistID = {playlistID} AND trackID = {trackID}";
+            SqlCommand cmdInPlaylist = new SqlCommand(favoritesQuery, DBConnection.Connection);
+            var contains = cmdInPlaylist.ExecuteScalar();
 
-            //Prepare the query
-            SqlCommand cmd = new SqlCommand(query, DBConnection.Connection);
+            if (contains == null)
+            {
+                //Build the query
+                string query = $"INSERT INTO playlist_track (trackID, playlistID, number) VALUES({trackID}, {playlistID}, -1)";
 
-            cmd.ExecuteScalar();
-            DBConnection.CloseConnection();
+                //Prepare the query
+                SqlCommand cmd = new SqlCommand(query, DBConnection.Connection);
+
+                cmd.ExecuteScalar();
+                DBConnection.CloseConnection();
+            } else
+            {
+                Console.WriteLine("already contains track");
+                DBConnection.CloseConnection();
+            }
         }
 
         /// <summary>
         /// inserts a track in the favorites playlist of an user
         /// </summary>
-        /// <param name="trackID">is the id from a track that has to be added</param>
-        public void InsertToFavorites(int trackID)
+        /// <param name="trackID">id from track</param>
+        public void InsertToFavorites(int trackID, int userID)
         {
             DBConnection.Initialize();
             DBConnection.OpenConnection();
 
-            //Build the query
-            string favoritesQuery = $"SELECT playlistID FROM playlist where title = 'Favorites' AND ownerID = {_userID}";
+            //Build the query to get playlistID from favorites
+            string favoritesQuery = $"SELECT playlistID FROM playlist where title = 'Favorites' AND ownerID = {userID}";
             SqlCommand cmdFavorites = new SqlCommand(favoritesQuery, DBConnection.Connection);
             int playlistID = Convert.ToInt32(cmdFavorites.ExecuteScalar().ToString());
 
@@ -86,13 +92,18 @@ namespace Controller
             DBConnection.CloseConnection();
         }
 
-        public bool FavoritesContainsTrack(int trackID)
+        /// <summary>
+        /// Checks if a track is already in favorites
+        /// </summary>
+        /// <param name="trackID"></param>
+        /// <returns>true or false</returns>
+        public bool IsTrackInFavorites(int trackID, int userID)
         {
             DBConnection.Initialize();
             DBConnection.OpenConnection();
 
             //Build the query
-            string favoritesQuery = $"SELECT playlistID FROM playlist where title = 'Favorites' AND ownerID = {_userID}";
+            string favoritesQuery = $"SELECT playlistID FROM playlist where title = 'Favorites' AND ownerID = {userID}";
             SqlCommand cmdFavorites = new SqlCommand(favoritesQuery, DBConnection.Connection);
             int playlistID = Convert.ToInt32(cmdFavorites.ExecuteScalar().ToString());
 
@@ -106,15 +117,52 @@ namespace Controller
             {
                 if (Convert.ToInt32(dataReader["trackID"]) == trackID)
                 {
-                    DBConnection.CloseConnection();
-                    return false;
+                    return true;
                 }
             }
-            DBConnection.CloseConnection();
-            return true;
+            return false;
         }
-        //on click playlist name insert song
-        //notify if inserted or not
+
+        /// <summary>
+        /// Deletes a track from the selected playlist
+        /// </summary>
+        /// <param name="trackID">id from track</param>
+        public void DeleteFromPlaylist(int playlistID, int trackID)
+        {
+            DBConnection.Initialize();
+            DBConnection.OpenConnection();
+
+            //Build the query
+            string DeleteQuery = $"DELETE FROM playlist_track WHERE playlistID = {playlistID} AND trackID = {trackID}";
+            SqlCommand cmdDelete = new SqlCommand(DeleteQuery, DBConnection.Connection);
+
+
+            cmdDelete.ExecuteNonQuery();
+            DBConnection.CloseConnection();
+        }
+
+        /// <summary>
+        /// Deletes a track from the favorites playlist
+        /// </summary>
+        /// <param name="trackID">id from track</param>
+        public void DeleteFromFavorites(int trackID, int userID)
+        {
+            DBConnection.Initialize();
+            DBConnection.OpenConnection();
+
+            //Build the query
+            string favoritesQuery = $"SELECT playlistID FROM playlist where title = 'Favorites' AND ownerID = {userID}";
+            SqlCommand cmdFavorites = new SqlCommand(favoritesQuery, DBConnection.Connection);
+            int playlistID = Convert.ToInt32(cmdFavorites.ExecuteScalar().ToString());
+
+            //Build the query
+            string DeleteQuery = $"DELETE FROM playlist_track WHERE playlistID = {playlistID} AND trackID = {trackID}";
+            SqlCommand cmdDelete = new SqlCommand(DeleteQuery, DBConnection.Connection);
+
+
+            cmdDelete.ExecuteNonQuery();
+            DBConnection.CloseConnection();
+        }
 
     }
 }

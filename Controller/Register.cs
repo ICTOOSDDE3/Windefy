@@ -15,8 +15,15 @@ namespace Controller
         private Mail _verificationMail = new Mail();
         private Login _account = new Login();
         private Playlist _favorites = new Playlist();
+        private Playlist _history = new Playlist();
 
-        //Method to register an account (validate and save to db)
+        /// <summary>
+        /// puts an new account in the database
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="name"></param>
+        /// <param name="pw1"></param>
+        /// <param name="pw2"></param>
         public void RegisterAccount(string email, string name, string pw1, string pw2)
         {
             
@@ -26,12 +33,9 @@ namespace Controller
                 if (IsEmailUnique(email))
                 {
                     if (IsPasswordEqual(pw1, pw2))
-                    {
-                        //TODO: Create the account in the database when the db connection is made
-
-                        
-                        string salt = GenerateSalt(20); // maybe a random number between 20 - 30?
-                        string genratedPasswordHash = GenerateHash(pw1, salt);// maybe these numbers random generate aswell?
+                    {  
+                        string salt = GenerateSalt(20); 
+                        string genratedPasswordHash = GenerateHash(pw1, salt);
                         string verificationCode = CreateCode();
 
                         //database connection / inserting new user in database
@@ -73,24 +77,38 @@ namespace Controller
                         _verificationMail.SendValidationMail(email, verificationCode);
                         _account.IsLogin(email, pw1);
                         _favorites.CreateUserPlaylist("Favorites", false);
+                        _history.CreateUserPlaylist("History", false);
                     }
                 }
             }
         }
 
-        //Check if email is valid
+        /// <summary>
+        /// checks if the input is similar to an email
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         public bool IsValidEmail(string email)
         {
             return new EmailAddressAttribute().IsValid(email);
         }
 
-        //Check if two passwords are equal
+        /// <summary>
+        /// checks if the two inputted passwords are equal
+        /// </summary>
+        /// <param name="str1"></param>
+        /// <param name="str2"></param>
+        /// <returns></returns>
         public bool IsPasswordEqual(string str1, string str2)
         {
             return str1.Equals(str2);
         }
 
-        //Check if email is already in use
+        /// <summary>
+        /// checks if inputted email doesn't exist in the database
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         public bool IsEmailUnique(string email)
         {
             DBConnection.OpenConnection();
@@ -155,7 +173,12 @@ namespace Controller
             return code;
         }
 
-        // method check verification code
+        /// <summary>
+        /// checks if the verificationcode is equal to the one in the database
+        /// </summary>
+        /// <param name="verificationCode"></param>
+        /// <param name="email"></param>
+        /// <returns></returns>
         public bool IsVerificationCodeCorrect(string verificationCode, string email)
         {
 
@@ -183,7 +206,10 @@ namespace Controller
         }
 
 
-        // method resend verification code
+        /// <summary>
+        /// resends new verification code
+        /// </summary>
+        /// <param name="email"></param>
         public void ResendVerificationCode(string email)
         {
             string newCode = CreateCode();

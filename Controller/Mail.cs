@@ -12,7 +12,10 @@ namespace Controller
     {
         private MailMessage _email;
 
-        //TODO: Refactor
+        /// <summary>
+        /// sends email to the given mailadress
+        /// </summary>
+        /// <param name="mail"></param>
         public void SendMail(Model.Mail mail)
         {
             //Instanciate email
@@ -38,6 +41,11 @@ namespace Controller
             emailSender.Send(_email);
         }
 
+        /// <summary>
+        /// sends an email to the user with verification code
+        /// </summary>
+        /// <param name="adres"></param>
+        /// <param name="code"></param>
         public void SendValidationMail(string adres, string code)
         {
             Model.Mail mail = new Model.Mail(adres, "Windify80@gmail.com", "Mail verification", $"To verify your mail, insert code: {code}, \n\n kind regards, \n\n Windify ");

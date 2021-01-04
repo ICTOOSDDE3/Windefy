@@ -6,7 +6,7 @@ using System.Text;
 namespace Test
 {
     [TestFixture]
-    class IsPasswordEqual
+    class Controller_Register_IsPasswordEqual
     {
         Controller.Register register = new Controller.Register();
         [Test]

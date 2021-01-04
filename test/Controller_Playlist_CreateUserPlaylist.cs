@@ -7,6 +7,9 @@ namespace Test
     [TestFixture]
     class Controller_Playlist_CreateUserPlaylist
     {
+        int privatePlaylistId = 0;
+        int publicPlaylistId = 0;
+
         //Test if you can create a private playlist
         [Test]
         public void CreatePrivatePlaylist()
@@ -15,7 +18,7 @@ namespace Test
             string PlaylistName = "Nunit private playlist";
             Playlist playlist = new Playlist();
 
-            playlist.CreateUserPlaylist(PlaylistName, false);
+            privatePlaylistId = playlist.CreateUserPlaylist(PlaylistName, false);
 
             DBConnection.OpenConnection();
             //Build the query
@@ -45,7 +48,7 @@ namespace Test
             string PlaylistName = "Nunit private playlist";
             Playlist playlist = new Playlist();
 
-            playlist.CreateUserPlaylist(PlaylistName, true);
+            publicPlaylistId = playlist.CreateUserPlaylist(PlaylistName, true);
 
             DBConnection.OpenConnection();
             //Build the query
@@ -66,6 +69,32 @@ namespace Test
 
             Assert.AreEqual(PlaylistName, result);
             Assert.AreEqual(true, result2);
+        }
+
+        [TearDown]
+        public void delete()
+        {
+            DBConnection.OpenConnection();
+
+            string query = $"DELETE FROM playlist_track WHERE playlistID = {privatePlaylistId}";
+            string query2 = $"DELETE FROM playlist WHERE playlistID = {privatePlaylistId}";
+
+            SqlCommand cmd = new SqlCommand(query, DBConnection.Connection);
+            cmd.ExecuteNonQuery();
+
+            SqlCommand cmd2 = new SqlCommand(query2, DBConnection.Connection);
+            cmd2.ExecuteNonQuery();
+
+            string query3 = $"DELETE FROM playlist_track WHERE playlistID = {publicPlaylistId}";
+            string query4 = $"DELETE FROM playlist WHERE playlistID = {publicPlaylistId}";
+
+            SqlCommand cmd3 = new SqlCommand(query3, DBConnection.Connection);
+            cmd3.ExecuteNonQuery();
+
+            SqlCommand cmd4 = new SqlCommand(query4, DBConnection.Connection);
+            cmd4.ExecuteNonQuery();
+
+            DBConnection.CloseConnection();
         }
     }
 }

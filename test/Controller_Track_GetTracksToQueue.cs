@@ -16,6 +16,10 @@ namespace Test
             controller = new Track();
             DBConnection.Initialize();
         }
+        /// <summary>
+        /// Tests GetTracksToQueue method with a Query where no tracks found.
+        /// </summary>
+        /// <param name="query"></param>
         [TestCase("SELECT trackID FROM playlist_track WHERE playlistID = -1 ")]
         [Test]
         public void GetTracksToQueue_QueryWhereZeroTracksFound(string query)
@@ -23,6 +27,10 @@ namespace Test
             var tracks = controller.GetTracksToQueue(query);
             Assert.IsNull(tracks);
         }
+        /// <summary>
+        /// Tests GetTracksToQueue method with a Query where tracks found. 
+        /// </summary>
+        /// <param name="query"></param>
         [TestCase("SELECT trackID FROM playlist_track WHERE playlistID = 84 ")]
         [Test]
         public void GetTracksToQueue_QueryWhereTracksFound(string query)

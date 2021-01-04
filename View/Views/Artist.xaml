@@ -6,11 +6,38 @@
              xmlns:local="clr-namespace:View.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    
     <Grid Background="White">
-        <TextBlock Text="{Binding CurrentArtist.Name}" Margin="35,69,658,351"/>
-        <TextBlock Text="{Binding CurrentArtist.Bio}" Margin="25,104,668,316"/>
+        <Grid Background="#FFFF72" Height="300" VerticalAlignment="Top">
+            <TextBlock Text="{Binding CurrentArtist.Name}" FontWeight="Bold" FontSize="50" HorizontalAlignment="Left" Margin="35,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="577"/>
+            <ToggleButton x:Name="LikeButton" Width="40" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" OpacityMask="{x:Null}" ToolTip="Add this number to favorites" Click="LikeButton_Click" Margin="744,244,16,16">
+                <Image>
+                    <Image.Style>
+                        <Style TargetType="Image">
+                            <Style.Triggers>
+                                <DataTrigger
+                                                    Binding="{Binding ElementName=LikeButton, Path=IsChecked}"
+                                                    Value="True">
+                                    <Setter Property="Source"
+                                                            Value="../Assets/Images/Like.png">
+                                    </Setter>
+                                </DataTrigger>
+                                <DataTrigger
+                                                    Binding="{Binding ElementName=LikeButton, Path=IsChecked}"
+                                                    Value="False">
+                                    <Setter Property="Source"
+                                                            Value="../Assets/Images/LikeEmpty.png"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+            </ToggleButton>
+            <TextBlock Text="{Binding CurrentArtist.Bio}" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left" Margin="35,233,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="482"/>
+            <Image Source="../Assets/Images/banner.png" Margin="581,52,52,52" />
+        </Grid>
 
-        <ItemsControl ItemsSource="{Binding CurrentArtistSongs}" Margin="48,150,48,0">
+        <ItemsControl ItemsSource="{Binding CurrentArtistSongs}" Margin="48,348,48,0">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel />
@@ -18,9 +45,9 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Grid Width="500" Height="100" MouseDown="Grid_MouseDown">
+                    <Grid Width="500" Height="100">
                         <Image Source="../Assets/Images/mockSongImage.jpg" Width="70" Height="70" HorizontalAlignment="Left" Margin="0,0,0,25" VerticalAlignment="Bottom" />
-                        <Label Content="{Binding Title}" Margin="94,10,94,0" Width="312" Height="24" VerticalAlignment="Top" />
+                        <Label Tag="{Binding TrackID}" Content="{Binding Title}" Margin="94,10,94,0" Width="312" Height="24" VerticalAlignment="Top" MouseDown="Track_Click" />
                         <Grid Margin="94,30,0,0">
                             <WrapPanel>
                                 <ItemsControl ItemsSource="{Binding Artists}">
@@ -32,7 +59,6 @@
                                 </ItemsControl>
                             </WrapPanel>
                         </Grid>
-                        <Image Source="../Assets/Images/like.png" Width="30" Height="30" HorizontalAlignment="Right" Margin="0,0,50,40" VerticalAlignment="Bottom" />
                     </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>

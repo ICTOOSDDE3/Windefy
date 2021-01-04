@@ -17,7 +17,7 @@ namespace Test
             DBConnection.Initialize();
         }
         /// <summary>
-        /// This test checks whether the function returns a List with strings when you use an existing Track ID as parameter
+        /// Tests GetGenres method with an ID of an existing Track
         /// </summary>
         /// <param name="artistID"></param>
         [TestCase(210)]
@@ -30,12 +30,14 @@ namespace Test
             Assert.IsTrue(genres is List<string>);
             Assert.That(genres, Has.Count.GreaterThan(0));
         }
-
+        /// <summary>
+        /// Tests GetGenres method with an ID of an non existing track
+        /// </summary>
+        /// <param name="trackID"></param>
         [TestCase(-1)]
         [TestCase(-2)]
         [TestCase(-3)]
         [Test]
-        // This test checks whether the function returns null when you use an non-existed Track ID as parameter
         public void GetGenresFromNonExistingTrack(int trackID)
         {
             var genres = controller.GetGenres(trackID);
