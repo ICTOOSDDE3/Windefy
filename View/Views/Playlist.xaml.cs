@@ -30,17 +30,13 @@ namespace View.Views
 
         private void Artist_Loaded(object sender, RoutedEventArgs e)
         {
+            // Fill in the heart button if the playlist is within favourites
             if (Favourite.IsFavouritePlaylist(((ViewModels.PlaylistViewModel)DataContext).PlaylistID))
             {
                 LikeButton.IsChecked = true;
             }
         }
 
-        /// <summary>
-        /// removes track from the playlist you are on
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void Remove_Button_Click(object sender, RoutedEventArgs e)
         {
             // gets the current playlistID
@@ -96,13 +92,11 @@ namespace View.Views
         {
             var addedToFavourites = (ToggleButton)e.OriginalSource;
             int playlistID = ((ViewModels.PlaylistViewModel)DataContext).PlaylistID;
-
+            
+            // Add or remove the playlist from favourites depending on the current state of the button
             if ((bool)addedToFavourites.IsChecked)
             {
-                if (!Favourite.IsFavouritePlaylist(playlistID))
-                {
-                    Favourite.AddFavouritePlaylist(playlistID);
-                }
+                Favourite.AddFavouritePlaylist(playlistID);
             }
             else
             {

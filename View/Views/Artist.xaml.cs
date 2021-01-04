@@ -22,6 +22,7 @@ namespace View.Views
 
         private void Artist_Loaded(object sender, RoutedEventArgs e)
         {
+            // If the artist is favourites, fill in the heart button upon load
             if (Favourite.IsFavouriteArtist(((ViewModels.Artist)DataContext).CurrentArtist.ArtistID))
             {
                 LikeButton.IsChecked = true;
@@ -53,12 +54,10 @@ namespace View.Views
             var addedToFavourites = (ToggleButton)e.OriginalSource;
             int artistID = ((ViewModels.Artist)DataContext).CurrentArtist.ArtistID;
 
+            // Add / remove artist from favourites depending on the state of the button
             if ((bool)addedToFavourites.IsChecked)
             {
-                if (!Favourite.IsFavouriteArtist(artistID))
-                {
-                    Favourite.AddFavouriteArtist(artistID);
-                }
+                Favourite.AddFavouriteArtist(artistID);
             }
             else
             {

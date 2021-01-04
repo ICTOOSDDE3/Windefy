@@ -43,7 +43,7 @@ namespace View
             // initialize and setup of timer
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(0);
-            timer.Tick += timer_Tick;
+            timer.Tick += Timer_Tick;
             timer.Start();
         }
 
@@ -57,12 +57,13 @@ namespace View
             LoginBackground.Visibility = Visibility.Visible;
             LoginGrid.Visibility = Visibility.Visible;
         }
+
         private void Playlist_Plus_Button_Click(object sender, RoutedEventArgs e)
         {
             LoginBackground.Visibility = Visibility.Visible;
             AddPlaylistGrid.Visibility = Visibility.Visible;
         }
-        //A new playlist wants to be created
+
         private void PlaylistDetails_Button_Click(object sender, RoutedEventArgs e)
         {
             string title = Details_Title_Input.Text;
@@ -94,6 +95,7 @@ namespace View
                 AddPlaylist_Comment.Visibility = Visibility.Visible;
             }
         }
+
         private void OpenPlaylist(object sender, RoutedEventArgs e)
         {
 
@@ -112,12 +114,12 @@ namespace View
             }
         }
 
-
         private void Close_AddPlaylist_Button_Click(object sender, RoutedEventArgs e)
         {
             LoginBackground.Visibility = Visibility.Hidden;
             AddPlaylistGrid.Visibility = Visibility.Hidden;
         }
+
         private void Account_Button_Click(object sender, RoutedEventArgs e)
         {
             LoginBackground.Visibility = Visibility.Visible;
@@ -146,12 +148,14 @@ namespace View
             LoginGrid.Visibility = Visibility.Visible;
             RegisterGrid.Visibility = Visibility.Hidden;
         }
+
         private void Close_Account_Details_Button_Click(object sender, RoutedEventArgs e)
         {
             LoginBackground.Visibility = Visibility.Hidden;
             AccountDetailsGrid.Visibility = Visibility.Hidden;
             Updated_Text.Visibility = Visibility.Visible;
         }
+
         private void AccountDetails_Button_Click(object sender, RoutedEventArgs e)
         {
             string newEmail = Details_Email_Input.Text;
@@ -266,12 +270,13 @@ namespace View
                 Login_HeadsUp.Content = "Email or password invalid!";
             }
         }
+
         /// <summary>
         /// Updates time on screen
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void timer_Tick(object sender, EventArgs e)
+        private void Timer_Tick(object sender, EventArgs e)
         {
 
             if (mediaPlayer.Source != null && !userIsDraggingSlider && mediaPlayer.NaturalDuration.HasTimeSpan)
@@ -287,13 +292,14 @@ namespace View
             }
             if (Model.SingleTrackClicked.TrackClicked)
             {
-                clickedTrackUpdate();
+                ClickedTrackUpdate();
             }
         }
+
         /// <summary>
         /// Updates and plays music when clicked on track
         /// </summary>
-        private void clickedTrackUpdate()
+        private void ClickedTrackUpdate()
         {
             Model.SingleTrackClicked.TrackClicked = false;
             rewFor = false;
@@ -308,15 +314,15 @@ namespace View
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnNext_Click(object sender, RoutedEventArgs e)
+        private void BtnNext_Click(object sender, RoutedEventArgs e)
         {
-            nextTrack();
+            NextTrack();
         }
 
         /// <summary>
         /// Call updatemusicbar with the next track in queue
         /// </summary>
-        private void nextTrack()
+        private void NextTrack()
         {
             if (Model.SingleTrackClicked.QueueTrackIDs.Count > 0)
             {
@@ -351,7 +357,7 @@ namespace View
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnPrev_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void BtnPrev_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (Model.TrackHistory.trackHistory.Count > 0)
             {
@@ -382,12 +388,13 @@ namespace View
                 mediaPlayer.Play();
             }
         }
+
         /// <summary>
         /// Stops the current track
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnPrev_Click(object sender, RoutedEventArgs e)
+        private void BtnPrev_Click(object sender, RoutedEventArgs e)
         {
             mediaPlayer.Stop();
 
@@ -396,6 +403,7 @@ namespace View
                 mediaPlayer.Play();
             }
         }
+
         /// <summary>
         /// Change the volume track
         /// </summary>
@@ -420,7 +428,7 @@ namespace View
             }
             else
             {
-                nextTrack();
+                NextTrack();
             }
         }
 
@@ -434,6 +442,7 @@ namespace View
             userIsDraggingSlider = false;
             mediaPlayer.Position = TimeSpan.FromSeconds(TimeStatus.Value);
         }
+
         /// <summary>
         /// Starts drag boolean
         /// </summary>
@@ -443,6 +452,7 @@ namespace View
         {
             userIsDraggingSlider = true;
         }
+
         /// <summary>
         /// Plays current track and changes play/pause button to pause
         /// </summary>
@@ -453,6 +463,7 @@ namespace View
             mediaPlayer.Play();
             mediaPlaying = true;
         }
+
         /// <summary>
         /// Pauses current track and changes play/button to play
         /// </summary>
@@ -463,12 +474,13 @@ namespace View
             mediaPlayer.Pause();
             mediaPlaying = false;
         }
+
         /// <summary>
         /// Enables rewind to listen to the current song again
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnRewind_Checked(object sender, RoutedEventArgs e)
+        private void BtnRewind_Checked(object sender, RoutedEventArgs e)
         {
             rewind = true;
             rewind_playlist = false;
@@ -480,19 +492,19 @@ namespace View
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnRewind_Unchecked(object sender, RoutedEventArgs e)
+        private void BtnRewind_Unchecked(object sender, RoutedEventArgs e)
         {
             rewind = false;
             rewind_playlist = false;
         }
 
-        private void btnRewind_Indeterminate(object sender, RoutedEventArgs e)
+        private void BtnRewind_Indeterminate(object sender, RoutedEventArgs e)
         {
             rewind = false;
             rewind_playlist = true;
         }
 
-        private void btnQueue_Click(object sender, RoutedEventArgs e)
+        private void BtnQueue_Click(object sender, RoutedEventArgs e)
         {
             Queue<int> queue = FillViewQueue();
             DataContext = new TrackQueueViewModel(queue);
@@ -503,7 +515,7 @@ namespace View
             Queue<int> trackQueueView = new Queue<int>();
             int[] singleTrackIDs = SingleTrackQueueToArray();
 
-            Queue<int> trackQueue = trackQueuetoQueue();
+            Queue<int> trackQueue = TrackQueuetoQueue();
             int count = 0;
 
             while (count < singleTrackIDs.Length || trackQueue.Count > 0)
@@ -538,7 +550,7 @@ namespace View
             return singleTrackIDs;
         }
 
-        private Queue<int> trackQueuetoQueue()
+        private Queue<int> TrackQueuetoQueue()
         {
             Queue<int> trackQueue;
 
@@ -577,6 +589,7 @@ namespace View
                 Model.SingleTrackClicked.QueueTrackIDs.RemoveFirst();
             }
         }
+
         /// <summary>
         /// Updates page after music update
         /// </summary>
@@ -623,6 +636,8 @@ namespace View
                 string dropDownValue = SearchDropdown.SelectedItem.ToString();
 
                 // If the searchvalue is 3 characters or more, search
+                // Add clickevents in order to change the window when someone clicks on an 
+                // album, playlist, artist
                 switch (dropDownValue)
                 {
                     case "Artist":
@@ -653,7 +668,7 @@ namespace View
             }  
         }
 
-        private void shuffleBtn_Click(object sender, RoutedEventArgs e)
+        private void ShuffleBtn_Click(object sender, RoutedEventArgs e)
         {
             TrackQueue.trackQueue = FillViewQueue();
             TrackQueue.Shuffle();
@@ -664,11 +679,7 @@ namespace View
         {
             DataContext = new Homepage(Model.TrackHistory.PlaylistID);
         }
-        /// <summary>
-        /// event for logging out
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+
         private void Logout_Button_Click(object sender, RoutedEventArgs e)
         {
             User.EmptyUserModel();
@@ -687,8 +698,8 @@ namespace View
 
         private void FavouriteAlbum_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            // Create new window with favourite albums
             DataContext = null;
-
             SearchAlbumViewModel searchPlaylistViewModel = new SearchAlbumViewModel();
             searchPlaylistViewModel.AlbumClickEvent += OnAlbumClick;
             DataContext = searchPlaylistViewModel;
@@ -702,6 +713,7 @@ namespace View
 
         private void FavouriteArtist_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            // Create new view page for artist with favourite artists
             DataContext = null;
             DataContext = new SearchArtistViewModel();
             ((SearchArtistViewModel)DataContext).ArtistClickEvent += OnArtistClick;

@@ -597,21 +597,21 @@
                 </StackPanel>
             </WrapPanel>
             <WrapPanel VerticalAlignment="Center" Margin="301,0,651,0" >
-                <Button x:Name="shuffleBtn" Height="32" Width="32" Margin="49,0,0,0" BorderThickness="0" Style="{StaticResource Shuffle}" Click="shuffleBtn_Click" />
-                <Button x:Name="btnPrev" MouseDoubleClick="btnPrev_MouseDoubleClick" Click="btnPrev_Click" Width="32" Height="24" Margin="60,0,0,0" BorderThickness="0" Style="{StaticResource PrevNext}">
+                <Button x:Name="shuffleBtn" Height="32" Width="32" Margin="49,0,0,0" BorderThickness="0" Style="{StaticResource Shuffle}" Click="ShuffleBtn_Click" />
+                <Button x:Name="btnPrev" MouseDoubleClick="BtnPrev_MouseDoubleClick" Click="BtnPrev_Click" Width="32" Height="24" Margin="60,0,0,0" BorderThickness="0" Style="{StaticResource PrevNext}">
                     <Button.Background>
                         <ImageBrush ImageSource="/Rewind.png"/>
                     </Button.Background>
                     <Image Source="/Rewind.png"/>
                 </Button>
                 <ToggleButton x:Name="tbPlayPause" Checked = "TogglePlay" Unchecked = "TogglePause" Margin="60,0,0,0" Width="40" Height="40" BorderThickness="0" Style="{StaticResource PausePlay}" />
-                <Button x:Name="btnNext" Click="btnNext_Click" Width="32" Height="24" Margin="60,0,5,0" BorderThickness="0" Style="{StaticResource PrevNext}">
+                <Button x:Name="btnNext" Click="BtnNext_Click" Width="32" Height="24" Margin="60,0,5,0" BorderThickness="0" Style="{StaticResource PrevNext}">
                     <Button.Background>
                         <ImageBrush ImageSource="/Forward.png"/>
                     </Button.Background>
                     <Image Source="/Forward.png"/>
                 </Button>
-                <ToggleButton IsThreeState="True" x:Name="tbBtnRewind" Checked="btnRewind_Checked" Unchecked="btnRewind_Unchecked"  Margin="60,0,5,0" Width="32" Height="32" BorderThickness="0" Style="{StaticResource Repeat}" Indeterminate="btnRewind_Indeterminate"/>
+                <ToggleButton IsThreeState="True" x:Name="tbBtnRewind" Checked="BtnRewind_Checked" Unchecked="BtnRewind_Unchecked"  Margin="60,0,5,0" Width="32" Height="32" BorderThickness="0" Style="{StaticResource Repeat}" Indeterminate="BtnRewind_Indeterminate"/>
 
             </WrapPanel>
             <WrapPanel VerticalAlignment="Center" Margin="680,0,279,0">
@@ -620,7 +620,7 @@
                 <Label x:Name="TotalTime" Content="00:00" Margin="0,0,0,0"/>
             </WrapPanel>
             <WrapPanel VerticalAlignment="Center" Margin="1166,0,10,0">
-                <Button x:Name="btnQueue" Width="50" Height="50" BorderThickness="0" Style="{StaticResource Queue}" Click="btnQueue_Click"/>
+                <Button x:Name="btnQueue" Width="50" Height="50" BorderThickness="0" Style="{StaticResource Queue}" Click="BtnQueue_Click"/>
                 <Image Source="/Volume.png" Width="30" Height="30" Margin="25,0,0,0"/>
                 <Slider Style="{StaticResource Horizontal_Slider}" Value="25" Maximum="100" Minimum="0" ValueChanged="Volume_ValueChanged" x:Name="Volume" Width="142" Height="9" Margin="5"/>
             </WrapPanel>
