@@ -23,13 +23,13 @@ namespace Controller
             if (p != null)
             {
                 Track TrackController = new Track();
-                if (p.playlist_type == Model.PlaylistType.Album || p.playlist_type == Model.PlaylistType.UserPlaylists)
+                if (p.PlaylistType == Model.PlaylistType.Album || p.PlaylistType == Model.PlaylistType.UserPlaylists)
                 {
                     var playlist_query = $"SELECT trackID FROM playlist_track WHERE playlistID = {playlistID} AND trackID != {trackID}";
                     trackQueue = TrackController.GetTracksToQueue(playlist_query);
                     PlayListID = playlistID;
                 }
-                if (p.playlist_type == Model.PlaylistType.SingleTracks)
+                if (p.PlaylistType == Model.PlaylistType.SingleTracks)
                 {
                     var genres = TrackController.GetGenres(trackID);
                     if (genres != null)

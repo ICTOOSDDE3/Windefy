@@ -19,7 +19,7 @@ namespace Test
 
             var playlist = testPlaylist.GetPlaylistData(1);
             
-            Assert.AreEqual("Nunit", playlist.title);
+            Assert.AreEqual("Nunit", playlist.Title);
 
         }
     }

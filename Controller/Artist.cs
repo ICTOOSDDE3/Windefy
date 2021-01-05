@@ -28,8 +28,8 @@ namespace Controller
                     {
                         artist.Name = reader["name"].ToString();
                         artist.ArtistID = artistID;
-                        if (reader["active_year_begin"].GetType().GetProperties().Length > 0) artist.active_year_begin = (DateTime)reader["active_year_begin"];
-                        if (reader["active_year_end"].GetType().GetProperties().Length > 0) artist.active_year_end = (DateTime)reader["active_year_end"];
+                        if (reader["active_year_begin"].GetType().GetProperties().Length > 0) artist.ActiveYearBegin = (DateTime)reader["active_year_begin"];
+                        if (reader["active_year_end"].GetType().GetProperties().Length > 0) artist.ActiveYearEnd = (DateTime)reader["active_year_end"];
                         artist.Bio = reader["bio"].ToString();
                         artist.Associated_Labels = reader["associated_labels"].ToString();
                         artist.Location = reader["location"].ToString();
@@ -84,12 +84,12 @@ namespace Controller
 
             tracks.ForEach(track =>
             {
-                track.Artists = getTrackArtists(track.TrackID);
+                track.Artists = GetTrackArtists(track.TrackID);
             });
             return tracks;
         }
 
-        private List<Model.Artist> getTrackArtists(int trackID)
+        private List<Model.Artist> GetTrackArtists(int trackID)
         {
             DBConnection.OpenConnection();
             string query2 = $"SELECT * FROM artist WHERE artistID IN (SELECT artistID FROM track_artist WHERE trackID = {trackID})";

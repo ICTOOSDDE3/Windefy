@@ -8,11 +8,11 @@ namespace Model
     public class PlaylistList
     {
 
-        public List<Playlist> playlists { get; set; } = new List<Playlist>();
+        public List<Playlist> Playlists { get; set; } = new List<Playlist>();
 
         public void AddPlaylistToList(Playlist playlist)
         {
-            playlists.Add(playlist);
+            Playlists.Add(playlist);
         }
     }
 }

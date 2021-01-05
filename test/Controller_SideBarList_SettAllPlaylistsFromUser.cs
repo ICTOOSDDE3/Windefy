@@ -23,11 +23,11 @@ namespace Test
             var result = cmd.ExecuteScalar();
             DBConnection.CloseConnection();
 
-            SideBarList.sideBarList.playlists = null;
-            SideBarList.sideBarList.playlists = new List<Model.Playlist>();
+            SideBarList.sideBarList.Playlists = null;
+            SideBarList.sideBarList.Playlists = new List<Model.Playlist>();
             SideBarList.SetAllPlaylistsFromUser();
             
-            Assert.AreEqual(result, SideBarList.sideBarList.playlists.Count);
+            Assert.AreEqual(result, SideBarList.sideBarList.Playlists.Count);
 
         }
     }

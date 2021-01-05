@@ -10,7 +10,7 @@ namespace Controller
         {
             DBConnection.Initialize();
             DBConnection.OpenConnection();
-            Playlist playlist = new Playlist();
+            Playlist Playlist = new Playlist();
 
             Model.User.UserID = 1;
 

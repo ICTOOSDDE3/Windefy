@@ -12,7 +12,7 @@ namespace View.ViewModels
             Playlist PlaylistController = new Playlist();
             PlaylistID = playlistID;
             Playlist = PlaylistController.GetPlaylistData(playlistID);
-            Playlist.tracks = PlaylistController.FillPlaylist(playlistID);
+            Playlist.Tracks = PlaylistController.FillPlaylist(playlistID);
         }
     }
 }

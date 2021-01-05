@@ -31,7 +31,7 @@ namespace Controller
         /// Gets history playlistID
         /// </summary>
         /// <returns></returns>
-        public static int getHistoryPlaylistID()
+        public static int GetHistoryPlaylistID()
         {
             DBConnection.OpenConnection();
 

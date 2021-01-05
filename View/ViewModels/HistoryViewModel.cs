@@ -12,7 +12,7 @@ namespace View.ViewModels
         {
             tracks = new List<Model.Track>();
             tracks = TrackHistory.HistoryTracks();
-            playlistID = TrackHistory.getHistoryPlaylistID();
+            playlistID = TrackHistory.GetHistoryPlaylistID();
         }
        
     }

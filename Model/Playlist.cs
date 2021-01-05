@@ -15,25 +15,25 @@ namespace Model
         }
         public Playlist(int playlistID, string title, DateTime release_date, int listens, int playlist_type, string information, bool is_Public, int ownerID)
         {
-            this.playlistID = playlistID;
-            this.title = title;
-            this.release_date = release_date;
-            this.listens = listens;
-            this.playlist_type = (PlaylistType)playlist_type;
-            this.information = information;
-            this.is_Public = is_Public;
-            this.ownerID = ownerID;
+            this.PlaylistID = playlistID;
+            this.Title = title;
+            this.ReleaseDate = release_date;
+            this.Listens = listens;
+            this.PlaylistType = (PlaylistType)playlist_type;
+            this.Information = information;
+            this.IsPublic = is_Public;
+            this.OwnerID = ownerID;
         }
       
-        public int playlistID { get; set; }
-        public string title { get; set; }
-        public DateTime release_date { get; set; }
-        public int listens { get; set; }
-        public PlaylistType playlist_type {get; set;}
-        public string information { get; set; }
-        public bool is_Public { get; set; }
-        public int ownerID { get; set; }
-        public List<Track> tracks { get; set; } = new List<Track>();
+        public int PlaylistID { get; set; }
+        public string Title { get; set; }
+        public DateTime ReleaseDate { get; set; }
+        public int Listens { get; set; }
+        public PlaylistType PlaylistType {get; set;}
+        public string Information { get; set; }
+        public bool IsPublic { get; set; }
+        public int OwnerID { get; set; }
+        public List<Track> Tracks { get; set; } = new List<Track>();
 
         
     }

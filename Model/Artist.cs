@@ -12,8 +12,8 @@ namespace Model
         public List<int> MemberIDs { get; set; }
         public string Associated_Labels { get; set; }
         public string Location { get; set; }
-        public DateTime active_year_begin { get; set; }
-        public DateTime active_year_end { get; set; }
+        public DateTime ActiveYearBegin { get; set; }
+        public DateTime ActiveYearEnd { get; set; }
 
         public Artist(int artistID, string name)
         {

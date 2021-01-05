@@ -11,7 +11,7 @@ namespace Test
         {
             DBConnection.Initialize();
             Model.User.UserID = 15;
-            int result = TrackHistory.getHistoryPlaylistID();
+            int result = TrackHistory.GetHistoryPlaylistID();
 
             Assert.AreEqual(22978, result);
         }

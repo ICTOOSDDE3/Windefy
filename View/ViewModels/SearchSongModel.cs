@@ -110,7 +110,7 @@ namespace View.ViewModels
             a1.ShowPlaylists(Model.User.UserID);
             foreach (var item in a1.Playlists)
             {
-                if(!item.PlaylistTitle.Equals("Favorites")) playlists.Add(item.PlaylistId,item.PlaylistTitle);
+                if(!item.PlaylistTitle.Equals("Favorites")) playlists.Add(item.PlaylistID,item.PlaylistTitle);
             }
 
 

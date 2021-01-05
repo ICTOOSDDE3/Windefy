@@ -49,7 +49,7 @@ namespace View
 
         private void Add_PlayLists_To_Left_Sidebar()
         {
-            LeftSideBarPlayLists.ItemsSource = SideBarList.sideBarList.playlists;
+            LeftSideBarPlayLists.ItemsSource = SideBarList.sideBarList.Playlists;
         }
 
         private void Login_Button_Click(object sender, RoutedEventArgs e)
@@ -87,7 +87,7 @@ namespace View
                 //Reset the sidebar
                 LeftSideBarPlayLists.ItemsSource = null;
                 //Load all the playlists into the sidebar
-                LeftSideBarPlayLists.ItemsSource = SideBarList.sideBarList.playlists;
+                LeftSideBarPlayLists.ItemsSource = SideBarList.sideBarList.Playlists;
             }
             //Give error if no title is filled in
             else
@@ -103,14 +103,14 @@ namespace View
 
             Model.Playlist playlistData = button.DataContext as Model.Playlist;
 
-            if (playlistData.playlistID == Model.TrackHistory.PlaylistID)
+            if (playlistData.PlaylistID == Model.TrackHistory.PlaylistID)
             {
                 DataContext = new HistoryViewModel();
             }
             else
             {
-                playlistID = playlistData.playlistID;
-                DataContext = new PlaylistViewModel(playlistData.playlistID);
+                playlistID = playlistData.PlaylistID;
+                DataContext = new PlaylistViewModel(playlistData.PlaylistID);
             }
         }
 
@@ -249,7 +249,7 @@ namespace View
                     LoginBackground.Visibility = Visibility.Hidden;
                     //Get all the playlists from the current users into a playlistlistobject
                     SideBarList.SetAllPlaylistsFromUser();
-                    Model.TrackHistory.PlaylistID = TrackHistory.getHistoryPlaylistID();
+                    Model.TrackHistory.PlaylistID = TrackHistory.GetHistoryPlaylistID();
                     DataContext = new Homepage(Model.TrackHistory.PlaylistID);
                     Add_PlayLists_To_Left_Sidebar();
                 }

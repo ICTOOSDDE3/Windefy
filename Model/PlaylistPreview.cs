@@ -7,12 +7,12 @@ namespace Model
     public class PlaylistPreview
     {
         // space for an image variable
-        public int PlaylistId { get; set; }
+        public int PlaylistID { get; set; }
         public string PlaylistTitle { get; set; }
 
         public PlaylistPreview(int playlistId, string playlistTitle)
         {
-            PlaylistId = playlistId;
+            PlaylistID = playlistId;
             PlaylistTitle = playlistTitle;
         }
     }

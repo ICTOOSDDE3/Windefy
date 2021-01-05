@@ -80,14 +80,14 @@ namespace Controller
                 while (dataReader.Read())
                 {
                     PlaylistModel = new Model.Playlist();
-                    PlaylistModel.playlistID = Convert.ToInt32(dataReader["playlistID"]);
-                    PlaylistModel.title = Convert.ToString(dataReader["title"]);
-                    if (!(dataReader["release_date"] is DBNull)) PlaylistModel.release_date = Convert.ToDateTime(dataReader["release_date"]);
-                    PlaylistModel.listens = Convert.ToInt32(dataReader["listens"]);
-                    PlaylistModel.playlist_type = (Model.PlaylistType)Convert.ToInt32(dataReader["playlist_typeID"]);
-                    if (!(dataReader["information"] is DBNull)) PlaylistModel.information = Convert.ToString(dataReader["information"]);
-                    PlaylistModel.is_Public = Convert.ToBoolean(dataReader["is_public"]);
-                    if(!(dataReader["ownerID"] is DBNull)) PlaylistModel.ownerID = Convert.ToInt32(dataReader["ownerID"]);
+                    PlaylistModel.PlaylistID = Convert.ToInt32(dataReader["playlistID"]);
+                    PlaylistModel.Title = Convert.ToString(dataReader["title"]);
+                    if (!(dataReader["release_date"] is DBNull)) PlaylistModel.ReleaseDate = Convert.ToDateTime(dataReader["release_date"]);
+                    PlaylistModel.Listens = Convert.ToInt32(dataReader["listens"]);
+                    PlaylistModel.PlaylistType = (Model.PlaylistType)Convert.ToInt32(dataReader["playlist_typeID"]);
+                    if (!(dataReader["information"] is DBNull)) PlaylistModel.Information = Convert.ToString(dataReader["information"]);
+                    PlaylistModel.IsPublic = Convert.ToBoolean(dataReader["is_public"]);
+                    if(!(dataReader["ownerID"] is DBNull)) PlaylistModel.OwnerID = Convert.ToInt32(dataReader["ownerID"]);
                 }
             }
           
