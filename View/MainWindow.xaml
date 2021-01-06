@@ -541,7 +541,7 @@
                                             </Button.Background>
                                         </Button>
                                         <Button x:Name="Playlist_Name" Click="OpenPlaylist" Style="{StaticResource RoundedButton}">
-                                            <Label Content="{Binding title}" FontFamily="Segoe" FontSize="20"  ToolTip="{Binding title}"></Label>
+                                            <Label Content="{Binding Title}" FontFamily="Segoe" FontSize="20"  ToolTip="{Binding Title}"></Label>
                                         </Button>
                                     </StackPanel>
                                 </DataTemplate>

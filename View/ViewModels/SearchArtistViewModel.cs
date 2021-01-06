@@ -8,7 +8,7 @@ namespace View.ViewModels
     public class SearchArtistViewModel
     {
         public event EventHandler<int> ArtistClickEvent;
-        public List<ArtistInfo> items { get; set; }
+        public List<ArtistInfo> Items { get; set; }
 
         private string _NoResultsVisibility;
         public string NoResultsVisibility
@@ -19,7 +19,7 @@ namespace View.ViewModels
 
         public SearchArtistViewModel()
         {
-            items = new List<ArtistInfo>();
+            Items = new List<ArtistInfo>();
             NoResultsVisibility = "Hidden";
         }
 
@@ -30,7 +30,7 @@ namespace View.ViewModels
 
         public SearchArtistViewModel(string q)
         {
-            items = new List<ArtistInfo>();
+            Items = new List<ArtistInfo>();
             DBConnection.OpenConnection();
 
             // Fetch all artists based on the search query
@@ -54,7 +54,7 @@ namespace View.ViewModels
             SqlDataReader dataReader = cmd.ExecuteReader();
             while (dataReader.Read())
             {
-                items.Add(new ArtistInfo(Convert.ToString(dataReader["name"]),
+                Items.Add(new ArtistInfo(Convert.ToString(dataReader["name"]),
                     Convert.ToInt32(dataReader["artistID"])));
             }
 
@@ -62,7 +62,7 @@ namespace View.ViewModels
 
             DBConnection.CloseConnection();
 
-            if (items.Count > 0)
+            if (Items.Count > 0)
             {
                 NoResultsVisibility = "Hidden";
             }
@@ -74,7 +74,7 @@ namespace View.ViewModels
 
         internal void GetFavourites(int userID)
         {
-            items = new List<ArtistInfo>();
+            Items = new List<ArtistInfo>();
             DBConnection.OpenConnection();
 
             // Fetch all artists based on the search query
@@ -102,7 +102,7 @@ namespace View.ViewModels
             SqlDataReader dataReader = cmd.ExecuteReader();
             while (dataReader.Read())
             {
-                items.Add(new ArtistInfo(Convert.ToString(dataReader["name"]),
+                Items.Add(new ArtistInfo(Convert.ToString(dataReader["name"]),
                     Convert.ToInt32(dataReader["artistID"])));
             }
 

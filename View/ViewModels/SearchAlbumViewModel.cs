@@ -7,7 +7,7 @@ namespace View.ViewModels
 {
     public class SearchAlbumViewModel
     {
-        public List<PlaylistInfo> items { get; set; }
+        public List<PlaylistInfo> Items { get; set; }
 
         private string _NoResultsVisibility;
         internal Action<object, int> AlbumClickEvent;
@@ -20,7 +20,7 @@ namespace View.ViewModels
 
         public SearchAlbumViewModel()
         {
-            items = new List<PlaylistInfo>();
+            Items = new List<PlaylistInfo>();
         }
 
         public SearchAlbumViewModel(string q, bool playlist)
@@ -32,7 +32,7 @@ namespace View.ViewModels
                 ApacheConnection.Initialize();
                 DBConnection.OpenConnection();
 
-                items = new List<PlaylistInfo>();
+                Items = new List<PlaylistInfo>();
 
 
                 // Get playlists based on query
@@ -60,7 +60,7 @@ namespace View.ViewModels
                     PlaylistInfo playlistInfo = new PlaylistInfo(Convert.ToString(dataReader["title"]),
                         Convert.ToInt32(dataReader["playlistID"]), false);
 
-                    items.Add(playlistInfo);
+                    Items.Add(playlistInfo);
                 }
 
                 dataReader.Close();
@@ -71,7 +71,7 @@ namespace View.ViewModels
             {
                 ApacheConnection.Initialize();
 
-                items = new List<PlaylistInfo>();
+                Items = new List<PlaylistInfo>();
                 DBConnection.OpenConnection();
 
 
@@ -99,7 +99,7 @@ namespace View.ViewModels
                     PlaylistInfo playlistInfo = new PlaylistInfo(Convert.ToString(dataReader["title"]),
                         Convert.ToInt32(dataReader["playlistID"]), true);
 
-                    items.Add(playlistInfo);
+                    Items.Add(playlistInfo);
                 }
 
                 dataReader.Close();
@@ -107,7 +107,7 @@ namespace View.ViewModels
                 DBConnection.CloseConnection();
             }
 
-            if (items.Count > 0)
+            if (Items.Count > 0)
             {
                 NoResultsVisibility = "Hidden";
             }
@@ -127,7 +127,7 @@ namespace View.ViewModels
             NoResultsVisibility = "Hidden";
             ApacheConnection.Initialize();
 
-            items = new List<PlaylistInfo>();
+            Items = new List<PlaylistInfo>();
             DBConnection.OpenConnection();
 
 
@@ -158,14 +158,14 @@ namespace View.ViewModels
                 PlaylistInfo playlistInfo = new PlaylistInfo(Convert.ToString(dataReader["title"]),
                     Convert.ToInt32(dataReader["playlistID"]), true);
 
-                items.Add(playlistInfo);
+                Items.Add(playlistInfo);
             }
 
             dataReader.Close();
 
             DBConnection.CloseConnection();
 
-            if (items.Count > 0)
+            if (Items.Count > 0)
             {
                 NoResultsVisibility = "Hidden";
             }

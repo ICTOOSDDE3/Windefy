@@ -17,7 +17,7 @@ namespace Test
             DBConnection.Initialize();
             SearchArtistViewModel searchArtist = new SearchArtistViewModel("Taal");
 
-            Assert.AreEqual(50, searchArtist.items[0].ArtistID);
+            Assert.AreEqual(50, searchArtist.Items[0].ArtistID);
         }
 
     }

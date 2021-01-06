@@ -5,14 +5,14 @@ namespace View.ViewModels
 {
     public class HistoryViewModel
     {
-        public List<Model.Track> tracks { get; set; }
-        private int playlistID { get; set; }
+        public List<Model.Track> Tracks { get; set; }
+        private int PlaylistID { get; set; }
 
         public HistoryViewModel()
         {
-            tracks = new List<Model.Track>();
-            tracks = TrackHistory.HistoryTracks();
-            playlistID = TrackHistory.GetHistoryPlaylistID();
+            Tracks = new List<Model.Track>();
+            Tracks = TrackHistory.HistoryTracks();
+            PlaylistID = TrackHistory.GetHistoryPlaylistID();
         }
        
     }

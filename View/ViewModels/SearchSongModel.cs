@@ -9,7 +9,7 @@ namespace View.ViewModels
     public class SearchSongModel
     {
         public event EventHandler<int> ArtistClickEvent;
-        public List<TrackInfo> items { get; set; }
+        public List<TrackInfo> Items { get; set; }
 
         private string _NoResultsVisibility;
 
@@ -31,7 +31,7 @@ namespace View.ViewModels
             DBConnection.OpenConnection();
 
             // Initialize or empty the items
-            items = new List<TrackInfo>();
+            Items = new List<TrackInfo>();
 
 
 
@@ -74,13 +74,13 @@ namespace View.ViewModels
                     Convert.ToInt32(dataReader["playlistID"]),
                     addMusicToPlaylist.IsTrackInFavorites(Convert.ToInt32(dataReader["trackID"]), Model.User.UserID));
 
-                items.Add(trackInfo);
+                Items.Add(trackInfo);
             }
 
             dataReader.Close();
             DBConnection.CloseConnection();
 
-            if (items.Count > 0)
+            if (Items.Count > 0)
             {
                 NoResultsVisibility = "Hidden";
             }
@@ -95,14 +95,14 @@ namespace View.ViewModels
     public class TrackInfo
     {
         public AddMusicToPlaylist a1 = new AddMusicToPlaylist();
-        private int userID = Model.User.UserID;
+        private int UserID = Model.User.UserID;
         public int TrackID { get; set; }
         public string Title { get; set; }
         public string Duration { get; set; }
         public string ImagePath { get; set; }
         public List<Model.Artist> Artists { get; set; } = new List<Model.Artist>();
         public int PlaylistID { get; set; }
-        public Dictionary<int, string> playlists { get; set; } = new Dictionary<int, string>();
+        public Dictionary<int, string> Playlists { get; set; } = new Dictionary<int, string>();
         public bool Liked { get; set; }
 
         public TrackInfo(string T, int D, string I, int ID, int P_ID, bool liked)
@@ -110,7 +110,7 @@ namespace View.ViewModels
             a1.ShowPlaylists(Model.User.UserID);
             foreach (var item in a1.Playlists)
             {
-                if(!item.PlaylistTitle.Equals("Favorites")) playlists.Add(item.PlaylistID,item.PlaylistTitle);
+                if(!item.PlaylistTitle.Equals("Favorites")) Playlists.Add(item.PlaylistID,item.PlaylistTitle);
             }
 
 

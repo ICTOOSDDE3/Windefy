@@ -17,7 +17,7 @@ namespace Test
             DBConnection.Initialize();
             SearchAlbumViewModel searchAlbum = new SearchAlbumViewModel("blue piano", false);
 
-            Assert.AreEqual(84, searchAlbum.items[0].PlaylistID);
+            Assert.AreEqual(84, searchAlbum.Items[0].PlaylistID);
         }
 
     }

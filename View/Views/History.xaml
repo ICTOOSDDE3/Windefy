@@ -102,7 +102,7 @@
 
 
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0,60,0,0">
-                    <ItemsControl x:Name="Tracks" ItemsSource="{Binding tracks}" VerticalAlignment="Top">
+                    <ItemsControl x:Name="Tracks" ItemsSource="{Binding Tracks}" VerticalAlignment="Top">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <UniformGrid Columns="1" />
@@ -146,7 +146,7 @@
                                         </ItemsControl.ItemTemplate>
                                     </ItemsControl>
 
-                                    <ToggleButton Margin="20,0,0,0" Grid.Column="2" HorizontalAlignment="Left" Tag="{Binding trackID}" x:Name="LikeButton" Width="40" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" OpacityMask="{x:Null}" Style="{StaticResource MyToggleButtonStyle}" ToolTip="Add this number to favorites" Loaded="LikeButton_Loaded" Click="LikeButton_Click">
+                                    <ToggleButton Margin="20,0,0,0" Grid.Column="2" HorizontalAlignment="Left" Tag="{Binding TrackID}" x:Name="LikeButton" Width="40" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" OpacityMask="{x:Null}" Style="{StaticResource MyToggleButtonStyle}" ToolTip="Add this number to favorites" Loaded="LikeButton_Loaded" Click="LikeButton_Click">
                                         <Image>
                                             <Image.Style>
                                                 <Style TargetType="Image">

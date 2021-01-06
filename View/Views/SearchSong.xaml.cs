@@ -93,7 +93,7 @@ namespace View.Views
             var itemCombobox = (ComboBox)e.OriginalSource;
             var trackInfo = itemCombobox.DataContext as TrackInfo;
             var info = itemCombobox.SelectedItem;
-            foreach (var item in trackInfo.playlists)
+            foreach (var item in trackInfo.Playlists)
             {
                 if (item.Equals(info))
                 {

@@ -72,8 +72,8 @@
                     </Rectangle.Fill>
                 </Rectangle>
                 <StackPanel Grid.Column="1" Orientation="Vertical" Margin="25,0,0,0" HorizontalAlignment="Left">
-                    <Label Content="{Binding title}" FontSize="36" FontWeight="Bold" Margin="0,0,0,0" />
-                    <TextBlock  FontFamily="Segoe" FontSize="20" TextWrapping="Wrap" Text="{Binding information}" Margin="8,0,0,0"/>
+                    <Label Content="{Binding Title}" FontSize="36" FontWeight="Bold" Margin="0,0,0,0" />
+                    <TextBlock  FontFamily="Segoe" FontSize="20" TextWrapping="Wrap" Text="{Binding Information}" Margin="8,0,0,0"/>
                 </StackPanel>
                 <ToggleButton x:Name="LikeButton" Width="40" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" OpacityMask="{x:Null}" ToolTip="Add this number to favorites" Click="LikeButtonPlaylist_Click" Margin="522,254,0,6" Grid.Column="1">
                     <Image>
@@ -126,7 +126,7 @@
 
 
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0,60,0,0">
-                    <ItemsControl x:Name="Tracks" ItemsSource="{Binding tracks}" VerticalAlignment="Top">
+                    <ItemsControl x:Name="Tracks" ItemsSource="{Binding Tracks}" VerticalAlignment="Top">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid Columns="1" />
@@ -170,7 +170,7 @@
                                         </ItemsControl.ItemTemplate>
                                     </ItemsControl>
 
-                                    <ToggleButton Margin="20,0,0,0" Grid.Column="2" HorizontalAlignment="Left" Tag="{Binding trackID}" x:Name="LikeButton" Width="40" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" OpacityMask="{x:Null}" Style="{StaticResource MyToggleButtonStyle}" ToolTip="Add this number to favorites" Loaded="LikeButton_Loaded" Click="LikeButton_Click">
+                                    <ToggleButton Margin="20,0,0,0" Grid.Column="2" HorizontalAlignment="Left" Tag="{Binding TrackID}" x:Name="LikeButton" Width="40" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" OpacityMask="{x:Null}" Style="{StaticResource MyToggleButtonStyle}" ToolTip="Add this number to favorites" Loaded="LikeButton_Loaded" Click="LikeButton_Click">
                                         <Image>
                                             <Image.Style>
                                                 <Style TargetType="Image">

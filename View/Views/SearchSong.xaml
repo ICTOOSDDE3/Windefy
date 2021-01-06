@@ -263,7 +263,7 @@
              
     <Grid Background="White">
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" >
-            <ItemsControl ItemsSource="{Binding items}" Name="items">
+            <ItemsControl ItemsSource="{Binding Items}" Name="items">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Columns="2" />
@@ -344,7 +344,7 @@
 
                             <StackPanel Orientation="Vertical">
                                 <Label Margin="10, 0, 0, 0">Add to playlist:</Label>
-                                <ComboBox x:Name="PlaylistDropdown" ItemsSource="{Binding playlists}" IsEditable="True" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Height="35" SelectedIndex="-1" BorderBrush="#FF4F83CC" Foreground="White" Background="#FF4F83CC" FontSize="20" FontStyle="Normal" SelectionChanged="LoadedEvent_Combobox" Margin="10,0,0,0">
+                                <ComboBox x:Name="PlaylistDropdown" ItemsSource="{Binding Playlists}" IsEditable="True" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Height="35" SelectedIndex="-1" BorderBrush="#FF4F83CC" Foreground="White" Background="#FF4F83CC" FontSize="20" FontStyle="Normal" SelectionChanged="LoadedEvent_Combobox" Margin="10,0,0,0">
                                     <ComboBox.ItemTemplate>
                                         <DataTemplate>
                                             <TextBlock Text="{Binding Value}"/>
